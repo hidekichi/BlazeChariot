@@ -1,0 +1,7 @@
+{
+  "watch": [
+    ".eleventy.js",
+    "src"
+  ],
+  "ext": "js,mjs,json,njk,css,md"
+}

@@ -1,0 +1,37 @@
+---
+layout: base.njk
+---
+
+<header class="page-title">
+	<h1 class="page-title__title">{{ title }}</h1>
+	{% if description %}
+		<h2 class="page-title__desc">{{ description }}</h2>
+	{% endif %}
+	<div class="header-meta">
+	{{ site.author }}｜{% if date %}<time class="page-title__date" datetime="{{ date | htmlDateString }}">{{ date | postDate }}</time> {% endif %}<br>
+
+		<div class="tags">
+		{% for tag in tags -%}
+			{% if tag !== 'posts' %}
+				<a class="tag" href="/tags/{{ tag }}/" title="{{ tag }}">{{ tag }}</a>
+			{% endif %}
+		{%- endfor %}
+		</div>
+	</div>
+</header>
+<article class="body-copy">
+	{{ content | safe }}
+	
+	{% include "sns.njk" %}
+	
+	<div class="tags">
+	{% for tag in tags -%}
+		{% if tag !== 'posts' %}
+			<a class="tag" href="/tags/{{ tag }}/" title="{{ tag }}の記事一覧" aria-label="{{ tag }}の記事一覧">{{ tag }}</a>
+		{% endif %}
+	{%- endfor %}
+	</div>
+	
+</article>
+
+{% include "sidebar.njk" %}

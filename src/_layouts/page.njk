@@ -1,0 +1,17 @@
+---
+layout: base.njk
+---
+
+<header class="page-title">
+	<h1 class="page-title__title">{{ title }}</h1>
+	{% if description %}
+		<h2 class="page-title__desc">{{ description }}</h2>
+	{% endif %}
+	{{ author }}
+	{% if last_updated %}
+		<p class="page-title__date mt-6">Last updated: <time datetime="{{ last_updated | htmlDateString }}">{{ last_updated | postDate }}</time></p>
+	{% endif %}
+</header>
+<article class="body-copy {% if category %}cat-{{ category }}{% endif %}">
+	{{ content | safe }}
+</article>

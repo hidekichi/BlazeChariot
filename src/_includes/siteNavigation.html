@@ -1,0 +1,7 @@
+<ul class="navList flex flex-row gap-x-16">
+  {% for item in grobalNavigation.items %}
+  <li>
+    <a href="{{ item.url }}" alt="{{ item.text }}のリンク">{{ item.text }}</a>
+  </li>
+  {% endfor %}
+</ul>

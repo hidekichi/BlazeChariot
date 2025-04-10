@@ -1,0 +1,42 @@
+---
+layout: page.njk
+title: ギターを弾き語れ！記事一覧
+description: テスト
+category:
+  - guitar
+
+pagination:
+  data: collections.guitar
+  size: 6
+  alias: guitar
+  
+permalink: /guitar{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber + 1}}{% endif %}/index.html
+---
+
+<h3>Now Entering Page {{ pagination.pageNumber + 1 }}</h3>
+<ul class="listing">
+	{% for entry in pagination.items %}
+	<li>
+		<a href="{{ entry.url }}">
+		<div class="title-meta">
+			<span class="title">{{ symbol }} {{ entry.data.title }}</span>
+			<time datetime="{{ entry.date | htmlDateString }}">{{ entry.date | postDate }}</time>
+		</div>
+		<div class="summary">
+			{{ entry.templateContent | striptags | truncate(100) }}
+		</div>
+		</a>
+	</li>
+	{% endfor %}
+</ul>
+
+<nav id="articleList-pagination" aria-labelledby="pagination">
+  <ol class="pagination">
+    <li>{% if pagination.href.previous %}<a href="{{ pagination.href.previous }}"><button class="previous">Prev</button></a>{% else %}<button class="previous text-gray-800 bg-gray-600 aria-disabled cursor-not-allowed">Prev</button>{% endif %}</li>
+	<li>{% if pagination.href.next %}<a href="{{ pagination.href.next }}"><button class="next">Next</button></a>{% else %}<button class="next text-gray-800 bg-gray-600 aria-disabled cursor-not-allowed">Next</button>{% endif %}</li>
+{%- for pageEntry in pagination.pages %}
+    <li><a href="{{ pagination.hrefs[ loop.index0 ] }}"{% if page.url == pagination.hrefs[ loop.index0 ] %} aria-current="page"{% endif %}>Page {{ loop.index }}</a></li>
+{%- endfor %}
+  </ol>
+</nav>
+

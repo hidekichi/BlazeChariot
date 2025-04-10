@@ -1,0 +1,18 @@
+
+
+<ul class="sns-share">
+	{%- set pageUrl = page.url | url -%}
+	{%- set pageTitle = title | urlencode -%}
+
+	{%- for platform, baseUrl in sns -%}
+	<li class="{{ platform }}">
+		<a href="{{ baseUrl.url }}{{ pageUrl }}{% if platform == 'twitter' %}&text={{ pageTitle }}{% elseif platform == 'facebook' %}{% else %}&title={{ pageTitle }}{% endif %}" 
+		 title="{{ platform }}共有ボタン"
+		 aria-label="{{ platform }}共有ボタン"
+		 target="_blank" 
+		 rel="noopener noreferrer">
+		{{ baseUrl.icon | safe }}
+		</a>
+	</li>
+	{%- endfor -%}
+</ul>
