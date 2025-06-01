@@ -17,7 +17,7 @@ const path = require('path');
 
 module.exports = async function (eleventyConfig) {
 	const EleventyPluginVite = (await import("@11ty/eleventy-plugin-vite")).default;
-	eleventyConfig.addPlugin(EleventyPluginVite);
+	//eleventyConfig.addPlugin(EleventyPluginVite);
 	
 	// Folders to copy to build dir
 	eleventyConfig.addPassthroughCopy("src/static");
