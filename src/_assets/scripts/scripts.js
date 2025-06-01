@@ -5,9 +5,12 @@ import { floatImage } from "./module/floatImage.js";
 import { imageModalOpen } from "./module/floatImage.js";
 import { toc } from "./module/toc.js";
 import { highlightWhenTheyIntersect } from "./module/highlightWhenTheyIntersect.js";
+import { topCoverSlideImage } from "./module/topCoverSlideImage.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
 	await footnote();
+	
+	await topCoverSlideImage();
 	
 	embbedYoutubePlayer();
 

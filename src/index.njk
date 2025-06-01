@@ -7,15 +7,18 @@ description: Eleventy Web Starter is a lightweight Eleventy boilerplate utilisin
 
 <section class="body-copy index">
 	<div class="cover relative">
-	<picture>
-	  <source type="image/avif" srcset="/static/images/covertreasure.avif">
-	  <source type="image/webp" srcset="/static/images/covertreasure.webp">
-	  <img class="w-full" src="/static/images/covertreasure.jpg" alt="ブログイメージ" sizes="100vw">
-	</picture>
-	<div class="catchcopy">
-		<div>Every discovery is a journey fulfilled—its value, yours to define.</div>
-		<div>Will you keep it to yourself or share its wonder with the world?</div>
-	</div>
+		<span class="text">Every discovery is a journey fulfilled—its value, yours to define.</span>
+		<span class="text">Will you keep it to yourself or share its wonder with the world?</span>
+		
+		<nav class="navigation" aria-labelledby="primary-navigation">
+		<ul>
+			<li><a href="/" class="{{ 'active' if '/' === page.url }}">Home</a></li>
+			<li><a href="/blog/" class="{{ 'active' if '/blog' in page.url }}">Blog</a></li>
+			<li><a href="/guitar/" class="{{ 'active' if '/guitar' in page.url }}">ギターを弾き語れ！</a></li>
+			<li><a href="/now/" class="{{ 'active' if '/now' in page.url }}">Now</a></li>
+			<li><a href="/about/" class="{{ 'active' if '/about' in page.url }}">About</a></li>
+		</ul>
+	</nav>
 	</div>
 
 	<div class="info">
@@ -33,18 +36,22 @@ description: Eleventy Web Starter is a lightweight Eleventy boilerplate utilisin
 			<ul>
 			{% for item in collections.latestPosts %}
 				<li>
-					<a href="{{ item.url }}" alt="{{ item.data.title }}へのリンク" title="{{ item.data.title }}"><span>{{ item.data.title }}</span></a>
-					<span>[{{ item.data.category }}]</span>
-					<span>{{ item.date | htmlDateString }}</span>
+					<div class="meta">
+						<span class="category">[{{ item.data.category }}]</span>
+						<span class="date">{{ item.date | htmlDateString }}</span>
+					</div>
+					<a href="{{ item.url }}" class="title-link" alt="{{ item.data.title }}へのリンク" title="{{ item.data.title }}">
+						<span class="title">{{ item.data.title }}</span>
+					</a>
 					</li>
 			{% endfor %}
 			</ul>
 		</div>
 	</aside>
 	
-	<div class="tag-cloud w-full flex flex-wrap">
+	<div class="tag-cloud w-full flex">
 	{% for tag in collections.allTags %}
-		<div class="tag m-[.25rem] rounded-full border border-sky-100 bg-sky-50 px-2 py-0.5 text-xs dark:text-sky-300 dark:border-sky-500/15 dark:bg-sky-500/10"><a href="/tags/{{ tag | urlencode }}">{{ tag }}</a></div>
+		<div class="tag m-[.6rem]  rounded-full border border-sky-100 bg-sky-50 px-2 py-0.5 text-xs text-center dark:text-sky-300 dark:border-sky-500/15 dark:bg-sky-500/10"><a href="/tags/{{ tag | urlencode }}">{{ tag }}</a></div>
 	{% endfor %}
 	</div>
 </section>
