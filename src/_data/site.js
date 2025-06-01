@@ -2,7 +2,7 @@ module.exports = () => {
 	return {
 		"title": "BlazeChariot",
 		"description": "Minimal boilerplate for new projects built with Eleventy, Tailwind, PostCSS and esbuild",
-		"url": "https://eleventywebstarter.netlify.app",
+		"url": "https://blazechariot.netlify.app/",
 		"author": "HIDEKICHI",
 		"meta_data": {
 			"twitter": "@ko_hidekichi",
