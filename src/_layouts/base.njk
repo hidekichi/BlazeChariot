@@ -16,7 +16,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
 
 	<title>{% if title %}{{ title }}{% else %}BlazeChariot{% endif %}</title>
-	<meta name="description" content="{% if description %}{{ description }}{% else %}Chris Collins is a Glasgow based multi-disciplinary software engineer working across digital design, web development and solutions architecture.{% endif %}">
+	<meta name="description" content="{% if description %}{{ description }}{% else %}BlazeChariotはギター初心者のためとブログのサイトです。11tyと言うので作りました。{% endif %}">
 	<!-- Favicons -->
 	<!-- Apple Touch Icon (reuse 192px icon.png) & standard favicons -->
 	<link rel="apple-touch-icon" href="/static/favicons/apple-touch-icon.png">
@@ -24,7 +24,7 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png">
 
 	<!-- Open Graph -->
-	<meta property="og:url" content="https://blazechariot.netlify.app/{{ page.url }}">
+	<meta property="og:url" content="https://blazechariot.netlify.app{{ page.url }}">
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="{% if title %}{{ title }}{% else %}BlazeChariot{% endif %}">
 	<meta property="og:image" content="{% if cover %}https://blazechariot.netlify.app/{{ page.url | url }}{{ cover }}{% else %}https://blazechariot.netlify.app/static/opengraph-cover.jpg{% endif %}" />

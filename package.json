@@ -1,7 +1,7 @@
 {
 	"name": "BlazeChariot",
 	"version": "2.0.0",
-	"description": "Eleventy Web Starter is a lightweight Eleventy boilerplate utilising, ESBuild Tailwind and PostCSS",
+	"description": "BlazeChariotはギター初心者のためとブログのサイトです。11tyと言うので作りました。",
 	"scripts": {
 		"clean": "rimraf dist",
 		"dev:postcss": "postcss src/_assets/css/*.css -o src/static/build/styles.min.css --watch --verbose",

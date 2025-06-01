@@ -19,6 +19,11 @@ module.exports = async function (eleventyConfig) {
 	const EleventyPluginVite = (await import("@11ty/eleventy-plugin-vite")).default;
 	//eleventyConfig.addPlugin(EleventyPluginVite);
 	
+	//my URL
+	eleventyConfig.addGlobalData("site", {
+		url: "https://blazechariot.netlify.app" // あなたのサイトの絶対URL
+	});
+	
 	// Folders to copy to build dir
 	eleventyConfig.addPassthroughCopy("src/static");
 	eleventyConfig.addPassthroughCopy("src/blog/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
