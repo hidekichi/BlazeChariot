@@ -318,6 +318,7 @@ module.exports = async function (eleventyConfig) {
 			layouts: "_layouts",
 		},
 		templateFormats: ["html", "md", "njk"],
+		markdownTemplateEngine: "njk",
 		htmlTemplateEngine: "njk",
 		passthroughFileCopy: true,
 	};
