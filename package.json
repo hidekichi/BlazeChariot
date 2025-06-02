@@ -46,6 +46,7 @@
 		"terser": "^5.34.1"
 	},
 	"dependencies": {
+		"@11ty/eleventy-plugin-rss": "^2.0.4",
 		"sharp": "^0.33.5"
 	}
 }

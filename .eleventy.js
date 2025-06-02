@@ -7,6 +7,7 @@ const CleanCSS = require("clean-css");
 const markdownIt = require("markdown-it");
 const htmlmin = require("html-minifier-terser");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
 const postcss = require("postcss");
 const postcssNested = require("./postcss.config.js");
 const markdownItMultimdTable = require("markdown-it-multimd-table-ext");
@@ -30,6 +31,26 @@ module.exports = async function (eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("src/guitar/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
 	eleventyConfig.addPassthroughCopy("src/pages/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
 
+	//feedPlugin
+	eleventyConfig.addPlugin(feedPlugin, {
+		type: "atom", // or "rss", "json"
+		outputPath: "/sitemap.xml",
+		collection: {
+			name: "posts", // iterate over `collections.posts`
+			limit: 20,     // 0 means no limit
+		},
+		metadata: {
+			language: "ja",
+			title: "BlazeChariot",
+			subtitle: "ギターを弾き語れ！とLinuxとかPC関係の話などを11tyで作ったブログ",
+			base: "https://blazechariot.netlify.app/",
+			author: {
+				name: "Hidekichi",
+				email: "", // Optional
+			}
+		}
+	});
+	
 	//Filter to parse dates
 	eleventyConfig.addFilter("htmlDateString", function (dateObj) {
 		return DateTime.fromJSDate(dateObj, {
