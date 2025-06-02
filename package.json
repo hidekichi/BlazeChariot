@@ -1,6 +1,7 @@
 {
 	"name": "BlazeChariot",
 	"version": "2.0.0",
+	"type": "module",
 	"description": "BlazeChariotはギター初心者のためとブログのサイトです。11tyと言うので作りました。",
 	"scripts": {
 		"clean": "rimraf dist",

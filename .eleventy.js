@@ -1,24 +1,27 @@
-const { DateTime } = require("luxon");
-const { minify } = require("terser");
-const isProduction = process.env.ELEVENTY_ENV === "production";
-const htmlnano = require("htmlnano");
-const htmlSave = require("htmlnano").presets.safe;
-const CleanCSS = require("clean-css");
-const markdownIt = require("markdown-it");
-const htmlmin = require("html-minifier-terser");
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const postcss = require("postcss");
-const postcssConfig = require("./postcss.config.js");
-//const postcssNested = require("./postcss.config.js");
-const markdownItMultimdTable = require("markdown-it-multimd-table-ext");
-const attrs = require("markdown-it-attrs");
-const pluginRss = require("@11ty/eleventy-plugin-rss");
+import { DateTime } from "luxon";
+import { minify } from "terser";
+const isProduction = process.env.ELEVENTY_ENV === "production"; // これはそのまま
+import htmlnano from "htmlnano"; // 未使用の可能性あり
+// const htmlSave = require("htmlnano").presets.safe; // 未使用の可能性あり
+import CleanCSS from "clean-css";
+import markdownIt from "markdown-it";
+import htmlmin from "html-minifier-terser";
+import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
+import postcss from "postcss";
+import postcssConfig from "./postcss.config.js"; // postcss.config.js が CommonJS なら要確認
+import markdownItMultimdTable from "markdown-it-multimd-table-ext";
+import markdownItFigure from "markdown-it-figure";
+import attrs from "markdown-it-attrs";
+import pluginRss from "@11ty/eleventy-plugin-rss";
 
-const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
-const path = require('path');
+// --- eleventy-img も import に ---
+import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import path from 'path';
 
-module.exports = async function (eleventyConfig) {
-	const EleventyPluginVite = (await import("@11ty/eleventy-plugin-vite")).default;
+// --- EleventyPluginVite も import に ---
+import EleventyPluginVite from "@11ty/eleventy-plugin-vite";
+
+export default async function (eleventyConfig) {
 	//eleventyConfig.addPlugin(EleventyPluginVite);
 	
 	// Folders to copy to build dir
@@ -116,9 +119,9 @@ module.exports = async function (eleventyConfig) {
   //feedPlugin
 	eleventyConfig.addPlugin(pluginRss);
 	
-	// eleventyConfig.addNunjucksFilter("htmlDateString", (dateObj) => {
-		// return new Date(dateObj).toISOString();
-	// });
+	eleventyConfig.addNunjucksFilter("htmlDateString", (dateObj) => {
+		return new Date(dateObj).toISOString();
+	});
 	eleventyConfig.addNunjucksFilter("readableDate", (dateObj) => {
 		return new Date(dateObj).toLocaleDateString('ja-JP', {year: 'numeric', month: 'long', day: 'numeric'});
 	});
@@ -130,37 +133,6 @@ module.exports = async function (eleventyConfig) {
 			return b.date - a.date; // 新しい記事が上に来るように並べ替え
 		});
 	});
-	
-	eleventyConfig.addNunjucksTemplate("atom-feed.njk", `
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>{{ site.title }}</title>
-  <subtitle>{{ site.description }}</subtitle>
-  <link href="{{ site.url }}/feed.xml" rel="self"/>
-  <link href="{{ site.url }}/"/>
-  <updated>{{ collections.latestPosts | getNewestCollectionItemDate | htmlDateString }}</updated>
-  <id>{{ site.url }}/</id>
-  <author>
-    <name>{{ site.author.name }}</name>
-    <email>{{ site.author.email }}</email>
-    <uri>{{ site.author.url }}</uri>
-  </author>
-  {%- for post in collections.latestPosts -%}
-  {%- set absolutePostUrl = site.url + post.url -%}
-  <entry>
-    <title>{{ post.data.title }}</title>
-    <link href="{{ absolutePostUrl }}"/>
-    <updated>{{ post.date | htmlDateString }}</updated>
-    <id>{{ absolutePostUrl }}</id>
-    <content type="html"><![CDATA[
-      {{ post.templateContent | safe }}
-    ]]></content>
-  </entry>
-  {%- endfor -%}
-</feed>
-  `, {
-    permalink: "/feed.xml" // このURLでフィードが生成されます
-  });
 	
 	eleventyConfig.addPlugin(syntaxHighlight, {
 
@@ -276,7 +248,7 @@ module.exports = async function (eleventyConfig) {
 		linkify: true,
 		typographer: true,
 	})
-	.use(require('markdown-it-figure'))
+	.use(markdownItFigure)
 	.use(attrs, {
 		selectorExceptions: ['table', 'table tbody', 'tbody'] // テーブル要素を処理対象から除外
 	})

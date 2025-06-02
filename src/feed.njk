@@ -1,0 +1,30 @@
+---
+permalink: /feed.xml
+---
+
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.title }}</title>
+  <subtitle>{{ site.description }}</subtitle>
+  <link href="{{ site.url }}/feed.xml" rel="self"/>
+  <link href="{{ site.url }}/"/>
+  <updated>{{ collections.latestPosts | getNewestCollectionItemDate | htmlDateString }}</updated>
+  <id>{{ site.url }}/</id>
+  <author>
+    <name>{{ site.author.name }}</name>
+    <email>{{ site.author.email }}</email>
+    <uri>{{ site.author.url }}</uri>
+  </author>
+  {%- for post in collections.latestPosts -%}
+  {%- set absolutePostUrl = site.url + post.url -%}
+  <entry>
+    <title>{{ post.data.title }}</title>
+    <link href="{{ absolutePostUrl }}"/>
+    <updated>{{ post.date | htmlDateString }}</updated>
+    <id>{{ absolutePostUrl }}</id>
+    <content type="html"><![CDATA[
+      {{ post.templateContent | safe }}
+    ]]></content>
+  </entry>
+  {%- endfor -%}
+</feed>
