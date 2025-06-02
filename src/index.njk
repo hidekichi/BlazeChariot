@@ -38,7 +38,7 @@ description: Eleventy Web Starter is a lightweight Eleventy boilerplate utilisin
 				<li>
 					<div class="meta">
 						<span class="category">[{{ item.data.category }}]</span>
-						<span class="date">{{ item.date | htmlDateString }}</span>
+						<span class="date">{{ item.date | shortDateString }}</span>
 					</div>
 					<a href="{{ item.url }}" class="title-link" alt="{{ item.data.title }}へのリンク" title="{{ item.data.title }}">
 						<span class="title">{{ item.data.title }}</span>

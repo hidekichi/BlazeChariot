@@ -1,9 +1,13 @@
 module.exports = () => {
 	return {
 		"title": "BlazeChariot",
-		"description": "Minimal boilerplate for new projects built with Eleventy, Tailwind, PostCSS and esbuild",
-		"url": "https://blazechariot.netlify.app/",
-		"author": "HIDEKICHI",
+		"description": "ギターを弾き語れ！とLinuxなどPCの事を書いた11tyで作ったブログです。",
+		"url": "https://blazechariot.netlify.app",
+		"author": {
+			"name": "Hidekichi",
+			"email": "hidekichi0513@gmail.com",
+			url: "https://blazechariot.netlify.app/about/"
+		},
 		"meta_data": {
 			"twitter": "@ko_hidekichi",
 			"opengraph_default": "/static/opengraph-default.webp"

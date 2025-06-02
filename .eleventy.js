@@ -8,7 +8,8 @@ const markdownIt = require("markdown-it");
 const htmlmin = require("html-minifier-terser");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const postcss = require("postcss");
-const postcssNested = require("./postcss.config.js");
+const postcssConfig = require("./postcss.config.js");
+//const postcssNested = require("./postcss.config.js");
 const markdownItMultimdTable = require("markdown-it-multimd-table-ext");
 const attrs = require("markdown-it-attrs");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
@@ -20,11 +21,6 @@ module.exports = async function (eleventyConfig) {
 	const EleventyPluginVite = (await import("@11ty/eleventy-plugin-vite")).default;
 	//eleventyConfig.addPlugin(EleventyPluginVite);
 	
-	//my URL
-	eleventyConfig.addGlobalData("site", {
-		url: "https://blazechariot.netlify.app" // あなたのサイトの絶対URL
-	});
-	
 	// Folders to copy to build dir
 	eleventyConfig.addPassthroughCopy("src/static");
 	eleventyConfig.addPassthroughCopy("src/blog/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
@@ -33,7 +29,7 @@ module.exports = async function (eleventyConfig) {
 
 	
 	//Filter to parse dates
-	eleventyConfig.addFilter("htmlDateString", function (dateObj) {
+	eleventyConfig.addFilter("shortDateString", function (dateObj) {
 		return DateTime.fromJSDate(dateObj, {
 			zone: "utc",
 		}).toFormat("yyyy-LL-dd");
@@ -125,16 +121,6 @@ module.exports = async function (eleventyConfig) {
 	// });
 	eleventyConfig.addNunjucksFilter("readableDate", (dateObj) => {
 		return new Date(dateObj).toLocaleDateString('ja-JP', {year: 'numeric', month: 'long', day: 'numeric'});
-	});
-	
-	eleventyConfig.addGlobalData("site", {
-		title: "BlazeChariot",
-		description: "ギターを弾き語れ！とLinuxなどPCの事を書いた11tyで作ったブログです。",
-		url: "https://blazechariot.netlify.app", // あなたのサイトの絶対URL！重要！
-		author: {
-		  name: "Hidekichi",
-		  url: "https://blazechariot.netlify.app/about/" // 著者ページのURLなど
-		}
 	});
 	
 	eleventyConfig.addCollection("posts", function(collectionApi) {

@@ -19,7 +19,7 @@ permalink: /blog{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber 
 			<a href="{{ entry.url }}">
 			<div class="title-meta">
 				<span class="title">{{ symbol }} {{ entry.data.title }}</span>
-				<time datetime="{{ entry.date | htmlDateString }}">{{ entry.date | postDate }}</time>
+				<time datetime="{{ entry.date | shortDateString }}">{{ entry.date | postDate }}</time>
 			</div>
 			</a>
 		</li>

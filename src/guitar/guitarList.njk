@@ -20,7 +20,7 @@ permalink: /guitar{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumbe
 		<a href="{{ entry.url }}">
 		<div class="title-meta">
 			<span class="title">{{ symbol }} {{ entry.data.title }}</span>
-			<time datetime="{{ entry.date | htmlDateString }}">{{ entry.date | postDate }}</time>
+			<time datetime="{{ entry.date | shortDateString }}">{{ entry.date | postDate }}</time>
 		</div>
 		<div class="summary">
 			{{ entry.templateContent | striptags | truncate(100) }}
