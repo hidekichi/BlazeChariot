@@ -7,7 +7,6 @@ const CleanCSS = require("clean-css");
 const markdownIt = require("markdown-it");
 const htmlmin = require("html-minifier-terser");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
 const postcss = require("postcss");
 const postcssNested = require("./postcss.config.js");
 const markdownItMultimdTable = require("markdown-it-multimd-table-ext");
