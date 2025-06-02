@@ -121,9 +121,9 @@ module.exports = async function (eleventyConfig) {
   //feedPlugin
 	eleventyConfig.addPlugin(pluginRss);
 	
-	eleventyConfig.addNunjucksFilter("htmlDateString", (dateObj) => {
-		return new Date(dateObj).toISOString();
-	});
+	// eleventyConfig.addNunjucksFilter("htmlDateString", (dateObj) => {
+		// return new Date(dateObj).toISOString();
+	// });
 	eleventyConfig.addNunjucksFilter("readableDate", (dateObj) => {
 		return new Date(dateObj).toLocaleDateString('ja-JP', {year: 'numeric', month: 'long', day: 'numeric'});
 	});
