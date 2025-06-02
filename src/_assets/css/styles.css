@@ -50,7 +50,7 @@ a {
 }
 */
 :root {
-	--font-color: hsl(200,100%,90%);
+	--font-color: #263542;
 	--text-red: #db1b51;
 	--brand: #90e0ef;
 	--logo: #ff5757;
@@ -68,10 +68,10 @@ a {
 
 @media (prefers-color-scheme: dark) {
 	:root{
-		--font-color: #e6edf0;
+		--font-color: #cccccc;
 		--brand: #38acc1;
 		--logo: #ff5757;
-		--background-color: #0c1620;
+		--background-color: oklch(0.2101 0.0316 272.19); /*original 1e1e1e*/
 		--link-color: #3bd7fb;
 		--muted: #444;
 		--lightest: #333;
