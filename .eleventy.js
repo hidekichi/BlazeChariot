@@ -12,6 +12,7 @@ const postcss = require("postcss");
 const postcssNested = require("./postcss.config.js");
 const markdownItMultimdTable = require("markdown-it-multimd-table-ext");
 const attrs = require("markdown-it-attrs");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 
 const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
 const path = require('path');
@@ -31,8 +32,6 @@ module.exports = async function (eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("src/guitar/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
 	eleventyConfig.addPassthroughCopy("src/pages/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
 
-	//feedPlugin
-	//eleventyConfig.addPlugin(feedPlugin);
 	
 	//Filter to parse dates
 	eleventyConfig.addFilter("htmlDateString", function (dateObj) {
@@ -117,6 +116,65 @@ module.exports = async function (eleventyConfig) {
     });
 
     return categoryTags;
+  });
+  
+  //feedPlugin
+	eleventyConfig.addPlugin(pluginRss);
+	
+	eleventyConfig.addNunjucksFilter("htmlDateString", (dateObj) => {
+		return new Date(dateObj).toISOString();
+	});
+	eleventyConfig.addNunjucksFilter("readableDate", (dateObj) => {
+		return new Date(dateObj).toLocaleDateString('ja-JP', {year: 'numeric', month: 'long', day: 'numeric'});
+	});
+	
+	eleventyConfig.addGlobalData("site", {
+		title: "BlazeChariot",
+		description: "ギターを弾き語れ！とLinuxなどPCの事を書いた11tyで作ったブログです。",
+		url: "https://blazechariot.netlify.app", // あなたのサイトの絶対URL！重要！
+		author: {
+		  name: "Hidekichi",
+		  url: "https://blazechariot.netlify.app/about/" // 著者ページのURLなど
+		}
+	});
+	
+	eleventyConfig.addCollection("posts", function(collectionApi) {
+		// 'posts'タグが付いたアイテムを日付の新しい順に取得
+		// または、ブログ記事が格納されているディレクトリ glob を指定 (例: "src/blog/*.md")
+		return collectionApi.getFilteredByGlob("src/blog/*.md").sort((a, b) => {
+			return b.date - a.date; // 新しい記事が上に来るように並べ替え
+		});
+	});
+	
+	eleventyConfig.addNunjucksTemplate("atom-feed.njk", `
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.title }}</title>
+  <subtitle>{{ site.description }}</subtitle>
+  <link href="{{ site.url }}/feed.xml" rel="self"/>
+  <link href="{{ site.url }}/"/>
+  <updated>{{ collections.latestPosts | getNewestCollectionItemDate | htmlDateString }}</updated>
+  <id>{{ site.url }}/</id>
+  <author>
+    <name>{{ site.author.name }}</name>
+    <email>{{ site.author.email }}</email>
+    <uri>{{ site.author.url }}</uri>
+  </author>
+  {%- for post in collections.latestPosts -%}
+  {%- set absolutePostUrl = site.url + post.url -%}
+  <entry>
+    <title>{{ post.data.title }}</title>
+    <link href="{{ absolutePostUrl }}"/>
+    <updated>{{ post.date | htmlDateString }}</updated>
+    <id>{{ absolutePostUrl }}</id>
+    <content type="html"><![CDATA[
+      {{ post.templateContent | safe }}
+    ]]></content>
+  </entry>
+  {%- endfor -%}
+</feed>
+  `, {
+    permalink: "/feed.xml" // このURLでフィードが生成されます
   });
 	
 	eleventyConfig.addPlugin(syntaxHighlight, {

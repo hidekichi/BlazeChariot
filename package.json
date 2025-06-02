@@ -19,6 +19,7 @@
 		"@11ty/eleventy": "^3.0.0",
 		"@11ty/eleventy-cache-assets": "^2.3.0",
 		"@11ty/eleventy-img": "^6.0.1",
+		"@11ty/eleventy-plugin-rss": "^2.0.4",
 		"@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
 		"@11ty/eleventy-plugin-vite": "^6.0.0-alpha.4",
 		"autoprefixer": "^10.4.20",
@@ -46,7 +47,6 @@
 		"terser": "^5.34.1"
 	},
 	"dependencies": {
-		"@11ty/eleventy-plugin-rss": "^2.0.4",
 		"sharp": "^0.33.5"
 	}
 }
