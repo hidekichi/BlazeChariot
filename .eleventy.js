@@ -32,24 +32,7 @@ module.exports = async function (eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("src/pages/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
 
 	//feedPlugin
-	eleventyConfig.addPlugin(feedPlugin, {
-		type: "atom", // or "rss", "json"
-		outputPath: "/sitemap.xml",
-		collection: {
-			name: "posts", // iterate over `collections.posts`
-			limit: 20,     // 0 means no limit
-		},
-		metadata: {
-			language: "ja",
-			title: "BlazeChariot",
-			subtitle: "ギターを弾き語れ！とLinuxとかPC関係の話などを11tyで作ったブログ",
-			base: "https://blazechariot.netlify.app/",
-			author: {
-				name: "Hidekichi",
-				email: "", // Optional
-			}
-		}
-	});
+	//eleventyConfig.addPlugin(feedPlugin);
 	
 	//Filter to parse dates
 	eleventyConfig.addFilter("htmlDateString", function (dateObj) {

@@ -50,7 +50,7 @@ a {
 }
 */
 :root {
-	--font-color: #263542;
+	--font-color: hsl(200,100%,90%);
 	--text-red: #db1b51;
 	--brand: #90e0ef;
 	--logo: #ff5757;
@@ -280,7 +280,9 @@ nav .title {
 .page-title__desc {
 	font-weight: 400;
 	font-size: 0.875rem;
-	margin: 0 auto;
+	margin: 1rem auto;
+	max-width: 768px;
+	color: hsl(200, 100%, 78%);
 }
 
 .page-title__date {
