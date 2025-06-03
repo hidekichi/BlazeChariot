@@ -1,6 +1,8 @@
 ---
 title: ゲームさえ考えなければPCは安く買える
+description: PCを選ぶ時の基準は色々あれど、ゲームの事を考えさえしなければ普段遣いのPCはとても安く買えるという話
 date: 2025-03-12
+update: 2025-06-03
 category:
   - blog
 tags:

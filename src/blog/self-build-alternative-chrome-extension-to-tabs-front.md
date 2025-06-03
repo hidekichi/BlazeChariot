@@ -1,6 +1,8 @@
 ---
 title: Chrome拡張機能でTabs to Frontというのが死んだので自作してみた
+description: 自分で使うためだけにブラウザのタブが開いたらそれにフォーカスが当たる拡張機能を作ったという話
 date: 2024-04-09
+update: 2025-06-03
 category:
   - blog
 tags:

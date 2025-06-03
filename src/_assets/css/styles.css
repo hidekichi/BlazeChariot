@@ -285,7 +285,8 @@ nav .title {
 	color: hsl(200, 100%, 78%);
 }
 
-.page-title__date {
+.page-title__date,
+.page-title__update {
 	font-size: 0.875rem;
 }
 
@@ -813,6 +814,12 @@ b,strong {
 		min-width: 100%;
 		table-layout: initial;
 	}
+	
+	&::after {
+		content: "表が見切れている時はスクロール可能";
+		font-size: 0.7em;
+		color: #ffd700;
+	}
 }
 
 
@@ -880,7 +887,7 @@ ul.listing {
 			/* font-size: 0.65em; */
 			white-space: nowrap;
 			display: block;
-			width: 100%;
+			width: max-content;
 		}
 	}
 }
@@ -1704,13 +1711,6 @@ f-left: サムネイルを左にして文字を回り込ませます
   }
 }
 
-@media (width < 768px) {
-	main {
-		grid-template-columns: repeat(1,minmax(0, 1fr));
-		width: 100%;
-	}
-}
-
 .cover {
 	container-type: inline-size;
   container-name: cover;
@@ -1721,6 +1721,14 @@ f-left: サムネイルを左にして文字を回り込ませます
 		div {
 			font-size: 0.75em;
 		}
+	}
+}
+
+@media (width < 768px) {
+	main.container {
+		/*grid-template-columns: repeat(1,minmax(0, 1fr));*/
+		grid-template-columns: minmax(0,1fr);
+		width: 100%;
 	}
 }
 
@@ -1738,6 +1746,7 @@ f-left: サムネイルを左にして文字を回り込ませます
 		"under";
 		grid-template-rows: max-content 1fr auto auto;
 		width: 100vw;
+		grid-template-columns: minmax(0,1fr);
 		
 		.cover {
 			aspect-ratio: 4/3;
