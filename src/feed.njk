@@ -23,7 +23,7 @@ permalink: /feed.xml
     <updated>{{ post.date | htmlDateString }}</updated>
     <id>{{ absolutePostUrl }}</id>
     <content type="html"><![CDATA[
-      {{ post.templateContent | safe }}
+      {{ post.templateContent | truncate(400, true, "…") | safe }}<p><a href="{{ post.url }}">続きを読む</a></p>
     ]]></content>
   </entry>
   {%- endfor -%}
