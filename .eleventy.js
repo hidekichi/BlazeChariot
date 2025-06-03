@@ -61,6 +61,9 @@ export default async function (eleventyConfig) {
 		return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
 	});
 	
+	// rss plugin convert Rfc3339
+	eleventyConfig.addLiquidFilter("dateToRfc3339", pluginRss.dateToRfc3339);
+	
 	eleventyConfig.addFilter("randomize", function (items) {
 		if (!Array.isArray(items)) {
 			return items;

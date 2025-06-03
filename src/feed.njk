@@ -14,7 +14,7 @@
   <subtitle>{{ site.description }}</subtitle>
   <link href="{{ site.url }}/feed.xml" rel="self"/>
   <link href="{{ site.url }}/"/>
-  <updated>{{ collections.latestPosts | getNewestCollectionItemDate | htmlDateString }}</updated>
+  <updated>{{ collections.latestPosts | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
   <id>{{ site.url }}/</id>
   <author>
     <name>{{ site.author.name }}</name>
@@ -26,7 +26,7 @@
   <entry>
     <title>{{ post.data.title }}</title>
     <link href="{{ absolutePostUrl }}"/>
-    <updated>{{ post.data.update or post.date | htmlDateString }}</updated>
+    <updated>{{ post.data.update or post.date | dateToRfc3339 }}</updated>
     <id>{{ absolutePostUrl }}</id>
     <content type="html"><![CDATA[
       {{ post.templateContent | truncate(400, true, "…") | safe }}<p><a href="{{ post.url }}">続きを読む</a></p>
