@@ -1,7 +1,11 @@
----
-permalink: /feed.xml
-metadata:
-  - language: ja
+---json
+{
+  "permalink": "/feed.xml",
+  "eleventyExcludeFromCollections": true,
+  "metadata": {
+    "language": "ja"
+  }
+}
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ metadata.language or page.lang }}">
