@@ -70,6 +70,15 @@ export default async function (eleventyConfig) {
 		});
 	});
 	
+	eleventyConfig.addFilter("truncate", function (str, length = 400, useWordBoundary = true, ellipsis = "...") {
+		if (!str) return "";
+		if (str.length <= length) return str;
+		const subString = str.slice(0, length - 1); 
+		return useWordBoundary 
+			? subString.slice(0, subString.lastIndexOf(" ")) + ellipsis 
+			: subString + ellipsis;
+	});
+	
 	eleventyConfig.addCollection("allTags", function (collectionApi) {
 		const allPages = collectionApi.getAll();
 	
