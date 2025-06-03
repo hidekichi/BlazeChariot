@@ -1,7 +1,9 @@
 ---
 permalink: /feed.xml
+metadata:
+  - language: ja
 ---
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"  xml:lang="{{ metadata.language or page.lang }}"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title>{{ site.title }}</title>
@@ -20,7 +22,7 @@ permalink: /feed.xml
   <entry>
     <title>{{ post.data.title }}</title>
     <link href="{{ absolutePostUrl }}"/>
-    <updated>{{ post.date | htmlDateString }}</updated>
+    <updated>{{ post.data.update or post.date | htmlDateString }}</updated>
     <id>{{ absolutePostUrl }}</id>
     <content type="html"><![CDATA[
       {{ post.templateContent | truncate(400, true, "…") | safe }}<p><a href="{{ post.url }}">続きを読む</a></p>
