@@ -889,6 +889,10 @@ ul.listing {
 			display: block;
 			width: max-content;
 		}
+		
+		.summary {
+			color: #999;
+		}
 	}
 }
 
@@ -1562,7 +1566,7 @@ f-left: サムネイルを左にして文字を回り込ませます
 	margin: 5rem 0 0;
 	
 	&::before {
-		content: "FOOTNOTES | 脚注";
+		content: "FOOTNOTES | 脚注  -  該当の脚注をクリック/タップで元の位置に戻ります";
 		padding: 4px 4rem 2px 4px;
 		font-size: .78125rem;
 		color: #fff;

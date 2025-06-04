@@ -1,6 +1,8 @@
 ---
 title: アニメーション画像のファイルサイズによる比較
+description: jpgとwebp、avif、あるいはgifアニメーションとwebp、avifのアニメーションを比較してみる
 date: 2025-03-12
+update: 2025-06-04
 category:
   - blog
 tags:
@@ -44,6 +46,24 @@ permalink: /blog/{{ page.fileSlug }}/
 この場合のimg要素は、画像のサイズやその他の属性と表示方法を記述できます。
 
 これらは`picture`タグの中に`img`があるので`picture`が親要素になると思う方もいるかも知れませんが`picture`タグはコンテナ要素で、`img`で使用するためのソースなどをまとめて書いておけるものであるので、上記の例であっても基本的には一般的な`img`タグと同じようにして使用します。そのため、もし親要素が必要であれば、`picture`タグの外に`div`なりを置く必要があります。
+
+最も良い例としては、
+```html
+<picture>
+    <source srcset="example.com/images/test.avif" type="image/avif" />
+    <source srcset="example.com/images/test.webp" type="image/webp" />
+    <img src="example.com/images/test.jpg" alt="テスト画像" />
+</picture>
+```
+
+と書いたら間違いはありません。しかしこのためにはavif、webp、jpgと3つの画像を用意する必要があります。webpは[can i use - webp](https://caniuse.com/webp)で見ても、IEと古いsafariだけが対応していないだけで全てのブラウザが対応していますからそれらは無視しても良いと思います。アプリなどでwebpが使えないという場合は泣く泣くjpgを用意するぐらいかと。
+[can i use - avif](https://caniuse.com/?search=avif)でもほぼ同じで、2025年現在avifは使用できる画像フォーマットです。ただしブラウザは対応していてもそれらをローカルで見るためのソフトが対応していない可能性はあります。
+
+### ブラウザは対応しているがOS側でサムネイルなどが表示されない可能性はある
+
+ブラウザは基本的にライブラリを自前で持っていると思いますが、OS側ではライブラリが入っていない場合はありえます。
+windowsではMicrosoftストアで`AV1 ビデオ拡張機能(av1-video-extension)`を検索すれば良いかと思います。無料の拡張機能です。
+macOS Ventura(macOS 13)以降なら何もしなくてもそのままで表示できると思います。
 
 ### AVIFとは
 

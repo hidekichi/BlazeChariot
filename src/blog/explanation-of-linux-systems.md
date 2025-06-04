@@ -2,7 +2,7 @@
 title: Linuxの系統別 解説
 description: こちらのページでは、Linuxのディストリビューションのリリースタイプや、パッケージ管理、その特徴や諸々を系統別で記載しています。それらを諸々加味して自身に最適と思われるディストリビューションを探してみて下さい。
 date: 2025-05-13
-update: 2025-06-03
+update: 2025-06-04
 category:
   - blog
 tags:
@@ -15,6 +15,7 @@ images:
   - ../img/Budgie.webp
   - ../img/cinnamon-6-2-1.webp
   - ../img/unity.webp
+  - ../img/sway_desktop.webp
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---
@@ -117,15 +118,15 @@ Debian系統の特徴は、APTパッケージ管理、安定したパッケー�
 | 親            | rating | 子                     | rating | 孫                      | rating | 
 | ------------- | :----: | ---------------------- | :----: | ----------------------- | :----: |
 | [Debian](https://www.debian.org/) | 8.9    | [Ubuntu](https://www.ubuntu.com/)          | 7.7    | [Linux Mint](https://linuxmint.com/)       | 8.8|
-|^^             |^^      |^^                      |^^      | [Pop!_OS](https://system76.com/pop)          | 8.0|
-|^^             |^^      |^^                      |^^      | [Zorin OS](https://zorin.com/os/)         | 8.5|
-|^^             |^^      |^^                      |^^      | [elementary OS](https://elementary.io/)    | 5.0|
-|^^             |^^      |^^                      |^^      | [Linux Lite](https://www.linuxliteos.com/)       | 7.9|
-|^^             |^^      |^^                      |^^      | [KDE neon](https://neon.kde.org/)         | 7.7|
-|(Debian)       |^^      | [Kali Linux](https://www.kali.org/)      | 8.7    | --                      | --|
-|^^             |^^      | [Parrot Security](https://parrotsec.org/) | 8.3    | --                      | --|
-|^^             |^^      | [antiX](https://antixlinux.com/)           | 8.3    | [MX Linux](https://mxlinux.org/)         | 8.0|
-|^^             |^^      | [Devuan GNU+Linux](https://devuan.org/)| 9.1    | [Peppermint OS](https://peppermintos.com/)    | 7.6|
+|^^ |^^ |^^|^^| [Pop!_OS](https://system76.com/pop) | 8.0|
+|^^ |^^ |^^|^^| [Zorin OS](https://zorin.com/os/)| 8.5|
+|^^ |^^ |^^|^^| [elementary OS](https://elementary.io/) | 5.0|
+|^^ |^^ |^^|^^| [Linux Lite](https://www.linuxliteos.com/)|7.9|
+|^^ |^^ |^^|^^| [KDE neon](https://neon.kde.org/)  | 7.7|
+|(Debian) |^^ | [Kali Linux](https://www.kali.org/)      | 8.7    | --                      | --|
+|^^ |^^ | [Parrot Security](https://parrotsec.org/) | 8.3    | --                      | --|
+|^^ |^^ | [antiX](https://antixlinux.com/)           | 8.3    | [MX Linux](https://mxlinux.org/)         | 8.0|
+|^^ |^^ | [Devuan GNU+Linux](https://devuan.org/)| 9.1    | [Peppermint OS](https://peppermintos.com/)    | 7.6|
 
 </div>
 
@@ -163,8 +164,7 @@ Debian系ではバイナリパッケージの他にソースパッケージも�
 
 <picture>
   <source srcset="../img/kde plasma.avif" type="image/avif">
-  <source srcset="../img/kde plasma.webp" type="image/webp">
-  <img src="../img/kde plasma.avif" alt="kde plasmaのスクリーンショット">
+  <img src="../img/kde plasma.webp" alt="kde plasmaのスクリーンショット">
 </picture>
 
 デスクトップエフェクトや多彩なテーマなどが多いと思います。KDEの統合されたアプリケーションがあり、Dolphin(ファイルマネージャー)、kMail(メールクライアント)、konsole(ターミナル)などがシームレスに統合されています。
@@ -175,8 +175,7 @@ Debian系ではバイナリパッケージの他にソースパッケージも�
 
 <picture>
   <source srcset="../img/xfce4_20.avif" type="image/avif">
-  <source srcset="../img/xfce4_20.webp" type="image/webp">
-  <img src="../img/xfce4_20.avif" alt="Xfce4.20の公式スクリーンショット">
+  <img src="../img/xfce4_20.webp" alt="Xfce4.20の公式スクリーンショット">
 </picture>
 
 GnomeやDKEほどではないにしてもある程度のカスタマイズもでき見た目は若干古さは残りつつも大きく見た目を変えないことでの利便性は高く、シンプルな使いやすいデスクトップ環境であると思います。
@@ -187,8 +186,7 @@ GnomeやDKEほどではないにしてもある程度のカスタマイズもで
 
 <picture>
   <source srcset="../img/LXQt labwc.avif" type="image/avif">
-  <source srcset="../img/LXQt labwc.webp" type="image/webp">
-  <img src="../img/LXQt labwc.avif" alt="LXQt lavwc(Wayland)の公式スクリーンショット">
+  <img src="../img/LXQt labwc.webp" alt="LXQt lavwc(Wayland)の公式スクリーンショット">
 </picture>
 
 古いPCや非常に限られたリソースしか持たないデバイスでもインストールするのに最適だろうと思います。その分、余計な機能は削られWebブラウジング、オフィス作業、メディア再生などの基本的な日常よくやることに特化しているという感じでしょうか。
@@ -215,32 +213,28 @@ GnomeやDKEほどではないにしてもある程度のカスタマイズもで
     <span>Mate</span>
     <picture>
       <source srcset="../img/mate-terminal.avif" type="image/avif">
-      <source srcset="../img/mate-terminal.webp" type="image/webp">
-      <img src="../img/mate-terminal.avif" alt="mateスクリーンショット">
+      <img src="../img/mate-terminal.webp" alt="mateスクリーンショット">
     </picture>
  </div>
  <div class="w-[100%] md:w-[50%]"> 
     <span>Budgie</span>
     <picture>
       <source srcset="../img/Budgie.avif" type="image/avif">
-      <source srcset="../img/Budgie.webp" type="image/webp">
-      <img src="../img/Budgie.avif" alt="Budgieのスクリーンショット">
+      <img src="../img/Budgie.webp" alt="Budgieのスクリーンショット">
     </picture>
   </div>
   <div class="w-[100%] md:w-[50%]">
     <span>cinnamon</span>
     <picture>
       <source srcset="../img/cinnamon-6-2-1.avif" type="image/avif">
-      <source srcset="../img/cinnamon-6-2-1.webp" type="image/webp">
-      <img src="../img/cinnamon-6-2-1.avif" alt="cinnamon-6-2-1のスクリーンショット">
+      <img src="../img/cinnamon-6-2-1.webp" alt="cinnamon-6-2-1のスクリーンショット">
     </picture>
   </div>
   <div class="w-[100%] md:w-[50%]">
     <span>unity</span>
     <picture>
       <source srcset="../img/unity.avif" type="image/avif">
-      <source srcset="../img/unity.webp" type="image/webp">
-      <img src="../img/unity.avif" alt="unityのスクリーンショット">
+      <img src="../img/unity.webp" alt="unityのスクリーンショット">
     </picture>
   </div>
 </div>
@@ -270,6 +264,9 @@ Red Hat系統の特徴は、YUM/DNFパッケージ管理。企業向け(RHEL)。
 `dnf`コマンドは、元々Red Hat系のディストリビューションでは、`yum`(Yellowdog Updater, Modified)コマンドが使われていたわけですが、yumに潜在的にあった問題点(ドキュメント不足、依存関係解決アルゴリズムの不備)を改善して更にそれをおしゃれに洗練するという意味を込めて**Dandified YUM**と名付けられ、それの省略形として**dnf**が使用されるようになりました。
 
 Red Hat系のディストリビューションのパッケージの殆どはバイナリ形式(RPMファイル)で提供されており、(必要な場合は)リポジトリを追加した後`dnf install ...`でインストールします。非公式のパッケージはCOPR(Copr Build system)としてやはりビルド済みのRPMパッケージを提供しており、制作者がソースをビルドしてRPMを作成して、ユーザーはそれを利用する形になっています。
+
+> バイナリ形式とは：
+> ソースコードとは違って、それをコンピューターがすぐに実行できる0および1などに変換された形式を言います。内容はともかくビルドしなくてもすぐに実行できる形式と理解してokかと
 
 ビルド済みのパッケージをインストールするためにユーザーは外部リポジトリからdnfの設定に追加してインストールします。追加作業は最初の一度のみで、その後は通常の`dnf install ...`でインストールなどができるようになります。
 
@@ -315,7 +312,7 @@ Arch系統の特徴は、pacmanパッケージ管理、ローリングリリー�
 
 pacmanはあのパックマンをもじった意味合いが込められています。本家でゲーム中のドット(餌)を食べていくように、依存関係をどんどん解決しながらインストールしていくという意味や、お化けになった敵キャラを食べていくように、不要になったパッケージや依存関係、あるいはキャッシュを片付けるというような意味も込められているわけです。
 
-Arch Linuxでは「Keep It Simple, Stupid (KISS)」と言われる哲学があり、シンプルであることこそ最良であると言う原則があり、パッケージマネージャのpacmanもその哲学を反映しています。
+Arch Linuxでは「Keep It Simple, Stupid (KISS)」と言われる哲学があって、シンプルである事こそ最良であると言う原則があり、パッケージマネージャのpacmanもその哲学を反映しています。
 
 pacman.conf(設定ファイル)に、
 ```shell
@@ -323,13 +320,21 @@ pacman.conf(設定ファイル)に、
 Color
 ILoveCandy
 ```
-と言う設定があり(あるいは書くと)、ダウンロードのプログレスメーターの代わりに「・(ドット)」で状況が表示され、それをCやOという文字がアニメーションしながら、さもパックマンがドットを食べていくような演出を出せます。
+と言う設定があり(あるいは書くと)、ダウンロードのプログレスメーターの代わりに「・(ドット)」で状況が表示され、それをcやCと文字がアニメーションしながら、さもパックマンがドットを食べていくような演出を出せます。
 pacmanが扱うのは基本的にはバイナリ形式のパッケージで、公式リポジトリにあるパッケージを管理します。これらは`.pkg.tar.zst`(以前は`.pkg.tar.xz`)という拡張子を持っています。
 
 一方ユーザーリポジトリ(AUR:Arch User Repositoryで公開されているパッケージ)はバイナリファイルは含まれていません。これらは`.pkg.tar.zst`にビルドするためのPKGBUILDというシェルスクリプトファイルになっています。
-よって悪意のあるコードが含まれている可能性はあるため、ユーザーはそれらを事前に調べてからインストールする必要があります。それらの事からAURでインストールするためにはpacmanではなく`yay`などのAURヘルパーが使用されます。
+よって悪意のあるコードが含まれている可能性はあるため、<u>ユーザーはそれらを事前に調べてからインストールする必要があります</u>。それらの事からAURでインストールするためにはpacmanではなく`yay`などのAURヘルパーが使用されます。yayではその記述はpacmanと同様ながら、
+```shell
+sudo yay -S <パッケージ名> //このようには書かない
+yay -S <パッケージ名> //これでok
+```
+のようにして`sudo`を求めません。
 
-Arch Linuxは「シンプルでミニマル」と言う哲学を持ち、ユーザー自身が様々な事をカスタマイズしていくという形を取っています。それはそれで素晴らしいことですがあまりにも敷居が高いため、Arch開発陣はシステムの精度を高めるのに注力し、それらを表示するGUIなどは別で開発をして、それらを融合すると言う形がとられ、それらを取りまとめたものがManjaroやEndeavorOSなどになります。
+> yay はユーザー権限でパッケージをビルドし、インストール段階のみ sudo で root 権限(管理者パスワードの要求)を使ってシステム領域にインストールします。
+> ビルド段階ではユーザー領域で展開しパッケージを作り、インストール段階でシステムにインストールされます。
+
+Arch Linuxは「シンプルでミニマル」と言う哲学を持ち、ユーザー自身が様々な事をカスタマイズしていくという形を取っています。それはそれで素晴らしいことですがあまりにも敷居が高いため、Arch開発陣はシステムの精度を高めるのに注力し、それらを表示するGUIなどは別で開発をして、それらを融合すると言う形がとられ、それらを取りまとめたものが**Manjaro**や**EndeavorOS**などになります。
 これらはArch Linuxをより簡単にユーザーに届けるために開発されており、競合であったり兄妹ディストリビューションと言うのが最もわかりやすい関係かもしれません。
 ManjaroもEndeavorOSも比較的新しいディストリビューションなのでまだ孫に当たるようなディストリビューションは出てきていませんが、今後もしかするとそれらに該当するものが登場する可能性はあります。
 
@@ -337,7 +342,9 @@ ManjaroもEndeavorOSも比較的新しいディストリビューションなの
 
 Garuda LinuxもCachyOSのように、性能重視で見た目にも派手、Dr460nized(Dragonized)バージョンはKDE Plasmaデスクトップ環境をベースにカスタマイズされたもので、視覚的な美しさとパフォーマンスに優れています。しかし、それらを滞り無く動作させるためには比較的新し目なPCである必要があるかも知れません。
 
-i3初代のノートPCで動作させたことがありましたが特別問題はなかったものの、性能的にはそれ以上は必須と思ってもらって差し支えないかと思います。もとよりGaruda Linuxは要求スペックが他のディストリビューションと比較してもやや高めです。
+> Garuda Linuxでは、2025年に登場したMochaと言うエディションもあり、これらはDr460nizedエディションとは対象に落ち着いた色合いで統一されており、ベースのデスクトップ環境はKDE Plasmaで、開発者向けのツールが充実されているということです。一方開発者向けと言いながらゲーム用途でも性能を発揮するという報告もあり、必要に応じでそれらパッケージを手動で追加することで幅広く対応できるようになると思います。
+
+Garuda、chacy共にi3初代のノートPCで動作させたことがありましたが特別問題はなかったものの、性能的にはi3のそれ以上は必須と思ってもらって差し支えないかと思います。もとより<u>Garuda Linuxは要求スペックが他のディストリビューションと比較しても**やや高め**です</u>。
 
 Garuda Linuxは[BTRFS(英語)](https://btrfs.readthedocs.io/en/latest/)ファイルシステム採用でスナップショットなどが撮れ、問題があった場合にスナップショットの所まで戻って復旧ができるなどを最初から組み込んでいます((インストール時に別のファイルシステムを選ぶことも可能です))。また[Chaotic-AUR](https://aur.chaotic.cx/)と言う豊富なプレビルドパッケージのリポジトリもあり、他のArch系ディストリビューションでも利用できます。これらのおかけでダウンロードしてすぐ様々なアプリが使用できるようになっています。
 
@@ -386,7 +393,7 @@ windowsでいうコントロールパネルのような感じです。基本的�
 企業などでは多くの設定ファイルを共有する必要がありますが、YaSTによって設定をXMLで書き出し複数のシステムを自動でインストール・設定できるAuto YaSTという機能もあります。
 
 openSUSEはここまでの内容を読んでもらってわかるように、もう一つのRed Hat系という感じのものであり、決して使いにくいとか玄人向けというわけではありません。もちろんすべてのディストリビューションが玄人向けな使い方もできるのですが。
-市場でもRed HatとSUSEはエンタープライズのlinux分野においては二大競合企業でもあります。
+<u>市場でもRed HatとSUSEはエンタープライズのlinux分野においては二大競合企業でもあります</u>。
 
 -----
 ### Gentoo系統
@@ -490,9 +497,12 @@ Windowsのレジストリエディタと違う点はライブ編集ではなく�
 
 ## 諸々な所感
 
-### インストールについて
+### Linuxのインストールについて
 
 このページで挙げたほとんど、少なくても子に当たるディストリビューションはグラフィカルなインストーラー(Calamaresなど)があってほとんどの人はUSBからISOを起動できるようにするだけ((BIOS、UEFIの設定でUSBから起動できるように。またISOも単にUSBに保管するのではなくUSBから起動した時にそこから動作するように書き込む必要がある))で最初にライブ環境が起動し、そこから任意のストレージにISOの内容を書き込むような手順を踏む感じになると思います。
+
+> Calamaresとは:
+> ディストリビューション中立的なGUIベースのLinuxインストーラーで、Qt(C++)を使って開発されており、柔軟なモジュールシステムにより、さまざまなディストリビューションが自分たちに合ったインストール手順を組み立てることができます。
 
 特別迷うような部分もなく、ノートPCであればWi-FiのSSID(無線LANの電波名)とパスワードを入力してネットに繋ぐ、デスクトップであればLANケーブルで接続するだけ、そのどちらの方式も持っているならそれぞれのやりやすい方法でと簡単な事でネットワークに繋がるのでほとんどが**オンライン**インストールすることになるかと思います。
 
@@ -502,10 +512,28 @@ M.2 SSDであればインストール自体は15～30分ぐらいで終わりま
 
 ### デスクトップ環境について
 
-デスクトップ環境は色んな種類があって何から始めて良いのかどれが良いのかと迷うことがあるかと思います。個人的な好みとしてはLinuxをノートPCで使用するので[Gnome](https://www.gnome.org/)を使用しますが、もしデスクトップで使用する場合は、Gnomeよりも[Cinnamon](https://projects.linuxmint.com/cinnamon/)(ディストリビューションにあればですが)とか、Xfce、あるいは[KDE Plasma](https://kde.org/ja/plasma-desktop/)、[Mate](https://mate-desktop.org/ja/)あたりが使いやすいかも知れません。これらは個人の好みもあるので何が一番良いかは難しいわけです。
+デスクトップ環境は色んな種類があって何から始めて良いのかどれが良いのかと迷うことがあるかと思います。個人的な好みとしてはLinuxをノートPCで使用するので[Gnome](https://www.gnome.org/)を使用しますが、もしデスクトップで使用する場合は、Gnomeよりも[Cinnamon](https://projects.linuxmint.com/cinnamon/)(ディストリビューションにあればですが)とか、Xfce、あるいは[KDE Plasma](https://kde.org/ja/plasma-desktop/)、[Mate](https://mate-desktop.org/ja/)あたりが使いやすいかも知れません。これらは個人の好みもあるので何が一番良いかは難しいわけですが。
 
 Awesomeやbspwm、i3、Swayなどはキーボードでウィンドウの操作もしようというような、もちろんマウスも動作はするのですが、ちょっと玄人好みのデスクトップ環境(ウィンドウマネージャー)になっているので、ここらは後回しでも良いと思います。
 Linuxの操作に慣れて、使用している中でデータを別で何かしらに保存していつでも元に戻せるという環境を作った上で、実際にそれらウィンドウマネージャーを使用している人の使用感や操作方法、環境設定などを熟知してから使うことをオススメします。
+
+<picture>
+  <source srcset="../img/sway_desktop.avif" type="image/avif">
+  <img src="../img/sway_desktop.webp" alt="Sway Window Managerを利用している人のスクリーンショット">
+</picture>
+
+上の画像はSwayの画面です。Arch LinuxでSwayを利用していると言うのがわかります。Swayはi3で慣れたユーザーがwayland環境でも容易に移行できるようにi3(こちらもウィンドウマネージャ)からフォークされて作られました。
+
+私達が普段使用しているWindowsは**スタッキング(あるいはスタック)型**のウィンドウマネージャです。積み重なっていくというような感じです。マウス操作に適していてTabキーなどでウィンドウ間の移動などもできますがほとんどの人はマウスを使用しているかと思います。ノートPCでタッチパッドがあってもマウスを使用する場合が多いと思います。
+一方Swayなどのウィンドウマネージャは**タイル型**と呼ばれます。これは画面いっぱいに(設定で作れますが)隙間なくウィンドウを並べていくと言う感じです。これらはマウスで操作もできますが、基本的にはキーボードで完結するように作られており、よくドラマなどでハッカーめいた人たちがキーボードをカチャカチャ、ッターンとやっているのを一般人が見て「**そんなキーボードをカチャカチャしねぇよ**」と言うコメントを寄せられる事もありますが、これらは**カチャカチャ ッターンするのがデフォ**です。
+
+自身でレイアウトを変更する事もできますしスタックさせる事もできたと思いますが、仮想デスクトップを切り替えてウィンドウの操作だけでやるのが一般的です。画像を見てもわかるようにたくさんのアプリなどが画面に並んでいます。
+アプリそれぞれのメモリ消費はありますが、SwayなどはWaylandに最適化されており(1から作られた)、無駄がないのでとても軽くアプリケーションの動作を阻害しません。よって一般的なスタック型のウィンドウマネージャーはそれだけで多機能だったりもあり特別それが重いという感覚はありませんが、機能をそぎ取ったものは尚一層軽くなるのはイメージしてもらえるだろうと思います。
+
+デスクトップ環境の一つであるGnomeのウィンドウマネージャには**Mutter**というのが使われていますが、たとえMutterがWaylandに対応したデフォルトのウィンドウマネージャだとしてもSwayの方が軽量です。そもそも<u>SwayはWayland専用に設計されています</u>からカスタマイズしない限り通知であったり、諸々のウィンドウマネージャーにあるような機能は別で導入する必要があり、それらカスタマイズが初めての人には難しいと思うので、分かりやすいウィンドウマネージャがデフォルトになっていると理解してもらうとよいかと思います。
+
+どれぐらい軽くなるかをAIに聞いてみた所、Gnome(Wayland)でおおよそ700～1200MBですが、Swayでは100〜250MB程度(構成により変動)という返答がありました。本来であれば、ウィンドウマネージャ同士を比較すべきですが、GnomeのMutterはGnomeに統合されており、Mutterが持っている機能も連携して動作しています。しかしSwayはそれ単体のウィンドウマネージャでMutterと同等の機能を持たせるためにはユーザー自らがそれに対応するツール群を導入する必要があり、それらを含めても軽量であるということだろうと思います。
+これらSwayの設定を含めてテキストベースの設定になったりすることが初心者向けではないとも言えるため、中～上級者向けのウィンドウマネージャと言われるわけです。
 
 ### X11とWaylandについて
 
@@ -636,7 +664,7 @@ Flatpakなどは、必要なライブラリやフレームワークをひとつ�
 
 </div>
 
-これらになります。単に好みのランクです。
+これらになります。単に好みのランクです。Debian/Ubuntu系なら`Pop!_OS`です。
 私的な思いは抜きにして世界的な、2025年トレンドかつ総合的なランキングで言うと、
 
 <div class="table-container">
