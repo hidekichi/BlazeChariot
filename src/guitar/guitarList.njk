@@ -33,7 +33,7 @@ permalink: /guitar{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumbe
 <nav id="articleList-pagination" aria-labelledby="pagination">
   <ol class="pagination">
     <li>{% if pagination.href.previous %}<a href="{{ pagination.href.previous }}"><button class="previous">Prev</button></a>{% else %}<button class="previous text-gray-800 bg-gray-600 aria-disabled cursor-not-allowed">Prev</button>{% endif %}</li>
-	<li>{% if pagination.href.next %}<a href="{{ pagination.href.next }}"><button class="next">Next≫</button></a>{% else %}<button class="next text-gray-800 bg-gray-600 aria-disabled cursor-not-allowed">Next</button>{% endif %}</li>
+	<li>{% if pagination.href.next %}<a href="{{ pagination.href.next }}"><button class="next">Next</button></a>{% else %}<button class="next text-gray-800 bg-gray-600 aria-disabled cursor-not-allowed">Next</button>{% endif %}</li>
 {%- for pageEntry in pagination.pages %}
     <li><a href="{{ pagination.hrefs[ loop.index0 ] }}"{% if page.url == pagination.hrefs[ loop.index0 ] %} aria-current="page"{% endif %}>Page {{ loop.index }}</a></li>
 {%- endfor %}
