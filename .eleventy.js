@@ -57,6 +57,7 @@ export default async function (eleventyConfig) {
 		return collectionApi.getFilteredByGlob("src/guitar/**/*.md");
 	});
 	
+	//jdate convert
 	eleventyConfig.addFilter("postDate", (dateObj) => {
 		return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
 	});
