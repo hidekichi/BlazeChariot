@@ -64,6 +64,41 @@ export default async function (eleventyConfig) {
 		return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
 	});
 	
+	eleventyConfig.addFilter("getNewestUpdateDate", function(collection) {
+	  return collection
+		.map(item => item.data.update || item.date)
+		.sort((a, b) => new Date(b) - new Date(a))[0];
+	});
+
+eleventyConfig.addFilter("normalizeDateToJST", function (value) {
+  if (!value) return value;
+
+  // value がすでに Luxon の DateTime ならそのまま
+  if (DateTime.isDateTime(value)) return value.toJSDate();
+
+  // ISO文字列か日付だけの文字列か
+  let dt;
+  if (typeof value === "string") {
+    // すでに時刻を含む場合はそのまま使う
+    if (value.includes("T")) {
+      dt = DateTime.fromISO(value, { zone: "Asia/Tokyo" });
+    } else {
+      // 時刻なし → 09:00 を補う
+      dt = DateTime.fromISO(`${value}T09:00:00+09:00`);
+    }
+  } else {
+    // JS Date オブジェクトなど → JST に変換
+    dt = DateTime.fromJSDate(new Date(value), { zone: "Asia/Tokyo" });
+  }
+
+  return dt.toJSDate();
+});
+	
+	eleventyConfig.addFilter("toLocalDate", function(date) {
+	  if (!date) return date;
+	  return DateTime.fromJSDate(new Date(date), { zone: "Asia/Tokyo" }).toJSDate();
+	});
+	
 	// rss plugin convert Rfc3339
 	eleventyConfig.addLiquidFilter("dateToRfc3339", pluginRss.dateToRfc3339);
 	
@@ -100,10 +135,11 @@ export default async function (eleventyConfig) {
 		return Array.from(allTags).sort();
 	});
 	
+	
 	eleventyConfig.addCollection("latestPosts", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/**/*.md")
-      .sort((a, b) => b.date - a.date); // 新しい順にソート
-  });
+		return collectionApi.getFilteredByGlob("src/**/*.md")
+		  .sort((a, b) => b.date - a.date); // 新しい順にソート
+	});
   
   eleventyConfig.addCollection("categoryTags", function(collectionApi) {
     let categoryTags = {};

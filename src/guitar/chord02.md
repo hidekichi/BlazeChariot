@@ -1,6 +1,7 @@
 ---
 title: コードの構造
 date: 2021-10-16
+update: 2021-10-16
 category:
   - ギターを弾き語れ！
 tags:

@@ -1,6 +1,7 @@
 ---
 title: インターネットを速くするには
 date: 2025-03-12
+update: 2025-03-12
 category:
   - blog
 tags:

@@ -1,6 +1,7 @@
 ---
 title: ストローク
 date: 2021-10-05
+update: 2021-10-05
 category:
   - ギターを弾き語れ！
 tags:

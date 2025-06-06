@@ -2,6 +2,7 @@
 title: TVerの動画プレイヤーサムネイルを軽くする
 description: どの人にも役に立つかと言うとそうでもなく、テザリング環境やネット回線量を減らすために
 date: 2025-06-05
+update: 2025-06-05
 category:
     - blog
 tags:

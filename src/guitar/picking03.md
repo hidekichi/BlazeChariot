@@ -1,6 +1,7 @@
 ---
 title: スリーフィンガー
 date: 2021-10-06
+update: 2021-10-06
 category:
   - ギターを弾き語れ！
 tags:

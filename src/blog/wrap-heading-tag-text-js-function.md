@@ -1,6 +1,7 @@
 ---
 title: 階層のない平打したHTMLで、見出しとその本文を任意のタグで囲むJavascript関数
 date: 2024-03-12
+update: 2024-03-12
 category:
   - blog
 tags:

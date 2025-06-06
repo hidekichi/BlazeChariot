@@ -1,6 +1,7 @@
 ---
 title: Bbについて〜案外難しいB7
 date: 2021-10-18
+update: 2021-10-18
 category:
   - ギターを弾き語れ！
 tags:

@@ -1,10 +1,10 @@
 ---
 title: もうダメだ
+description:  I can't take this anymore
 date: 2025-01-12
-updated: 2025-01-25
+update: 2025-01-25
 layout: page.njk
 category: now
-description:  I can't take this anymore
 permalink: /now/
 ---
 

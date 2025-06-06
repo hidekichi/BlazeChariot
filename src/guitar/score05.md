@@ -1,6 +1,7 @@
 ---
 title: 音楽の進行とTAB譜の読み方
 date: 2021-11-22
+update: 2021-11-22
 category:
   - ギターを弾き語れ！
 tags:

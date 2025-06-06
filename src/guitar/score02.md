@@ -1,6 +1,7 @@
 ---
 title: 楽譜の読み方Tips
 date: 2021-11-22
+update: 2021-11-22
 category:
   - ギターを弾き語れ！
 tags:

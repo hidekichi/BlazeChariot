@@ -2,7 +2,7 @@
 title: BlazeChariot - ギターを弾き語れ！-11ty/eleventy-
 layout: page.njk
 date: 2021-09-27
-updated: 2025-02-25
+update: 2025-02-25
 tags:
   - about
 category:
