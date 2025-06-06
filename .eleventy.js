@@ -22,7 +22,7 @@ import path from 'path';
 import EleventyPluginVite from "@11ty/eleventy-plugin-vite";
 
 export default async function (eleventyConfig) {
-	//eleventyConfig.addPlugin(EleventyPluginVite);
+	eleventyConfig.addPlugin(EleventyPluginVite);
 	
 	// Folders to copy to build dir
 	eleventyConfig.addPassthroughCopy("src/static");

@@ -9,7 +9,7 @@ layout: base.njk
 	{% endif %}
 	{{ author }}
 	{% if updated %}
-		<p class="page-title__date mt-6">Last updated: <time datetime="{{ updated | shortDateString }}">{{ updated | postDate }}</time></p>
+		<p class="page-title__date mt-6">Last updated: <time datetime="{{ updated | shortDateString }}">{{ updated | readableDate }}</time></p>
 	{% endif %}
 </header>
 <article class="body-copy {% if category %}cat-{{ category }}{% endif %}">

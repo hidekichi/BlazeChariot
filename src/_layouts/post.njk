@@ -8,7 +8,7 @@ layout: base.njk
 		<h2 class="page-title__desc">{{ description }}</h2>
 	{% endif %}
 	<div class="header-meta">
-	{{ site.author.name }}{% if date %}｜<time class="page-title__date" datetime="{{ date }}">{{ date | postDate }}</time> {% endif %}{% if update %} [ <time class="page-title__update" datetime="{{ update }}">{{ update | postDate }} ]</time>{% endif %}<br>
+	{{ site.author.name }}{% if date %}｜<time class="page-title__date" datetime="{{ date }}">{{ date | readableDate }}</time> {% endif %}{% if update %} [ <time class="page-title__update" datetime="{{ update }}">{{ update | readableDate }} ]</time>{% endif %}<br>
 
 		<div class="tags">
 		{% for tag in tags -%}
