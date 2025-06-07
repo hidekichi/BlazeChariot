@@ -4,6 +4,7 @@
   "eleventyExcludeFromCollections": true,
   "metadata": {
     "title": "blazechariot",
+    "description": "BlazeChariotはギター初心者のためにとブログのサイトです。11tyで作りました",
     "language": "ja",
     "base": "https://blazechariot.netlify.app/",
     "author": {
@@ -13,25 +14,24 @@
 }
 ---
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ metadata.language or page.lang }}">
-  <title>{{ metadata.title }}</title>
-  <subtitle>{{ site.description }}</subtitle>
-  <link href="{{ permalink | htmlBaseUrl(metadata.base) }}" rel="self"/>
-  <link href="{{ metadata.base | addPathPrefixToFullUrl }}/"/>
-  <updated>{{ collections.latestPosts | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
-  <id>{{ site.url }}/</id>
-  <author>
-    <name>{{ metadata.author.name }}</name>
-  </author>
-  {%- for post in collections.latestPosts -%}
-  {%- set absolutePostUrl = site.url + post.url -%}
-  {% set truncContent = post.templateContent | striptags(true) | truncate(300) %}
-  <entry>
-    <title>{{ post.data.title }}</title>
-    <link href="{{ absolutePostUrl }}"/>
-    <updated>{{ (post.data.update or post.date) | dateToRfc3339 }}</updated>
-    <id>{{ absolutePostUrl }}</id>
-    <content type="html">{{ truncContent | renderTransforms(post.data.page, metadata.base) }}</content>
-  </entry>
-  {%- endfor -%}
-</feed>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:base="{{ metadata.base | addPathPrefixToFullUrl }}" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ metadata.title }}</title>
+    <link>{{ metadata.base | addPathPrefixToFullUrl }}</link>
+    <atom:link href="{{ permalink | htmlBaseUrl(metadata.base) }}" rel="self" type="application/rss+xml" />
+    <description>{{ metadata.description }}</description>
+    <language>{{ metadata.language or page.lang }}</language>
+    {%- for post in collections.posts | reverse %}
+    {%- set absolutePostUrl = post.url | htmlBaseUrl(metadata.base) %}
+    {% set truncContent = post.templateContent | striptags(true) | truncate(300) %}
+    <item>
+      <title>{{ post.data.title }}</title>
+      <link>{{ absolutePostUrl }}</link>
+      <description>{{ truncContent | renderTransforms(post.data.page, metadata.base) }}</description>
+      <pubDate>{{ post.date | dateToRfc822 }}</pubDate>
+      <dc:creator>{{ metadata.author.name }}</dc:creator>
+      <guid>{{ absolutePostUrl }}</guid>
+    </item>
+    {%- endfor %}
+  </channel>
+</rss>
