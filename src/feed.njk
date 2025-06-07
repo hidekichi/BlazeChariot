@@ -14,7 +14,6 @@
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ metadata.language or page.lang }}">
-
   <title>{{ metadata.title }}</title>
   <subtitle>{{ site.description }}</subtitle>
   <link href="{{ permalink | htmlBaseUrl(metadata.base) }}" rel="self"/>
@@ -30,7 +29,7 @@
     <title>{{ post.data.title }}</title>
     <link href="{{ absolutePostUrl }}"/>
     <updated>{{ (post.data.update or post.date) | dateToRfc3339 }}</updated>
-    <summary>{{ post.templateContent | truncate(400) }}</summary>
+    <summary>{{ post.templateContent | striptags(true) | truncate(260) }}</summary>
     <id>{{ absolutePostUrl }}</id>
     <content type="html">
       <![CDATA[
@@ -39,5 +38,4 @@
     </content>
   </entry>
   {%- endfor -%}
-  
 </feed>
