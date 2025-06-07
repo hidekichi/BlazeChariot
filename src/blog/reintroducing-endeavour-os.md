@@ -1,7 +1,7 @@
 ---
 title: EndeavourOSを再導入
 date: 2024-03-12
-update: 2024-03-12
+update: 2024-03-13
 category:
   - blog
 tags:
