@@ -29,6 +29,7 @@ export default async function (eleventyConfig) {
 	
 	// Folders to copy to build dir
 	eleventyConfig.addPassthroughCopy("src/static");
+	eleventyConfig.addPassthroughCopy("src/*.txt");
 	eleventyConfig.addPassthroughCopy("src/blog/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
 	eleventyConfig.addPassthroughCopy("src/guitar/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
 	eleventyConfig.addPassthroughCopy("src/pages/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
@@ -272,10 +273,6 @@ eleventyConfig.addFilter("normalizeDateToJST", function (value) {
 			changefreq: "weekly",
 			priority: 0.8,
 		},
-		source: [
-			"src/blog/**/*.md",
-			"src/guitar/**/*.md"
-		],
 	});
 	
 	// CSSバンドルの設定
