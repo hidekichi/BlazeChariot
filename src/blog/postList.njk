@@ -9,6 +9,9 @@ pagination:
   size: 10
   alias: blog
 permalink: /blog{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber + 1}}{% endif %}/
+
+sitemap:
+  ignore: true
 ---
 
 <h3>Now Entering Page {{ pagination.pageNumber + 1 }}</h3>

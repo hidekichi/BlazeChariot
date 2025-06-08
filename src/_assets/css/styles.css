@@ -127,14 +127,51 @@ h1 { font-size: clamp(2.861rem, 2.514rem + 1.734vw, 3.815rem); }
 */
 
 .body-copy {
-	h1 { font-size: 2.5rem; }
+	/*h1 { font-size: 2.5rem; }
 	h2 { font-size: 2rem; }
 	h3 { font-size: 1.75rem; } 
 	h4 { font-size: 1.5rem; } 
 	h5 { font-size: 1.25rem; }
- 	h6 { font-size: 1.1rem; }
+ 	h6 { font-size: 1.1rem; }*/
+	
+	h1 {
+	  /*
+	   * clamp(最小値, 推奨値, 最大値)
+	   * 最小値: モバイルでの最小フォントサイズ (rem)
+	   * 推奨値: ビューポート幅に基づく動的なフォントサイズ (vw)
+	   * 最大値: デスクトップでの最大フォントサイズ (rem)
+	   */
+	  font-size: clamp(2rem, 5vw, 2.5rem); /* 例: 32px ～ 40px */
+	  line-height: 1.2;
+	}
+
+	h2 {
+	  font-size: clamp(1.6rem, 4vw, 2rem); /* 例: 25.6px ～ 32px */
+	  line-height: 1.25;
+	  margin: 6rem 0 1.75rem;
+	}
+
+	h3 {
+	  font-size: clamp(1.4rem, 3.5vw, 1.75rem); /* 例: 22.4px ～ 28px */
+	  line-height: 1.3;
+	}
+
+	/* h4, h5, h6 も同様に clamp() で設定 */
+	h4 {
+	  font-size: clamp(1.15rem, 3vw, 1.45rem);
+	  line-height: 1.4;
+	}
+	h5 {
+	  font-size: clamp(1.05rem, 2.5vw, 1.15rem);
+	  line-height: 1.5;
+	}
+	h6 {
+	  font-size: clamp(0.95rem, 2vw, 1.115rem); /* bodyの1remを下限にする */
+	  line-height: 1.55;
+	}
  }
 
+/*
 @media (width <= 768px) {
 	.body-copy {
 		h1 { font-size: 2rem; }
@@ -145,6 +182,7 @@ h1 { font-size: clamp(2.861rem, 2.514rem + 1.734vw, 3.815rem); }
 		h6 { font-size: 1rem; }
 	}
 }
+*/
 
 /* Headings */
 h6, h5, h4, h3, h2, h1 {
@@ -530,7 +568,8 @@ b,strong {
 		line-height: inherit;
 		
 		& + hr {
-			margin: 4rem 0;
+			margin: 6rem 0;
+			border-style: dashed;
 		}
 		
 		& + pre[class*="language-"] {
@@ -553,7 +592,6 @@ b,strong {
 	}
 	
 	h2 {
-		margin-top: 0;
 		/* font-size: 1.8rem; */
 		padding-bottom: 0.5rem;
 		border-bottom: solid 0.1rem var(--transparency-1);
@@ -610,17 +648,32 @@ b,strong {
 	}
 	
 	:where(ul,ol) {
-		padding-left: 0.75rem;
-		/* font-size: 0.875em; */
+		font-size: 15px;
 		margin-bottom: 2rem;
+		padding: 1rem;
+		
 		
 		li {
-			margin-bottom: 1.2rem;
+			margin-bottom: 0.75rem;
+			margin-left: 0.5rem;
+			padding-left: 0.5rem;
 			line-height: 1.5;
 			
 			&::marker {
 				color: var(--brand);
 			}
+			
+			li {
+				margin-bottom: 0.5rem;
+				
+				&:last-of-type {
+					margin-bottom: 1.6rem;
+				}
+			}
+		}
+		
+		li:last-of-type {
+			margin-bottom: 0;
 		}
 		
 		ul {

@@ -13,6 +13,7 @@ import markdownItMultimdTable from "markdown-it-multimd-table-ext";
 import markdownItFigure from "markdown-it-figure";
 import attrs from "markdown-it-attrs";
 import pluginRss from "@11ty/eleventy-plugin-rss";
+import sitemap from "@quasibit/eleventy-plugin-sitemap";
 
 // --- eleventy-img も import に ---
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
@@ -261,6 +262,20 @@ eleventyConfig.addFilter("normalizeDateToJST", function (value) {
 			// Fail gracefully.
 			callback(null, code);
 		}
+	});
+	
+	//sitemap	
+	eleventyConfig.addPlugin(sitemap, {
+		lastModifiedProperty: "update",
+		sitemap: {
+			hostname: "https://blazechariot.netlify.app",
+			changefreq: "weekly",
+			priority: 0.8,
+		},
+		source: [
+			"src/blog/**/*.md",
+			"src/guitar/**/*.md"
+		],
 	});
 	
 	// CSSバンドルの設定

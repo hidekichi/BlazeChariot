@@ -3,13 +3,16 @@ layout: page.njk
 title: ギターを弾き語れ！記事一覧
 category:
   - guitar
-
+  
 pagination:
   data: collections.guitar
   size: 6
   alias: guitar
 
 permalink: /guitar{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber + 1}}{% endif %}/index.html
+
+sitemap:
+  ignore: true
 ---
 
 <h3>Now Entering Page {{ pagination.pageNumber + 1 }}</h3>
