@@ -483,9 +483,14 @@ b,strong {
 			grid-area: main;
 			
 			h2 {
+				margin-top: 0;
 				font-family: serif;
 				font-weight: bolder;
 				line-height: 1.1;
+			}
+			
+			hr {
+				margin: 1rem 0 1.5rem !important;
 			}
 		}
 		
@@ -677,8 +682,8 @@ b,strong {
 		}
 		
 		ul {
-			margin: 0.5rem 0 1rem;
-			/* font-size: 0.9875em; */
+			margin: 0.5rem 1rem 0.5rem;
+			padding: 0;
 		}
 		
 		a {
@@ -1136,8 +1141,16 @@ code[class^="language-"] {
 		list-style: none;
 		display: flex;
 		align-items: center;
+		column-gap: 0 0.5rem;
 		/* font-size: 14px; */
-		gap: 0 0.5rem;
+		
+		li {
+			margin-bottom: 0;
+		}
+		
+		a[aria-current="page"] {
+			color: var(--logo);
+		}
 		
 	}
 	

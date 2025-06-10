@@ -50,11 +50,11 @@ Windowsに慣れていると、日本語入力はできて当たり前と言う�
 
 BlendOSのインストール自体はJadeと言うインストーラーで、とてもわかり易く簡単な印象でした。インストール前にWi-Fiに繋いでインストール後は再度設定することなく自動でネットに接続されました。
 
-…と、長々と説明しているものの、試しに入れてみただけでやはり本命はEndeavorOSだろうと入れ直しになります。
+…と、長々と説明しているものの、試しに入れてみただけでやはり本命はEndeavourOSだろうと入れ直しになります。
 
 ### そして長く使うことなく再度EndeavourOSへ
 
-![EndeavorOSデスクトップ](../img/desktop.jpg)
+![EndeavourOSデスクトップ](../img/desktop.jpg)
 
 2024/01/30 時点でEndeavourOSは、[Galileo Neo](https://endeavouros.com/news/galileo-neo-with-kernel-6-7-1-plasma-offline-and-calamares-fixes/)で、デフォルト(offライン)ではPlasmaデスクトップになってます。過去にはXFceのデスクトップだったと思うのですが、Plasmaになっていたので若干戸惑い気味でした。
  オンラインでインストールする際には、これまで同様、用意されている任意のデスクトップ環境が選択できます。
@@ -78,7 +78,7 @@ OSのインストーラーは画面左下のタスクバーの一覧の中にあ
 
 ### アプリケーションの開き方
 
-![EndeavorOSアプリ一覧画面](../img/applicationList.jpg)
+![EndeavourOSアプリ一覧画面](../img/applicationList.jpg)
 
 EndeavourOSというよりはGnomeの話になりますが、3フィンガーで上下させると、上に1段階目はウィンドウ一覧になり、2段階目では全画面アプリケーションメニューとなります。 
 
