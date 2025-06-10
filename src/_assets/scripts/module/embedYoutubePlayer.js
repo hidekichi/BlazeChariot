@@ -73,6 +73,8 @@ export function embbedYoutubePlayer() {
 	Array.from(youtubePlayers).forEach((ytp) => {
 		const youtubeAddress = ytp.textContent;
 		ytp.textContent = '';
+		
+		const mvTitle = ytp.dataset.title;
 
 		// data[convertIframe,getThumb,pickupID]
 		const data = makeData(youtubeAddress);
@@ -81,7 +83,12 @@ export function embbedYoutubePlayer() {
 		const thumbnail = `background-image: url(${data[1]})`;
 		const titleText = 'Click/tap to load video player';
 		const playbackButton = `<button class='button play-button inner' data-target='${data[2]}' title='${titleText}'></button>`;
-		const container = `<div class='container'>${playbackButton}${data[0]}</div>`;
+		let container = `<div class='container'>${playbackButton}${data[0]}</div>`;
+		if (!mvTitle) {
+			container = container; 
+		} else {
+			container = `<span class="title">${mvTitle}</span>${container}`;
+		}
 		const wrapper = `<div class='wrapper' style='${thumbnail}'>${container}</div>`;
 
 		ytp.innerHTML = wrapper;

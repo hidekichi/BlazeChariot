@@ -38,7 +38,7 @@ permalink: /guitar/{{ page.fileSlug }}/
 
 良い耳を鍛えて下さい。それはギターの演奏にもきっと役立つはずです。
 
-<div class="ytp">https://www.youtube.com/watch?v=9ExFsLH-O-o</div>
+{ytp::https://www.youtube.com/watch?v=9ExFsLH-O-o::Tommy Emmanuel&Igor Presnyakov - Tears in Heaven}
 
 ### 自分で試して理解する
 

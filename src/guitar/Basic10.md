@@ -221,7 +221,7 @@ STEP 5の一例として±0オクターブの「ド((いわゆる普通のド、
 実際には真っ直ぐではなく、指は外に倒し気味になっていて、触れるとすればコードによって人差し指の付け根あたりがネックに触れるぐらいになるのではなかろうかと思います。  
 これらは6.に関係しています。そして、6は、4であったり5にも関係しています。
 
-<div class="ytp">https://youtu.be/0cHeNscKZN0</div>
+{ytp::https://youtu.be/0cHeNscKZN0::Tommy Emmanue - Somewhere Over The Rainbow}
 
 我らが[Tommy Emmanuel](https://www.youtube.com/channel/UCL-0gAth4u6Wp-9_98XU3nA "Youtubeのチャンネルへのリンクです")おじさんのギターの構え方をみて下さい。まず真正面に構えてないのがわかるでしょうか？右足の付け根にギターの凹んでる部分を乗せてますよね？正解はここです。
 

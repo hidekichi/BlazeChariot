@@ -40,7 +40,7 @@ permalink: /guitar/{{ page.fileSlug }}/
 
 ギターは必ずしもコードを弾かねばならないという事はありません。ベースだけの部分、メロディーとのユニゾン等色々な弾き方があります。例えば以下のジミヘンのLittle wingなど。エレキ独自の弾き方もあると思いますが多くは共通です。
 
-<div class="ytp">https://youtu.be/72ABomY0MmA</div>
+{ytp::https://youtu.be/uUpAnmWJa2M::Jimi Hendrox - Little Wing}
 
 いきなりジミヘンはハードルが高すぎますが、こういうものもあるというのを知っておくべきなのです。
 

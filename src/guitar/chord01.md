@@ -53,7 +53,7 @@ permalink: /guitar/{{ page.fileSlug }}/
 
 むしろ左手は自由に動かせるようにどこかに固定されるような感じではいけません。ネックを握るにしても人差し指から親指までの間がネックに触れるのはありますが<u>なるべく薬指や小指の付け根あたりがネックには触れないようにしてみて下さい</u>。よく教本などではネックを握った時に手のひらに少し隙間があくようにとかと書いている本もあるでしょう。
 
-<div class="ytp">https://youtu.be/oUoxlagDVlo</div>
+{ytp::https://youtu.be/oUoxlagDVlo::Tommy Emmanuel - Pink Panther Theme}
 
 我らがTommy Emmanuelおじさんを見てみて下さい。**構え方の角度はこれです**。コードが押さえられないという人はギターが正面に向きすぎていませんか？
 

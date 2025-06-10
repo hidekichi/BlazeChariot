@@ -16,12 +16,89 @@ import pluginRss from "@11ty/eleventy-plugin-rss";
 import sitemap from "@quasibit/eleventy-plugin-sitemap";
 import rubyPlugin from "markdown-it-ruby";
 
-// --- eleventy-img も import に ---
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import path from 'path';
 
-// --- EleventyPluginVite も import に ---
 import EleventyPluginVite from "@11ty/eleventy-plugin-vite";
+
+
+const embedYoutubeDiv = function(md) {
+  const ytpBlock = function(state, startLine, endLine, silent) {
+    const pos = state.bMarks[startLine] + state.tShift[startLine];
+    const max = state.eMarks[startLine];
+    const src = state.src;
+
+    // ルールを適用する行を特定
+    const lineSrc = src.slice(pos, max);
+
+    // 変更点: 正規表現をシンプル化し、ytpとそれに続く全てのクラスをキャプチャ
+    // 例: {ytp f-left size-m::アドレス::タイトル} の場合
+    // match[1] = "ytp f-left size-m"
+    // match[2] = "アドレス::タイトル"
+    const match = lineSrc.match(/^{\s*(ytp(?:\s+[a-zA-Z0-9\-]+)*)::(.*)}$/);
+    if (!match) {
+      return false;
+    }
+
+    // 抽出されたクラス名とコンテンツ
+    const fullClasses = match[1]; // 例: "ytp f-left size-m"
+    const contentStr = match[2]; // 例: "アドレス::タイトル"
+
+    if (!contentStr.trim()) return false; // 中身が空なら無効
+
+    // 最後の '::' を探してアドレスとタイトルを分割
+    const lastSepPos = contentStr.lastIndexOf('::');
+
+    let address, title;
+    if (lastSepPos !== -1) {
+      // タイトルあり
+      address = contentStr.slice(0, lastSepPos);
+      title = contentStr.slice(lastSepPos + 2);
+    } else {
+      // タイトルなし
+      address = contentStr;
+      title = '';
+    }
+
+    // アドレスが空の場合は無効
+    if (!address.trim()) {
+      return false;
+    }
+
+    // silent モードでなければトークンを生成
+    if (!silent) {
+      const token = state.push('ytp_block', '', 0);
+      token.content = address.trim();
+      token.meta = {
+        title: title.trim(),
+        // 抽出したクラス名をそのままメタ情報として保存
+        classes: fullClasses.trim()
+      };
+
+      // このルールは1行だけを消費する
+      state.line = startLine + 1;
+    }
+
+    return true;
+  };
+
+  md.block.ruler.before('paragraph', 'ytp_block', ytpBlock, {
+    alt: ['paragraph', 'blockquote']
+  });
+
+  md.renderer.rules['ytp_block'] = function(tokens, idx, options, env, self) {
+    const address = md.utils.escapeHtml(tokens[idx].content);
+    const title = md.utils.escapeHtml(tokens[idx].meta.title);
+    // 変更点: トークンから取得したクラス名をそのまま使用
+    const classes = md.utils.escapeHtml(tokens[idx].meta.classes || 'ytp'); // 念のためデフォルトを設定
+
+    const titleAttr = title ? ` data-title="${title}"` : '';
+
+    // 変更点: class 属性に取得したクラス名を使用
+    return `<div class="${classes}"${titleAttr}>${address}</div>\n`;
+  };
+};
+
 
 export default async function (eleventyConfig) {
 	if (process.env.ELEVENTY_ENV !== "production") {
@@ -316,6 +393,7 @@ export default async function (eleventyConfig) {
 		rp: ['(', ')']
 	})
 	.use(markdownItFigure)
+	.use(embedYoutubeDiv)
 	.use(attrs, {
 		selectorExceptions: ['table', 'table tbody', 'tbody']
 	})

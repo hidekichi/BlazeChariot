@@ -580,6 +580,10 @@ b,strong {
 		& + pre[class*="language-"] {
 			margin-bottom: 2rem;
 		}
+		
+		& + :where(ul,ol) {
+			margin-top: -1.7rem;
+		}
 	}
 
 	:where(h2,h3,h4,h5) {
@@ -1308,6 +1312,18 @@ f-left: サムネイルを左にして文字を回り込ませます
 		left: 50%;
 		/*transform: translate(-50%,-50%);*/
 		animation: heartbeat 1.5s infinite;
+	}
+	
+	.title {
+		display: inline-flex;
+		margin: 0.25rem;
+		color: var(--code-color);
+		background-color: var(--background-color);
+		padding: 0 0.5rem;
+		border-radius: 4px;
+		position: absolute;
+		top: 0;
+		left: 0;
 	}
 	
 	&.mv_hidden {

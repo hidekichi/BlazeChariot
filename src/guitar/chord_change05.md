@@ -16,7 +16,7 @@ permalink: /guitar/{{ page.fileSlug }}/
 
 ### 例題は桑田佳祐「孤独の太陽」
 
-<div class="ytp">https://youtu.be/miV-gNAM8xc</div>
+{ytp::https://youtu.be/miV-gNAM8xc::初音ミク弾き語り - 孤独の太陽}
 
 まずは、曲を知らない人へ。
 そして、[楽器.me 孤独の太陽](http://gakufu.gakki.me/m/data/DT09590.html?target=_blank)から歌詞とコードが見ることができます。これは[UFRET](https://www.ufret.jp/)でも何でも構いません。

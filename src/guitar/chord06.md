@@ -102,7 +102,7 @@ Cであれば普通にローポジションで押さえればよいのでバレ�
 更には2フレットに中指、薬指、小指と並ぶので、中指を軸にやや手首を内側にひねらなくてはならず、親指の使い方に乏しい初心者は押さえ難く感じるのかも知れません。
 もしバレーが既にできるなら2フレットバレーのA7で問題はありません。言葉で書くと簡単ですが、これはこれで難しい。
 
-<div class="ytp">https://youtu.be/1XOCxBgxlXk</div>
+{ytp::https://youtu.be/1XOCxBgxlXk::LOVE PSYCHEDELICO - I Will Be With You (Official Video)}
 
 現在B7を多用する楽曲が多いのかどうかは不明ですが、例えばLOVE PSYCHEDELICO「I'll be with you」などで使われていたりします。Emからの連携が多いです。
 

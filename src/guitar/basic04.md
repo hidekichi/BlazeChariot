@@ -43,7 +43,7 @@ permalink: /guitar/{{ page.fileSlug }}/
 
 #### 実際に弦を取り付けている動画
 
-<div class="ytp">https://www.youtube.com/watch?v=0xxeRFEP1Y4</div>
+{ytp::https://youtu.be/0xxeRFEP1Y4::How to Change Your Acoustic Guitar Strings | Fender}
 
 よい動画を見つけたので貼り付け。<u>2分05秒あたりからの弦を押さえながらペグを巻く部分とか</u>。この動画では予め弦をカットしてからペグに巻きつけていますが、弦の終端のカットは後の方が良いと思う。
 
@@ -177,4 +177,5 @@ permalink: /guitar/{{ page.fileSlug }}/
 よほどでない限りそうそう切れるものではないですが、弦の交換を忘れて放置して錆びついていたりした場合などは切れることも考えられます。
 
 ちなみに長渕剛はいつもヘビーゲージらしい（笑）［長渕剛「ぼくのギターにはいつもヘビーゲージ」より］
-<div class="ytp">https://youtu.be/fWYUhZ4lUT4</div>
+
+{ytp::https://youtu.be/fWYUhZ4lUT4::長渕剛-ぼくのギターにはいつもヘビーゲージ}
