@@ -14,6 +14,7 @@ import markdownItFigure from "markdown-it-figure";
 import attrs from "markdown-it-attrs";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import sitemap from "@quasibit/eleventy-plugin-sitemap";
+import rubyPlugin from "markdown-it-ruby";
 
 // --- eleventy-img も import に ---
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
@@ -72,29 +73,29 @@ export default async function (eleventyConfig) {
 		.sort((a, b) => new Date(b) - new Date(a))[0];
 	});
 
-eleventyConfig.addFilter("normalizeDateToJST", function (value) {
-  if (!value) return value;
+	eleventyConfig.addFilter("normalizeDateToJST", function (value) {
+	  if (!value) return value;
 
-  // value がすでに Luxon の DateTime ならそのまま
-  if (DateTime.isDateTime(value)) return value.toJSDate();
+	  // value がすでに Luxon の DateTime ならそのまま
+	  if (DateTime.isDateTime(value)) return value.toJSDate();
 
-  // ISO文字列か日付だけの文字列か
-  let dt;
-  if (typeof value === "string") {
-    // すでに時刻を含む場合はそのまま使う
-    if (value.includes("T")) {
-      dt = DateTime.fromISO(value, { zone: "Asia/Tokyo" });
-    } else {
-      // 時刻なし → 09:00 を補う
-      dt = DateTime.fromISO(`${value}T09:00:00+09:00`);
-    }
-  } else {
-    // JS Date オブジェクトなど → JST に変換
-    dt = DateTime.fromJSDate(new Date(value), { zone: "Asia/Tokyo" });
-  }
+	  // ISO文字列か日付だけの文字列か
+	  let dt;
+	  if (typeof value === "string") {
+		// すでに時刻を含む場合はそのまま使う
+		if (value.includes("T")) {
+		  dt = DateTime.fromISO(value, { zone: "Asia/Tokyo" });
+		} else {
+		  // 時刻なし → 09:00 を補う
+		  dt = DateTime.fromISO(`${value}T09:00:00+09:00`);
+		}
+	  } else {
+		// JS Date オブジェクトなど → JST に変換
+		dt = DateTime.fromJSDate(new Date(value), { zone: "Asia/Tokyo" });
+	  }
 
-  return dt.toJSDate();
-});
+	  return dt.toJSDate();
+	});
 	
 	eleventyConfig.addFilter("toLocalDate", function(date) {
 	  if (!date) return date;
@@ -143,33 +144,33 @@ eleventyConfig.addFilter("normalizeDateToJST", function (value) {
 		  .sort((a, b) => b.date - a.date); // 新しい順にソート
 	});
   
-  eleventyConfig.addCollection("categoryTags", function(collectionApi) {
-    let categoryTags = {};
+	eleventyConfig.addCollection("categoryTags", function(collectionApi) {
+		let categoryTags = {};
 
-    // 全コレクションの記事を取得
-    let allPosts = collectionApi.getAll();
+		// 全コレクションの記事を取得
+		let allPosts = collectionApi.getAll();
 
-    allPosts.forEach(post => {
-      let category = post.filePathStem.split("/")[1]; // blog, guitar など
+		allPosts.forEach(post => {
+			let category = post.filePathStem.split("/")[1]; // blog, guitar など
 
-      let tags = post.data.tags || [];
+			let tags = post.data.tags || [];
 
-      if (!categoryTags[category]) {
-        categoryTags[category] = {};
-      }
+			if (!categoryTags[category]) {
+				categoryTags[category] = {};
+			}
 
-      tags.forEach(tag => {
-        if (!categoryTags[category][tag]) {
-          categoryTags[category][tag] = 0;
-        }
-        categoryTags[category][tag]++;
-      });
-    });
+			tags.forEach(tag => {
+				if (!categoryTags[category][tag]) {
+					categoryTags[category][tag] = 0;
+				}
+				categoryTags[category][tag]++;
+			});
+		});
 
-    return categoryTags;
-  });
+		return categoryTags;
+	});
   
-  //feedPlugin
+	//feedPlugin
 	eleventyConfig.addPlugin(pluginRss);
 	
 	eleventyConfig.addNunjucksFilter("htmlDateString", (dateObj) => {
@@ -305,23 +306,27 @@ eleventyConfig.addFilter("normalizeDateToJST", function (value) {
 		return new CleanCSS({}).minify(code).styles;
 	});
 	
-	eleventyConfig.setLibrary("md", markdownIt({
+	const mdLib = markdownIt({
 		html: true,
 		breaks: true,
 		linkify: true,
 		typographer: true,
 	})
+	.use(rubyPlugin, {
+		rp: ['(', ')']
+	})
 	.use(markdownItFigure)
 	.use(attrs, {
-		selectorExceptions: ['table', 'table tbody', 'tbody'] // テーブル要素を処理対象から除外
+		selectorExceptions: ['table', 'table tbody', 'tbody']
 	})
 	.use(markdownItMultimdTable, {
-		multiline: true, // 複数行のセルを許可
-		rowspan: true, // 行結合を許可
-		headerless: false, // ヘッダーなしテーブルを許可
+		multiline: true,
+		rowspan: true,
+		headerless: false,
 		Multibody: true,
-	})
-	);
+	});
+
+	eleventyConfig.setLibrary("md", mdLib);
 
 	// This allows Eleventy to watch for file changes during local development.
 	eleventyConfig.setUseGitIgnore(false);

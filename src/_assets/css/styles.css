@@ -654,8 +654,8 @@ b,strong {
 	
 	:where(ul,ol) {
 		font-size: 15px;
-		margin-bottom: 2rem;
-		padding: 1rem;
+		margin-bottom: 1.7rem;
+		padding: 0.5rem 1rem 0;
 		
 		
 		li {

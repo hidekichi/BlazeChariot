@@ -49,6 +49,7 @@
 	},
 	"dependencies": {
 		"@quasibit/eleventy-plugin-sitemap": "^2.2.0",
+		"markdown-it-ruby": "^1.1.2",
 		"sharp": "^0.33.5"
 	}
 }
