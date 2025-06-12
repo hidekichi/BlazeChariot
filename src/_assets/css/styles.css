@@ -859,7 +859,6 @@ b,strong {
 			}
 		  
 			.icon {
-				
 				width: 32px;
 				height: 32px;
 				fill: #333;
@@ -885,6 +884,7 @@ b,strong {
 		.next {
 			justify-content: flex-end;
 		}
+		
 	}
 
 }

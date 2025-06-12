@@ -42,21 +42,25 @@ layout: base.njk
 {% endif %}
 
 <section class="pageNavi">
-{% if previousPost %}
-<a class="prev" href="{{ previousPost.url }}">
+{% if nextPost %}
+<a class="prev" href="{{ nextPost.url }}">
+<div>{{ nextPost.data.title }}</div>
 <svg class="icon" aria-hidden="true">
+	<use href="#tabler-arrow-right-from-arc" />
+</svg>
+</a>
+{% elif not prevPost %}
+<div class="prev"></div>
+{% endif %}
+{% if previousPost %}
+<a class="next" href="{{ previousPost.url }}">
+<svg class="icon right" aria-hidden="true">
 	<use href="#tabler-arrow-right-from-arc" />
 </svg>
 <div>{{ previousPost.data.title }}</div>
 </a>
-{% endif %}
-{% if nextPost %}
-<a class="next" href="{{ nextPost.url }}">
-<div>{{ nextPost.data.title }}</div>
-<svg class="icon right" aria-hidden="true">
-	<use href="#tabler-arrow-right-from-arc" />
-</svg>
-</a>
+{% elif not nextPost %}
+<div class="next"></div>
 {% endif %}
 </section>
 </article>
