@@ -25,7 +25,7 @@ permalink: /guitar/{{ page.fileSlug }}/
 ギターには大まかに分けてエレキ・ギター(Electric Guitar)とアコースティック・ギター(Acoustic guitar)があります。
 その中間的なエレアコ、セミアコなどもあります。
 
-#### アコースティックギターテスト
+#### アコースティックギター
 
 ![サウンドホール](../img/soundhole.jpg){class="md:float-right md:ml-[4px]"}
 
