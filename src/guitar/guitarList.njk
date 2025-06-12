@@ -19,10 +19,11 @@ sitemap:
 <ul class="listing">
 	{% for entry in pagination.items %}
 	<li>
+		<img src="{{ image }}" />
 		<a href="{{ entry.url }}">
 		<div class="title-meta">
 			<span class="title">{{ symbol }} {{ entry.data.title }}</span>
-			<time datetime="{{ entry.date | dateToRfc3339 }}">{{ entry.date | readableDate }}</time>
+			<time class="date" datetime="{{ entry.date | dateToRfc3339 }}">{{ entry.date | readableDate }}</time>
 		</div>
 		<div class="summary">
 			{{ entry.data.description or entry.templateContent | striptags | truncate(100) }}

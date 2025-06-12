@@ -5,8 +5,6 @@
 	"description": "BlazeChariotはギター初心者のためとブログのサイトです。11tyと言うので作りました。",
 	"scripts": {
 		"clean": "rimraf dist",
-		"dev:postcss": "postcss src/_assets/css/*.css -o src/static/build/styles.min.css --watch --verbose",
-		"dev:scripts": "esbuild src/_assets/scripts/scripts.js --bundle --watch --outfile=src/static/build/scripts.min.js --format=esm",
 		"dev:11ty": "eleventy --serve",
 		"build:postcss": "cross-env NODE_ENV=production postcss src/_assets/css/styles.css -o dist/static/build/styles.min.css",
 		"build:11ty": "cross-env ELEVENTY_ENV=production eleventy",

@@ -20,7 +20,10 @@ import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import path from 'path';
 
 import EleventyPluginVite from "@11ty/eleventy-plugin-vite";
-
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = dirname(_filename);
 
 const embedYoutubeDiv = function(md) {
   const ytpBlock = function(state, startLine, endLine, silent) {
@@ -102,7 +105,44 @@ const embedYoutubeDiv = function(md) {
 
 export default async function (eleventyConfig) {
 	if (process.env.ELEVENTY_ENV !== "production") {
-		eleventyConfig.addPlugin(EleventyPluginVite);
+		eleventyConfig.addPlugin(EleventyPluginVite, {
+			viteOptions: {
+				clearScreen: false,
+				appType: "mpa",
+
+				server: {
+					mode: "development",
+					middlewareMode: true,
+				},
+
+				build: {
+					mode: "production",
+					// ここにrollupOptionsを追加して試す
+					rollupOptions: {
+						input: { // これまでの情報から、Viteが正しくエントリポイントを検出していない可能性も考慮
+							mainCss: path.resolve(_dirname, 'src/_assets/css/styles.css'),
+							mainJs: path.resolve(_dirname, 'src/_assets/scripts/scripts.js'),
+						},
+						output: {
+							// output.assetFileNames や entryFileNames を明示的に指定することで、
+							// ファイルの命名規則を固定し、Viteの監視に影響を与える可能性
+							// [name] は元のファイル名（styles, scriptsなど）、[ext] は拡張子
+							assetFileNames: 'static/build/[name].min.[ext]',
+							entryFileNames: 'static/build/[name].min.js',
+							// この下に、output.manualChunksなどの、
+							// 出力チャンク分割に関する設定を追加すると、書き込みの挙動が変わることもあります。
+							// しかし、まずは上記の明確なファイル名指定から試すのが良いでしょう。
+						}
+					},
+				},
+
+				resolve: {
+					alias: {
+					  "/node_modules": path.resolve(".", "node_modules"),
+					},
+				},
+			},
+		});
 	}
 	
 	// Folders to copy to build dir
@@ -409,9 +449,9 @@ export default async function (eleventyConfig) {
 	// This allows Eleventy to watch for file changes during local development.
 	eleventyConfig.setUseGitIgnore(false);
 	
-	//eleventyConfig.addWatchTarget("src/_assets/css/"); // CSSファイルを監視
-	//eleventyConfig.addWatchTarget("src/_assets/scripts/");
-	//eleventyConfig.addWatchTarget("./src/**/*.md");
+//eleventyConfig.addWatchTarget("src/_assets/css/"); // CSSファイルを監視
+//eleventyConfig.addWatchTarget("src/_assets/scripts/");
+//eleventyConfig.addWatchTarget("./src/**/*.md");
 	
 	return {
 		dir: {
