@@ -117,6 +117,8 @@ export default async function (eleventyConfig) {
 
 				build: {
 					mode: "production",
+					outDir: path.resolve(_dirname, './dist'),
+					assetsDir: 'static/build',
 					// ここにrollupOptionsを追加して試す
 					rollupOptions: {
 						input: { // これまでの情報から、Viteが正しくエントリポイントを検出していない可能性も考慮
@@ -455,7 +457,7 @@ export default async function (eleventyConfig) {
 	
 	return {
 		dir: {
-			input: "src/",
+			input: "src",
 			output: "dist",
 			includes: "_includes",
 			layouts: "_layouts",
