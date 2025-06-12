@@ -32,6 +32,33 @@ layout: base.njk
 	{%- endfor %}
 	</div>
 	
+	
+	{% if 'ギターを弾き語れ！' in category %}
+	{% set previousPost = collections.guitar | getPreviousCollectionItem %}
+	{% set nextPost = collections.guitar | getNextCollectionItem %}
+{% elif 'blog' in category %}
+	{% set previousPost = collections.blog | getPreviousCollectionItem %}
+	{% set nextPost = collections.blog | getNextCollectionItem %}
+{% endif %}
+
+<section class="pageNavi">
+{% if previousPost %}
+<a class="prev" href="{{ previousPost.url }}">
+<svg class="icon" aria-hidden="true">
+	<use href="#tabler-arrow-right-from-arc" />
+</svg>
+<div>{{ previousPost.data.title }}</div>
+</a>
+{% endif %}
+{% if nextPost %}
+<a class="next" href="{{ nextPost.url }}">
+<div>{{ nextPost.data.title }}</div>
+<svg class="icon right" aria-hidden="true">
+	<use href="#tabler-arrow-right-from-arc" />
+</svg>
+</a>
+{% endif %}
+</section>
 </article>
 
 {% include "sidebar.njk" %}
