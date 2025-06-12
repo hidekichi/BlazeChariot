@@ -114,30 +114,6 @@ export default async function (eleventyConfig) {
 					mode: "development",
 					middlewareMode: true,
 				},
-
-				build: {
-					mode: "production",
-					outDir: path.resolve(_dirname, './dist'),
-					assetsDir: 'static/build',
-					// ここにrollupOptionsを追加して試す
-					rollupOptions: {
-						input: { // これまでの情報から、Viteが正しくエントリポイントを検出していない可能性も考慮
-							mainCss: path.resolve(_dirname, 'src/_assets/css/styles.css'),
-							mainJs: path.resolve(_dirname, 'src/_assets/scripts/scripts.js'),
-						},
-						output: {
-							// output.assetFileNames や entryFileNames を明示的に指定することで、
-							// ファイルの命名規則を固定し、Viteの監視に影響を与える可能性
-							// [name] は元のファイル名（styles, scriptsなど）、[ext] は拡張子
-							assetFileNames: 'static/build/[name].min.[ext]',
-							entryFileNames: 'static/build/[name].min.js',
-							// この下に、output.manualChunksなどの、
-							// 出力チャンク分割に関する設定を追加すると、書き込みの挙動が変わることもあります。
-							// しかし、まずは上記の明確なファイル名指定から試すのが良いでしょう。
-						}
-					},
-				},
-
 				resolve: {
 					alias: {
 					  "/node_modules": path.resolve(".", "node_modules"),
