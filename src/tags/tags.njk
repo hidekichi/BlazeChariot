@@ -12,10 +12,9 @@ permalink: /tags/{{ tag }}/
 ---
 
 <h2>“{{ tag }}”の記事一覧</h2>
-
-<ul>
 {% set taglist = collections[ tag ] %}
-{% for post in taglist | reverse %}
+<ul>
+{% for post in taglist  %}
   <li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
 {% endfor %}
 </ul>

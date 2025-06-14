@@ -4,17 +4,20 @@ const isProduction = process.env.ELEVENTY_ENV === "production"; // これはそ�
 import htmlnano from "htmlnano"; // 未使用の可能性あり
 // const htmlSave = require("htmlnano").presets.safe; // 未使用の可能性あり
 import CleanCSS from "clean-css";
-import markdownIt from "markdown-it";
 import htmlmin from "html-minifier-terser";
+import markdownIt from "markdown-it";
+import attrs from "markdown-it-attrs";
+import markdownItFigure from "markdown-it-figure";
+import markdownItMultimdTable from "markdown-it-multimd-table-ext";
+import rubyPlugin from "markdown-it-ruby";
+import { HtmlBasePlugin } from "@11ty/eleventy";
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
+import { feedPlugin } from "@11ty/eleventy-plugin-rss";
+import pluginRss from "@11ty/eleventy-plugin-rss";
+import pluginNavigation from "@11ty/eleventy-navigation";
 import postcss from "postcss";
 import postcssConfig from "./postcss.config.js"; // postcss.config.js が CommonJS なら要確認
-import markdownItMultimdTable from "markdown-it-multimd-table-ext";
-import markdownItFigure from "markdown-it-figure";
-import attrs from "markdown-it-attrs";
-import pluginRss from "@11ty/eleventy-plugin-rss";
 import sitemap from "@quasibit/eleventy-plugin-sitemap";
-import rubyPlugin from "markdown-it-ruby";
 
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import path from 'path';
@@ -105,12 +108,22 @@ export default async function (eleventyConfig) {
 		eleventyConfig.addPlugin(EleventyPluginVite);
 	}
 	
+	eleventyConfig.addPlugin(HtmlBasePlugin);
+	eleventyConfig.addPlugin(pluginNavigation);
+	
+	eleventyConfig.addPlugin(sitemap, {
+		sitemap: {
+			hostname: "https://blazechariot.netlify.app",
+		},
+	});
+	
 	// Folders to copy to build dir
-	eleventyConfig.addPassthroughCopy("src/static");
-	eleventyConfig.addPassthroughCopy("src/*.txt");
-	eleventyConfig.addPassthroughCopy("src/blog/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
-	eleventyConfig.addPassthroughCopy("src/guitar/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
-	eleventyConfig.addPassthroughCopy("src/pages/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
+	eleventyConfig
+		.addPassthroughCopy("src/static")
+		.addPassthroughCopy("src/*.{txt,xsl}")
+		.addPassthroughCopy("src/blog/**/*.{jpg,jpeg,png,webp,svg,gif,avif}")
+		.addPassthroughCopy("src/guitar/**/*.{jpg,jpeg,png,webp,svg,gif,avif}")
+		.addPassthroughCopy("src/pages/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
 
 	
 	//Filter to parse dates
@@ -220,6 +233,10 @@ export default async function (eleventyConfig) {
 		return collectionApi.getFilteredByGlob("src/**/*.md")
 		  .sort((a, b) => b.date - a.date); // 新しい順にソート
 	});
+	
+	eleventyConfig.addCollection("allPosts", function(collectionApi) {
+		return collectionApi.getFilteredByGlob("src/**/*.md");
+	});
   
 	eleventyConfig.addCollection("categoryTags", function(collectionApi) {
 		let categoryTags = {};
@@ -248,13 +265,43 @@ export default async function (eleventyConfig) {
 	});
   
 	//feedPlugin
-	eleventyConfig.addPlugin(pluginRss);
+	eleventyConfig.addPlugin(feedPlugin, {
+		type: "atom", // or "rss", "json"
+		outputPath: "/feed.xml",
+		stylesheet: "/pretty-atom-feed.xsl",
+		templateData: {
+			eleventyNavigation: {
+				key: "Feed",
+				order: 4
+			}
+		},
+		collection: {
+			name: "allPosts",
+			limit: 0,
+		},
+		metadata: {
+			language: "ja",
+			title: "BlazeChariot",
+			subtitle: "BlazeChariotはギター初心者のためとブログのサイトです。11tyと言うので作りました。",
+			base: "https://blazechariot.netlify.app/",
+			author: {
+				name: "Hidekichi"
+			}
+		}
+	});
 	
 	eleventyConfig.addNunjucksFilter("htmlDateString", (dateObj) => {
 		return new Date(dateObj).toISOString();
 	});
+	
 	eleventyConfig.addNunjucksFilter("readableDate", (dateObj) => {
-		return new Date(dateObj).toLocaleDateString('ja-JP', {year: 'numeric', month: 'long', day: 'numeric'});
+		const date = new Date(dateObj);
+		const year = date.getFullYear();
+		const month = date.getMonth() + 1; // getMonth() は0から始まるため、1を加算
+		const day = date.getDate();
+
+		// 日本語の日付形式にフォーマット
+		return `${year}年${month}月${day}日`;
 	});
 	
 	eleventyConfig.addCollection("posts", function(collectionApi) {
@@ -267,34 +314,34 @@ export default async function (eleventyConfig) {
 	
 	eleventyConfig.addPlugin(syntaxHighlight, {
 
-    // Line separator for line breaks
-    lineSeparator: "\n",
+		// Line separator for line breaks
+		lineSeparator: "\n",
 
-    // Change which Eleventy template formats use syntax highlighters
-    templateFormats: ["*"], // default
+		// Change which Eleventy template formats use syntax highlighters
+		templateFormats: ["*"], // default
 
-    // Use only a subset of template types (11ty.js added in v4.0.0)
-    // templateFormats: ["liquid", "njk", "md", "11ty.js"],
+		// Use only a subset of template types (11ty.js added in v4.0.0)
+		// templateFormats: ["liquid", "njk", "md", "11ty.js"],
 
-    // init callback lets you customize Prism
-    init: function({ Prism }) {
-      Prism.languages.myCustomLanguage = { /* … */ };
-    },
+		// init callback lets you customize Prism
+		init: function({ Prism }) {
+		  Prism.languages.myCustomLanguage = { /* … */ };
+		},
 
-    // Added in 3.1.1, add HTML attributes to the <pre> or <code> tags
-    preAttributes: {
-      tabindex: 0,
+		// Added in 3.1.1, add HTML attributes to the <pre> or <code> tags
+		preAttributes: {
+		  tabindex: 0,
 
-      // Added in 4.1.0 you can use callback functions too
-      "data-language": function({ language, content, options }) {
-        return language;
-      }
-    },
-    codeAttributes: {},
+		  // Added in 4.1.0 you can use callback functions too
+		  "data-language": function({ language, content, options }) {
+			return language;
+		  }
+		},
+		codeAttributes: {},
 
-    // Added in 5.0.0, throw errors on invalid language names
-    errorOnInvalidLanguage: false,
-  });
+		// Added in 5.0.0, throw errors on invalid language names
+		errorOnInvalidLanguage: false,
+	});
 
 	// Compress/Minify HTML output on production builds
 	eleventyConfig.addTransform("compressHTMLOutput", (content, outputPath) => {
@@ -303,22 +350,6 @@ export default async function (eleventyConfig) {
 			removeEmptyAttributes: false, // Disable the module "removeEmptyAttributes"
 			removeComments: true,
 		};
-		// posthtml, posthtml-render, and posthtml-parse options
-		// const postHtmlOptions = {
-			// lowerCaseTags: true, // https://github.com/posthtml/posthtml-parser#options
-			// quoteAllAttributes: false, // https://github.com/posthtml/posthtml-render#options
-		// };
-
-		// if (outputPath.endsWith(".html") && isProduction) {
-			// return htmlnano
-				// .process(content, options, htmlSave, postHtmlOptions)
-				// .then(function (result) {
-					// return result.html;
-				// })
-				// .catch(function (err) {
-					// console.error(err);
-				// });
-		// }
 		
 		if (outputPath && outputPath.endsWith(".html") && isProduction) {
 			try {
@@ -343,15 +374,17 @@ export default async function (eleventyConfig) {
 		}
 	});
 	
-	//sitemap	
-	eleventyConfig.addPlugin(sitemap, {
-		lastModifiedProperty: "update",
-		sitemap: {
-			hostname: "https://blazechariot.netlify.app",
-			changefreq: "weekly",
-			priority: 0.8,
-		},
-	});
+	//sitemap
+	/*
+	const finalOptions = options || {};
+
+	function getSitemap(items) {
+		return sitemap(items, finalOptions);
+	}
+	eleventyConfig.addLiquidShortcode("sitemap", getSitemap);
+	eleventyConfig.addJavaScriptFunction("sitemap", getSitemap);
+	eleventyConfig.addNunjucksShortcode("sitemap", getSitemap);
+	*/
 	
 	// CSSバンドルの設定
 	  eleventyConfig.addBundle("css", {
@@ -412,17 +445,44 @@ export default async function (eleventyConfig) {
 	//eleventyConfig.addWatchTarget("src/_assets/css/"); // CSSファイルを監視
 	//eleventyConfig.addWatchTarget("src/_assets/scripts/");
 	//eleventyConfig.addWatchTarget("./src/**/*.md");
-	
-	return {
-		dir: {
-			input: "src/",
-			output: "dist",
-			includes: "_includes",
-			layouts: "_layouts",
-		},
-		templateFormats: ["html", "md", "njk"],
-		markdownTemplateEngine: "njk",
-		htmlTemplateEngine: "njk",
-		passthroughFileCopy: true,
-	};
+
+};
+
+export const config = {
+	// Control which files Eleventy will process
+	// e.g.: *.md, *.njk, *.html, *.liquid
+	templateFormats: [
+		"md",
+		"njk",
+		"html",
+		"liquid",
+	],
+
+	// Pre-process *.md files with: (default: `liquid`)
+	markdownTemplateEngine: "njk",
+
+	// Pre-process *.html files with: (default: `liquid`)
+	htmlTemplateEngine: "njk",
+
+	// These are all optional:
+	dir: {
+		input: "src",          // default: "."
+		includes: "_includes",  // default: "_includes" (`input` relative)
+		layouts: "_layouts",
+		data: "_data",          // default: "_data" (`input` relative)
+		output: "dist"
+	},
+
+	// -----------------------------------------------------------------
+	// Optional items:
+	// -----------------------------------------------------------------
+
+	// If your site deploys to a subdirectory, change `pathPrefix`.
+	// Read more: https://www.11ty.dev/docs/config/#deploy-to-a-subdirectory-with-a-path-prefix
+
+	// When paired with the HTML <base> plugin https://www.11ty.dev/docs/plugins/html-base/
+	// it will transform any absolute URLs in your HTML to include this
+	// folder name and does **not** affect where things go in the output folder.
+
+	// pathPrefix: "/",
 };
