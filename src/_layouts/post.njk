@@ -33,10 +33,10 @@ layout: base.njk
 	</div>
 	
 	
-{% if category == 'ギターを弾き語れ！' %}
+{% if 'ギターを弾き語れ！' in category %}
 	{% set previousPost = collections.guitar | getPreviousCollectionItem %}
 	{% set nextPost = collections.guitar | getNextCollectionItem %}
-{% elif category == 'blog' %}
+{% elif 'blog' in category %}
 	{% set previousPost = collections.blog | getPreviousCollectionItem %}
 	{% set nextPost = collections.blog | getNextCollectionItem %}
 {% endif %}
