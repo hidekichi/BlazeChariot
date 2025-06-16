@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/static/build/styles.min.css" />
+	<link rel="stylesheet" href="/assets/styles.min.css" />
 	<!-- Try and serve Google Fonts in the most efficent way possible -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,19 +15,19 @@
 	<meta name="msvalidate.01" content="7321A9FC815E38B388EF7112CEBCA1B0" />
 	
 	<meta name="description" content="{% if description %}{{ description }}{% else %}BlazeChariotはギター初心者のためとブログのサイトです。11tyと言うので作りました。{% endif %}">
-	<link rel="alternate" type="application/atom+xml" title="{{ site.title }} Atom Feed" href="/feed.xml">
+	<link rel="alternate" type="application/atom+xml" title="{{ site.title }} Atom Feed" href="/feed.xml" />
 	<!-- Favicons -->
 	<!-- Apple Touch Icon (reuse 192px icon.png) & standard favicons -->
-	<link rel="apple-touch-icon" href="/static/favicons/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png">
-	<link rel="icon" type="image/x-icon" href="/static/favicons/favicon.ico">
+	<link rel="apple-touch-icon" href="/assets/favicons/apple-touch-icon.png" />
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png" />
+	<link rel="icon" type="image/x-icon" href="/assets/favicons/favicon.ico" />
 
 	<!-- Open Graph -->
 	<meta property="og:url" content="https://blazechariot.netlify.app{{ page.url }}">
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="{% if title %}{{ title }}{% else %}BlazeChariot{% endif %}">
-	<meta property="og:image" content="{% if cover %}https://blazechariot.netlify.app/{{ page.url | url }}{{ cover }}{% else %}https://blazechariot.netlify.app/static/opengraph-cover.jpg{% endif %}" />
+	<meta property="og:image" content="{% if cover %}https://blazechariot.netlify.app/{{ page.url | url }}{{ cover }}{% else %}https://blazechariot.netlify.app/assets/image/opengraph-cover.jpg{% endif %}" />
 	<meta property="og:description" content="{% if description %}{{ description }}{% else %}BlazeChariotはギター初心者のためにとブログのサイトです。11tyで作りました。{% endif %}" />
 	<meta property="og:site_name" content="{{ site.title }}">
 	<meta property="og:locale" content="ja_JP">
@@ -114,6 +114,7 @@
 				</small>
 				<div class="feedMeta flex gap-x-[0.5rem]">
 					<a href="/feed.xml" title="Feed">Feed</a>
+					<a href="{{ site.url }}/sitemap.xml" title="sitemap">sitemap</a>
 				</div>
 			</section>
 		</div>
@@ -126,6 +127,6 @@
 		</div>
 	</div>
 	
-	<script type="module" src="/static/build/scripts.min.js"></script>
+	<script type="module" src="/assets/scripts.min.js"></script>
 </body>
 </html>
