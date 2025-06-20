@@ -1,11 +1,10 @@
-/*@import 'utils/normalize.css';*/
-
-@import 'utils/uaplus.css';
-@import 'utils/_tailwind.css';
-@import 'utils/_accessibility.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 a {
-	@apply text-ws-blue-500 underline;
+  color: #3b82f6;
+  text-decoration: underline;
 }
 
 *,
@@ -127,20 +126,8 @@ h1 { font-size: clamp(2.861rem, 2.514rem + 1.734vw, 3.815rem); }
 */
 
 .body-copy {
-	/*h1 { font-size: 2.5rem; }
-	h2 { font-size: 2rem; }
-	h3 { font-size: 1.75rem; } 
-	h4 { font-size: 1.5rem; } 
-	h5 { font-size: 1.25rem; }
- 	h6 { font-size: 1.1rem; }*/
 	
 	h1 {
-	  /*
-	   * clamp(最小値, 推奨値, 最大値)
-	   * 最小値: モバイルでの最小フォントサイズ (rem)
-	   * 推奨値: ビューポート幅に基づく動的なフォントサイズ (vw)
-	   * 最大値: デスクトップでの最大フォントサイズ (rem)
-	   */
 	  font-size: clamp(2rem, 5vw, 2.5rem); /* 例: 32px ～ 40px */
 	  line-height: 1.2;
 	}
@@ -170,19 +157,6 @@ h1 { font-size: clamp(2.861rem, 2.514rem + 1.734vw, 3.815rem); }
 	  line-height: 1.55;
 	}
  }
-
-/*
-@media (width <= 768px) {
-	.body-copy {
-		h1 { font-size: 2rem; }
-		h2 { font-size: 1.75rem; }
-		h3 { font-size: 1.5rem; }
-		h4 { font-size: 1.25rem; }
-		h5 { font-size: 1.1rem; }
-		h6 { font-size: 1rem; }
-	}
-}
-*/
 
 /* Headings */
 h6, h5, h4, h3, h2, h1 {
@@ -250,6 +224,20 @@ main.container {
 		grid-template-columns: repeat(1, minmax(0, 1fr));
 		max-width: 960px;
 	}
+	
+	&:has(.cat-guitarContent) {
+		grid-template-areas:
+"header" 
+"main";
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+		max-width: 960px;
+	}
+}
+
+.guitarContent {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	column-gap: 1rem;
 }
 
 main.container header.page-title {
@@ -583,6 +571,14 @@ b,strong {
 		
 		& + :where(ul,ol) {
 			margin-top: -1.7rem;
+		}
+		
+		img {
+			display: block;
+			
+			&.md\:alignImg {
+				margin: 4px; 
+			}
 		}
 	}
 
@@ -1074,31 +1070,6 @@ ul.listing {
 	white-space: nowrap;
 	width: 1px;
 }
-/*
-@media only screen and (min-width: 600px) {
-	.home-header {
-		margin: 6rem auto 4rem auto;
-	}
-
-	.home-header img {
-		width: 8rem;
-		height: 8rem;
-	}
-
-	.page-title__desc {
-		max-width: 75%;
-	}
-
-	ul.listing li {
-		flex-wrap: nowrap;
-	}
-
-	ul.listing li time {
-		width: auto;
-		margin-left: 2rem;
-	}
-}
-*/
 
 code {
 	font-family: "Fragment Mono", monospace;

@@ -1,0 +1,21 @@
+---
+title: "ギターを弾き語れ！目次"
+date: 2025-06-20
+update: 2025-06-20
+category: guitarContent
+layout: page.njk
+permalink: "/guitar/contents/"
+---
+
+  <section class="guitarContent">
+  {% for categoryKey, categoryData in gutarArticleLinks %}
+    <div class="content-item">
+      <h3>{{ categoryKey }}</h3>
+        <ol>
+        {% for item in categoryData.items %}
+          <li><a href="{{ item.link | url }}">{{ item.title }}</a></li>
+        {% endfor %}
+        </ol>
+    </div>
+  {% endfor %}
+  </section>

@@ -1,0 +1,91 @@
+{
+  "BASIC": {
+    "link": "/tags/basic/",
+    "items": [
+      { "title": "基本的なこと はじめに", "link": "/guitar/Basic01/" },
+      { "title": "アコギとエレキ、ギターの違い", "link": "/guitar/basic02/" },
+      { "title": "どういったギターを選ぶか", "link": "/guitar/basic03/" },
+      { "title": "弦の取り付け方", "link": "/guitar/basic04/" },
+      { "title": "チューニング", "link": "/guitar/basic05/" },
+      { "title": "指板と押弦の音", "link": "/guitar/Basic06/" },
+      { "title": "ピックについて", "link": "/guitar/Basic07/" },
+      { "title": "アルファベットとドレミ", "link": "/guitar/Basic08/" },
+      { "title": "ドレミファソラシドを覚えてみる", "link": "/guitar/Basic09/" },
+      { "title": "ドレミファソラシドを覚えてみる2", "link": "/guitar/Basic10/" }
+    ]
+  },
+  "CHORD": {
+    "link": "/tags/chord/",
+    "items": [
+      { "title": "コードの押さえ方など", "link": "/guitar/chord01/" },
+      { "title": "コードの構成", "link": "/guitar/chord02/" },
+      { "title": "弾けないコードは飛ばしてしまえ、もしくは代用できるコード", "link": "/guitar/chord03/" },
+      { "title": "FやBが弾けない人のためにその他の方法", "link": "/guitar/chord04/" },
+      { "title": "パワーコードで弾ける曲", "link": "/guitar/chord05/" },
+      { "title": "Bbについて〜案外難しいB7", "link": "/guitar/chord06/" },
+      { "title": "パワーコード一覧", "link": "/guitar/chord_ex_powercode/" }
+    ]
+  },
+  "CHORD CHANGE": {
+    "link": "/tags/chord_change/",
+    "items": [
+      { "title": "基本のコードチェンジ", "link": "/guitar/chord_change01/" },
+      { "title": "コード「F」と「B」について", "link": "/guitar/chord_change02/" },
+      { "title": "コードチェンジのタイミング", "link": "/guitar/chord_change03/" },
+      { "title": "各コードからコードへのコードチェンジまとめ", "link": "/guitar/chord_change04/" },
+      { "title": "コードチェンジのためのカポを上手に使うやり方", "link": "/guitar/chord_change05/" }
+    ]
+  },
+  "PRACTICE": {
+    "link": "/tags/picking/",
+    "items": [
+      { "title": "ストローク", "link": "/guitar/picking01/" },
+      { "title": "アルペジオ", "link": "/guitar/picking02/" },
+      { "title": "スリーフィンガー", "link": "/guitar/picking03/" },
+      { "title": "ピッキングストローク", "link": "/guitar/picking04/" }
+    ]
+  },
+  "SCORE": {
+    "link": "/tags/score/",
+    "items": [
+      { "title": "楽譜の読み方", "link": "/guitar/score01/" },
+      { "title": "楽譜の読み方Tips", "link": "/guitar/score02/" },
+      { "title": "基本となる音だけをひとまず4つ覚えとこう", "link": "/guitar/score03/" },
+      { "title": "音楽記号", "link": "/guitar/score04/" },
+      { "title": "音譜の進行とTAB譜の読み方", "link": "/guitar/score05/" }
+    ]
+  },
+  "初心者のために": {
+    "link": "/tags/初心者のために/",
+    "items": [
+      { "title": "初心者のために1", "link": "/guitar/beginner01/" },
+      { "title": "初心者のために2", "link": "/guitar/beginner02/" },
+      { "title": "初心者のために3", "link": "/guitar/beginner03/" },
+      { "title": "初心者のために4", "link": "/guitar/beginner04/" },
+      { "title": "初心者のために5", "link": "/guitar/beginner05/" },
+      { "title": "初心者のために6", "link": "/guitar/beginner06/" },
+      { "title": "初心者のために7", "link": "/guitar/beginner07/" }
+    ]
+  },
+  "TECHNIQUE": {
+    "link": "/tags/テクニック/",
+    "items": [
+      { "title": "初心者が覚えておくと良い4つのテクニック", "link": "/guitar/technique01/" },
+      { "title": "基本的なテクニック", "link": "/guitar/technique02/" },
+      { "title": "上手く聞かせるために", "link": "/guitar/technique03/" },
+      { "title": "コード進行におまけをつける", "link": "/guitar/technique04/" },
+      { "title": "スリーフィンガーの魔力", "link": "/guitar/technique05/" }
+    ]
+  },
+  "TOOLs": {
+    "link":"/tags/tool/",
+    "items": [
+      { "title": "ギター道具など", "link": "/guitar/tool01/" },
+      { "title": "カポタスト", "link": "/guitar/tool02/" },
+      { "title": "カポとFコード、Bコードなどの関係性－基礎", "link": "/guitar/tool03/" },
+      { "title": "カポとFコード、Bコードなどの関係性－発展", "link": "/guitar/tool04/" },
+      { "title": "カポの使い方", "link": "/guitar/tool05/" },
+      { "title": "ギターを録音するために", "link": "/guitar/tool06/" }
+    ]
+  }
+}
