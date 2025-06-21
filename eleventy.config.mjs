@@ -325,17 +325,17 @@ export default async function (eleventyConfig) {
 
 		// init callback lets you customize Prism
 		init: function({ Prism }) {
-		  Prism.languages.myCustomLanguage = { /* … */ };
+			Prism.languages.myCustomLanguage = { /* … */ };
 		},
 
 		// Added in 3.1.1, add HTML attributes to the <pre> or <code> tags
 		preAttributes: {
-		  tabindex: 0,
+			tabindex: 0,
 
-		  // Added in 4.1.0 you can use callback functions too
-		  "data-language": function({ language, content, options }) {
-			return language;
-		  }
+			// Added in 4.1.0 you can use callback functions too
+			"data-language": function({ language, content, options }) {
+				return language;
+			}
 		},
 		codeAttributes: {},
 

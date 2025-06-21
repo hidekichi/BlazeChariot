@@ -6,9 +6,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/static/build/styles.min.css" />
 	<!-- Try and serve Google Fonts in the most efficent way possible -->
+	<!--
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+	-->
+	<link rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'">
+	<noscript>
+	  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap">
+	</noscript>
 
 	<title>{% if title %}{{ title }}{% else %}BlazeChariot{% endif %}</title>
 	<meta name="google-site-verification" content="xa6weg4F-oSHqFFa2cO3OXTDQwNXkD4r7_UVEdWW2F4" />
@@ -55,8 +63,8 @@
 	</svg>
 	<nav class="navigation" aria-labelledby="primary-navigation">
 		<div class="title w-[200px]">
-		<a href="/" alt="site title">
-			<svg class="logo" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 149.502 33.433" width="200px">
+		<a href="/" alt="site title" aria-label="BlazeChariotトップページへ">
+			<svg class="logo" role="img" aria-label="BlazeChariotロゴ" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 149.502 33.433" width="200px">
 				<use href="#logo"></use>
 			</svg>
 		</a>
