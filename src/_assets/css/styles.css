@@ -1594,6 +1594,7 @@ f-left: サムネイルを左にして文字を回り込ませます
 		display: flex;
 		flex-flow: row wrap;
 		justify-content: flex-start;
+		gap: 0.25rem;
 		
 		h5 {
 			width: 100%;
@@ -1610,7 +1611,7 @@ f-left: サムネイルを左にして文字を回り込ませます
 	
 	.thumb {
 		display: block;
-		width: 20%;
+		width: 24%;
 		aspect-ratio: 1 / 1;
 		overflow: hidden;
 		filter: grayscale(100%);
