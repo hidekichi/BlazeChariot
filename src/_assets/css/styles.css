@@ -1378,11 +1378,13 @@ f-left: サムネイルを左にして文字を回り込ませます
 		margin: 0.25rem;
 		color: var(--code-color);
 		background-color: var(--background-color);
-		padding: 0 0.5rem;
+		padding: 0.25rem 0.5rem;
 		border-radius: 4px;
 		position: absolute;
 		top: 0;
 		left: 0;
+		line-height: 1.2;
+		font-size: 14px;
 	}
 	
 	&.mv_hidden {
@@ -1430,6 +1432,14 @@ f-left: サムネイルを左にして文字を回り込ませます
 	.ytp.f-right {
 		float: none;
 		margin: unset;
+	}
+}
+
+@media (width < 640px) {
+	.ytp {
+		.title {
+			font-size: 1rem;
+		}
 	}
 }
 
