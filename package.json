@@ -5,14 +5,14 @@
 	"description": "BlazeChariotはギター初心者のためとブログのサイトです。11tyと言うので作りました。",
 	"scripts": {
 		"clean": "rimraf dist",
-		"dev:postcss": "postcss src/_assets/css/*.css -o src/static/build/styles.min.css --watch --verbose",
-		"dev:scripts": "esbuild src/_assets/scripts/scripts.js --bundle --watch --outfile=src/static/build/scripts.min.js --format=esm",
-		"dev:11ty": "eleventy --serve",
+		"dev:postcss": "postcss src/_assets/css/*.css -o dist/static/build/styles.min.css --watch --verbose",
+		"dev:scripts": "esbuild src/_assets/scripts/scripts.js --bundle --watch --outfile=dist/static/build/scripts.min.js --format=esm",
 		"build:postcss": "postcss src/_assets/css/*.css -o dist/static/build/styles.min.css",
 		"build:scripts": "esbuild src/_assets/scripts/scripts.js --bundle --minify --outfile=dist/static/build/scripts.min.js --format=esm",
 		"build:11ty": "cross-env ELEVENTY_ENV=production eleventy",
-		"dev": "cross-env NODE_ENV=development run-p dev:postcss dev:scripts dev:11ty",
-		"build": "run-s clean build:postcss build:scripts build:11ty"
+		"serve:11ty": "eleventy --serve",
+		"dev": "cross-env ELEVENTY_ENV=development run-s clean && run-s build:postcss build:scripts && run-p dev:postcss dev:scripts serve:11ty",
+		"build": "cross-env ELEVENTY_ENV=production run-s clean build:postcss build:scripts build:11ty"
 	},
 	"author": "HIDEKICHI",
 	"license": "ISC",

@@ -68,6 +68,21 @@ export function externalLink() {
 
 			link.setAttribute('rel', newRel);
 
+			if (href.includes("amzn.to/")) {
+				// アイコンを追加
+				const amazonIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+				amazonIcon.classList.add("amazon");
+				const amazonUse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+				amazonUse.setAttributeNS(null,'href', '#icon-amazon');
+				amazonIcon.setAttributeNS(null,'role','img');
+				amazonIcon.setAttributeNS(null,'width','13.35px');
+				amazonIcon.setAttributeNS(null,'height','13.35px');
+				amazonIcon.appendChild(amazonUse);
+				link.appendChild(amazonIcon);
+				link.setAttribute('title','Amazonへのリンクです');
+			}
+			
+
 			// アイコンを追加
 			const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 			icon.classList.add('icon_external-link',"insert");

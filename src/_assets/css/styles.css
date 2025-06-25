@@ -342,6 +342,16 @@ img {
   }
 }
 
+.amazon {
+  margin: 4px 0 0 2px;
+  padding: 1px 2px;
+  width: 1.35em;
+  height: 1.2em;
+  background-color: #285a8e;
+  color: #fff;
+  border-radius: 4px;
+}
+
 b,strong {
 	font-weight: 700;
 	background-color: #203246;
@@ -1012,10 +1022,11 @@ ul.listing {
 		padding: 0;
 	}
 	
-	section {
-		display: flex;
-		justify-content: space-between;
+	.site-meta {
+		display: grid;
+		grid-template-columns: 1fr 33.3% 1fr;
 		align-items: center;
+		justify-items: center;
 		
 		ul {
 			display: flex;
@@ -1023,6 +1034,7 @@ ul.listing {
 			list-style: none;
 			padding: 0;
 			margin: 0;
+			flex-direction: row;
 			
 			li {
 				padding: 0.25rem;
@@ -1031,6 +1043,16 @@ ul.listing {
 					padding-left: 0;
 				}
 			}
+		}
+		
+		.site-meta {
+			grid-column: 1/2;
+		}
+		.credit {
+			grid-column: 2/3;
+		}
+		.feedMeta {
+			grid-column: 3/4;
 		}
 	}
 	
@@ -1052,6 +1074,25 @@ ul.listing {
 			
 			&.sun:hover {
 				color: orange;
+			}
+		}
+	}
+}
+
+@media (width < 640px) {
+	.footer {
+		.site-meta {
+			grid-template-columns: initial;
+			grid-template-columns: 50% 50%;
+			grid-template-rows: auto auto;
+			
+			.credit {
+				grid-column: 1/-1;
+				grid-row: 2/3;
+			}
+			
+			.feedMeta {
+				grid-column: 2/3;
 			}
 		}
 	}
@@ -1667,8 +1708,7 @@ f-left: サムネイルを左にして文字を回り込ませます
 	margin: 5rem 0 0;
 	
 	&::before {
-		content: "FOOTNOTES | 脚注  -  該当の脚注をクリック/タップで元の位置に戻ります";
-		padding: 4px 4rem 2px 4px;
+		content: "FOOTNOTES: ";
 		font-size: .78125rem;
 		color: #fff;
 		background: var(--muted);
@@ -1698,6 +1738,14 @@ f-left: サムネイルを左にして文字を回り込ませます
 		cursor: pointer;
 		line-height: 1.5;
 		font-size: 0.875rem;
+	}
+}
+
+@media (width > 640px) {
+	.footnotes-list {
+		&::before {
+			content: "FOOTNOTES | 脚注  -  該当の脚注をクリック/タップで元の位置に戻ります";
+		}
 	}
 }
 

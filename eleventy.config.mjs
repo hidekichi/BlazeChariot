@@ -15,8 +15,8 @@ import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import pluginNavigation from "@11ty/eleventy-navigation";
-import postcss from "postcss";
-import postcssConfig from "./postcss.config.js"; // postcss.config.js が CommonJS なら要確認
+//import postcss from "postcss";
+//import postcssConfig from "./postcss.config.js"; // postcss.config.js が CommonJS なら要確認
 import sitemap from "@quasibit/eleventy-plugin-sitemap";
 
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
@@ -363,17 +363,6 @@ export default async function (eleventyConfig) {
 		return content;
 	});
 	
-	eleventyConfig.addNunjucksAsyncFilter("jsmin", async function (code, callback) {
-		try {
-			const minified = await minify(code);
-			callback(null, minified.code);
-		} catch (err) {
-			console.error("Terser error: ", err);
-			// Fail gracefully.
-			callback(null, code);
-		}
-	});
-	
 	//sitemap
 	/*
 	const finalOptions = options || {};
@@ -385,36 +374,6 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addJavaScriptFunction("sitemap", getSitemap);
 	eleventyConfig.addNunjucksShortcode("sitemap", getSitemap);
 	*/
-	
-	// CSSバンドルの設定
-	  eleventyConfig.addBundle("css", {
-		transforms: [
-		  async function (content) {
-			let { page } = this;
-			// postcss.config.js の設定を利用
-			let result = await postcss(postcssConfig.plugins).process(content, {
-			  from: page.inputPath,
-			  to: null,
-			});
-			return result.css;
-		  },
-		],
-	  });
-	  
-	  eleventyConfig.addTransform("postcss", async function (content) {
-		if (this.page.outputPath && this.page.outputPath.endsWith(".css")) {
-		  let result = await postcss(postcssConfig.plugins).process(content, {
-			from: this.page.inputPath,
-			to: this.page.outputPath,
-		  });
-		  return result.css;
-		}
-		return content;
-	  });
-	
-	eleventyConfig.addFilter("cssmin", function (code) {
-		return new CleanCSS({}).minify(code).styles;
-	});
 	
 	const mdLib = markdownIt({
 		html: true,

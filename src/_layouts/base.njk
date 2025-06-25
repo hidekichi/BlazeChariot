@@ -1,48 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/static/build/styles.min.css" />
-	<!-- Try and serve Google Fonts in the most efficent way possible -->
-	<!--
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-	-->
-	<link rel="preload" as="style"
-      href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'">
-	<noscript>
-	  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap">
-	</noscript>
-
-	<title>{% if title %}{{ title }}{% else %}BlazeChariot{% endif %}</title>
-	<meta name="google-site-verification" content="xa6weg4F-oSHqFFa2cO3OXTDQwNXkD4r7_UVEdWW2F4" />
-	<meta name="msvalidate.01" content="7321A9FC815E38B388EF7112CEBCA1B0" />
-	
-	<meta name="description" content="{% if description %}{{ description }}{% else %}BlazeChariotはギター初心者のためとブログのサイトです。11tyと言うので作りました。{% endif %}">
-	<link rel="alternate" type="application/atom+xml" title="{{ site.title }} Atom Feed" href="/feed.xml" />
-	<!-- Favicons -->
-	<!-- Apple Touch Icon (reuse 192px icon.png) & standard favicons -->
-	<link rel="apple-touch-icon" sizes="180x180" href="/static/favicons/apple-touch-icon.png" >
-	<link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png" >
-	<link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png" >
-	<link rel="icon" type="image/x-icon" href="/favicon.ico" >
-
-	<!-- Open Graph -->
-	<meta property="og:url" content="https://blazechariot.netlify.app{{ page.url }}">
-	<meta property="og:type" content="website">
-	<meta property="og:title" content="{% if title %}{{ title }}{% else %}BlazeChariot{% endif %}">
-	<meta property="og:image" content="{% if cover %}https://blazechariot.netlify.app/{{ page.url | url }}{{ cover }}{% else %}https://blazechariot.netlify.app/assets/image/opengraph-cover.jpg{% endif %}" />
-	<meta property="og:description" content="{% if description %}{{ description }}{% else %}BlazeChariotはギター初心者のためにとブログのサイトです。11tyで作りました。{% endif %}" />
-	<meta property="og:site_name" content="{{ site.title }}">
-	<meta property="og:locale" content="ja_JP">
-
-	<!-- Twitter -->
-	<meta property="twitter:image" content="{% if cover %}https://blazechariot.netlify.app/{{ page.url | url }}{{ cover }}{% else %}https://blazechariot.netlify.app/assets/image/opengraph-cover.jpg{% endif %}" />
-	<meta name="twitter:card" content="summary_large_image" />
+	{% include "header.njk" %}
 </head>
 <body>
 	<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;">
@@ -56,8 +15,29 @@
 			<symbol id="moon" viewBox="0 0 512 512">
 				<path d="M264 480A232 232 0 0132 248c0-94 54-178.28 137.61-214.67a16 16 0 0121.06 21.06C181.07 76.43 176 104.66 176 136c0 110.28 89.72 200 200 200 31.34 0 59.57-5.07 81.61-14.67a16 16 0 0121.06 21.06C442.28 426 358 480 264 480z"/>
 			</symbol>
+			
 			<symbol id="sun" viewBox="0 0 24 24">
 				<path d="M12 6a1 1 0 001-1V3a1 1 0 00-2 0v2a1 1 0 001 1zM21 11h-2a1 1 0 000 2h2a1 1 0 000-2zM6 12a1 1 0 00-1-1H3a1 1 0 000 2h2a1 1 0 001-1zM6.22 5a1 1 0 00-1.39 1.47l1.44 1.39a1 1 0 00.73.28 1 1 0 00.72-.31 1 1 0 000-1.41zM17 8.14a1 1 0 00.69-.28l1.44-1.39A1 1 0 0017.78 5l-1.44 1.42a1 1 0 000 1.41 1 1 0 00.66.31zM12 18a1 1 0 00-1 1v2a1 1 0 002 0v-2a1 1 0 00-1-1zM17.73 16.14a1 1 0 00-1.39 1.44L17.78 19a1 1 0 00.69.28 1 1 0 00.72-.3 1 1 0 000-1.42zM6.27 16.14l-1.44 1.39a1 1 0 000 1.42 1 1 0 00.72.3 1 1 0 00.67-.25l1.44-1.39a1 1 0 00-1.39-1.44zM12 8a4 4 0 104 4 4 4 0 00-4-4z"/>
+			</symbol>
+			
+			<symbol viewBox="0 0 32 32" id="icon-amazon">
+				<path fill="currentColor" d="M.063 24.026c.094-.156.245-.167.464-.031c4.844 2.818 10.125 4.224 15.823 4.224q5.703 0 11.266-2.125l.417-.188c.188-.083.313-.135.391-.172c.302-.12.521-.063.703.172c.161.229.12.448-.161.641c-.339.25-.802.547-1.339.87q-2.49 1.483-5.583 2.302a23.4 23.4 0 0 1-6.021.813q-4.531.001-8.578-1.583a23.9 23.9 0 0 1-7.24-4.464c-.135-.099-.203-.203-.203-.297c0-.063.026-.12.068-.172zm8.75-8.292q-.002-2.01.99-3.432c.992-1.422 1.563-1.667 2.724-2.156c1.057-.448 2.339-.766 3.88-.958a70 70 0 0 1 2.563-.234v-.49c0-1.245-.141-2.078-.401-2.5c-.406-.578-1.042-.87-1.922-.87h-.24c-.641.063-1.198.26-1.661.615c-.469.359-.771.839-.901 1.464q-.123.593-.583.677l-3.359-.422c-.328-.078-.495-.24-.495-.516c0-.063.01-.12.031-.203c.328-1.719 1.141-3 2.427-3.839c1.297-.823 2.797-1.302 4.516-1.401h.724c2.198 0 3.943.578 5.182 1.719c.182.203.359.401.542.641c.156.219.297.422.375.599c.099.182.203.443.26.76c.078.339.141.563.182.682c.036.141.083.401.099.818s.026.661.026.74v7.042c0 .5.083.958.219 1.38c.141.417.281.719.422.896l.682.901c.12.182.177.339.177.479q.002.243-.24.417c-1.599 1.401-2.479 2.161-2.615 2.281q-.33.273-.839.063c-.26-.224-.5-.443-.703-.661l-.411-.464a11 11 0 0 1-.427-.563l-.396-.578c-1.083 1.182-2.141 1.922-3.203 2.219c-.656.203-1.458.302-2.438.302c-1.479 0-2.719-.453-3.682-1.375c-.958-.922-1.438-2.224-1.438-3.922l-.068-.099zm5.005-.583q-.001 1.131.568 1.818c.38.453.901.682 1.536.682c.063 0 .146-.005.26-.026a2 2 0 0 1 .224-.031c.818-.214 1.438-.734 1.896-1.568c.224-.375.38-.776.484-1.214c.12-.427.156-.786.177-1.068c.021-.26.021-.719.021-1.339v-.719c-1.12 0-1.979.078-2.563.24c-1.698.479-2.557 1.557-2.557 3.24l-.047-.026zm12.213 9.37c.042-.078.104-.146.177-.224a4.7 4.7 0 0 1 1.401-.667a11 11 0 0 1 2.151-.323q.282-.023.547.042c.865.078 1.396.224 1.563.438c.083.12.12.307.12.521v.203c0 .677-.188 1.479-.557 2.396c-.37.922-.885 1.667-1.536 2.24c-.099.083-.188.12-.266.12c-.042 0-.078 0-.12-.016c-.12-.057-.141-.156-.083-.318c.719-1.682 1.073-2.859 1.073-3.521c0-.198-.042-.359-.115-.458c-.193-.219-.734-.344-1.635-.344q-.484 0-1.156.063c-.484.063-.938.12-1.333.182q-.178 0-.24-.063c-.042-.036-.052-.063-.031-.099c0-.026.01-.042.031-.089v-.078z"></path>
+			</symbol>
+			
+			<symbol viewBox="0 0 24 24" id="icon-x">
+				<path fill="currentColor" d="m17.687 3.063l-4.996 5.711l-4.32-5.711H2.112l7.477 9.776l-7.086 8.099h3.034l5.469-6.25l4.78 6.25h6.102l-7.794-10.304l6.625-7.571zm-1.064 16.06L5.654 4.782h1.803l10.846 14.34z"></path>
+			</symbol>
+			
+			<symbol viewBox="0 0 448 512" id="icon-blogger">
+				<path fill="currentColor" d="M162.4 196c4.8-4.9 6.2-5.1 36.4-5.1c27.2 0 28.1.1 32.1 2.1c5.8 2.9 8.3 7 8.3 13.6c0 5.9-2.4 10-7.6 13.4c-2.8 1.8-4.5 1.9-31.1 2.1c-16.4.1-29.5-.2-31.5-.8c-10.3-2.9-14.1-17.7-6.6-25.3m61.4 94.5c-53.9 0-55.8.2-60.2 4.1c-3.5 3.1-5.7 9.4-5.1 13.9c.7 4.7 4.8 10.1 9.2 12c2.2 1 14.1 1.7 56.3 1.2l47.9-.6l9.2-1.5c9-5.1 10.5-17.4 3.1-24.4c-5.3-4.7-5-4.7-60.4-4.7m223.4 130.1c-3.5 28.4-23 50.4-51.1 57.5c-7.2 1.8-9.7 1.9-172.9 1.8c-157.8 0-165.9-.1-172-1.8c-8.4-2.2-15.6-5.5-22.3-10c-5.6-3.8-13.9-11.8-17-16.4c-3.8-5.6-8.2-15.3-10-22S0 420.3 0 256.3C0 93.2 0 89.7 1.8 82.6C8.1 57.9 27.7 39 53 33.4c7.3-1.6 332.1-1.9 340-.3c21.2 4.3 37.9 17.1 47.6 36.4c7.7 15.3 7-1.5 7.3 180.6c.2 115.8 0 164.5-.7 170.5m-85.4-185.2c-1.1-5-4.2-9.6-7.7-11.5c-1.1-.6-8-1.3-15.5-1.7c-12.4-.6-13.8-.8-17.8-3.1c-6.2-3.6-7.9-7.6-8-18.3c0-20.4-8.5-39.4-25.3-56.5c-12-12.2-25.3-20.5-40.6-25.1c-3.6-1.1-11.8-1.5-39.2-1.8c-42.9-.5-52.5.4-67.1 6.2c-27 10.7-46.3 33.4-53.4 62.4c-1.3 5.4-1.6 14.2-1.9 64.3c-.4 62.8 0 72.1 4 84.5c9.7 30.7 37.1 53.4 64.6 58.4c9.2 1.7 122.2 2.1 133.7.5c20.1-2.7 35.9-10.8 50.7-25.9c10.7-10.9 17.4-22.8 21.8-38.5c3.2-10.9 2.9-88.4 1.7-93.9"></path>
+			</symbol>
+			
+			<symbol viewBox="0 0 512 512" id="sitemap">
+				<path fill="currentColor" d="M472 328h-24v-64a24.027 24.027 0 0 0-24-24H272v-64h32a24.03 24.03 0 0 0 24-24V80a24.03 24.03 0 0 0-24-24h-96a24.03 24.03 0 0 0-24 24v72a24.03 24.03 0 0 0 24 24h32v64H88a24.027 24.027 0 0 0-24 24v64H40a24.03 24.03 0 0 0-24 24v72a24.03 24.03 0 0 0 24 24h80a24.03 24.03 0 0 0 24-24v-72a24.03 24.03 0 0 0-24-24H96v-56h144v56h-24a24.03 24.03 0 0 0-24 24v72a24.03 24.03 0 0 0 24 24h80a24.03 24.03 0 0 0 24-24v-72a24.03 24.03 0 0 0-24-24h-24v-56h144v56h-24a24.03 24.03 0 0 0-24 24v72a24.03 24.03 0 0 0 24 24h80a24.03 24.03 0 0 0 24-24v-72a24.03 24.03 0 0 0-24-24M216 88h80v56h-80ZM112 360v56H48v-56Zm176 0v56h-64v-56Zm176 56h-64v-56h64Z"></path>
+			</symbol>
+			
+			<symbol viewBox="0 0 24 24" id="feed">
+				<path fill="currentColor" d="M3 3c9.941 0 18 8.059 18 18h-3c0-8.284-6.716-15-15-15zm0 7c6.075 0 11 4.925 11 11h-3a8 8 0 0 0-8-8zm0 7a4 4 0 0 1 4 4H3z"></path>
 			</symbol>
 		</defs>
 	</svg>
@@ -72,7 +52,7 @@
 		<ul>
 			<li><a href="/" class="{{ 'active' if '/' === page.url }}">Home</a></li>
 			<li><a href="/blog/" class="{{ 'active' if '/blog' in page.url }}">Blog</a></li>
-			<li><a href="/guitar/" class="{{ 'active' if '/guitar' in page.url }}">ギターを弾き語れ！</a></li>
+			<li><a href="/guitar/contents/" class="{{ 'active' if '/guitar' in page.url }}">ギターを弾き語れ！</a></li>
 			<li><a href="/now/" class="{{ 'active' if '/now' in page.url }}">Now</a></li>
 			<li><a href="/about/" class="{{ 'active' if '/about' in page.url }}">About</a></li>
 		</ul>
@@ -116,22 +96,7 @@
 
 
 	<footer class="container">
-		<div class="footer">
-			<section>
-				<ul>
-					<li><strong>Social&amp;Related:</strong></li>
-					<li><a href="https://x.com/ko_hidekichi">X.com(Profile)</a></li>
-					<li><a href="https://blazechariot.blogspot.com/">Blogger(Suspended)</a></li>
-				</ul>
-				<small>
-					© 2025
-				</small>
-				<div class="feedMeta flex gap-x-[0.5rem]">
-					<a href="/feed.xml" title="Feed">Feed</a>
-					<a href="{{ site.url }}/sitemap.xml" title="sitemap">sitemap</a>
-				</div>
-			</section>
-		</div>
+		{% include "footer.njk" %}
 	</footer>
 	<div class="ref-container"></div>
 	<div id="image-modal" class="modal place-content-center">
@@ -141,6 +106,8 @@
 		</div>
 	</div>
 	
+
 	<script type="module" src="/static/build/scripts.min.js"></script>
+
 </body>
 </html>
