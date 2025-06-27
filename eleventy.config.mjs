@@ -1,7 +1,6 @@
 import { DateTime } from "luxon";
 import { minify } from "terser";
 const isProduction = process.env.ELEVENTY_ENV === "production"; // これはそのまま
-import htmlnano from "htmlnano"; // 未使用の可能性あり
 // const htmlSave = require("htmlnano").presets.safe; // 未使用の可能性あり
 import CleanCSS from "clean-css";
 import htmlmin from "html-minifier-terser";

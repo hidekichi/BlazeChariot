@@ -1,4 +1,5 @@
-@import "/utils/syntax.css";
+@import "./uaplus.css";
+@import "./syntax.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -390,7 +391,7 @@ b,strong {
 			.text {
 				display: block;
 				position: absolute;
-				font-size: 8vw;
+				font-size: clamp(2vw, 10vw, 8vw);
 				line-height: 0.8;
 				font-weight: 700;
 				z-index: 10;
@@ -399,11 +400,13 @@ b,strong {
 				&:first-of-type {
 					top: 1rem;
 					left: 1rem;
+					mix-blend-mode: difference;
 				}
 				
 				&:last-of-type {
 					bottom: 1rem;
 					left: 1rem;
+					mix-blend-mode: plus-lighter;
 				}
 			}
 			
@@ -799,18 +802,57 @@ b,strong {
 		}
 	}
 }
+/*
+@media (width > 640px) {
+	.body-copy.index {
+		.cover {
+			.text {
+				font-size: 9.5vw;
+			}
+		}
+	}
+}
 
-@media (width > 1000px) {
+@media (width > 768px) {
 	.body-copy.index {
 		.cover {
 			.text {
 				font-size: 8vw;
 			}
 		}
-		
 	}
 }
 
+@media (width > 1024px) {
+	.body-copy.index {
+		.cover {
+			.text {
+				font-size: 8.5vw;
+			}
+		}
+	}
+}
+
+@media (width > 1280px) {
+	.body-copy.index {
+		.cover {
+			.text {
+				font-size: 7vw;
+			}
+		}
+	}
+}
+
+@media (width > 1560px) {
+	.body-copy.index {
+		.cover {
+			.text {
+				font-size: 6rem;
+			}
+		}
+	}
+}
+*/
 @media (width <= 768px) {
 	.header nav {
 		ul {
@@ -1022,6 +1064,10 @@ ul.listing {
 		padding: 0;
 	}
 	
+	:where(.social-related,.feedMeta) {
+		row-gap: 1rem;
+	}
+	
 	.site-meta {
 		display: grid;
 		grid-template-columns: 1fr 33.3% 1fr;
@@ -1054,6 +1100,7 @@ ul.listing {
 		.feedMeta {
 			grid-column: 3/4;
 		}
+		
 	}
 	
 	button {
