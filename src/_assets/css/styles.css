@@ -379,25 +379,26 @@ b,strong {
 			.text {
 				display: block;
 				position: absolute;
-				font-size: calc((100 / 3.4) * 0.65vw);
-				line-height: 0.6;
+				font-size: calc((100 / 3.3) * 0.3075vw);
+				line-height: 0.7;
 				font-weight: 900;
 				z-index: 10;
 				transition: 0.4s;
-				/* transform: rotate(-12deg); */
 				letter-spacing: -0.08em;
 				width: 100%;
 				
 				&:first-of-type {
 					top: 1rem;
 					left: 1rem;
-					mix-blend-mode: color-burn;
+					mix-blend-mode: difference;
+					color: #3b99d0;
 				}
 				
 				&:last-of-type {
 					bottom: 1rem;
 					left: 1rem;
-					mix-blend-mode: exclusion;
+					mix-blend-mode: overlay;
+					color: #ead09e;
 				}
 			}
 			
@@ -782,57 +783,7 @@ b,strong {
 		}
 	}
 }
-/*
-@media (width > 640px) {
-	.body-copy.index {
-		.cover {
-			.text {
-				font-size: 9.5vw;
-			}
-		}
-	}
-}
 
-@media (width > 768px) {
-	.body-copy.index {
-		.cover {
-			.text {
-				font-size: 8vw;
-			}
-		}
-	}
-}
-
-@media (width > 1024px) {
-	.body-copy.index {
-		.cover {
-			.text {
-				font-size: 8.5vw;
-			}
-		}
-	}
-}
-
-@media (width > 1280px) {
-	.body-copy.index {
-		.cover {
-			.text {
-				font-size: 7vw;
-			}
-		}
-	}
-}
-
-@media (width > 1560px) {
-	.body-copy.index {
-		.cover {
-			.text {
-				font-size: 6rem;
-			}
-		}
-	}
-}
-*/
 @media (width <= 768px) {
 	.header nav {
 		ul {
@@ -1054,7 +1005,8 @@ ul.listing {
 		padding: 0;
 	}
 	
-	:where(.social-related,.feedMeta) {
+	.social-related {
+		column-gap: 2rem;
 		row-gap: 1rem;
 	}
 	
@@ -1085,10 +1037,14 @@ ul.listing {
 			grid-column: 1/2;
 		}
 		.credit {
+			display: flex;
 			grid-column: 2/3;
+			margin: 1rem 0;
 		}
 		.feedMeta {
 			grid-column: 3/4;
+			column-gap: 2rem;
+			row-gap: 1rem;
 		}
 		
 	}
