@@ -6,8 +6,8 @@ category: home
 
 <section class="body-copy index">
 	<div class="cover relative">
-		<span class="text">Every discovery is a journey fulfilled—its value, yours to define.</span>
-		<span class="text">Will you keep it to yourself or share its wonder with the world?</span>
+		<span class="text">Seek what you truly need. Keep moving even in darkness.</span>
+		<span class="text">Somewhere, something incredible is waiting to be known.</span>
 		
 		<nav class="navigation" aria-labelledby="primary-navigation">
 		<ul>
@@ -32,19 +32,21 @@ category: home
 		<h3>New Arrivals</h3>
 		<div class="wrapper">
 			{#% set items = getData("all", 5) %#}
-			<ul>
+			<table>
 			{% for item in collections.latestPosts %}
-				<li>
-					<div class="meta">
+				<tr>
+					<th class="meta">
 						<span class="category">[{{ item.data.category }}]</span>
 						<span class="date">{{ item.date | shortDateString }}</span>
-					</div>
-					<a href="{{ item.url }}" class="title-link" alt="{{ item.data.title }}へのリンク" title="{{ item.data.title }}">
-						<span class="title">{{ item.data.title }}</span>
-					</a>
-					</li>
+					</th>
+					<td>
+						<a href="{{ item.url }}" class="title-link" alt="{{ item.data.title }}へのリンク" title="{{ item.data.title }}">
+							<span class="title">{{ item.data.title }}</span>
+						</a>
+					</td>
+				</tr>
 			{% endfor %}
-			</ul>
+			</table>
 		</div>
 	</aside>
 	
