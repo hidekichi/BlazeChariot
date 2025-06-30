@@ -2,7 +2,7 @@
 title: 2025-6 Arch系Linuxでアップデートができない件
 description: こちらのページでは、Linuxのディストリビューションのリリースタイプや、パッケージ管理、その特徴や諸々を系統別で記載しています。それらを諸々加味して自身に最適と思われるディストリビューションを探してみて下さい。
 date: 2025-06-30
-update: 2025-06-30
+update: 2025-07-01
 category:
   - blog
 tags:
@@ -95,9 +95,36 @@ EndeavourOSフォーラムでもやはり更新に失敗したなどのユーザ
 しかし、これに伴う二次被害としてNetworkManagerが利用するファームウェアも削除されたのか、NetworkManagerを作動させるサービスなどは動作しているようだけども、肝心のファームウェアが読み込まれずに結果としてwifiが機能しないと言う状態になりました。
 もちろん本来であれば正しく動作するようになったのでしょうけれども、たまたまか何かしらが原因でそうなったという感じです。
 
+<div class="rounded border-solid border-2 border-sky-500 p-6">
+2025-07-01 追記
+
+> これに伴う二次被害としてNetworkManagerが利用するファームウェアも削除されたのか、……
+
+と書きましたが、これは当然で`-Rdd`でファームウェアを削除しているのですからそうなります。つまり、以下のことを忘れていたと言うことです。なのでそう言う自体になったらどう対処するかと言う視点からも御覧ください。
+
+おそらく、こうなってしまった原因は、 `sudo pacman -Rdd linux-firmware` の後、`sudo pacman -Syu`で終わってしまったことにあるのではなかろうかと思うのです。
+つまり、ここで**再起動しろと言うメッセージが来る**ことで、必要であった`sudo pacman -S linux-firmware`が抜けてしまい、本来であれば<u>まだネットに接続されている状態でファームウェアの更新もできた</u>のに、**再起動してしまったがゆえにファームウェアが無くなり**、Wifiに接続できなくなってしまったと言うことではなかろうかと。
+
+で、更に以下で説明しますが、`sudo pacman -Syu`と`sudo pacman -S linux-firmware`と分ける必要もありません。
+
+> 無線だけではなく、`linux-firmware`がなくなるとスリープから復帰などのPCを制御する部分が無くなってしまうので、見た目には普通に使えているようでもかなり必要なものがない状態になります。
+> なので、必ず、`sudo pacman -Syu linux-firmware`とするか、`sudo pacman -Syu`の実行後に`sudo pacman -S linux-firmware`を忘れないように。
+
+ここで`sudo pacman -Syu linux-firmware`と`sudo pacman -S linux-firmware`の違いも書いておきます。
+- `-Syu` = 全体のシステムアップデート（upgrade）を行いつつ、linux-firmwareもアップグレードする
+- `-S` = install（インストール）
+- `-y` = sync（リポジトリの最新状態に更新）
+- `-u` = upgrade（インストール済みパッケージをすべて更新）
+
+システム全体を最新化しつつ`linux-firmware`もアップデートと言う形になります。
+`-S`は、つまりは`linux-firmware`をインストールするという事だけが対象になり、何かしらが必要であればアップデートされるかもしれませんし、既にインストールされている場合には「再インストールしますか？」と言う問い合わせがあるかと思ます。
+
+`linux-firmware`は、`linux`カーネルや、`linux-headers`などとの整合性をとるためにも一緒に更新するのが理想であり、そのためにも`Syu`でインストールするのが望ましいと思います。{class="!mb-[0px]"}
+</div>
+
 ## 解決に至るまで
 
-`sudo pacman -Rdd linux-firmware`→`sudo pacman -Syu`の部分から少しだけ振り返ってみたいと思います。
+`sudo pacman -Rdd linux-firmware`→`sudo pacman -Syu linux-firmware`の部分から少しだけ振り返ってみたいと思います。
 
 `-Rdd`を使用する場合というのは、ファイル衝突が非常に頑固で`--overwrite`オプションでも解決しないような場合に用いられる、強制的なパッケージの再構築・再インストール方法です。
 
@@ -123,7 +150,7 @@ EndeavourOSフォーラムでもやはり更新に失敗したなどのユーザ
 
 今回はエラーはなかったが、接続ができない、あるいは`wifi`インターフェースが見つからない状態だった
 
-### 原因の特定 Wifiファームウェアの欠如
+#### 原因の特定 Wifiファームウェアの欠如
 
 ```shell
 journalctl -b | grep firmware
@@ -138,14 +165,14 @@ iwlwifi 0000:00:14.3: Direct firmware load for iwlwifi-8265-36.ucode failed with
 ```
 これらのように、`iwlwifi-8265-36.ucode`の読み込みの失敗があった場合、ファームウェアが存在しない、あるいは壊れていると判断できる
 
-### 必要なファイルを確認・入手
+#### 必要なファイルを確認・入手
 
 - 使用している無線チップのファームウェア名を確認(ログにでているもの)
 ```log
 iwlwifi-8265-36.ucode
 iwlwifi-8265-34.ucode
 ```
-これらは使用しているPCがどのチップを使用しているかで変わるけれども、だいたいは以下にあると思う。以下のリンクでない場合は、AIなどに聞いてどこから入手できるかを探して欲しい。
+これらは使用しているPCがどのチップを使用しているかで変わりますが、だいたいは以下にあると思います。以下のリンク先にない場合は、AIなどに聞いてどこから入手できるかを探して下さい。
 
 [git.kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/)
 
@@ -207,12 +234,10 @@ nmcli dev wifi
 - `pacman`で更新できなかった場合の対処
 ```shell
 sudo pacman -Rdd linux-firmware
-sudo pacman -Syu
-sudo pacman -S linux-firmware
+sudo pacman -Syu linux-firmware
 ```
 - `linux-firmware`を強制的に削除
-- システムの更新
-- `linux-firmware`を再インストール
+- システムの更新をしつつ`linux-firmware`を再インストール
 
 もしこのページで書かれていないようなエラーが出た場合は、[Arch Wiki](https://wiki.archlinux.jp/index.php/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8)あるいは、各ディストリビューションのコミュニティーフォーラムで調べるのが良いです。
 ほとんどが英語であるため、それらがわからない場合は、`journalctl`を試して「次のようなエラーが出ているけどもどう対処すればよいか？」というようなことをAIに聞くのが良いかと思います。
@@ -230,7 +255,7 @@ AIは英語も翻訳して解説してくれるため、書かれている内容
 | ファームウェア所有確認 | `pacman -Qo /usr/lib/firmware/iwlwifi-8265-36.ucode`                    |
 | モジュール再読み込み  | `modprobe -r iwlwifi && modprobe iwlwifi`                               |
 | 接続確認・設定     | `nmcli`,`nmtui`                                                         |
-| ファームウェア再構築  | `pacman -Rdd linux-firmware && pacman -Syu && pacman -S linux-firmware` |
+| ファームウェア再構築  | `pacman -Rdd linux-firmware && pacman -S linux-firmware` |
 
 </div>
 
@@ -238,3 +263,16 @@ AIは英語も翻訳して解説してくれるため、書かれている内容
 
 > 上記にある`コマンドA && コマンドB`と連結してあるものは、コマンドAが成功した場合にコマンドBが実行されるという感じになります。
 > 1行ずつ実行するのはより確実な方法と言えますが、実質一緒です。もしトラブルシューティングをしようとしている場合は1行ずつする方がベスト
+
+## 総まとめ
+
+半ば、ファームウェアの更新方法みたいな記事になりましたが、本意としては<u>上流Archでlinux-firmwareの変更が行われ、正しくアップデートができなくなった</u>事をどのように解消するかです。
+
+途中の見出しで「**結果を簡潔に書けばほんの少しのことですが**」と書いたように、それらの答えは、
+```shell
+sudo pacman -Rdd linux-firmware
+sudo pacman -Syu linux-firmware
+```
+と言うだけの事です。しかし、システムの更新が行われると**再起動を促すメッセージが通知される**事で、ここで再起動をしてしまうと面倒くさいことになりますよと言うのがこの記事の流れからも察してもらえるかと思います。
+
+追記などをしたので記事の内容がわかりにくくなったかも知れませんが、これらに留意して問題の対処にあたってください。
