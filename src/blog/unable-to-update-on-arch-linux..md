@@ -212,7 +212,7 @@ sudo pacman -S linux-firmware
 ```
 - `linux-firmware`を強制的に削除
 - システムの更新
-- `linux-wirmware`を再インストール
+- `linux-firmware`を再インストール
 
 もしこのページで書かれていないようなエラーが出た場合は、[Arch Wiki](https://wiki.archlinux.jp/index.php/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8)あるいは、各ディストリビューションのコミュニティーフォーラムで調べるのが良いです。
 ほとんどが英語であるため、それらがわからない場合は、`journalctl`を試して「次のようなエラーが出ているけどもどう対処すればよいか？」というようなことをAIに聞くのが良いかと思います。
