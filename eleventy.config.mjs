@@ -11,8 +11,10 @@ import markdownItMultimdTable from "markdown-it-multimd-table-ext";
 import rubyPlugin from "markdown-it-ruby";
 import { HtmlBasePlugin } from "@11ty/eleventy";
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
-import { feedPlugin } from "@11ty/eleventy-plugin-rss";
+//import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginRss from "@11ty/eleventy-plugin-rss";
+//import { JSDOM } from 'jsdom';
+import summarizedPostsForRssCollection from './collections/summarizedPostsForRss.mjs';
 import pluginNavigation from "@11ty/eleventy-navigation";
 //import postcss from "postcss";
 //import postcssConfig from "./postcss.config.js"; // postcss.config.js が CommonJS なら要確認
@@ -118,7 +120,7 @@ export default async function (eleventyConfig) {
 	
 	// Folders to copy to build dir
 	eleventyConfig
-		.addPassthroughCopy("src/static")
+		.addPassthroughCopy("src/static/")
 		.addPassthroughCopy("src/*.{txt,xsl}")
 		.addPassthroughCopy("src/blog/**/*.{jpg,jpeg,png,webp,svg,gif,avif}")
 		.addPassthroughCopy("src/guitar/**/*.{jpg,jpeg,png,webp,svg,gif,avif}")
@@ -212,6 +214,38 @@ export default async function (eleventyConfig) {
 			: subString + ellipsis;
 	});
 	
+	eleventyConfig.addFilter('excerpt', (post) => {
+    return post
+      .replace(/(<([^>]+)>)/gi, '')
+	  .replace(/&nbsp/gi, '&#160;')
+	  .replace(/\s+/g, ' ')
+      //.split(' ')
+	  .split('。')
+      .slice(0, 5)
+      .join(' ');
+  });
+  
+/* function excerptFromHTML(html, maxLength = 200) {
+  const dom = new JSDOM(html);
+  const body = dom.window.document.body;
+  const nodes = Array.from(body.children);
+
+  let totalLength = 0;
+  const kept = [];
+
+  for (const el of nodes) {
+    const len = el.textContent.trim().length;
+    if (totalLength + len > maxLength) break;
+	
+    kept.push(el.outerHTML);
+    totalLength += len;
+  }
+  
+  return kept.length ? kept.join("\n") : "<p>&nbsp;</p>";
+}
+
+eleventyConfig.addFilter("excerpt", (html) => excerptFromHTML(html, 200)); */
+	
 	eleventyConfig.addCollection("allTags", function (collectionApi) {
 		const allPages = collectionApi.getAll();
 	
@@ -236,6 +270,11 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addCollection("allPosts", function(collectionApi) {
 		return collectionApi.getFilteredByGlob("src/**/*.md");
 	});
+	
+	/* eleventyConfig.addCollection("summarizedPostsForRss", function(collectionApi) {
+        // summarizedPostsForRssCollection 関数に mdLib を渡す
+        return summarizedPostsForRssCollection(collectionApi, mdLib);
+    }); */
   
 	eleventyConfig.addCollection("categoryTags", function(collectionApi) {
 		let categoryTags = {};
@@ -262,9 +301,9 @@ export default async function (eleventyConfig) {
 
 		return categoryTags;
 	});
-  
+  eleventyConfig.addPlugin(pluginRss);
 	//feedPlugin
-	eleventyConfig.addPlugin(feedPlugin, {
+	/* eleventyConfig.addPlugin(pluginRss, {
 		type: "atom", // or "rss", "json"
 		outputPath: "/feed.xml",
 		stylesheet: "/pretty-atom-feed.xsl",
@@ -275,7 +314,7 @@ export default async function (eleventyConfig) {
 			}
 		},
 		collection: {
-			name: "allPosts",
+			name: "summarizedPostsForRss",
 			limit: 0,
 		},
 		metadata: {
@@ -287,7 +326,7 @@ export default async function (eleventyConfig) {
 				name: "Hidekichi"
 			}
 		}
-	});
+	}); */
 	
 	eleventyConfig.addNunjucksFilter("htmlDateString", (dateObj) => {
 		return new Date(dateObj).toISOString();
@@ -376,6 +415,7 @@ export default async function (eleventyConfig) {
 	
 	const mdLib = markdownIt({
 		html: true,
+		xhtmlOut: true,
 		breaks: true,
 		linkify: true,
 		typographer: true,

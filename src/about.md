@@ -7,6 +7,7 @@ tags:
   - about
 category:
   - about
+eleventyExcludeFromCollections: true 
 permalink: /about/
 ---
 

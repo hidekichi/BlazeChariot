@@ -19,9 +19,10 @@ module.exports = {
 			},
 			spacing: {
 				'1px': '1px',
-			}
+			},
 		},
 	},
-	plugins: [],
+	plugins: [
+	],
 	content: ['src/**/*.{html,md,njk,ejs,pug}', 'src/**/*.js']
 }
