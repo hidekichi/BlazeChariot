@@ -142,7 +142,7 @@ export default async function (eleventyConfig) {
 	// Example Collections
 	// Filter source file names using a glob
 	eleventyConfig.addCollection("blog", function (collectionApi) {
-		return collectionApi.getFilteredByGlob("src/blog/**/*.md");
+		return collectionApi.getFilteredByGlob("src/blog/**/*.md").reverse();
 	});
 	
 	eleventyConfig.addCollection("guitar", function (collectionApi) {
@@ -218,9 +218,7 @@ export default async function (eleventyConfig) {
     return post
       .replace(/(<([^>]+)>)/gi, '')
 	  .replace(/&nbsp/gi, '&#160;')
-	  .replace(/\s+/g, ' ')
-      //.split(' ')
-	  .split('。')
+      .split(' ')
       .slice(0, 5)
       .join(' ');
   });

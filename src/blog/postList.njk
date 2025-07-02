@@ -16,7 +16,7 @@ sitemap:
 
 <h3>Now Entering Page {{ pagination.pageNumber + 1 }}</h3>
 <ul class="listing">
-	{% for entry in blog | reverse %}
+	{% for entry in blog %}
 
 		<li>
 			<a href="{{ entry.url }}">
