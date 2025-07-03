@@ -8,7 +8,7 @@ category:
 tags:
   - chord
   - パワーコード
-images: 
+images:
   - ../img/c.jpg
   - ../img/5_c.jpg
   - ../img/5_d.jpg
@@ -28,27 +28,34 @@ permalink: /guitar/{{ page.fileSlug }}/
 ### パワーコード一覧
 
 #### C
+
 ![パワーコードc](../img/c.jpg){class="w-full"}
 ![パワーコードc](../img/5_c.jpg){class="w-full"}
 
 #### D
+
 ![パワーコードD](../img/5_d.jpg){class="w-full"}
 
 #### E
+
 ![パワーコードE](../img/5_e.jpg){class="w-full"}
 ![パワーコードE](../img/low_e.jpg){class="w-full"}
 
 #### F
+
 ![パワーコードF](../img/5_f.jpg){class="w-full"}
 ![パワーコードF](../img/f.jpg){class="w-full"}
 
 #### G
+
 ![パワーコードG](../img/g.jpg){class="w-full"}
 
 #### A
+
 ![パワーコードA](../img/a.jpg){class="w-full"}
 ![パワーコードA](../img/low_a.jpg){class="w-full"}
 
 #### B
+
 ![パワーコードB](../img/b.jpg){class="w-full"}
 ![パワーコードB](../img/5_b.jpg){class="w-full"}

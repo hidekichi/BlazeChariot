@@ -4,28 +4,26 @@ description: ハンマーリングとプリングオフ、ミュートとスラ�
 date: 2021-11-11
 update: 2024-05-08
 category:
-    - ギターを弾き語れ！
+  - ギターを弾き語れ！
 tags:
-    - テクニック
+  - テクニック
 layout: post.njk
 permalink: /guitar/{{ page.fileSlug }}/
 ---
 
 <div class="table-container">
 
-|名称|記号|サンプル|
-|:--:|:--:|:------:|
-|ハンマーリングオン|H.O.|<audio controls><source src="../sound/ho.ogg" type="audio/ogg"/></audio>|
-|プリングオフ|P.O.|<audio controls><source src="../sound/po.ogg" type="audio/ogg"/></audio>|
-|ハンマーリング&プリングオフ|H.O.&P.O.|<audio controls><source src="../sound/hopo.ogg" type="audio/ogg"/></audio>|
-|スライド/グッサンド|slide/gliss|<audio controls><source src="../sound/slide.ogg" type="audio/ogg"/></audio>|
-|チョーキング|cho|<audio controls><source src="../sound/choking.ogg" type="audio/ogg"/></audio>|
+|            名称             |    記号     |                                   サンプル                                    |
+| :-------------------------: | :---------: | :---------------------------------------------------------------------------: |
+|     ハンマーリングオン      |    H.O.     |   <audio controls><source src="../sound/ho.ogg" type="audio/ogg"/></audio>    |
+|        プリングオフ         |    P.O.     |   <audio controls><source src="../sound/po.ogg" type="audio/ogg"/></audio>    |
+| ハンマーリング&プリングオフ |  H.O.&P.O.  |  <audio controls><source src="../sound/hopo.ogg" type="audio/ogg"/></audio>   |
+|     スライド/グッサンド     | slide/gliss |  <audio controls><source src="../sound/slide.ogg" type="audio/ogg"/></audio>  |
+|        チョーキング         |     cho     | <audio controls><source src="../sound/choking.ogg" type="audio/ogg"/></audio> |
 
 音源はとても古いものなのであまり良くありませんが録り直すのも面倒なのでそのまま使ってます
 
 </div>
-
-
 
 ### 簡単な解説
 
@@ -49,14 +47,14 @@ permalink: /guitar/{{ page.fileSlug }}/
 
 押さえている弦をその指で押し上げて音程を操作するテクニック。同じポジションを押さえながら途切れなく音程を操作できるので人が歌っているような、いわゆる「泣き」のような演奏ができますが、アコギでは使用頻度は控えめ。
 
-基本的なものは、チョーキングを除いた3つがよく使われます。ギターを弾き語るにおいてこれぐらい知っていればまず問題ないだろうと思います。
+基本的なものは、チョーキングを除いた 3 つがよく使われます。ギターを弾き語るにおいてこれぐらい知っていればまず問題ないだろうと思います。
 
 <div class="table-container">
 
-|名称|記号|サンプル|
-|:--:|:--:|:------:|
-|クロマティックラン|--|<audio controls><source src="../sound/chromatic_ran.ogg" type="audio/ogg"/></audio>|
-|(ハーフ)ミュート|--|<audio controls><source src="../sound/mute.ogg" type="audio/ogg"/></audio>|
+|        名称        | 記号 |                                      サンプル                                       |
+| :----------------: | :--: | :---------------------------------------------------------------------------------: |
+| クロマティックラン |  --  | <audio controls><source src="../sound/chromatic_ran.ogg" type="audio/ogg"/></audio> |
+|  (ハーフ)ミュート  |  --  |     <audio controls><source src="../sound/mute.ogg" type="audio/ogg"/></audio>      |
 
 </div>
 
