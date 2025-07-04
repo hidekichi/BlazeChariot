@@ -1,9 +1,13 @@
 export function toc() {
-	const toc = document.querySelector("#toc");
-	
-	if (!toc) {	return; }
-	const headers = document.querySelectorAll(".body-copy > :is(h1, h2, h3, h4, h5, h6)");
-	const commentsSection = document.getElementById("comments");
+	//const toc = document.querySelector("#toc");
+	const toc = document.getElementById("toc");
+
+	if (!toc) return;
+
+	const headers = document.querySelectorAll(
+		".body-copy > :is(h1, h2, h3, h4, h5, h6)"
+	);
+	//const commentsSection = document.getElementById("comments");
 	const tocMenu = document.querySelector("#toc .toc_menu");
 
 	headers.forEach((header, i) => {
@@ -21,7 +25,7 @@ export function toc() {
 	const tocSitetitle = document.querySelector("#toc .toc_sitetitle");
 	tocSitetitle.addEventListener("click", () => {
 		window.scroll({
-			top: 0
+			top: 0,
 		});
 	});
 
@@ -33,7 +37,7 @@ export function toc() {
 
 			if (targetHeader) {
 				targetHeader.scrollIntoView({
-					block: "start"
+					block: "start",
 				});
 			}
 		});
@@ -43,7 +47,7 @@ export function toc() {
 	const observerOptions = {
 		root: null, // ビューポートをルートとして使用
 		rootMargin: "0px",
-		threshold: 0.5 // 見出しの50%が表示されたらトリガー
+		threshold: 0.5, // 見出しの50%が表示されたらトリガー
 	};
 
 	const observer = new IntersectionObserver((entries) => {

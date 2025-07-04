@@ -69,8 +69,10 @@ export async function footnote() {
 			const backLink = document.createElement('div');
 			backLink.classList.add('foot');
 			backLink.dataset.foot = number;
+			
 			const spanInBackLink = document.createElement('span');
 			spanInBackLink.textContent = `注${number}`;
+			
 			const spanElement = document.createElement('span');
 			spanElement.href = `#ht${number}`;
 			spanElement.title = `クリック/タップで元の番号( [${number}] )に戻ります`;
@@ -105,15 +107,15 @@ export async function footnote() {
 			const findFootnote = footnotesList.querySelector(`[data-foot="${footNumber}"]`);
 			
 			const observer = new IntersectionObserver((entries) => {
-			  if (entries[0].isIntersecting) {
-				findFootnote.classList.add('footnoteblink');
-				
-				findFootnote.addEventListener('animationend', function onAnimationEnd() {
-					findFootnote.classList.remove('blink');
-					findFootnote.removeEventListener('animationend', onAnimationEnd);
-					observer.unobserve(findFootnote);
-				});
-			  }
+				if (entries[0].isIntersecting) {
+					findFootnote.classList.add('footnoteblink');
+					
+					findFootnote.addEventListener('animationend', function onAnimationEnd() {
+						findFootnote.classList.remove('blink');
+						findFootnote.removeEventListener('animationend', onAnimationEnd);
+						observer.unobserve(findFootnote);
+					});
+				}
 			});
 
 			observer.observe(findFootnote);
