@@ -158,7 +158,7 @@ pamac にはいくつか種類がありますが、上記 Chaotic-AUR のリポ�
 
 これはいわゆる<u>デスクトップ画面上部のトップバーにアイコンを表示させるためのもの</u>です。Gnome デフォルトのアイコンは右側に出てると思いますが、これからあるいは既にインストールされている IME(日本語入力)のアイコンとか Firewall やその他諸々のアイコンの表示をさせるものです。
 
-> 2025/7 月の段階で、Gnomw は 48 ですが、ここではもう AppIndicator and KStatusNotifierItem Support は不要になっています
+> 2025/7 月の段階で、Gnome は 48 ですが、ここではもう AppIndicator and KStatusNotifierItem Support は不要になっています
 
 #### Battery Health Charging
 
@@ -197,8 +197,7 @@ Linux を利用する際に、例えば今回の EndeavourOS を利用するに�
 
 大別すると Wayland か X11、いずれかに分かれるかもしれません。
 
-Wayland コンポジタの実行をサポートしているディスプレイマネージャが GDM、greetd、SDDM の 3 つだと[Wayland - ArchWiki](https://wiki.archlinux.jp/index.php/Wayland)にはありました。 GDM なら Gnome Display Manager の略称で、SDDM なら Simple Desktop
-Display Manager の略称になります。
+Wayland コンポジタの実行をサポートしているディスプレイマネージャが GDM、greetd、SDDM の 3 つだと[Wayland - ArchWiki](https://wiki.archlinux.jp/index.php/Wayland)にはありました。 GDM なら Gnome Display Manager の略称で、SDDM なら Simple Desktop Display Manager の略称になります。
 
 GDM は Gnome のディスプレイマネージャ、greetd はあまり知りません。SDDM は Fedora、KDE Plasma 5 から KDM の後継として SDDM を採用しているとあります。
 

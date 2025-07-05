@@ -79,11 +79,11 @@ permalink: /guitar/{{ page.fileSlug }}/
 - [Enya X4 Pro Carbon Fiber](https://www.enya-music.com/products/x4-cutaway)
   - 7 ～ 10 万円ぐらい。フルカーボンで耐候性抜群。あわせて温度湿度耐性も高い。音も豊かでレスポンス良好で Bluetooth 付きピックアップモデルもあり。
 
-<div class="grid grid-cols-1 md:grid-cols-2 auto-rows-auto">
+<div class="ytgrid grid grid-cols-1 md:grid-cols-2 auto-rows-auto">
 
 {ytp::https://youtu.be/_5HalNUDPcA::井上苑子 meets Yamaha FG&FS series}
 {ytp::https://youtu.be/w1B7FOnA4LY::Taylor Academy Series 12e Acoustic Guitar}
-{ytp::https://youtu.be/TALmztmf6fM::Eastman PCH2-GACE}
+{ytp::https://youtu.be/EtRkHBpvMSM::Eastman PCH1,2,3 三代同堂 試彈大集合}
 {ytp::https://youtu.be/34gTnLWvHw8::Enya X4 Pro Guitar | "Let It Be" | Fingerstyle Carbon Fiber Guitar Solo Playing }
 
 </div>
@@ -114,7 +114,7 @@ permalink: /guitar/{{ page.fileSlug }}/
 - [Maton EBG808TE](https://matonguitars.jp/products/ebg808te/)
   - 38 ～ 45 万円。Tommy Emmanuel シグネチャーモデル。万能フィンガースタイル向け。Maton 独自のピックアップシステム AP5-Pro が圧倒的高評価を得ている。ピエゾ+マイクのミックス方式で、ラインでもナチュラルに鳴ると言う。オーストラリア材を使用しており、職人製ながらやや粗さもあるがオーストラリアでは国民的ブランド。
 
-<div class="grid grid-cols-1 md:grid-cols-2 auto-rows-auto">
+<div class="ytgrid grid grid-cols-1 md:grid-cols-2 auto-rows-auto">
 
 {ytp::https://youtu.be/LPYUb3TKe1A::Taylor 214ce (2017) Acoustic Guitar}
 {ytp::https://youtu.be/nsOYasBqn4U::Guild Westerly Collection D-140 Acoustic Guitar Demo}
@@ -126,7 +126,7 @@ permalink: /guitar/{{ page.fileSlug }}/
 ここに挙げたものはいわゆる量産ギターではありながらも、厳選素材・設計を取り入れたハイクオリティギター。プレイヤーの腕が確かであればあるほど真価を発揮するものを選びました。おそらく価格も上記より高いかも知れません。
 このように、いくつかピックアップしたとしても何が良いかはそれぞれにあり異っていて、オススメは色々あるもののこれが一番というのが決められるポイントが見つかりません。もう悪い所を探す方が難しいのではなかろうかと。
 
-多くの場合、弾き比べたらこっちのほうが良いなという場合があったりしますが、曲にもより弾き方にもよりなのでもう本当に好きなのを選べばいいやんというしかないのです。ただ、初心者向けに挙げたものと中～上級者向けで挙げたものには同じと言えばそうですがやはり音質の良さが違うと動画だけを見ても言えると思うのです。
+多くの場合、弾き比べたらこっちのほうが良いなという場合があったりしますが、曲にもより弾き方にもよりなのでもう本当に好きなのを選べばいいやんというしかないのです。ただ、初心者向けに挙げたものと中～上級者向けで挙げたものには同じと言えばそうですがやはり音質の良さが違うと動画を見ただけでも言えると思うのです。
 もちろん値段の分は良くなっていてもらわなくては困るわけですが、動画ではわからない音圧であったり広がりであったり弾きやすさ、持ちやすさその他諸々は実際に弾いてみないとわからないので、必ず店で試し弾きをして自身の身体で感じてほしいのです。高いものですから。ネットで買えるとは言え、必ず一度は**購入前に現物を弾いてみるのが大事**です。
 
 #### 車に例えたら

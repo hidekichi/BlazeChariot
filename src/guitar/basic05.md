@@ -147,7 +147,7 @@ permalink: /guitar/{{ page.fileSlug }}/
 
 モーターを内蔵して、ゆるい状態で張られた弦をジャラーンと鳴らすと全ての弦を自動でチューニングしてしまうギターもありましたが、そのような機構がないとなかなか 1 度で完璧には合わせられません。
 
-<div class="grid grid-cols-1 md:grid-cols-2 auto-rows-auto">
+<div class="ytgrid grid grid-cols-1 md:grid-cols-2 auto-rows-auto">
 
 {ytp::https://youtu.be/n-4gShDByRc::Gibson Min ETune 2014 demo}
 {ytp::https://youtu.be/cdqvqNwAqMU::UPGRADE YOUR GUITAR NOW! Tronicaltune - real one automatic guitar tuner!}
@@ -169,7 +169,7 @@ Roadie4 の噂としては、Bluetooth 接続やスマホアプリとの連携�
 4 つ目の Jowoom Smart Tuner T2 は Roadie の廉価版として登場した韓国製の自動チューナー。精度も高く巻取りスピードも比較的速いと言われています。しかし一部で、巻き上げすぎて弦を切ってしまうとか。それらは手動でもしてしまいますが、既にテンションがかかっている所から目的の音を合わせるために更に巻き上げ続け、音に到達するまでにテンションが掛かりすぎて切断などがあるのでしょう。
 これは、つまりテンションを見ながら合わしているわけではないので機械だとありがちな事だろうとは思います。しかしそれらもある程度は考慮されているようなので、人も機械もダブルでテンション管理すると良いですね。USB-C 充電対応で、価格も Roadie よりも控えめ(1 万ちょいぐらい)。
 
-<div class="grid grid-cols-1 md:grid-cols-2 auto-rows-auto">
+<div class="ytgrid grid grid-cols-1 md:grid-cols-2 auto-rows-auto">
 
 {ytp::https://youtu.be/x1mjLbsmN-E::Peterson StroboClip HD}
 {ytp::https://youtu.be/msORx8g0Hdg::Polytune Clip - official product video}

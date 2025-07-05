@@ -233,6 +233,10 @@ main.container {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 	column-gap: 1rem;
+
+	li {
+		line-height: 2;
+	}
 }
 
 main.container header.page-title {
@@ -388,8 +392,8 @@ strong {
 	overflow-wrap: anywhere;
 	word-break: normal;
 	line-break: strict;
-	/* font-size: 0.90625rem; */
-	line-height: 1.9;
+	font-size: calc(var(--base-size) * 1.1);
+	line-height: calc(var(--body-line-height) * 1.05);
 
 	&.index {
 		display: grid;
@@ -582,29 +586,28 @@ strong {
 		}
 	}
 
+	:where(p):has(img) {
+		padding: 0.5rem;
+	}
+
 	p {
-		margin-bottom: 1.7rem;
+		margin-bottom: 0;
 		line-height: inherit;
 
-		& + hr {
-			margin: 6rem 0;
-			border-style: dashed;
+		& + p {
+			margin-top: 2em;
 		}
 
-		& + pre[class*="language-"] {
-			margin-bottom: 2rem;
+		& + :where(.ytp) {
+			margin: 1rem 0;
 		}
 
-		& + :where(ul, ol) {
-			margin-top: -1.7rem;
+		br {
+			margin-bottom: 0.8rem;
 		}
 
 		img {
 			display: block;
-
-			&.md\:alignImg {
-				margin: 4px;
-			}
 		}
 	}
 
@@ -626,10 +629,6 @@ strong {
 		/* font-size: 1.8rem; */
 		padding-bottom: 0.5rem;
 		border-bottom: solid 0.1rem var(--transparency-1);
-	}
-
-	h3 {
-		/* font-size: 1.4rem; */
 	}
 
 	h4 {
@@ -679,12 +678,12 @@ strong {
 	}
 
 	:where(ul, ol) {
-		font-size: 15px;
+		/*font-size: 15px;*/
 		margin-bottom: 1.7rem;
-		padding: 0.5rem 1rem 0;
+		padding: 0.5rem 0 0 1rem;
 
 		li {
-			margin-bottom: 0.75rem;
+			margin: 0.75rem;
 			margin-left: 0.5rem;
 			padding-left: 0.5rem;
 			line-height: 1.5;
@@ -707,7 +706,7 @@ strong {
 		}
 
 		ul {
-			margin: 0.5rem 1rem 0.5rem;
+			margin: 0.5rem 0 0.5rem 1rem;
 			padding: 0;
 		}
 
@@ -745,11 +744,12 @@ strong {
 	}
 
 	blockquote {
-		/* text-align: center; */
-		/* font-size: 0.9375em; */
-		margin: 1rem;
+		margin: 1.7rem 0 1.7rem 1rem;
 		border-left: 5px solid var(--brand);
-		padding: 0 1rem;
+		padding: 1rem 0 1rem 1rem;
+		line-height: 1.7;
+		background-color: #0a1b37;
+		font-size: 0.95em;
 	}
 
 	table {
@@ -757,7 +757,7 @@ strong {
 		width: 100%;
 		border-collapse: collapse;
 		/* font-size: 14px; */
-		margin-bottom: 2rem;
+		margin: 1rem 0;
 
 		:where(th, td):not(:last-child) {
 			border-right: 1px solid #225;
@@ -1433,6 +1433,23 @@ f-left: サムネイルを左にして文字を回り込ませます
 	}
 }
 
+.ytgrid {
+	margin: 1rem 0;
+	gap: 0;
+	row-gap: 0.5rem;
+
+	div {
+		margin: 0;
+	}
+}
+
+@media (width > 768px) {
+	.ytgrid {
+		row-gap: 0;
+		gap: 0.5rem;
+	}
+}
+
 .mv_hidden {
 	display: none;
 }
@@ -1749,17 +1766,18 @@ f-left: サムネイルを左にして文字を回り込ませます
 
 	&::before {
 		content: "FOOTNOTES: ";
-		font-size: 0.78125rem;
+		font-size: 0.75rem;
 		color: #fff;
 		background: var(--muted);
 		border-radius: 0 6px 0 0;
+		padding: 4px 0;
 	}
 
 	&::after {
 		content: "";
 		position: absolute;
 		width: 100%;
-		top: 1.45rem;
+		top: 1.75rem;
 		border: 1px solid var(--muted);
 	}
 
