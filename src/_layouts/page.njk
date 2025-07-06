@@ -8,8 +8,8 @@ layout: base.njk
 		<h2 class="page-title__desc">{{ description }}</h2>
 	{% endif %}
 	{{ author }}
-	{% if updated %}
-		<p class="page-title__date mt-6">Last updated: <time datetime="{{ updated | shortDateString }}">{{ updated | readableDate }}</time></p>
+	{% if update %}
+		<p class="mt-6"><time class="page-title__update" datetime="{{ update | shortDateString }}">{{ update | readableDate }}</time></p>
 	{% endif %}
 </header>
 <article class="body-copy {% if category %}cat-{{ category }}{% endif %}">
