@@ -513,6 +513,7 @@ strong {
 
 		.info {
 			grid-area: main;
+			font-size: 0.9em;
 
 			h2 {
 				margin-top: 0;
@@ -550,12 +551,14 @@ strong {
 					list-style: none;
 					padding: 0;
 					margin: 0;
+					font-size: 0.95em;
 
 					.meta {
 						width: 30%;
-						font-size: 0.7em;
-						color: #777;
-						background: rgba(255, 255, 255, 0.9);
+						font-size: 0.9em;
+						color: #ccc;
+						background-color: rgba(34, 39, 58, 0.9);
+						line-height: 1.2;
 
 						span {
 							display: block;
@@ -564,6 +567,7 @@ strong {
 
 					td {
 						overflow-x: auto;
+						font-size: 0.9em;
 					}
 
 					.title-link {
