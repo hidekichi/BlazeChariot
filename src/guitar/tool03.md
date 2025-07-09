@@ -14,26 +14,32 @@ layout: post.njk
 permalink: /guitar/{{ page.fileSlug }}/
 ---
 
+## ビジュアル的に確かめてみる
+
 他のページで何度か書きましたが、ギターの基本コードはきっと**EとA**なんだろうと思う次第です。この2つのコードから作れるものとして以下のコードが上げられます。またあわせてFとBコードも記載しますが、便宜上BはBbとして表に掲載します。
 
 <div class="table-container">
 
-| \   |      メジャー       |        セブン         |       マイナー        |     マイナーセブン      |
-| :-: | :-----------------: | :-------------------: | :-------------------: | :---------------------: |
-|  E  |  ![コードE](e.jpg)  |  ![コードE7](e7.jpg)  |  ![コードEm](em.jpg)  |  ![コードEm7](em7.jpg)  |
-|  F  | ![コードF](ff.jpg)  |  ![コードF7](f7.jpg)  |  ![コードFm](fm.jpg)  |  ![コードFm7](fm7.jpg)  |
-|  A  |  ![コードA](a.jpg)  |  ![コードA7](a7.jpg)  |  ![コードAm](am.jpg)  |  ![コードAm7](am7.jpg)  |
-| Bb  | ![コードBb](bb.jpg) | ![コードBb7](bb7.jpg) | ![コードBbm](bbm.jpg) | ![コードBbm7](bbm7.jpg) |
+| \  |           メジャー           |            セブン             |            マイナー            |           マイナーセブン            |
+|:--:|:------------------------:|:--------------------------:|:--------------------------:|:----------------------------:|
+| E  |  ![コードE](../img/e.avif)  |  ![コードE7](../img/e7.avif)  |  ![コードEm](../img/em.avif)  |  ![コードEm7](../img/em7.avif)  |
+| F  | ![コードF](../img/ff.avif)  |  ![コードF7](../img/f7.avif)  |  ![コードFm](../img/fm.avif)  |  ![コードFm7](../img/fm7.avif)  |
+| A  |  ![コードA](../img/a.avif)  |  ![コードA7](../img/a7.avif)  |  ![コードAm](../img/am.avif)  |  ![コードAm7](../img/am7.avif)  |
+| Bb | ![コードBb](../img/bb.avif) | ![コードBb7](../img/bb7.avif) | ![コードBbm](../img/bbm.avif) | ![コードBbm7](../img/bbm7.avif) |
 
 </div>
 
 他にもsus4などもありますが、頻繁に使うコードというとこれだけあれば事足りるような気もしますし、また説明しやすいのでこれらコードで解説を進めることにします。これら**E**、**A**の2つのコードは開放弦を含むコードではあるけれど考え方としては**0フレットを見えないカポがバレーしていると考える**とFやBでも対応することができるようになります。
 
-しかしその前に[アルファベットとドレミ](/guitar/Basic08/)の関係を知っておかねばなりません。どこかに書いていたはずですが、もう一度復習のために音階とアルファベットについて書いておきたいと思います。
+上記コード表を見て、コードフォームE・FとコードフォームA・B(Bb)をそれぞれ見てみると、バレーがあるかないかだけというのが見て取れると思います。前述したようにEあるいはAの時、**0フレットを見えない指(カポ)がバレーしている**と考えたらどうでしょうか？結果的にどれだけ元になるコードが横にズレているかと言うのがこの画像から読み取ってほしい真意です。
+
+> 数年経って気が付きましたが、Aのコード画像を加工して作ったせいか**Bbの指の数字がおかしい**です。1はバレーしている人差し指で、残りは(1)から、中・薬・小指と順番に読み直して下さい。
+
+しかしこれらを理解するためにはその前に[アルファベットとドレミ](/guitar/Basic08/)の関係を知っておかねばなりません。どこかに書いていたはずですが、もう一度復習のために音階とアルファベットについて書いておきたいと思います。
 
 #### アルファベットとドレミの関係(復習)
 
-![全音と半音](../img/zenon_hanon.webp)
+![全音と半音](../img/zenon_hanon.webp){class="w-full"}
 
 図のように、ミ←→ファとシ←→ドは半音で次の音へと移行します。他は全音で移行するわけですが、この事をギターで表すとすると、
 
@@ -49,88 +55,61 @@ permalink: /guitar/{{ page.fileSlug }}/
 
 さて、どうしてギターの1フレットが音階で言う半音に当たるのかを説明するとすると、全音と全音の間には半音階(#、b)があるからに他なりません。これを理解するために次のように音階は構成されていると覚えて下さい。
 
+図：全音と半音<span class="f-img" data-target="../img/zenon_hanon.webp">FIX</span>のドレミを例えばギターの5弦3フレットのドから考えたとして半音ずつずらしていくと以下のような並びになっています。
 <div class="table-container">
-<table class="table is-bordered">
-<caption>ドレミとアルファベット表記、また音階の図</caption>
-<tbody><tr>
-<th rowspan="2">半音・全音</th>
-<td colspan="3" class="center" style="background-color:#999966; color:#fff;">全音</td>
-<td class="center" style="background-color:#006699; color:#fff;">半音</td>
-<td colspan="2" class="center" style="background-color:#996666; color:#fff;">半音</td>
-<td class="center" style="background-color:#006699; color:#fff;">半音</td>
-<td colspan="3" class="center" style="background-color:#999966; color:#fff;">全音</td>
-<td class="center" style="background-color:#006699; color:#fff;">半音</td>
-<td colspan="2" class="center" style="background-color:#996666; color:#fff;">半音</td>
-</tr>
+<table class="text-base">
+<tbody class="text-center">
 <tr>
-<td style="background-color:#006699">&nbsp;</td>
-<td class="center" style="background-color:#006699; color:#fff;">半音</td>
-<td colspan="3" class="center" style="background-color:#888866; color:#fff;">全音</td>
-<td colspan="3" class="center" style="background-color:#999966; color:#fff;">全音</td>
-<td class="center" style="background-color:#006699; color:#fff;">半音</td>
-<td colspan="3" class="center" style="background-color:#999966; color:#fff;">全音</td>
-<td style="background-color:#006699">&nbsp;</td>
-</tr>
-<tr>
-<th>ドレミ表記</th>
-<td class="center" style="width:6%;">ド</td>
-<td class="center" style="background-color:#6699ff; color:#fff;">ド#<br>
-(レb)</td>
-<td class="center" style="width:6%;">レ</td>
-<td class="center" style="background-color:#6699ff; color:#fff;">レ#<br>
-(ミb)</td>
-<td class="center" style="width:6%;">ミ</td>
-<td class="center" style="width:6%;">ファ</td>
-<td class="center" style="background-color:#6699ff; color:#fff;">ファ#<br>
-(ソb)</td>
-<td class="center" style="width:6%;">ソ</td>
-<td class="center" style="background-color:#6699ff; color:#fff;">ソ#<br>
-(ラb)</td>
-<td class="center" style="width:6%;">ラ</td>
-<td class="center" style="background-color:#6699ff; color:#fff;">ラ#<br>
-(シb)</td>
-<td class="center" style="width:6%;">シ</td>
-<td class="center" style="width:6%;">ド</td>
+	<th>ドレミ表記</th>
+	<td class="text-gray-100 bg-rose-500 min-w-[3rem]">ド</td>
+	<td class="text-gray-900 bg-gray-100 min-w-[3rem]">ド#<br>(レb)</td>
+	<td class="text-gray-900 bg-gray-100 min-w-[3rem]">レ</td>
+	<td class="text-gray-900 bg-gray-100 min-w-[3rem]">レ#<br>(ミb)</td>
+	<td class="text-gray-100 bg-rose-500 min-w-[3rem]">ミ</td>
+	<td class="text-gray-100 bg-rose-500 min-w-[3rem]">ファ</td>
+	<td class="text-gray-900 bg-gray-100 min-w-[3rem]">ファ#<br>(ソb)</td>
+	<td class="text-gray-900 bg-gray-100 min-w-[3rem]">ソ</td>
+	<td class="text-gray-900 bg-gray-100 min-w-[3rem]">ソ#<br>(ラb)</td>
+	<td class="text-gray-900 bg-gray-100 min-w-[3rem]">ラ</td>
+	<td class="text-gray-900 bg-gray-100 min-w-[3rem]">ラ#<br>(シb)</td>
+	<td class="text-gray-100 bg-rose-500 min-w-[3rem]">シ</td>
+	<td class="text-gray-100 bg-rose-500 min-w-[3rem]">ド</td>
 </tr>
 <tr>
 <th>ABC表記</th>
-<td class="center">C</td>
-<td class="center" style="background-color:#6699ff; color:#fff;">C#<br>
-(Db)</td>
-<td class="center">D</td>
-<td class="center" style="background-color:#6699ff; color:#fff;">D#<br>
-(Eb)</td>
-<td class="center">E</td>
-<td class="center">F</td>
-<td class="center" style="background-color:#6699ff; color:#fff;">F#<br>
-(Gb)</td>
-<td class="center">G</td>
-<td class="center" style="background-color:#6699ff; color:#fff;">G#<br>
-(Ab)</td>
-<td class="center">A</td>
-<td class="center" style="background-color:#6699ff; color:#fff;">A#<br>
-(Bb)</td>
-<td class="center">B</td>
-<td class="center">C</td>
+<td class="text-gray-100 bg-rose-500">C</td>
+<td class="text-gray-900 bg-gray-100">C#<br>(Db)</td>
+<td class="text-gray-900 bg-gray-100">D</td>
+<td class="text-gray-900 bg-gray-100">D#<br>(Eb)</td>
+<td class="text-gray-100 bg-rose-500">E</td>
+<td class="text-gray-100 bg-rose-500">F</td>
+<td class="text-gray-900 bg-gray-100">F#<br>(Gb)</td>
+<td class="text-gray-900 bg-gray-100">G</td>
+<td class="text-gray-900 bg-gray-100">G#<br>(Ab)</td>
+<td class="text-gray-900 bg-gray-100">A</td>
+<td class="text-gray-900 bg-gray-100">A#<br>(Bb)</td>
+<td class="text-gray-100 bg-rose-500">B</td>
+<td class="text-gray-100 bg-rose-500">C</td>
 </tr>
 </tbody></table>
 </div>
 
-これらはすべて半音刻みで左から右へと音階が移っていっています。少しわかりにくいですが、ド→レは全音で次の音に移り、その間に半音階を含んでいます。ミ←→ファとシ←→ドは半音階で次の音へ移るので間に何も含まないと理解してもらえれば良いわけです。
+これらはすべて半音刻み(1フレットずらし)で左から右へと音階が移っていっています。少しわかりにくいですが、ド→レは全音で次の音に移り、その間に半音階を含んでいます。ミ←→ファとシ←→ドは半音階で次の音へ移るので間に何も含まないと理解してもらえれば良いわけです。
 ド→ド#→レ→レ#…は半音ずつ次の音へ移行しています。
 
-ではギターではどうなっているのかを見てみましょう。
+ではギター全体ではどうなっているのかを見てみましょう。
 
 <div class="table-container">
 
-|      | 開放  |   1    |   2    |   3    |   4    |  5  |   6    |   7    |   8    |   9    | 10  |   11   |  12   |   13   |
-| :--: | :---: | :----: | :----: | :----: | :----: | :-: | :----: | :----: | :----: | :----: | :-: | :----: | :---: | :----: |
-| 1 弦 | **E** |   F    | F#(Gb) |   G    | G#(Ab) |  A  | A#(Bb) |   B    |   C    | C#(Db) |  D  | D#(Eb) | **E** |   F    |
-| 2 弦 | **B** |   C    | C#(Db) |   D    | D#(Eb) |  E  |   F    | F#(Gb) |   G    | G#(Ab) |  A  | A#(Bb) | **B** |   C    |
-| 3 弦 | **G** | G#(Ab) |   A    | A#(Bb) |   B    |  C  | C#(Db) |   D    | D#(Eb) |   E    |  F  | F#(Gb) | **G** |   G#   |
-| 4 弦 | **D** | D#(Eb) |   E    |   F    | F#(Gb) |  G  | G#(Ab) |   A    | A#(Bb) |   B    |  C  | C#(Db) | **D** | D#(Eb) |
-| 5 弦 | **A** | A#(Bb) |   B    |   C    | C#(Db) |  D  | D#(Eb) |   E    |   F    | F#(Gb) |  G  | G#(Ab) | **A** | A#(Bb) |
-| 6 弦 | **E** |   F    | F#(Gb) |   G    | G#(Ab) |  A  | A#(Bb) |   B    |   C    | C#(Db) |  D  | D#(Eb) | **E** |   F    |
+|      | 開放  |   1    |   2    |   3    |   4    | 5 |   6    |   7    |   8    |   9    | 10 |   11   |  12   |   13   |
+|:----:|:-----:|:------:|:------:|:------:|:------:|:-:|:------:|:------:|:------:|:------:|:--:|:------:|:-----:|:------:|
+| 1 弦 | **E** |   F    | F#(Gb) |   G    | G#(Ab) | A | A#(Bb) |   B    |   C    | C#(Db) | D  | D#(Eb) | **E** |   F    |
+| 2 弦 | **B** |   C    | C#(Db) |   D    | D#(Eb) | E |   F    | F#(Gb) |   G    | G#(Ab) | A  | A#(Bb) | **B** |   C    |
+| 3 弦 | **G** | G#(Ab) |   A    | A#(Bb) |   B    | C | C#(Db) |   D    | D#(Eb) |   E    | F  | F#(Gb) | **G** |   G#   |
+| 4 弦 | **D** | D#(Eb) |   E    |   F    | F#(Gb) | G | G#(Ab) |   A    | A#(Bb) |   B    | C  | C#(Db) | **D** | D#(Eb) |
+| 5 弦 | **A** | A#(Bb) |   B    |   C    | C#(Db) | D | D#(Eb) |   E    |   F    | F#(Gb) | G  | G#(Ab) | **A** | A#(Bb) |
+| 6 弦 | **E** |   F    | F#(Gb) |   G    | G#(Ab) | A | A#(Bb) |   B    |   C    | C#(Db) | D  | D#(Eb) | **E** |   F    |
+{class="text-base"}
 
 </div>
 
