@@ -100,7 +100,7 @@ Fと言うコードは1フレットにカポをはめてEと言うコードを�
     <table class="text-base">
         <tbody class="text-center">
             <tr>
-                <td class="min-w-[3rem] text-gray-100 bg-gray-500" colspan="2">フレット(開放弦)</td>
+                <td class="min-w-[3rem] text-gray-100 bg-gray-500" colspan="2">フレット</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">1</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">2</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">3</td>
@@ -150,7 +150,7 @@ C#を押さえるためには<u>Cがどこにあるのかを探る必要があ�
     <table class="text-base">
         <tbody class="text-center">
             <tr>
-                <td class="min-w-[3rem] text-gray-100 bg-gray-500" colspan="2">フレット(開放弦)</td>
+                <td class="min-w-[3rem] text-gray-100 bg-gray-500" colspan="2">フレット</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">1</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">2</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">3</td>
@@ -194,7 +194,7 @@ C#を押さえるためには<u>Cがどこにあるのかを探る必要があ�
     <table class="text-base">
         <tbody class="text-center">
             <tr>
-                <td class="min-w-[3rem] text-gray-100 bg-gray-500" colspan="2">フレット(開放弦)</td>
+                <td class="min-w-[3rem] text-gray-100 bg-gray-500" colspan="2">フレット</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">1</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">2</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">3</td>
@@ -409,7 +409,7 @@ Bbなら7フレットバレーのF、Dなら10フレットバレーのFと即座
     <table class="text-base">
         <tbody>
             <tr class="text-center">
-                <td class="min-w-[3rem] text-gray-100 bg-gray-500" colspan="2">フレット(開放弦)</td>
+                <td class="min-w-[3rem] text-gray-100 bg-gray-500" colspan="2">フレット</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">1</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">2</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">3</td>
@@ -463,7 +463,7 @@ Bbなら7フレットバレーのF、Dなら10フレットバレーのFと即座
     <table class="text-base">
         <tbody>
             <tr class="text-center">
-                <td class="min-w-[3rem] text-gray-100 bg-gray-500" colspan="2">フレット(開放弦)</td>
+                <td class="min-w-[3rem] text-gray-100 bg-gray-500" colspan="2">フレット</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">1</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">2</td>
                 <td class="min-w-[3rem] text-gray-100 bg-gray-500">3</td>

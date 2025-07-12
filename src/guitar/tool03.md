@@ -2,7 +2,7 @@
 title: カポとFコード、Bコードなどの関係性－基礎
 description: ギターの基本コードはきっとEとAなんだろうと思う次第です。この2つのコードから作れるものとして以下のコードが上げられます。またあわせてFとBコードも記載しますが、便宜上BはBbとして表に掲載します
 date: 2021-11-28
-update: 2024-05-08
+update: 2025-07-11
 category:
   - ギターを弾き語れ！
 tags:
@@ -29,7 +29,7 @@ permalink: /guitar/{{ page.fileSlug }}/
 
 </div>
 
-他にもsus4などもありますが、頻繁に使うコードというとこれだけあれば事足りるような気もしますし、また説明しやすいのでこれらコードで解説を進めることにします。これら**E**、**A**の2つのコードは開放弦を含むコードではあるけれど考え方としては**0フレットを見えないカポがバレーしていると考える**とFやBでも対応することができるようになります。
+他にも`sus4`などもありますが、頻繁に使うコードというとこれだけあれば事足りるような気もしますし、また説明しやすいのでこれらコードで解説を進めることにします。これら**E**、**A**の2つのコードは開放弦を含むコードではあるけれど考え方としては**0フレットを見えないカポがバレーしていると考える**とFやBでも対応することができるようになります。
 
 上記コード表を見て、コードフォームE・FとコードフォームA・B(Bb)をそれぞれ見てみると、バレーがあるかないかだけというのが見て取れると思います。前述したようにEあるいはAの時、**0フレットを見えない指(カポ)がバレーしている**と考えたらどうでしょうか？結果的にどれだけ元になるコードが横にズレているかと言うのがこの画像から読み取ってほしい真意です。
 
@@ -58,6 +58,7 @@ permalink: /guitar/{{ page.fileSlug }}/
 図：全音と半音<span class="f-img" data-target="../img/zenon_hanon.webp">FIX</span>のドレミを例えばギターの5弦3フレットのドから考えたとして半音ずつずらしていくと以下のような並びになっています。
 <div class="table-container">
 <table class="text-base">
+<caption>ドレミとアルファベット表記、または音階の図</caption>
 <tbody class="text-center">
 <tr>
 	<th>ドレミ表記</th>
@@ -76,20 +77,20 @@ permalink: /guitar/{{ page.fileSlug }}/
 	<td class="text-gray-100 bg-rose-500 min-w-[3rem]">ド</td>
 </tr>
 <tr>
-<th>ABC表記</th>
-<td class="text-gray-100 bg-rose-500">C</td>
-<td class="text-gray-900 bg-gray-100">C#<br>(Db)</td>
-<td class="text-gray-900 bg-gray-100">D</td>
-<td class="text-gray-900 bg-gray-100">D#<br>(Eb)</td>
-<td class="text-gray-100 bg-rose-500">E</td>
-<td class="text-gray-100 bg-rose-500">F</td>
-<td class="text-gray-900 bg-gray-100">F#<br>(Gb)</td>
-<td class="text-gray-900 bg-gray-100">G</td>
-<td class="text-gray-900 bg-gray-100">G#<br>(Ab)</td>
-<td class="text-gray-900 bg-gray-100">A</td>
-<td class="text-gray-900 bg-gray-100">A#<br>(Bb)</td>
-<td class="text-gray-100 bg-rose-500">B</td>
-<td class="text-gray-100 bg-rose-500">C</td>
+	<th>ABC表記</th>
+	<td class="text-gray-100 bg-rose-500">C</td>
+	<td class="text-gray-900 bg-gray-100">C#<br>(Db)</td>
+	<td class="text-gray-900 bg-gray-100">D</td>
+	<td class="text-gray-900 bg-gray-100">D#<br>(Eb)</td>
+	<td class="text-gray-100 bg-rose-500">E</td>
+	<td class="text-gray-100 bg-rose-500">F</td>
+	<td class="text-gray-900 bg-gray-100">F#<br>(Gb)</td>
+	<td class="text-gray-900 bg-gray-100">G</td>
+	<td class="text-gray-900 bg-gray-100">G#<br>(Ab)</td>
+	<td class="text-gray-900 bg-gray-100">A</td>
+	<td class="text-gray-900 bg-gray-100">A#<br>(Bb)</td>
+	<td class="text-gray-100 bg-rose-500">B</td>
+	<td class="text-gray-100 bg-rose-500">C</td>
 </tr>
 </tbody></table>
 </div>
@@ -115,7 +116,7 @@ permalink: /guitar/{{ page.fileSlug }}/
 
 レギュラーチューニングの場合このような配置となっています。最左列は弦、最上段はフレットを表しています。
 注目すべきは、開放(0フレット)と1、2フレット。12フレット、と13フレットとの関係性。つまり1フレット～11フレットまでの繰り返しを12フレット以降もするということです。まず最初に気づいて欲しいのはこれなのです。
-そして[ドレミとアルファベット表記、また音階の図] の表で、見比べて理解して欲しいのは、同じ並び方でギターも音が配置されているという点です。
+そして[ドレミとアルファベット表記、または音階の図] の表で、見比べて理解して欲しいのは、同じ並び方でギターも音が配置されているという点です。
 
 これを理解してもらうために、E←→Fを探してみましょう。最もわかりやすいのは6弦の配置です。
 6弦では開放弦がE、そして1フレットがFとなっています。[ドレミとアルファベット表記、また音階の図]のE←→Fの前後を見てもらいたい。[ギター配置図]と同じ並びになっていることに気がついてもらえると思います。

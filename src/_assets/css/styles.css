@@ -762,7 +762,7 @@ strong {
 		table-layout: fixed;
 		width: 100%;
 		border-collapse: collapse;
-		/* font-size: 14px; */
+		/*font-size: 16px;*/
 		margin: 1rem 0;
 
 		:where(th, td):not(:last-child) {
@@ -943,6 +943,7 @@ strong {
 		width: max-content;
 		min-width: 100%;
 		table-layout: initial;
+		font-size: 16px;
 	}
 
 	&::after {

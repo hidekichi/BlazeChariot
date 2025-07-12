@@ -51,7 +51,7 @@ permalink: /blog/{{ page.fileSlug }}/
 
 JSONはこのようになっています。
 
-`manifest_version` はv3を利用するので 3 としています。
+`manifest_version` はv3を利用するので3としています。
 
 次いで拡張機能の名前、そのバージョン、また説明として`description`で、ここまでは全ての拡張機能にどれでもあるものでしょう。
 
