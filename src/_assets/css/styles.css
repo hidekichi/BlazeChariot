@@ -1644,8 +1644,8 @@ f-left: サムネイルを左にして文字を回り込ませます
 		height: 100%;
 		opacity: 1;
 		transform: scale(1); /* 元のサイズに戻す */
-		top: unset;
-		left: unset;
+		top: 0;
+		left: 0;
 	}
 }
 
