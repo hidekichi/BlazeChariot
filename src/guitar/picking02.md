@@ -2,7 +2,7 @@
 title: アルペジオ
 description: アルペジオは分散和音と呼ばれます。つまり左手はコードを押さえていますが、右手でそれぞれの対応した弦を弾いていくというやり方です。
 date: 2021-10-05
-update: 2021-10-05
+update: 2025-07-19
 category:
   - ギターを弾き語れ！
 tags:
@@ -47,11 +47,30 @@ C→Amまでは、5弦を弾くのですが、Am→Dmで4弦、G7は6弦を弾�
 
 さて、今度は3拍目に2音を同時に弾くというテクニックが出てきました。しかし、難しいことはありません。ただ2本を同時に弾くだけなのですから。ただし、5→3→2→3→1→3→2→3の#2をよく練習してからでないとつらいかもしれません。
 
+<div class="ytgrid grid grid-cols-1 md:grid-cols-2 auto-rows-auto">
+
+{ytp::https://youtu.be/_2PKNkTqilo::Sowel - Moon on the water - Anime Beck ED}
+{ytp::https://youtu.be/m2d7Z4Y48XU::長渕剛 二人歩記}
+
+</div>
+
+本当はこういうパターンではないですが、右手がついてこない間は簡単でそれっぽいパターンで練習すればその内に正しいパターンでも弾けるようになったりするのではないかと思うわけです。
+
 #### #4
 
 ![アルペジオ4](../img/g_a_4.webp)
 
 このパターンもよく使われるパターン。しかし案ずることなかれ、意外にパターン3よりも簡単だったりします。なぜなら2音同時に弾く時はすべて、1弦と2弦を弾いているのですから。
+
+<div class="ytgrid grid grid-cols-1 md:grid-cols-2 auto-rows-auto">
+
+{ytp::https://youtu.be/ikE9_yOLexw::長渕剛 Hold your last chance}
+{ytp::https://youtu.be/7n2NWvab2N0::長渕剛 祈り}
+{ytp::https://youtu.be/BqFftJDXii0::山崎まさよし One more time,One more chance}
+
+</div>
+
+これも本来はこのままのパターンではないですが、#3と同じように、あるいは#3と#4それぞれに、もしくは所々あわせたりしたりもして練習するとよいかと思います。
 
 #### #5
 
