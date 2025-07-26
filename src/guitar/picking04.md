@@ -40,6 +40,12 @@ permalink: /guitar/{{ page.fileSlug }}/
 
 なぜかと言えば小指を使うC7でも同様のベース音の移動があるからなのです。C7の場合は小指で3弦3フレットのシ♭を押さえているため、ベース音がド・ソと移動するものに対して小指の使用ができないわけです。
 
+<div class="ytgrid grid grid-cols-1 md:grid-cols-2 auto-rows-auto">
+
+{ytp::https://youtu.be/Nh3POPYMxhs::長渕剛 順子}
+
+</div>
+
 #### #3
 
 ![ピッキングストローク3](../img/g_c_3.webp)

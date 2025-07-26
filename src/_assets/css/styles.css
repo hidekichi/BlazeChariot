@@ -521,10 +521,6 @@ strong {
 				font-weight: bolder;
 				line-height: 1.1;
 			}
-
-			hr {
-				margin: 1rem 0 1.5rem !important;
-			}
 		}
 
 		aside {
@@ -615,6 +611,16 @@ strong {
 		img {
 			display: block;
 		}
+	}
+
+	hr {
+		border: none;
+		background: linear-gradient(to right, #ccc 0%, #ccc 100%);
+		background-size: 100% 1px;
+		background-position: center;
+		background-repeat: no-repeat;
+		height: 20px;
+		margin: 4rem 0;
 	}
 
 	:where(h2, h3, h4, h5) {
