@@ -10,7 +10,7 @@ tags:
 images:
   - ../img/bb.webp
   - ../img/power_chord_a.webp
-  - ../img/B7.webp
+  - ../img/B7.jpg
   - ../img/em.jpg
   - ../img/b7_low.webp
 
@@ -97,7 +97,7 @@ Cであれば普通にローポジションで押さえればよいのでバレ�
 
 ### 案外難しいB7
 
-![コードB7](../img/B7.webp)
+![コードB7](../img/B7.jpg)
 {class="md:float-right md:ml-4"}
 
 さてこの画像を見て下さい。どこを押さえているのかわかりにくくはありますが一応B7です。でもってこのB7が意外に難しいわけです。オープンコードの中ではレベルの高い方のコードであることに間違いありません。
