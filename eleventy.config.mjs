@@ -116,7 +116,7 @@ export default async function (eleventyConfig) {
 		.addPassthroughCopy("src/static/")
 		.addPassthroughCopy("src/*.{txt,xsl}")
 		.addPassthroughCopy("src/blog/**/*.{jpg,jpeg,png,webp,svg,gif,avif}")
-		.addPassthroughCopy("src/guitar/**/*.{jpg,jpeg,png,webp,svg,gif,avif}")
+		.addPassthroughCopy("src/guitar/**/*.{jpg,jpeg,png,webp,svg,gif,avif,ogg}")
 		.addPassthroughCopy("src/pages/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
 
 	//Filter to parse dates
