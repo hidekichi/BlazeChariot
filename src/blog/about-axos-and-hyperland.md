@@ -7,6 +7,8 @@ category:
   - blog
 tags:
   - linux
+  - Arch系
+  - Hyprland
 images:
   - ../img/axos.webp
 layout: post.njk

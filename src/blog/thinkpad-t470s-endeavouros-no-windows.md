@@ -7,6 +7,7 @@ category:
   - blog
 tags:
   - linux
+  - Arch系
 images:
   - ../img/t470s.webp
 layout: post.njk

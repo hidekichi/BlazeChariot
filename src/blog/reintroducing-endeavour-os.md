@@ -6,6 +6,7 @@ category:
   - blog
 tags:
   - linux
+  - Arch系
 layout: post.njk
 images:
   - ../img/desktop.jpg
