@@ -1,44 +1,56 @@
 //Convert paragraph text
-async function convertParagraphText() {
-	return new Promise(resolve => {
-		setTimeout(() => {		
-			const paragraphs = document.querySelectorAll('.body-copy p');
-			const excludedElements = ['code', 'pre', 'table'];
-			const excludedSelectors = ['.noCheck', '.f-img'];
 
-			const markups = [];
+async function replaceInTextNodes(root, patterns) {
+	const walker = document.createTreeWalker(
+		root,
+		NodeFilter.SHOW_TEXT,
+		null,
+		false
+	);
+	const nodes = [];
+	while (walker.nextNode()) {
+		nodes.push(walker.currentNode);
+	}
 
-			paragraphs.forEach((p) => {
-				let html = p.innerHTML;
-				const markupMap = new Map([
-					[/\[\@(.*?)\](?:\((.*?)\))?/g, `<div class='ytp $2'>$1</div>`],
-					[/\[hs\((.+?)\)\]/g, `<div style='display:block; height:$1;'></div>`],
-					[/\[(a)\((.+?)\)\](?:(.+)\[\/a\])?/g, `<a class='anchor' href='#$2' title='クリックでページスクロール'>$3</a>`],
-					[/\[(t)\((.+?)\)\](?:(.+)\[\/t\])?/g, `<span id='$2' class='anchorTarget'>$3</span>`], 
-					[/\(\((.+?)\)\)/g, `<sup class='footnote'>$1</sup>`],
-				//[/\(([^)]+)\)/g, '<span class='brackets'>$1</span>'],
-				//[/\[(info)(?:\s+([\w\s]+))?\](.+?)\[\/info\]/g, '<div class='$1 $2'>$3</div>'],
-					[/\[(info)(?:\s+([\w\s]+))?\]([\s\S]*?)\[\/info\]/g,`<div class='$1 $2'>$3</div>`],
-				]);
-				markupMap.forEach((value, key) => {
-					html = html.replace(key, value);
-				});
+	nodes.forEach((node) => {
+		// <code>, <pre>, <table> の中は無視
+		if (node.parentNode.closest("code, pre, table")) return;
 
-				markups.push(html);
-			});
+		let html = node.textContent;
+		patterns.forEach(([regex, replacement]) => {
+			html = html.replace(regex, replacement);
+		});
 
-			paragraphs.forEach((p, i) => {
-				const tagName = p.tagName.toLowerCase();
-				const excludedElementsSelector = excludedElements.map(element => `${tagName} ${element}`).join(', ');
-				if (tagName === 'p' && !p.matches(excludedSelectors.join(', ')) && !p.querySelector(excludedElementsSelector)) {
-					p.innerHTML = markups[i];
-				}
-			});
-			
-			resolve();
-		},1000);
+		if (html !== node.textContent) {
+			const span = document.createElement("span");
+			span.innerHTML = html;
+			node.replaceWith(...span.childNodes);
+		}
 	});
 }
+
+async function convertParagraphText() {
+	const patterns = [
+		[/\[\@(.*?)\](?:\((.*?)\))?/g, `<div class='ytp $2'>$1</div>`],
+		[/\[hs\((.+?)\)\]/g, `<div style='display:block; height:$1;'></div>`],
+		[
+			/\[(a)\((.+?)\)\](?:(.+)\[\/a\])?/g,
+			`<a class='anchor' href='#$2' title='クリックでページスクロール'>$3</a>`,
+		],
+		[
+			/\[(t)\((.+?)\)\](?:(.+)\[\/t\])?/g,
+			`<span id='$2' class='anchorTarget'>$3</span>`,
+		],
+		[/\(\(([^\)]+)\)\)/g, `<sup class='footnote'>$1</sup>`],
+		[
+			/\[(info)(?:\s+([\w\s]+))?\]([\s\S]*?)\[\/info\]/g,
+			`<div class='$1 $2'>$3</div>`,
+		],
+	];
+
+	replaceInTextNodes(document.querySelector(".body-copy"), patterns);
+}
+
 
 export async function footnote() {
 	

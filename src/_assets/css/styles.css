@@ -119,32 +119,32 @@ body {
 
 .body-copy {
 	h1 {
-		font-size: clamp(2rem, 5vw, 2.5rem); /* 例: 32px ～ 40px */
+		font-size: clamp(2em, 5vw, 2.5em); /* 例: 32px ～ 40px */
 		line-height: 1.2;
 	}
 
 	h2 {
-		font-size: clamp(1.6rem, 4vw, 2rem); /* 例: 25.6px ～ 32px */
+		font-size: clamp(1.6em, 4vw, 2em); /* 例: 25.6px ～ 32px */
 		line-height: 1.25;
 		margin: 6rem 0 1.75rem;
 	}
 
 	h3 {
-		font-size: clamp(1.4rem, 3.5vw, 1.75rem); /* 例: 22.4px ～ 28px */
+		font-size: clamp(1.4em, 3.5vw, 1.75em); /* 例: 22.4px ～ 28px */
 		line-height: 1.3;
 	}
 
 	/* h4, h5, h6 も同様に clamp() で設定 */
 	h4 {
-		font-size: clamp(1.15rem, 3vw, 1.45rem);
+		font-size: clamp(1.15em, 3vw, 1.45em);
 		line-height: 1.4;
 	}
 	h5 {
-		font-size: clamp(1.05rem, 2.5vw, 1.15rem);
+		font-size: clamp(1.05em, 2.5vw, 1.15em);
 		line-height: 1.5;
 	}
 	h6 {
-		font-size: clamp(0.95rem, 2vw, 1.115rem); /* bodyの1remを下限にする */
+		font-size: clamp(0.95em, 2vw, 1.115em); /* bodyの1remを下限にする */
 		line-height: 1.55;
 	}
 }
@@ -765,9 +765,9 @@ strong {
 		margin: 1.7rem 0 1.7rem 1rem;
 		border-left: 5px solid var(--brand);
 		padding: 1rem 0 1rem 1rem;
-		line-height: 1.7;
+		line-height: 1.9;
 		background-color: #080822;
-		font-size: 0.95em;
+		font-size: 0.9em;
 	}
 
 	table {
