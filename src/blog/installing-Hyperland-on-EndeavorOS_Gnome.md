@@ -440,7 +440,7 @@ property string screenshotDir: Directories.ssDir
 
 アップデートは通知があるわけでもない状態でやったので、実際にはアップデートの通知があるのかもしれないしないのかも知れないですが、ないとしても公式Githubで必要な更新があれば実行できます。
 
-1. ターミナルから `cd /home/YOUR-NAME/.cache/dors-hyprland/`((YOUR-NAMEは自身のアカウント名)) としてディレクトリを移動
+1. ターミナルから `cd /home/YOUR-NAME/.cache/dots-hyprland/`((YOUR-NAMEは自身のアカウント名)) としてディレクトリを移動
 2. `git pull origin main` で最新の更新をダウンロード
 3. `install.sh` をダブルクリックで実行して、`Yes`から更新開始
    - install.shがテキストエディターで開かれる場合は、右クリックから実行するアプリを選択できるので`kitty url launcher`にしたら実行できます((Thunarの場合))。
