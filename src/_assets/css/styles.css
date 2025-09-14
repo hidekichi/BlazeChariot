@@ -104,6 +104,7 @@ body {
 	letter-spacing: var(--body-letter-spacing);
 	/* color: var(--body-color); */
 	/* background: var(--body-background); */
+
 }
 
 /* Type scale */
@@ -121,23 +122,26 @@ body {
 	h1 {
 		font-size: clamp(2em, 5vw, 2.5em); /* 例: 32px ～ 40px */
 		line-height: 1.2;
+		font-weight: bold;
 	}
 
 	h2 {
-		font-size: clamp(1.6em, 4vw, 2em); /* 例: 25.6px ～ 32px */
+		font-size: clamp(1.6em, 4vw, 1.8em); /* 例: 25.6px ～ 32px */
 		line-height: 1.25;
 		margin: 6rem 0 1.75rem;
+		font-weight: bold;
 	}
 
 	h3 {
-		font-size: clamp(1.4em, 3.5vw, 1.75em); /* 例: 22.4px ～ 28px */
+		font-size: clamp(1.4em, 3.5vw, 1.6em); /* 例: 22.4px ～ 28px */
 		line-height: 1.3;
 	}
 
 	/* h4, h5, h6 も同様に clamp() で設定 */
 	h4 {
-		font-size: clamp(1.15em, 3vw, 1.45em);
+		font-size: clamp(1.15em, 3vw, 1.4em);
 		line-height: 1.4;
+		display: flex;
 	}
 	h5 {
 		font-size: clamp(1.05em, 2.5vw, 1.15em);
@@ -313,7 +317,6 @@ nav .title {
 	max-width: 50vw;
 	line-height: 1.5;
 	font-size: 0.875em;
-	font-weight: lighter;
 	color: darkgray;
 }
 
@@ -395,7 +398,7 @@ strong {
 	word-break: normal;
 	line-break: strict;
 	font-size: calc(var(--base-size) * 1.1);
-	line-height: calc(var(--body-line-height) * 1.01);
+	line-height: calc(var(--body-line-height) * 1.08);
 
 	&.index {
 		display: grid;
@@ -595,6 +598,7 @@ strong {
 	p {
 		margin-bottom: 0;
 		line-height: inherit;
+		letter-spacing: 0.02em;
 
 		& + p {
 			margin-top: 2em;
@@ -654,9 +658,8 @@ strong {
 
 		&::before {
 			content: "";
-			width: 1rem;
 			background-color: #ccc;
-			border: 3px solid #66d;
+			border: 4px solid #66d;
 			margin-right: 1rem;
 		}
 	}
@@ -701,9 +704,9 @@ strong {
 		padding: 0.5rem 0 0 1rem;
 
 		li {
-			margin: 0.75rem;
-			margin-left: 0.5rem;
-			padding-left: 0.5rem;
+			margin: 1rem;
+			margin-left: 0.5em;
+			padding-left: 0.5em;
 			line-height: 1.5;
 
 			&::marker {
@@ -764,7 +767,7 @@ strong {
 	blockquote {
 		margin: 1.7rem 0 1.7rem 1rem;
 		border-left: 5px solid var(--brand);
-		padding: 1rem 0 1rem 1rem;
+		padding: 1rem;
 		line-height: 1.9;
 		background-color: #080822;
 		font-size: 0.9em;
@@ -1155,14 +1158,14 @@ code {
 }
 
 :not(pre) > code {
-	display: inline-flex;
-	width: fit-content;
-	line-height: 1.7;
 	font-size: 0.875em;
 	margin: 0 4px;
-	padding: 0.1rem 0.4rem !important;
+	padding: 0.125em 0.4em 0.1em !important;
 	background: var(--code-background) !important;
 	color: var(--code-color);
+	vertical-align: 1px;
+	box-shadow: 0.0px 0.0px 2px hsl(216.6, 100%, 58.2%);
+	border-radius: 0.1em;
 }
 
 pre code {
@@ -1172,11 +1175,68 @@ pre code {
 pre[class^="language-"] {
 	overflow-x: auto;
 	background: #262d3c !important;
+	line-height: 1.2 !important;
 	font-family: "Fragment mono", monospace !important;
+	padding: 16px !important;
 }
 
 code[class^="language-"] {
 	font-family: inherit !important;
+}
+
+details {
+	display: block !important;
+	margin: 1rem auto;
+	
+	summary {
+		cursor: pointer;
+		padding: 0.5em 1em;
+		line-height: 1.2;
+		background-color: lab(34.0% -9.0 -25.0);
+		
+		&::after {
+			content: "(クリックで開きます)";
+			font-size: 0.75em; 
+		}
+
+		& + div {
+			margin-top: 1rem;
+			background-color: lab(14.0% 4.3 -26.5 / 0.5);
+			padding: 1rem;
+		}
+	}
+	
+
+	&::details-content {
+		transition:
+			height 0.4s,
+			opacity 0.4s,
+			content-visibility 0.4s allow-discrete;
+		height: 0;
+		opacity: 0;
+
+	}
+
+	&[open]::details-content {
+		opacity: 1;
+	}
+}
+
+@supports (interpolate-size: allow-keywords) {
+	:root {
+		interpolate-size: allow-keywords;
+	}
+
+	details[open]::details-content {
+		height: auto;
+	}
+}
+
+@supports not (interpolate-size: allow-keywords) {
+	details[open]::details-content {
+		height: 150px;
+		overflow-y: scroll;
+	}
 }
 
 :is(.cat-blog, .cat-guitar) {
@@ -1764,14 +1824,15 @@ f-left: サムネイルを左にして文字を回り込ませます
 .footnote {
 	color: var(--background-color);
 	cursor: pointer;
-	width: 0.9375rem;
-	aspect-ratio: 1/1;
+	height: 0.9375rem;
+	width: fit-content;
 	display: inline-flex;
 	background-color: var(--link-color);
 	padding: 2px 3px 2px 3px;
 	border-radius: 2px;
 	justify-content: center;
 	align-items: center;
+	margin: 0 2px 0 2px;
 
 	span {
 		font-size: 0.75rem;
