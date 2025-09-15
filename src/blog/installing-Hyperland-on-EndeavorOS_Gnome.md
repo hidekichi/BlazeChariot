@@ -505,7 +505,6 @@ bind = Super, T, exec, ~/.config/hypr/hyperland/scripts/launch_first_available.s
 <summary>デフォルトのファイルマネージャをThunarに変更する</summary>
 <div>
 
-<del>
 方法としては、ターミナルの場合と同じようなことです。元の記述を参考にして、`~/.config/hypr/custom/keybinds.conf`に次のような感じで追記します。
 ```conf
 unbind = Super, E
@@ -513,7 +512,6 @@ bind = Super, E, exec, ~/.config/hypr/hyperland/scripts/launch_first_available.s
 ```
 意味合いとしては、Thunarが入っていたらそれを使い、なければnautilus、それもなければnemoと言うことです。なので一番最初にthunarを持っていくということです。
 
-</div>
 </details>
 
 <details>
