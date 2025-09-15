@@ -2,7 +2,7 @@
 title: 公式で無いなら個人でやればいいじゃない？ EndeavourOS+Gnome+hyprland
 description: EndeavourOS+Gnome環境にHyprlandを導入するというのを実際に試してみた記録です
 date: 2025-08-25
-update: 2025-09-14
+update: 2025-09-15
 category:
   - blog
 tags:
@@ -450,6 +450,10 @@ property string screenshotDir: Directories.ssDir
 
 ## おまけ
 
+管理人は`unbind`を覚えたので 2025/9/15 に書き直しました。`unbind`はデフォルトの該当キーバインドの設定を無効にして、`~/.config/hypr/custom/keybinds.conf`の設定だけ有効にします。
+
+本来はHyprlandの設定をコメントアウトして、end-4/dots-hyprlandの設定で書き直すんでしょうけれどもアップデートすることで設定が無くなるのはどうするのだろうと調べてたら、ちょうどいいのを見つけたので書き直した次第です。
+
 <details>
 <summary>ターミナルをGhosttyに変更する</summary>
 <div>
@@ -481,15 +485,13 @@ mkdir -p ~/.config/ghostty && touch ~/.config/ghostty/config
 
 Ghosttyの設定は、各々誰かの公開されている設定を参考にしても良いと思いますし、ドキュメントを読んで独自に設定しても良いと思いますがここでは割愛させてもらいます。
 
-これら下準備ができているとしてHyprlandの設定としては、`~/.config/hypr/hyprland/keybinds.conf` の`##! Apps`の所にターミナルのキーバインドの項目があります。これはend-4/dots-hyprlandのデフォルトのものなので変更せず、先頭に`#`を入れてコメントアウトしておきます。
+これら下準備ができているとしてHyprlandの設定では、`~/.config/hypr/hyprland/keybinds.conf` の`##! Apps`の所にターミナルのキーバインドの項目があります。これはend-4/dots-hyprlandのデフォルトのものなので変更しません。
+
 ターミナルはいくつかの起動方法が登録されていて、今回は<u>`Super + T`だとGhostty、他は元のままでkittyが起動するようにします</u>。
 
-まず、前述の元の箇所をコメントアウトします。
+デフォルトの記述を参考に、`~/.config/hypr/custom/keybinds.conf`を次のような感じで追記します。
 ```conf
-# bind = Super, T, exec, ~/.config/hypr/hyperland/scripts/launch_first_available.sh "${TERMINAL}" "kitty -1" "foot" ...
-```
-次に、`~/.config/hypr/custom/keybinds.conf`に次のような感じで追記します。
-```conf
+unbind = Siper, T
 bind = Super, T, exec, ~/.config/hypr/hyperland/scripts/launch_first_available.sh "ghostty -e fish"
 ```
 これで`Super + T`でGhosttyがfishで起動できます。Ghosttyではこの設定でfishで起動できましたが、他のターミナルだとどうかは試してないのでわかりません。kittyのままで使っても特に問題はないので変にいじらない方が良いと言えばそうですが、どうてもGhosttyにしたい場合などに参考までに。
@@ -503,14 +505,10 @@ bind = Super, T, exec, ~/.config/hypr/hyperland/scripts/launch_first_available.s
 <summary>デフォルトのファイルマネージャをThunarに変更する</summary>
 <div>
 
-方法としては、ターミナルの場合と同じようなことです。
+<del>
+方法としては、ターミナルの場合と同じようなことです。元の記述を参考にして、`~/.config/hypr/custom/keybinds.conf`に次のような感じで追記します。
 ```conf
-# bind = Super, E, exec, ~/.config/hypr/hyperland/scripts/launch_first_available.sh "dolphin" "nautilus" "nemo" "thunar" "${TERMINAL}" ...
-```
-とある部分を上記のようにコメントアウトします。
-
-次に、`~/.config/hypr/custom/keybinds.conf`に次のような感じで追記します。
-```conf
+unbind = Super, E
 bind = Super, E, exec, ~/.config/hypr/hyperland/scripts/launch_first_available.sh "thunar" "nautilus" "nemo" "dolphin" "${TERMINAL}" ...
 ```
 意味合いとしては、Thunarが入っていたらそれを使い、なければnautilus、それもなければnemoと言うことです。なので一番最初にthunarを持っていくということです。
