@@ -491,7 +491,7 @@ Ghosttyの設定は、各々誰かの公開されている設定を参考にし�
 
 デフォルトの記述を参考に、`~/.config/hypr/custom/keybinds.conf`を次のような感じで追記します。
 ```conf
-unbind = Siper, T
+unbind = Super, T
 bind = Super, T, exec, ~/.config/hypr/hyperland/scripts/launch_first_available.sh "ghostty -e fish"
 ```
 これで`Super + T`でGhosttyがfishで起動できます。Ghosttyではこの設定でfishで起動できましたが、他のターミナルだとどうかは試してないのでわかりません。kittyのままで使っても特に問題はないので変にいじらない方が良いと言えばそうですが、どうてもGhosttyにしたい場合などに参考までに。
