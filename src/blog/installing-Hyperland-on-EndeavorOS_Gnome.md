@@ -494,7 +494,7 @@ Ghosttyの設定は、各々誰かの公開されている設定を参考にし�
 unbind = Super, T
 bind = Super, T, exec, ~/.config/hypr/hyperland/scripts/launch_first_available.sh "ghostty -e fish"
 ```
-これで`Super + T`でGhosttyがfishで起動できます。Ghosttyではこの設定でfishで起動できましたが、他のターミナルだとどうかは試してないのでわかりません。kittyのままで使っても特に問題はないので変にいじらない方が良いと言えばそうですが、どうてもGhosttyにしたい場合などに参考までに。
+これで`Super + T`でGhosttyがfishで起動できます。Ghosttyではこの設定でfishで起動できましたが、他のターミナルだとどうかは試してないのでわかりません。kittyのままで使っても特に問題はないので変にいじらない方が良いと言えばそうですが、どうしてもGhosttyにしたい場合などに参考までに。
 
 `-e` はexecuteで、`ghostty`だけだと`bash`が起動し、`ghostty -e fish`だと、デフォルトのシェルの代わりに`fish`を起動するというような意味になります。
 
@@ -505,7 +505,9 @@ bind = Super, T, exec, ~/.config/hypr/hyperland/scripts/launch_first_available.s
 <summary>デフォルトのファイルマネージャをThunarに変更する</summary>
 <div>
 
-方法としては、ターミナルの場合と同じようなことです。元の記述を参考にして、`~/.config/hypr/custom/keybinds.conf`に次のような感じで追記します。
+方法としては、ターミナルの場合と同じようなことです。もちろん同様にして予め`thunar`をインストールしておく必要があります。`thunar`は`Xfce`のファイルマネージャーです。
+
+元の記述を参考にして、`~/.config/hypr/custom/keybinds.conf`に次のような感じで追記します。
 ```conf
 unbind = Super, E
 bind = Super, E, exec, ~/.config/hypr/hyperland/scripts/launch_first_available.sh "thunar" "nautilus" "nemo" "dolphin" "${TERMINAL}" ...
@@ -549,7 +551,8 @@ sudo pacman -S tumbler
 WM部分がHyprlandになっており、正しくEndeavourOSでHyprlandが動作しているのがわかってもらえると思います。
 Shellがfishであると言う点、CursorがAdwaita、Terminalがkittyなのはデフォルトでそうなります。ターミナルの文字が[Bizin Gothic NF](https://github.com/yuru7/bizin-gothic)になっているのは後で導入しました。導入はしたもののほとんど設定はしていません。
 
-ちなみに上記画像は[Fastfetch](https://github.com/fastfetch-cli/fastfetch)の画像で、こういった細々としたものはいくつか入れました。[Localsend](https://localsend.org/ja)とか。LocalsendはファイルをWindowsから移したり、あるいはその逆であったりをするために必須ですがなんでこれを選ぶのかと言うと、Linux(Arche系)ではyayで入るので楽だからです。
+ちなみに上記画像は[Fastfetch](https://github.com/fastfetch-cli/fastfetch)の画像で、こういった細々としたものはいくつか入れました。[Localsend](https://localsend.org/ja)とか。
+LocalsendはファイルをWindowsから移したり、あるいはその逆であったりをするために必須ですがなんでこれを選ぶのかと言うと、Linux(Arche系)ではyayで入るので楽だからです。
 ```shell
 yay -S localsend-bin
 ```

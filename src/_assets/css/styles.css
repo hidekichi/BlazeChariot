@@ -1234,7 +1234,8 @@ details {
 
 @supports not (interpolate-size: allow-keywords) {
 	details[open]::details-content {
-		height: 150px;
+		height: max-content;
+		max-height: 50vh;
 		overflow-y: scroll;
 	}
 }
@@ -1833,6 +1834,7 @@ f-left: サムネイルを左にして文字を回り込ませます
 	justify-content: center;
 	align-items: center;
 	margin: 0 2px 0 2px;
+	min-width: 0.85rem;
 
 	span {
 		font-size: 0.75rem;
