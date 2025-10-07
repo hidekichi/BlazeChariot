@@ -2,7 +2,7 @@
 title: 公式で無いなら個人でやればいいじゃない？ EndeavourOS+Gnome+hyprland
 description: EndeavourOS+Gnome環境にHyprlandを導入するというのを実際に試してみた記録です
 date: 2025-08-25
-update: 2025-09-15
+update: 2025-10-08
 category:
   - blog
 tags:
@@ -23,10 +23,15 @@ permalink: /blog/{{ page.fileSlug }}/
 - [「Arch Linux」に対するDDoS攻撃、依然として継続中 - ZDNet](https://japan.zdnet.com/article/35237089/)
 - [Arch Linuxプロジェクト、1週間にわたるDDoS攻撃に対応](https://blackhatnews.tokyo/archives/5713)
 
-> 2025/8/27 あたりに`reflector`を試してみたら動作したので、まだ完全ではないかもしれませんが徐々に回復しているように思います。
+> ~~2025/8/27 あたりに`reflector`を試してみたら動作したので、まだ完全ではないかもしれませんが徐々に回復しているように思います。~~
+> 2025/10/08現在、Arch Linuxへの攻撃によって起きていたトラブルはほぼ復旧していると思います。ArchRiotもインストール可能になっていました。
 
-<div class="p-8 mb-8 border-solid border-2 border-sky-500">
-色々と実機でも確認しながら書いていますが環境によっては内容が異なる場合があります。注意の上、参考程度に御覧ください。
+<div class="p-4 mb-8 border-solid border-2 border-sky-500">
+
+- 色々と実機でも確認しながら書いていますが環境によっては内容が異なる場合があります。注意の上、参考程度に御覧ください。
+- Rice環境(dotファイル、quickshell、hyprland)のアップデートで、Fishの設定がデフォルトに戻されたりして継続して便利に使えない場合があるので、fishの各スクリプトと初期設定を分離・管理しRice環境の更新をしても即座にfish環境の復旧ができるスクリプト、各種操作ができるだけ便利になるよう記事を書きました。
+  - → [end-4/dots-hyprlandを例にしてFishシェルでターミナルを速く・美しく・便利に使ってみよう](../decorate-the-terminal-beautifully/)
+- 10/7時点で、end-4/dots-hyprlandのインストールスクリプトが刷新されています。注意して下さい
 </div>
 
 ### 簡単に導入の手順を書くと
