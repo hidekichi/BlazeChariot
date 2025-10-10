@@ -5,7 +5,7 @@ export function toc() {
 	if (!toc) return;
 
 	const headers = document.querySelectorAll(
-		".body-copy > :is(h1, h2, h3, h4, h5, h6)"
+		".body-copy > :is(h1, h2, h3, h4, h5)"
 	);
 	//const commentsSection = document.getElementById("comments");
 	const tocMenu = document.querySelector("#toc .toc_menu");

@@ -2,7 +2,7 @@
 title: end-4/dots-hyprlandを例にしてFishシェルでターミナルを速く・美しく・便利に使ってみよう
 description: 前回end-4/dots-hyprlandを導入していくつかカスタマイズしましたが今回はターミナルを飾ったり、便利に使おうという話です
 date: 2025-09-16
-update: 2025-10-07
+update: 2025-10-10
 category:
   - blog
 tags:
@@ -537,7 +537,8 @@ nano ~/.local/fish_functions/ii_update.fish
 ターミナルで操作することの記事なのでわざとターミナルの操作を書いていますが、一般的にはファイルマネージャーとテキストエディターでやる方がWindowsと操作が同じなので作業も速いしわかりやすいと思います。
 しかしここでもfishの補完機能があればパスの入力などが軽減され、ファイルの場所を指定するパスもだいぶ速く入力できる事もあって、あるディレクトリを開いている状態から目的のファイルを開くのもWindowsと同等かそれ以上の速さで行えると思います。
 
-### illogical-impulseの更新を半自動化するコード
+###### semi-automatic-script{id="semi-automatic-script" class="invisible h-0"}
+### illogical-impulseの更新を半自動化するスクリプト
 
 ```bash
 function ii_update --description "Update end-4 dots-hyprland repository and run install script"

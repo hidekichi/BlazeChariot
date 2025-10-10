@@ -2,7 +2,7 @@
 title: 公式で無いなら個人でやればいいじゃない？ EndeavourOS+Gnome+hyprland
 description: EndeavourOS+Gnome環境にHyprlandを導入するというのを実際に試してみた記録です
 date: 2025-08-25
-update: 2025-10-08
+update: 2025-10-10
 category:
   - blog
 tags:
@@ -81,10 +81,13 @@ Ubuntu LTSは、LTS(Long Term Support)のその名の通り、安定している
 #### 既にHyprlandエディションがあるディストリビューションではどうなるか
 
 例えばCachyOSや、Garuda LinuxにはHyprlandエディションが存在しますが、それらにこれらを適用した場合にどうなるかですが、多くの場合は導入したRice環境が有効になります。
-必要なパッケージの内、既に導入されているものが存在すればスキップして上書きしないような仕組みがあり、また`quick shell`を使用しているのも作者の意図としては、既存のファイルを上書きせずに追加するという意味合いがあるのではないかと想像しています。
+必要なパッケージの内、既に導入されているものが存在すればスキップして上書きしないような仕組みがあり、また`quick shell`を使用しているのも作者の意図としては、既存のファイルを上書きせずに追加するという狙いあるのではないかと想像しています。
 
 実際の所はわかりませんが、既存の環境が必要な場合は、**ユーザーを追加してそちらにRice環境を作る**とよいかと思います。
 そうすることでオリジナルの状態と、Rice環境が共存でき、ログインし直すだけでそれぞれの環境が動作すると思います。
+
+しかしながらこれらディストリビューションはリポジトリを独自に展開していたりもあるので正しく必要なプログラムを導入できない可能性もあり、最も安全なのは**素のArch LinuxかEndeavourOS**だろうと思います。
+wikiによると、**Manjaro は AUR との互換性が比較的低いため、特にお勧めしません**。とありました。
 
 ### end-4/dots-hyprland
 
@@ -98,10 +101,14 @@ Ubuntu LTSは、LTS(Long Term Support)のその名の通り、安定している
 > QtはGTKなどのように、クロスプラットフォームのアプリケーション開発フレームワークです。Qtはアプリを組み立てるための大きなツールボックスであり、その中の1つであるQMLやQtQuick(Qsの基盤になる仕組み)を使うと、シェルやランチャーなどのUIも簡単に作れるという事になります。ここで言うシェルとはガワに当たるものです。
 > Qtが比較的軽いとされるのは自身で様々なモジュールをまとめて持っているためC++のネイティブコードで直接動作する(依存性が少ない)、メモリ効率も良いという点が他のものと違って軽さの秘訣になっています。つまり汎用性を持たせるために外部に頼るのではなく、自身でほぼ全てを賄っているため効率良く軽いと言えるかと。
 
-[end-4/dots-hyprland](https://end-4.github.io/dots-hyprland-wiki/en/ii-qs/01setup/)で推奨される方法として書いてある、**「1.3 Automated installation (Arch distros only)」** にあるスクリプトをターミナルに貼り付けるだけ。
+[end-4/dots-hyprland](https://ii.clsty.link/en/ii-qs/01setup/#automated-installation)で推奨される方法として書いてある、**「Automated installation」** にあるスクリプトをターミナルに貼り付けるだけ。
 
 ```bash
-bash <(curl -s "https://end-4.github.io/dots-hyprland-wiki/setup.sh")
+# 旧インストールスクリプト
+# bash <(curl -s "https://end-4.github.io/dots-hyprland-wiki/setup.sh")
+
+# wikiサイトを新たにドメイン取得により以下のように短くなった模様です
+bash <(curl -s https://ii.clsty.link/setup)
 ```
 これは、`~/.cache/dots-hyprland`にリポジトリをクローンするので、もし別の場所に入れて管理したい場合は、
 
@@ -452,6 +459,8 @@ property string screenshotDir: Directories.ssDir
    - 後は、インストール時と同じようにどうするか聞かれるので`y`であったり自身のパスワード(管理者のパスワード)を入れていきます。
 
 もし`2`の段階でエラーが出た場合は、`git reset --hard`で、ローカルでの変更を元に戻す事もできます。
+
+→ [illogical-impulseの更新を半自動化するスクリプト - end-4/dots-hyprlandを例にしてFishシェルでターミナルを速く・美しく・便利に使ってみよう](/blog/decorate-the-terminal-beautifully/#semi-automatic-script) で記事を書いています。これを導入する前にリンクの記事を全体的に読んでもらえるとトラブル無く進めると思います。
 
 ## おまけ
 
