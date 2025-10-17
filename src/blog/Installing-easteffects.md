@@ -13,6 +13,7 @@ images:
   - ../img/easyeffects.avif
   - ../img/easyeffects_official_preset.avif
   - ../img/easyeffects_device_config.avif
+  - ../img/easyeffects_right_panel.avif
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---
@@ -79,14 +80,28 @@ sudo pacman -S lsp-pligins
 
 `Linux Studio Plugins`を導入すると、公式プリセットで設定された内容が正しく動作します。<u>これらが**なくても**イコライザーの設定はオリジナルで作成可能</u>で、`Linux Studio Plugins`はそれら以外のリバーブ(残響)やコンプレッサー(音圧調整)、ノイズサプレッション(ノイズ除去)などの<u>イコライザー以外</u>の高度なエフェクトを使うために必要なだけですので、それらが不要であれば導入する必要なく、個人で好きな音質にイコライザーで調整していけます。
 
+#### Flatpakで導入する
+
+次のコマンドで導入できます。
+```bash
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub com.github.wwmm.pulseeffects
+```
+
 ### 再起動しても設定がそのまま続くか
 
-最初に書いた「illogical-impulseのHyprlandの設定で、execs.conf…」の部分から既にEasyEffectsは次回起動時にバックグラウンドで起動するようになっています。しかし、設定した内容が起動しない場合は、EasyEffectのウィンドウの左上、`プリセット`とある右側にアイコンがありますが、ここが`Off`になってる可能性があるので`On`にしておけば次回も効果のあるまま起動するはずです。
+最初に書いた「**illogical-impulseのHyprlandの設定で、execs.conf…**」の部分から既にEasyEffectsは次回起動時にバックグラウンドで起動するようになっています。しかし、設定した内容が起動しない場合は、EasyEffectのウィンドウの左上、`プリセット`とある右側にアイコンがありますが、ここが`Off`になってる可能性があるので`On`にしておけば次回も効果のあるまま起動するはずです。
 
 デバイスごとの自動ロードも可能です。特定のデバイス、例えばUSBヘッドセットや、Bluetoothスピーカーが接続された時に自動で起動する設定も可能で、それらは`PipeWire`タブに設定があります。
 これらを確認して最適な設定で音楽などが再生されるように設定して下さい。
 
 ![各デバイスの設定](../img/easyeffects_device_config.avif)
+
+<div class="mb-4 md:float-right ml-4">
+
+![右パネルアイコン](../img/easyeffects_right_panel.avif)
+
+</div>
 
 EasyEffectsはインストールされて動作し始めると、右サイドパネル上部にあるアイコンに追加され表示されます。ここから右クリックでEasyEffectsの設定ができるようになっています。上部パネルではなく右サイドパネルです。
 
