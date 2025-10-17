@@ -2,7 +2,7 @@
 title: illogical-impulseを適用したEndeavourOS+Gnome環境にイコライザーを入れてみよう
 description: PCで作業をする場合には何かしら音楽を聞いたりしたりするものです。より良い音でそれらを行うためのイコライザーを設定しようという話です
 date: 2025-10-16
-update: 2025-10-17
+update: 2025-10-17T18:30:01.169Z
 category:
   - blog
 tags:
@@ -66,6 +66,7 @@ EasyEffectsの起動は、`Superキー`(windowsキー)でメニューを開い�
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh)"
 ```
+
 ![公式プリセット選択](../img/easyeffects_official_preset.avif)
 
 起動させると、どのプリセットをインストールするかを聞いてくるので数字で選択します。ここから、`Perfect EQ Preset`をインストールしたとします。
@@ -83,10 +84,20 @@ sudo pacman -S lsp-pligins
 #### Flatpakで導入する
 
 次のコマンドで導入できます。
+
 ```bash
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub com.github.wwmm.pulseeffects
+flatpak install flathub com.github.wwmm.easyeffects
 ```
+
+> --if-not-existsの記載通り、入ってなかったらflatpakが導入され、もし導入されていたらスキップされるので、既にflatpakを導入している場合は上記最初の行は不要です
+> またEasyEffects公式のWikiページの情報が更新されておらず、上記の2行目のリンクが間違っていましたのでflathubのリンクに合わせて修正しました。2025/10/18
+
+現在ご覧になってるこの記事は、<u>Arch系のディストロでの記事なので関係ない</u>ですがUbuntuではFlathubからインストールしようとすると、「could not unmount revokefs-fuse filesystem」エラー（revokefs-fuseファイルシステムのアンマウント失敗）が発生し、インストールが中断するという報告があるので注意してください。
+これら問題はパッチがリリースされており、apparmor 5.0.0~alpha1-0ubuntu8.1の更新で解決すると言われています。→ [Updated: Flatpak Doesn’t Work in Ubuntu 25.10, But a Fix is Coming](https://www.omgubuntu.co.uk/2025/10/flatpak-broken-ubuntu-25-10-apparmor-bug)
+
+Flatpak版を入れると依存プラグイン(Linux Studio Plugins for EqualizerやDeep Noise Remover)が自動的に導入され、全機能がすぐに利用可能になる利点があります。
+しかしこれらは全ての依存関係が最新と言うわけではなく古いライブラリが同梱されている場合もあり、最初から全機能が使えるのは便利ですがファイルサイズの肥大にも繋がるため、Arch系ディストロは`pacman`を用いて必要なものを順番に導入していくのが最も良い方法だと思います。
 
 ### 再起動しても設定がそのまま続くか
 
@@ -103,7 +114,7 @@ flatpak install flathub com.github.wwmm.pulseeffects
 
 </div>
 
-EasyEffectsはインストールされて動作し始めると、右サイドパネル上部にあるアイコンに追加され表示されます。ここから右クリックでEasyEffectsの設定ができるようになっています。上部パネルではなく右サイドパネルです。
+EasyEffectsはインストールされて動作し始めると、右サイドパネル上部にあるアイコンに追加され表示されます。ここから右クリックでEasyEffectsの設定ができるようになっています。<u>上部パネルではなく右サイドパネルです</u>。
 
 このサイドパネルにあるEasyEffectsのアイコンはクリックするとoffになり、EasyEffectsのウィンドウ左側上部にあるOn/Offアイコンの動作と連動しているように思います。
 音楽を再生中にサイドパネルのアイコンをoffにすると`MPV`の場合は停止して、再度MPVを再生するとEasyEffectsのエフェクトが効いていない状態で再生されました。Onにするとエフェクトがかかって再生されるのを確認しました。
