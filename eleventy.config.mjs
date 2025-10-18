@@ -1,8 +1,5 @@
 import { DateTime } from "luxon";
-//import { minify } from "terser";
 const isProduction = process.env.ELEVENTY_ENV === "production"; // これはそのまま
-// const htmlSave = require("htmlnano").presets.safe; // 未使用の可能性あり
-//import CleanCSS from "clean-css";
 import htmlmin from "html-minifier-terser";
 import markdownIt from "markdown-it";
 import attrs from "markdown-it-attrs";
@@ -12,10 +9,7 @@ import rubyPlugin from "markdown-it-ruby";
 import { HtmlBasePlugin } from "@11ty/eleventy";
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginRss from "@11ty/eleventy-plugin-rss";
-//import { JSDOM } from 'jsdom';
 import pluginNavigation from "@11ty/eleventy-navigation";
-//import postcss from "postcss";
-//import postcssConfig from "./postcss.config.js"; // postcss.config.js が CommonJS なら要確認
 import sitemap from "@quasibit/eleventy-plugin-sitemap";
 
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
@@ -113,8 +107,8 @@ export default async function (eleventyConfig) {
 
 	// Folders to copy to build dir
 	eleventyConfig
-		.addPassthroughCopy("src/static/")
-		.addPassthroughCopy("src/*.{txt,xsl}")
+		.addPassthroughCopy("src/static")
+		.addPassthroughCopy("src/*.{txt,xsl,ico}")
 		.addPassthroughCopy("src/blog/**/*.{jpg,jpeg,png,webp,svg,gif,avif}")
 		.addPassthroughCopy("src/guitar/**/*.{jpg,jpeg,png,webp,svg,gif,avif,ogg}")
 		.addPassthroughCopy("src/pages/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
