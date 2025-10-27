@@ -225,7 +225,7 @@ input {
 fcitx5((IMEのフレームワーク))の設定で、`~/.config/hypr/custom/env.conf`に
 ```js
 # fcitx5 setting
-env = QT_IM_MIDULE, wayland
+env = QT_IM_MODULE, wayland
 ```
 を追加。
 
