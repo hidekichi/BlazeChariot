@@ -2,7 +2,7 @@
 title: 緊急検証！CachyOSのCosmicデスクトップ環境の感じはどうだろうか？
 description: 前回、Fedora Cosmic Spinを試してみましたが、今度はArch系のディストリビューションであるCachyOSではどうだろうかを試してみました。
 date: 2025-10-30T03:43:20.025Z
-update: 2025-10-30T03:43:25.778Z
+update: 2025-11-01T08:37:16.581Z
 category:
     - blog
 tags:
@@ -114,8 +114,49 @@ Fedoraでもできたと思いますが、日本語になっているCachyOSで�
 - ターミナル：Ghostty [公式サイト](https://ghostty.org/) [Github](https://github.com/ghostty-org/ghostty)
 - ターミナルプロンプト：Starship 公式サイト [Github](https://github.com/starship/starship)
   - プロンプトのサンプル：[How are folks using starship? Share your setup!](https://github.com/starship/starship/discussions/1107) など
-- ファイルマネージャ：[Thunar](https://wiki.archlinux.jp/index.php/Thunar)
-- メディアプレーヤ：MPV [公式サイト](https://mpv.io/) [Github](https://github.com/mpv-player/mpv)
+- アプリケーション
+  - IME：fcitx5-im, fcitx5-mozc
+  - ファイルマネージャ：[Thunar](https://wiki.archlinux.jp/index.php/Thunar)
+  - メディアプレーヤ：MPV [公式サイト](https://mpv.io/) [Github](https://github.com/mpv-player/mpv)
+  - ファイル転送：[LocalSend](https://localsend.org/ja)
+- アイコンテーマ：kora
+- フォント：
+  - suns-serif：BIZ UDPゴシック
+  - serif：BIZ UDP明朝
+  - monospace：Bizin Gothic NF
+
+<details>
+<summary>フォントの導入・設定方法</summary>
+<div>
+
+フォントは`~/.local/share/fonts`((おそらく無いのでディレクトリを作成))に必要なフォントを入れて、必要な設定で指定しても良いですが、`~/.config/fontconfig/`に`fonts.conf`を作り、[フォント設定](https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E8%A8%AD%E5%AE%9A)と、その[サンプル](https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E8%A8%AD%E5%AE%9A/%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB#.E6.97.A5.E6.9C.AC.E8.AA.9E)を参考に必要なフォントを設定していってください。
+フォントの名称がわからない場合は、[gnome-font-viewer](https://github.com/GNOME/gnome-font-viewer)を一時的にでも導入して確認するとよいかと思います。
+
+</div>
+</details>
+
+<details>
+<summary>アイコンの導入・設定方法</summary>
+<div>
+
+アイコンは、GNOME-LOOK.ORGから[Kora](https://www.gnome-look.org/p/1256209)と言うのを使っています。ダウンロードして解凍して導入していっても行けると思いますが、最も簡単な方法は、[ocs-url](https://www.opendesktop.org/p/1136805/)というのを導入すると、各アイコンの`install`から自動で導入できるようになります。
+導入方法がディストロによって異なりますが、`file`タブの中の一番上にArch系のものがあるので、ダウンロードしておきます。<U>AURにもありますが古いので手動で入れます</u>((圧縮タイプが異なっていたり、必要な依存関係、つまりはライブラリが古い可能性があるので))。必要なパッケージは、
+```bash
+sudo pacman -S qt5-base qt5-svg qt5-declarative qt5-quickcontrols
+```
+で入れておきます。もし入っていた場合はスキップされますので確認のために上記を実行して下さい。
+
+その後、ダウンロードしておいた本体を導入します。
+```bash
+sudo pacman -U ~/ダウンロード/ocs-url-3.1.0-1-x86_64.pkg.tar.xz
+```
+でしょうか。`ダウンロード`はダウンロードした本体があるディレクトリで通常は`~/Download`ですが、日本語にデフォルトでローカライズされているため`~/ダウンロード`がそれに当たり、その後は本体のファイル名+圧縮の拡張子です。**これらが違っていたらディレクトリ・ファイル名を修正してインストール**します。
+たいていは<u>バージョンが違うとか圧縮タイプが違うとかそう言う違い</u>があるかもしれないというだけなのでよくダウンロードしたファイルを確認して、ファイル名を`F2`などから拡張子含めてコピペ((Ctrl + Cでコピーして、ターミナルはCtrl + Shift + Vでペースト))したら良いと思います。
+
+これら準備ができたら、各アイコンの`ファイル`タブにあるArchLinux用の`install`を押せば自動でインストールされ、`Cosmic Settings`の`デスクトップ → 外観`の一番下にある、`試験的な設定`の中に、`Icons and toolkit theming`をクリックするとその中に今入れたアイコンが表示されているはずなので、それを選択するだけです。
+
+</div>
+</details>
 
 #### 音楽の仕様は、PipeWire
 
@@ -229,6 +270,14 @@ sudo nano /usr/share/cachyos-fish-config/cachyos-config.fish
 のようにすれば良いです。保存は`Ctrl + O`で上書き、`Ctrl + X`で終了できます。しかし**システム側のファイルの改変はできるだけしないようにして**、ユーザーディレクトリ内で修正するのが良いです。修正できないものはオリジナルをコメントアウト(`#`)するとかのみに留めるべきです。
 
 尚、`bat`コマンドの終了は`Q`キーでターミナル画面に戻ります。
+
+<div class="p-4 my-8 border-solid border-2 border-sky-500">
+
+[micro](https://github.com/zyedidia/micro/tree/master)はnanoなどよりもモダンなCLIのテキストエディターです。nanoはやや特殊な操作をしますが、microはWindowsと主要な[キーバインド](https://github.com/zyedidia/micro/blob/master/runtime/help/keybindings.md#default-keybinding-configuration)は同じではなかろうかと。
+例えば、`Ctrl + C`でコピー、`Ctrl + V`でペースト、`Ctrl + S`で保存などです。`Alt + S`がセーブ後終了なのですが、Windowsもこうだったかは未確認です。上記キーバインドのリンクで確認してみて下さい。
+もし入っていない場合、Arch系のインストールは`sudo pacman -S micro`でできます。
+
+</div>
 
 さてここで、先程のCachyOSのFishの初期設定で、しばらくスクロールさせると、`alias`と書いてある塊が見えてくると思います。これらがターミナルから直接使えるコマンドになっています。
 これらを用いるとより簡単にコマンド入力ができます。もちろんfishは入力補完があるので、別段長いコマンドでもすぐに入力ができますが、より短ければより速くかつ間違えないというのもあり便利だということです。
