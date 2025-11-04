@@ -2,7 +2,7 @@
 title: 追加検証！CachyOSのHyprland環境にDANK Shellをぶち込んでいきなり使い勝手を良くする
 description: 前回、CachyOS Cosmic環境をインストールする際に色々確かめるためにHyprlandも入れていました。ただそれだけでは基本部分だけで便利ではなかったので便利にするためにDANK Shellを入れてしまおうと言う内容です
 date: 2025-11-02T07:23:01.608Z
-update: 2025-11-01T08:37:16.581Z
+update: 2025-11-04T03:14:57.446Z
 category:
     - blog
 tags:
