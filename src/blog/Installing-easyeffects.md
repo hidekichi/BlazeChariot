@@ -2,7 +2,7 @@
 title: illogical-impulseを適用したEndeavourOS+Gnome環境にイコライザーを入れてみよう
 description: PCで作業をする場合には何かしら音楽を聞いたりしたりするものです。より良い音でそれらを行うためのイコライザーを設定しようという話です
 date: 2025-10-16
-update: 2025-10-17T20:02:17.402Z
+update: 2025-11-06T04:09:31.451Z
 category:
   - blog
 tags:

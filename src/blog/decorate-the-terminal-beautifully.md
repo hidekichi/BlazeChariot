@@ -4,19 +4,19 @@ description: 前回end-4/dots-hyprlandを導入していくつかカスタマイ
 date: 2025-09-16
 update: 2025-10-10
 category:
-  - blog
+    - blog
 tags:
-  - linux
-  - Arch系
-  - Hyprland
-  - Terminal
+    - linux
+    - Arch系
+    - Hyprland
+    - Terminal
 images:
-  - ../img/pastel-powerline.avif
-  - ../img/local_directory.avif
-  - ../img/zf.avif
-  - ../img/z_tab.avif
-  - ../img/enter_part_of_a_keyword_with_z.avif
-  - ../img/2025-10-9fastfetch.avif
+    - ../img/pastel-powerline.avif
+    - ../img/local_directory.avif
+    - ../img/zf.avif
+    - ../img/z_tab.avif
+    - ../img/enter_part_of_a_keyword_with_z.avif
+    - ../img/2025-10-9fastfetch.avif
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---

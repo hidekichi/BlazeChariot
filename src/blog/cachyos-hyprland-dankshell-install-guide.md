@@ -2,22 +2,22 @@
 title: 追加検証！CachyOSのHyprland環境にDANK Shellをぶち込んでいきなり使い勝手を良くする
 description: 前回、CachyOS Cosmic環境をインストールする際に色々確かめるためにHyprlandも入れていました。ただそれだけでは基本部分だけで便利ではなかったので便利にするためにDANK Shellを入れてしまおうと言う内容です
 date: 2025-11-02T07:23:01.608Z
-update: 2025-11-04T03:14:57.446Z
+update: 2025-11-06T04:13:38.688Z
 category:
-    - blog
+  - blog
 tags:
-    - Arch系
-    - CachyOS
-    - Hyprland
-    - linux
-    - DankShell
+  - Arch系
+  - CachyOS
+  - Hyprland
+  - linux
+  - DankShell
 images:
-    - ../img/cachyos_desktop.avif
-    - ../img/cachyos_dgop_terminal.avif
-    - ../img/cachyos_localsend_thunar.avif
-    - ../img/cachyos-dankshell_dankdash.avif
-    - ../img/cachyos-dankshell_system-monitor.avif
-    - ../img/cachyos-dankshell_settings.avif
+  - ../img/cachyos_desktop.avif
+  - ../img/cachyos_dgop_terminal.avif
+  - ../img/cachyos_localsend_thunar.avif
+  - ../img/cachyos-dankshell_dankdash.avif
+  - ../img/cachyos-dankshell_system-monitor.avif
+  - ../img/cachyos-dankshell_settings.avif
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---
@@ -58,6 +58,7 @@ CachyOSのHyprlandは特別便利なわけではなく、基本的なウィン�
   - Pipewireです
 - 電源管理
 - ロックスクリーン
+  - デフォルトではオンになっていなかったと思うので設定からオンにする必要があります
 - プロセスとシステムモニタリング
 - テーマ管理
   - ライト&ダーク、自動カラー、壁紙からアクセントカラー抽出とカスタマイズ
@@ -90,9 +91,9 @@ CachyOSのHyprlandは特別便利なわけではなく、基本的なウィン�
 
 </div>
 
-左側((スマホなどの幅が狭い画面では最初の))画像左下のグラフがおおよそのCPU仕様率、温度、メモリ使用率かと。この他にトップバー右側にはシステムモニターがあって、ここからはもっと詳細に見ることができます。
+左側画像<span class="f-img" data-target="../img/cachyos-dankshell_dankdash.avif">FIX</span>左下のグラフがおおよそのCPU仕様率、温度、メモリ使用率かと。この他にトップバー右側にはシステムモニターがあって、ここからはもっと詳細に見ることができます。
 
-右側でメモリが1.9GBと表示されていますが、裏で色々と動作さているのでこれぐらいになっています。だいたい1.2～1.5GB前後かと思います。Windows11が4GBは超えてくると思うので、どれだけ軽量であるかがわかると思います。
+右側<span class="f-img" data-target="../img/cachyos-dankshell_system-monitor.avif">FIX</span>でメモリが1.9GBと表示されていますが、裏で色々と動作さているのでこれぐらいになっています。だいたい1.2～1.5GB前後かと思います。Windows11が4GBは超えてくると思うので、どれだけ軽量であるかがわかると思います。
 
 DankShellは、プラグインで機能を拡張できます。それらもターミナルで導入するのではなくDankShellの設定画面から導入・設定ができるので難しく考える必要はありません。予めプラグインを入れるディレクトリを制作する必要がありますが、それもDankShell上から行えます。
 
@@ -255,6 +256,20 @@ bind = CTRL, Print, exec, grimblast save area
 
 こうすることで`Print`キーで画面全体のスクリーンショットが**プラグインで設定したディレクトリに保存**されます。`CTRL + Print`キーで任意のエリアを選択できるような画面になって任意の箇所をスクリーンショットできるようになります。
 これもコメントアウトではなく、`unbind`しても良いと思いますが、何をどうするかあるいは何をどうしたかをわかりやすいと思う方法で書くのが良いかと思います。
+
+### Mprisメディアコントロールするには
+
+元々Cosmic環境でMPVを入れていたので、[mpv-mpris](https://wiki.archlinux.jp/index.php/Mpv#mpv-mpris)を入れます。
+
+```bash
+sudo pacman -S mpv-mpris
+```
+
+で入ると思うので、導入するだけです。これを導入していないとShell部分には何の反応もありません。
+
+MPVの場合はこうですが他のメディアプレーヤーの場合はまた別の方法になると思います。もしかするとデフォルトで導入されているものもあるかも知れません。
+他には[VLC](https://wiki.archlinux.jp/index.php/VLC)とか[celluloid](https://www.archlinux.org/packages/?name=celluloid)、[Audacious](https://wiki.archlinux.jp/index.php/Audacious)、各種モダンブラウザなどがサポートされていたりします。
+詳しくは、ArchWikiの[MPRIS](https://wiki.archlinux.jp/index.php/MPRIS)を参考しにしてください。
 
 ## まとめ と 動画
 
