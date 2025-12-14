@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-const isProduction = process.env.ELEVENTY_ENV === "production"; // これはそのまま
+import path from "path";
 import htmlmin from "html-minifier-terser";
 import markdownIt from "markdown-it";
 import attrs from "markdown-it-attrs";
@@ -11,445 +11,331 @@ import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import pluginNavigation from "@11ty/eleventy-navigation";
 import sitemap from "@quasibit/eleventy-plugin-sitemap";
-
-import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
-import path from "path";
-
 import EleventyPluginVite from "@11ty/eleventy-plugin-vite";
 
+// 削除: 使われていなかった imports
+// import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+// import path from "path";
+
+const isProduction = process.env.ELEVENTY_ENV === "production";
+
+/**
+ * YouTube埋め込み用のMarkdownプラグイン
+ */
 const embedYoutubeDiv = function (md) {
-	const ytpBlock = function (state, startLine, endLine, silent) {
-		const pos = state.bMarks[startLine] + state.tShift[startLine];
-		const max = state.eMarks[startLine];
-		const src = state.src;
+  const ytpBlock = function (state, startLine, endLine, silent) {
+    const pos = state.bMarks[startLine] + state.tShift[startLine];
+    const max = state.eMarks[startLine];
+    const src = state.src;
+    const lineSrc = src.slice(pos, max);
 
-		// ルールを適用する行を特定
-		const lineSrc = src.slice(pos, max);
+    // クラス名とコンテンツ（アドレス::タイトル）をキャプチャ
+    const match = lineSrc.match(/^{\s*(ytp(?:\s+[a-zA-Z0-9\-]+)*)::(.*)}$/);
+    if (!match) return false;
 
-		// 変更点: 正規表現をシンプル化し、ytpとそれに続く全てのクラスをキャプチャ
-		// 例: {ytp f-left size-m::アドレス::タイトル} の場合
-		// match[1] = "ytp f-left size-m"
-		// match[2] = "アドレス::タイトル"
-		const match = lineSrc.match(/^{\s*(ytp(?:\s+[a-zA-Z0-9\-]+)*)::(.*)}$/);
-		if (!match) return false;
+    const fullClasses = match[1];
+    const contentStr = match[2];
+    if (!contentStr.trim()) return false;
 
-		// 抽出されたクラス名とコンテンツ
-		const fullClasses = match[1]; // 例: "ytp f-left size-m"
-		const contentStr = match[2]; // 例: "アドレス::タイトル"
+    const lastSepPos = contentStr.lastIndexOf("::");
+    let address, title;
 
-		if (!contentStr.trim()) return false; // 中身が空なら無効
+    if (lastSepPos !== -1) {
+      address = contentStr.slice(0, lastSepPos);
+      title = contentStr.slice(lastSepPos + 2);
+    } else {
+      address = contentStr;
+      title = "";
+    }
 
-		// 最後の '::' を探してアドレスとタイトルを分割
-		const lastSepPos = contentStr.lastIndexOf("::");
+    if (!address.trim()) return false;
 
-		let address, title;
-		if (lastSepPos !== -1) {
-			// タイトルあり
-			address = contentStr.slice(0, lastSepPos);
-			title = contentStr.slice(lastSepPos + 2);
-		} else {
-			// タイトルなし
-			address = contentStr;
-			title = "";
-		}
+    if (!silent) {
+      const token = state.push("ytp_block", "", 0);
+      token.content = address.trim();
+      token.meta = {
+        title: title.trim(),
+        classes: fullClasses.trim(),
+      };
+      state.line = startLine + 1;
+    }
+    return true;
+  };
 
-		// アドレスが空の場合は無効
-		if (!address.trim()) return false;
+  md.block.ruler.before("paragraph", "ytp_block", ytpBlock, {
+    alt: ["paragraph", "blockquote"],
+  });
 
-		// silent モードでなければトークンを生成
-		if (!silent) {
-			const token = state.push("ytp_block", "", 0);
+  md.renderer.rules["ytp_block"] = function (tokens, idx) {
+    const address = md.utils.escapeHtml(tokens[idx].content);
+    const title = md.utils.escapeHtml(tokens[idx].meta.title);
+    const classes = md.utils.escapeHtml(tokens[idx].meta.classes || "ytp");
+    const titleAttr = title ? ` data-title="${title}"` : "";
 
-			token.content = address.trim();
-			token.meta = {
-				title: title.trim(),
-				// 抽出したクラス名をそのままメタ情報として保存
-				classes: fullClasses.trim(),
-			};
-
-			// このルールは1行だけを消費する
-			state.line = startLine + 1;
-		}
-
-		return true;
-	};
-
-	md.block.ruler.before("paragraph", "ytp_block", ytpBlock, {
-		alt: ["paragraph", "blockquote"],
-	});
-
-	md.renderer.rules["ytp_block"] = function (tokens, idx, options, env, self) {
-		const address = md.utils.escapeHtml(tokens[idx].content);
-		const title = md.utils.escapeHtml(tokens[idx].meta.title);
-		// 変更点: トークンから取得したクラス名をそのまま使用
-		const classes = md.utils.escapeHtml(tokens[idx].meta.classes || "ytp"); // 念のためデフォルトを設定
-
-		const titleAttr = title ? ` data-title="${title}"` : "";
-
-		// 変更点: class 属性に取得したクラス名を使用
-		return `<div class="${classes}"${titleAttr}>${address}</div>\n`;
-	};
+    return `<div class="${classes}"${titleAttr}>${address}</div>\n`;
+  };
 };
 
 export default async function (eleventyConfig) {
-	if (process.env.ELEVENTY_ENV !== "production") {
-		eleventyConfig.addPlugin(EleventyPluginVite);
-	}
+  // -----------------------------------------------------------------
+  // Vite Plugin Config
+  // -----------------------------------------------------------------
+  // 開発環境だけでなく、ビルド時もViteを通してアセット処理を行うと構成がシンプルになります。
+  // そのため if (dev) の条件を外すことも検討できますが、
+  // 現在のpackage.json構成に合わせて「開発時はVite」「本番は11ty + 後処理」とするならこのまま維持します。
+  // ただし、Viteの強みを活かすなら以下のようにオプションを追加します。
+  if (!isProduction) {
+    eleventyConfig.addPlugin(EleventyPluginVite, {
+      viteOptions: {
+        resolve: {
+          alias: {
+            // "/src" というパスを、実際の src フォルダへの絶対パスに紐付ける
+            "/src": path.resolve(".", "src"),
+          },
+        },
+        // TailwindなどPostCSSの設定ファイルを自動検知させる
+        css: {
+          postcss: "./postcss.config.js",
+        },
+        // 画面クリアを無効化（ログが見やすくなります）
+        clearScreen: false,
+        // 11tyの再構築トリガー設定
+        server: {
+          mode: "development",
+          middlewareMode: true,
+        },
+      },
+    });
+  }
 
-	eleventyConfig.addPlugin(HtmlBasePlugin);
-	eleventyConfig.addPlugin(pluginNavigation);
+  eleventyConfig.addGlobalData("isProduction", isProduction);
 
-	eleventyConfig.addPlugin(sitemap, {
-		sitemap: {
-			hostname: "https://blazechariot.netlify.app",
-		},
-	});
+  // -----------------------------------------------------------------
+  // Standard Plugins
+  // -----------------------------------------------------------------
+  eleventyConfig.addPlugin(HtmlBasePlugin);
+  eleventyConfig.addPlugin(pluginNavigation);
+  eleventyConfig.addPlugin(sitemap, {
+    sitemap: {
+      hostname: "https://blazechariot.netlify.app",
+    },
+  });
+  eleventyConfig.addPlugin(pluginRss);
 
-	// Folders to copy to build dir
-	eleventyConfig
-		.addPassthroughCopy("src/static")
-		.addPassthroughCopy("src/*.{txt,xsl,ico}")
-		.addPassthroughCopy("src/blog/**/*.{jpg,jpeg,png,webp,svg,gif,avif}")
-		.addPassthroughCopy("src/guitar/**/*.{jpg,jpeg,png,webp,svg,gif,avif,ogg}")
-		.addPassthroughCopy("src/pages/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
+  // Syntax Highlight settings
+  eleventyConfig.addPlugin(syntaxHighlight, {
+    lineSeparator: "\n",
+    templateFormats: ["*"],
+    preAttributes: {
+      tabindex: 0,
+      "data-language": function ({ language }) {
+        return language;
+      },
+    },
+    errorOnInvalidLanguage: false,
+  });
 
-	//Filter to parse dates
-	eleventyConfig.addFilter("shortDateString", function (dateObj) {
-		return DateTime.fromJSDate(dateObj, {
-			zone: "utc",
-		}).toFormat("yyyy-LL-dd");
-	});
+  // -----------------------------------------------------------------
+  // Passthroughs
+  // -----------------------------------------------------------------
+  // Vite使用時、CSS/JSはimportで解決するためPassthroughは画像やフォント等の静的ファイルに絞るのが理想です。
+  eleventyConfig
+    .addPassthroughCopy("src/static")
+    .addPassthroughCopy("src/*.{txt,xsl,ico}")
+    .addPassthroughCopy("src/blog/**/*.{jpg,jpeg,png,webp,svg,gif,avif}")
+    .addPassthroughCopy("src/guitar/**/*.{jpg,jpeg,png,webp,svg,gif,avif,ogg}")
+    .addPassthroughCopy("src/pages/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
 
-	/* eleventyConfig.addFilter("logg", (...args) => {
-		console.log(...args);
-		debugger;
-	}); */
+  // -----------------------------------------------------------------
+  // Filters
+  // -----------------------------------------------------------------
+  eleventyConfig.addFilter("shortDateString", (dateObj) => {
+    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
+  });
 
-	// Example Collections
-	// Filter source file names using a glob
-	eleventyConfig.addCollection("blog", function (collectionApi) {
-		return collectionApi.getFilteredByGlob("src/blog/**/*.md").reverse();
-	});
+  eleventyConfig.addFilter("postDate", (dateObj) => {
+    return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
+  });
 
-	eleventyConfig.addCollection("guitar", function (collectionApi) {
-		return collectionApi.getFilteredByGlob("src/guitar/**/*.md");
-	});
+  eleventyConfig.addFilter("getNewestUpdateDate", function (collection) {
+    if (!collection || collection.length === 0) return null;
+    return collection
+      .map((item) => item.data.update || item.date)
+      .sort((a, b) => new Date(b) - new Date(a))[0];
+  });
 
-	eleventyConfig.addCollection("guitarAll", function (collectionApi) {
-		return collectionApi.getFilteredByGlob("src/guitar/**/*.md");
-	});
+  eleventyConfig.addFilter("normalizeDateToJST", function (value) {
+    if (!value) return value;
+    if (DateTime.isDateTime(value)) return value.toJSDate();
 
-	//jdate convert
-	eleventyConfig.addFilter("postDate", (dateObj) => {
-		return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
-	});
+    let dt;
+    if (typeof value === "string") {
+      if (value.includes("T")) {
+        dt = DateTime.fromISO(value, { zone: "Asia/Tokyo" });
+      } else {
+        dt = DateTime.fromISO(`${value}T09:00:00+09:00`);
+      }
+    } else {
+      dt = DateTime.fromJSDate(new Date(value), { zone: "Asia/Tokyo" });
+    }
+    return dt.toJSDate();
+  });
 
-	eleventyConfig.addFilter("getNewestUpdateDate", function (collection) {
-		return collection
-			.map((item) => item.data.update || item.date)
-			.sort((a, b) => new Date(b) - new Date(a))[0];
-	});
+  eleventyConfig.addFilter("toLocalDate", function (date) {
+    if (!date) return date;
+    return DateTime.fromJSDate(new Date(date), {
+      zone: "Asia/Tokyo",
+    }).toJSDate();
+  });
 
-	eleventyConfig.addFilter("normalizeDateToJST", function (value) {
-		if (!value) return value;
+  eleventyConfig.addLiquidFilter("dateToRfc3339", pluginRss.dateToRfc3339);
 
-		// value がすでに Luxon の DateTime ならそのまま
-		if (DateTime.isDateTime(value)) return value.toJSDate();
+  eleventyConfig.addFilter("randomize", function (items) {
+    if (!Array.isArray(items)) return items;
+    return [...items].sort(() => 0.5 - Math.random()); // 元の配列を変更しないようコピー
+  });
 
-		// ISO文字列か日付だけの文字列か
-		let dt;
-		if (typeof value === "string") {
-			// すでに時刻を含む場合はそのまま使う
-			if (value.includes("T")) {
-				dt = DateTime.fromISO(value, { zone: "Asia/Tokyo" });
-			} else {
-				// 時刻なし → 09:00 を補う
-				dt = DateTime.fromISO(`${value}T09:00:00+09:00`);
-			}
-		} else {
-			// JS Date オブジェクトなど → JST に変換
-			dt = DateTime.fromJSDate(new Date(value), { zone: "Asia/Tokyo" });
-		}
+  eleventyConfig.addFilter(
+    "truncate",
+    function (str, length = 400, useWordBoundary = true, ellipsis = "...") {
+      if (!str) return "";
+      if (str.length <= length) return str;
+      const subString = str.slice(0, length - 1);
+      return useWordBoundary
+        ? subString.slice(0, subString.lastIndexOf(" ")) + ellipsis
+        : subString + ellipsis;
+    },
+  );
 
-		return dt.toJSDate();
-	});
+  eleventyConfig.addFilter("excerpt", (post) => {
+    if (!post) return "";
+    return post
+      .replace(/(<([^>]+)>)/gi, "")
+      .replace(/&nbsp/gi, "&#160;")
+      .split(" ")
+      .slice(0, 5)
+      .join(" ");
+  });
 
-	eleventyConfig.addFilter("toLocalDate", function (date) {
-		if (!date) return date;
-		return DateTime.fromJSDate(new Date(date), {
-			zone: "Asia/Tokyo",
-		}).toJSDate();
-	});
+  eleventyConfig.addNunjucksFilter("htmlDateString", (dateObj) =>
+    new Date(dateObj).toISOString(),
+  );
 
-	// rss plugin convert Rfc3339
-	eleventyConfig.addLiquidFilter("dateToRfc3339", pluginRss.dateToRfc3339);
+  eleventyConfig.addNunjucksFilter("readableDate", (dateObj) => {
+    const date = new Date(dateObj);
+    return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+  });
 
-	eleventyConfig.addFilter("randomize", function (items) {
-		if (!Array.isArray(items)) {
-			return items;
-		}
-		items.sort(() => {
-			return 0.5 - Math.random();
-		});
-	});
+  // -----------------------------------------------------------------
+  // Collections
+  // -----------------------------------------------------------------
+  eleventyConfig.addCollection("blog", (api) =>
+    api.getFilteredByGlob("src/blog/**/*.md").reverse(),
+  );
+  eleventyConfig.addCollection("guitar", (api) =>
+    api.getFilteredByGlob("src/guitar/**/*.md"),
+  );
+  eleventyConfig.addCollection("guitarAll", (api) =>
+    api.getFilteredByGlob("src/guitar/**/*.md"),
+  ); // 重複していますが意図的であればOK
 
-	eleventyConfig.addFilter(
-		"truncate",
-		function (str, length = 400, useWordBoundary = true, ellipsis = "...") {
-			if (!str) return "";
-			if (str.length <= length) return str;
-			const subString = str.slice(0, length - 1);
-			return useWordBoundary
-				? subString.slice(0, subString.lastIndexOf(" ")) + ellipsis
-				: subString + ellipsis;
-		}
-	);
+  eleventyConfig.addCollection("latestPosts", (api) => {
+    return api.getFilteredByGlob("src/**/*.md").sort((a, b) => b.date - a.date);
+  });
 
-	eleventyConfig.addFilter("excerpt", (post) => {
-		return post
-			.replace(/(<([^>]+)>)/gi, "")
-			.replace(/&nbsp/gi, "&#160;")
-			.split(" ")
-			.slice(0, 5)
-			.join(" ");
-	});
+  eleventyConfig.addCollection("allPosts", (api) =>
+    api.getFilteredByGlob("src/**/*.md"),
+  );
 
-	/* function excerptFromHTML(html, maxLength = 200) {
-	const dom = new JSDOM(html);
-	const body = dom.window.document.body;
-	const nodes = Array.from(body.children);
+  eleventyConfig.addCollection("posts", (api) => {
+    return api
+      .getFilteredByGlob("src/blog/*.md")
+      .sort((a, b) => b.date - a.date);
+  });
 
-	let totalLength = 0;
-	const kept = [];
+  eleventyConfig.addCollection("allTags", function (collectionApi) {
+    const allTags = new Set();
+    collectionApi.getAll().forEach((item) => {
+      if (item.data.tags) {
+        item.data.tags.forEach((tag) => allTags.add(tag));
+      }
+    });
+    return Array.from(allTags).sort();
+  });
 
-	for (const el of nodes) {
-	const len = el.textContent.trim().length;
-	if (totalLength + len > maxLength) break;
+  eleventyConfig.addCollection("categoryTags", function (collectionApi) {
+    let categoryTags = {};
+    collectionApi.getAll().forEach((post) => {
+      // パスからカテゴリ抽出 (例: src/blog/foo.md -> blog)
+      // filePathStemは先頭にスラッシュが入るため [1] を取得
+      let category = post.filePathStem.split("/")[1];
+      let tags = post.data.tags || [];
 
-	kept.push(el.outerHTML);
-	totalLength += len;
-	}
+      if (!categoryTags[category]) categoryTags[category] = {};
+      tags.forEach((tag) => {
+        categoryTags[category][tag] = (categoryTags[category][tag] || 0) + 1;
+      });
+    });
+    return categoryTags;
+  });
 
-	return kept.length ? kept.join("\n") : "<p>&nbsp;</p>";
-	}
+  // -----------------------------------------------------------------
+  // Transforms (Minify)
+  // -----------------------------------------------------------------
+  eleventyConfig.addTransform("compressHTMLOutput", (content, outputPath) => {
+    const options = {
+      collapseWhitespace: "conservative",
+      removeEmptyAttributes: false,
+      removeComments: true,
+    };
+    // 本番環境かつHTMLの場合のみ圧縮
+    if (isProduction && outputPath && outputPath.endsWith(".html")) {
+      try {
+        return htmlmin.minify(content, options);
+      } catch (err) {
+        console.error("HTML minification failed:", err);
+        return content;
+      }
+    }
+    return content;
+  });
 
-	eleventyConfig.addFilter("excerpt", (html) => excerptFromHTML(html, 200)); */
+  // -----------------------------------------------------------------
+  // Markdown Library Config
+  // -----------------------------------------------------------------
+  const mdLib = markdownIt({
+    html: true,
+    xhtmlOut: true,
+    breaks: true,
+    linkify: true,
+    typographer: true,
+  })
+    .use(rubyPlugin, { rp: ["(", ")"] })
+    .use(markdownItFigure)
+    .use(embedYoutubeDiv)
+    .use(attrs, { selectorExceptions: ["table", "table tbody", "tbody"] })
+    .use(markdownItMultimdTable, {
+      multiline: true,
+      rowspan: true,
+      headerless: false,
+      Multibody: true,
+    });
 
-	eleventyConfig.addCollection("allTags", function (collectionApi) {
-		const allPages = collectionApi.getAll();
+  eleventyConfig.setLibrary("md", mdLib);
 
-		const allTags = new Set();
-		// すべてのページをループ
-		collectionApi.getAll().forEach((item) => {
-			if (item.data.tags) {
-				// タグをセットに追加
-				item.data.tags.forEach((tag) => allTags.add(tag));
-			}
-		});
-
-		// セットを配列に変換して返す
-		return Array.from(allTags).sort();
-	});
-
-	eleventyConfig.addCollection("latestPosts", function (collectionApi) {
-		return collectionApi
-			.getFilteredByGlob("src/**/*.md")
-			.sort((a, b) => b.date - a.date); // 新しい順にソート
-	});
-
-	eleventyConfig.addCollection("allPosts", function (collectionApi) {
-		return collectionApi.getFilteredByGlob("src/**/*.md");
-	});
-
-	/* eleventyConfig.addCollection("summarizedPostsForRss", function(collectionApi) {
-		// summarizedPostsForRssCollection 関数に mdLib を渡す
-		return summarizedPostsForRssCollection(collectionApi, mdLib);
-	}); */
-
-	eleventyConfig.addCollection("categoryTags", function (collectionApi) {
-		let categoryTags = {};
-
-		// 全コレクションの記事を取得
-		let allPosts = collectionApi.getAll();
-
-		allPosts.forEach((post) => {
-			let category = post.filePathStem.split("/")[1]; // blog, guitar など
-
-			let tags = post.data.tags || [];
-
-			if (!categoryTags[category]) {
-				categoryTags[category] = {};
-			}
-
-			tags.forEach((tag) => {
-				if (!categoryTags[category][tag]) {
-					categoryTags[category][tag] = 0;
-				}
-				categoryTags[category][tag]++;
-			});
-		});
-
-		return categoryTags;
-	});
-
-	eleventyConfig.addPlugin(pluginRss);
-	//feedPlugin
-	/* eleventyConfig.addPlugin(pluginRss, {
-		type: "atom", // or "rss", "json"
-		outputPath: "/feed.xml",
-		stylesheet: "/pretty-atom-feed.xsl",
-		templateData: {
-			eleventyNavigation: {
-				key: "Feed",
-				order: 4
-			}
-		},
-		collection: {
-			name: "summarizedPostsForRss",
-			limit: 0,
-		},
-		metadata: {
-			language: "ja",
-			title: "BlazeChariot",
-			subtitle: "BlazeChariotはギター初心者のためとブログのサイトです。11tyと言うので作りました。",
-			base: "https://blazechariot.netlify.app/",
-			author: {
-				name: "Hidekichi"
-			}
-		}
-	}); */
-
-	eleventyConfig.addNunjucksFilter("htmlDateString", (dateObj) => {
-		return new Date(dateObj).toISOString();
-	});
-
-	eleventyConfig.addNunjucksFilter("readableDate", (dateObj) => {
-		const date = new Date(dateObj);
-		const year = date.getFullYear();
-		const month = date.getMonth() + 1; // getMonth() は0から始まるため、1を加算
-		const day = date.getDate();
-
-		// 日本語の日付形式にフォーマット
-		return `${year}年${month}月${day}日`;
-	});
-
-	eleventyConfig.addCollection("posts", function (collectionApi) {
-		return collectionApi.getFilteredByGlob("src/blog/*.md").sort((a, b) => {
-			return b.date - a.date;
-		});
-	});
-
-	eleventyConfig.addPlugin(syntaxHighlight, {
-		// Line separator for line breaks
-		lineSeparator: "\n",
-
-		// Change which Eleventy template formats use syntax highlighters
-		templateFormats: ["*"], // default
-
-		// Use only a subset of template types (11ty.js added in v4.0.0)
-		// templateFormats: ["liquid", "njk", "md", "11ty.js"],
-
-		// init callback lets you customize Prism
-		init: function ({ Prism }) {
-			Prism.languages.myCustomLanguage = {
-				/* … */
-			};
-		},
-
-		// Added in 3.1.1, add HTML attributes to the <pre> or <code> tags
-		preAttributes: {
-			tabindex: 0,
-
-			// Added in 4.1.0 you can use callback functions too
-			"data-language": function ({ language, content, options }) {
-				return language;
-			},
-		},
-		codeAttributes: {},
-
-		// Added in 5.0.0, throw errors on invalid language names
-		errorOnInvalidLanguage: false,
-	});
-
-	// Compress/Minify HTML output on production builds
-	eleventyConfig.addTransform("compressHTMLOutput", (content, outputPath) => {
-		const options = {
-			collapseWhitespace: "conservative", // Pass options to the module "collapseWhitespace"
-			removeEmptyAttributes: false, // Disable the module "removeEmptyAttributes"
-			removeComments: true,
-		};
-
-		if (outputPath && outputPath.endsWith(".html") && isProduction) {
-			try {
-				return htmlmin.minify(content, options);
-			} catch (err) {
-				console.error("HTML minification failed:", err);
-				return content; // エラーが発生した場合は元のコンテンツを返す
-			}
-		}
-
-		return content;
-	});
-
-	// markdown-it config
-	const mdLib = markdownIt({
-		html: true,
-		xhtmlOut: true,
-		breaks: true,
-		linkify: true,
-		typographer: true,
-	})
-		.use(rubyPlugin, {
-			rp: ["(", ")"],
-		})
-		.use(markdownItFigure)
-		.use(embedYoutubeDiv)
-		.use(attrs, {
-			selectorExceptions: ["table", "table tbody", "tbody"],
-		})
-		.use(markdownItMultimdTable, {
-			multiline: true,
-			rowspan: true,
-			headerless: false,
-			Multibody: true,
-		});
-
-	eleventyConfig.setLibrary("md", mdLib);
-
-	// This allows Eleventy to watch for file changes during local development.
-	eleventyConfig.setUseGitIgnore(false);
+  // .gitignore のファイルを監視対象から除外しない（開発中ファイルを検知するため）
+  eleventyConfig.setUseGitIgnore(false);
 }
 
 export const config = {
-	// Control which files Eleventy will process
-	// e.g.: *.md, *.njk, *.html, *.liquid
-	templateFormats: ["md", "njk", "html", "liquid"],
-
-	// Pre-process *.md files with: (default: `liquid`)
-	markdownTemplateEngine: "njk",
-
-	// Pre-process *.html files with: (default: `liquid`)
-	htmlTemplateEngine: "njk",
-
-	// These are all optional:
-	dir: {
-		input: "src", // default: "."
-		includes: "_includes", // default: "_includes" (`input` relative)
-		layouts: "_layouts",
-		data: "_data", // default: "_data" (`input` relative)
-		output: "dist",
-	},
-
-	// -----------------------------------------------------------------
-	// Optional items:
-	// -----------------------------------------------------------------
-
-	// If your site deploys to a subdirectory, change `pathPrefix`.
-	// Read more: https://www.11ty.dev/docs/config/#deploy-to-a-subdirectory-with-a-path-prefix
-
-	// When paired with the HTML <base> plugin https://www.11ty.dev/docs/plugins/html-base/
-	// it will transform any absolute URLs in your HTML to include this
-	// folder name and does **not** affect where things go in the output folder.
-
-	// pathPrefix: "/",
+  templateFormats: ["md", "njk", "html", "liquid"],
+  markdownTemplateEngine: "njk",
+  htmlTemplateEngine: "njk",
+  dir: {
+    input: "src",
+    includes: "_includes",
+    layouts: "_layouts",
+    data: "_data",
+    output: "dist",
+  },
 };

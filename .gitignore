@@ -74,3 +74,5 @@ src/_includes/styles.min.css
 .cache/
 .vscode/settings.json
 .zed/settings.json
+.frontmatter/database/taxonomyDb.json
+frontmatter.json
