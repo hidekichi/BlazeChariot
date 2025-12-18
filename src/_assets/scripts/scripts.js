@@ -9,23 +9,23 @@ import { topCoverSlideImage } from "./module/topCoverSlideImage.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
 	await footnote();
-	
+
 	await topCoverSlideImage();
-	
+
 	embbedYoutubePlayer();
 
 	initPanelSwitch();
-	
+
 	externalLink();
 
 	floatImage();
-	
+
 	toc();
-	
+
 	insertLoadlazy();
 
 	highlightWhenTheyIntersect();
-	
+
 	imageModalOpen();
 });
 
