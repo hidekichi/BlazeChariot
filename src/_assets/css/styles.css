@@ -129,6 +129,13 @@ body {
 		line-height: 1.25;
 		margin: 6rem 0 1.75rem;
 		font-weight: bold;
+
+		&::before {
+			content: "✻";
+			display: inline-block;
+			width: 1em;
+			margin-right: 0.5rem;
+		}
 	}
 
 	h3 {
@@ -631,14 +638,14 @@ strong {
 		margin: 4rem 0;
 	}
 
-	:where(h2, h3, h4, h5) {
+	:where(h3, h4, h5) {
 		/* font-size: 0.865rem; */
 		letter-spacing: 0.025rem;
 		line-height: 1.4;
 		margin-top: 4rem;
 		margin-bottom: 1rem;
 		padding-bottom: 0.5em;
-		border-bottom: solid 0.1rem var(--transparency-1);
+		border-bottom: solid 0.1rem rgba(84, 156, 168, 0.3);
 
 		& + :where(h2, h3, h4, h5) {
 			margin-top: 2rem;
@@ -648,11 +655,12 @@ strong {
 	h2 {
 		/* font-size: 1.8rem; */
 		padding-bottom: 0.5rem;
-		border-bottom: solid 0.1rem var(--transparency-1);
+		/*border-bottom: solid 0.1rem var(--transparency-1);*/
 	}
 
 	h4 {
 		/* font-size: 1rem; */
+		border: 0;
 
 		&::before {
 			content: "";
@@ -1013,7 +1021,6 @@ ul.listing {
 	padding: 0;
 
 	li {
-		border-bottom: solid 0.1rem var(--transparency-1);
 		padding: 0.5rem 0;
 		display: flex;
 		align-items: center;
@@ -1026,6 +1033,13 @@ ul.listing {
 			&:hover {
 				text-decoration: underline;
 			}
+		}
+
+		&::after {
+			content: "";
+			width: 100%;
+			margin: 2em 0 0 0;
+			border-bottom: 1px solid rgb(21, 67, 81);
 		}
 
 		time {
@@ -1178,6 +1192,7 @@ pre[class^="language-"] {
 	line-height: 1.2 !important;
 	font-family: "Fragment mono", monospace !important;
 	padding: 16px !important;
+	margin: 2em 0;
 }
 
 code[class^="language-"] {
@@ -1253,6 +1268,8 @@ details {
 		.title {
 			font-size: 1.125rem;
 			line-height: 1.2;
+			width: auto;
+			max-width: 60ch;
 		}
 
 		time {
