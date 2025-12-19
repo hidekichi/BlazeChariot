@@ -2,7 +2,7 @@
 title: Linuxの系統別 解説
 description: こちらのページでは、Linuxのディストリビューションのリリースタイプや、パッケージ管理、その特徴や諸々を系統別で記載しています。それらを諸々加味して自身に最適と思われるディストリビューションを探してみて下さい。
 date: 2025-05-13
-update: 2025-09-22
+update: 2025-12-19
 category:
   - blog
 tags:
@@ -22,7 +22,7 @@ permalink: /blog/{{ page.fileSlug }}/
 
 ## linuxのリリース頻度について
 
-Linuxには、**ローリングリリース**と**固定リリース**との二種類が主にあります。
+Linuxのディストリビューションには、**ローリングリリース**と**固定リリース**の二種類が主にあります。
 
 ローリングリリースは、常に最新の状態にOS等を維持するようにして更新があればその通知が来たりします。
 固定リリースは定期的にアップデートが行われ、普段は早急な問題や更新があった場合にだけ更新されるという感じです。
@@ -30,12 +30,12 @@ Linuxには、**ローリングリリース**と**固定リリース**との二�
 PC(あるいはシステム)を常に最新の状態にしたい人にはローリングリリースモデルが良いでしょうし、できるだけアップデートをせず機能を維持したい場合は固定リリースの方が良いかと思います。
 
 Windowsのように勝手に通知もなく更新(主にダウンロード)されますが、Linuxの場合でも同じような自動更新の設定はあるかと思いますが、基本的には<u>まず通知があります</u>。
-通知にはその通知を受けられるソフトや拡張機能などが必要ですが、勝手に更新されない設定をして自分のタイミングで更新するのが良いと個人的には思います。
+通知にはその通知を受けられるソフトや拡張機能などが必要で、勝手に更新されない設定をして自分のタイミングで更新するのが良いと個人的には思います。
 通知を受けられるソフトや拡張機能については、たいていはデスクトップ環境に統合されているか、ない場合は機能だけはありつつも(アイコン)表示するには拡張機能が必要と言う感じかと思います。
 
 ### Windowsの場合
 
-Linuxで説明する前に多くの人がご存知のWindowsの場合ではどうかと言うと、ハイブリットなアップデートモデルが採用されていて、22H2、23H2、24H2などといった固定リリースされる更新があり、またそれより短い頻度で月次品質更新プログラム(毎月第2火曜、日本は水曜か)ら更新するものと、Delivery Optimizationで、何かしらのたびに更新されるものなどが入り混じっています。
+Linuxで説明する前に多くの人がご存知のWindowsの場合ではどうかと言うと、ハイブリットなアップデートモデルが採用されています。22H2、23H2、24H2などといった固定リリースされる更新があり、またそれより短い頻度で月次品質更新プログラム(毎月第2火曜、日本は水曜か)ら更新するものと、Delivery Optimizationで、何かしらのたびに更新されるものなどが入り混じっています。
 特にDelivery Optimizationは通知もなしに勝手にダウンロードして勝手にインストールされるのが多くの人に不評です。何か大事なことをしていてネットの帯域を使われたくないとかでも容赦なくダウンロードもしますしアップデートもされます。
 
 Windowsの説明などでは作業のじゃまをしないように配慮されているということですが確実に邪魔します。特にWi-Fiがない場所でスマホなどを用いてテザリングをしている環境でもWindows Updateは勝手に行われますし、それだけで現在の通信帯域や通信量が{逼迫|ひっぱく}してようが無視して実行してきます。
@@ -63,7 +63,6 @@ Windows Updateは1週間とか決めた分だけ停止(延長)することも可
 - LTS：Long Term Support長期サポート
 </div>
 
-
 ### ローリングリリースタイプのディストリビューション
 
 ローリングリリースは常に最新の状態に保つという性質なので、更新はその都度行われ開発チームの準備ができたものから随時小さなアップデートしてリリースされます。
@@ -83,12 +82,13 @@ Windows Updateは1週間とか決めた分だけ停止(延長)することも可
 
 <div class="table-container">
 
-| Arch Linux          | Arch 系   | 子や孫にあたるディストリビューションもほぼローリングリリース                 |
-|---------------------|----------|--------------------------------------------------|
-| Manjaro Linux       | Arch 系   | 上記通り、Arch Linux の子に当たる Manjaro もローリングリリースです |
-| openSUSE Tumbleweed | SUSE 系   | openSUSE の Leap とは違う事に注意                     |
-| Gentoo Linux        | Gentoo 系 |                                                  |
-| NixOS               | 独立系    |                                                  |
+| ディストリビューション名 | 系統      | 備考                                                           |
+| ------------------------ | --------- | -------------------------------------------------------------- |
+| Arch Linux               | Arch 系   | 子や孫にあたるディストリビューションもほぼローリングリリース   |
+| Manjaro Linux            | Arch 系   | 上記通り、Arch Linux の子に当たる Manjaro もローリングリリース |
+| openSUSE Tumbleweed      | SUSE 系   | openSUSE の Leap とは違う事に注意                              |
+| Gentoo Linux             | Gentoo 系 |                                                                |
+| NixOS                    | 独立系    |                                                                |
 
 </div>
 
@@ -96,10 +96,10 @@ Windows Updateは1週間とか決めた分だけ停止(延長)することも可
 
 <div class="table-container">
 
-|                          |                                                                                                 |
-|--------------------------|-------------------------------------------------------------------------------------------------|
-| Debian(Testing/Unstable) | 次期安定版に向けた開発版で厳密なローリングとは違いながら継続的に更新されます                                         |
-| CentOS Stream            | RHEL のアップストリーム開発ブランチで、RHEL の次期マイナーリリースに<br/>何が含まれるかを事前に確認できるローリングプレビューのような性質を持っている |
+| ディストリビューション   |                                        |
+| ------------------------ | -------------------------------------------------------------------------------------------------------- |
+| Debian(Testing/Unstable) | 次期安定版に向けた開発版で厳密なローリングとは違いながら継続的に更新されます       |
+| CentOS Stream            | RHEL のアップストリーム開発ブランチで、RHELの次期マイナーリリースに<br/>何が含まれるかを事前に確認できるローリングプレビューのような性質を持っている |
 
 </div>
 
@@ -117,7 +117,7 @@ Debian系統の特徴は、APTパッケージ管理、安定したパッケー�
 <div class="table-container">
 
 | 親                                | rating | 子                                        | rating | 孫                                         | rating |
-|-----------------------------------|:------:|-------------------------------------------|:------:|--------------------------------------------|:------:|
+| --------------------------------- | :----: | ----------------------------------------- | :----: | ------------------------------------------ | :----: |
 | [Debian](https://www.debian.org/) |  8.9   | [Ubuntu](https://www.ubuntu.com/)         |  7.7   | [Linux Mint](https://linuxmint.com/)       |  8.8   |
 | ^^                                |   ^^   | ^^                                        |   ^^   | [Pop!\_OS](https://system76.com/pop)       |  8.0   |
 | ^^                                |   ^^   | ^^                                        |   ^^   | [Zorin OS](https://zorin.com/os/)          |  8.5   |
@@ -219,7 +219,7 @@ GnomeやKDEほどではないにしてもある程度のカスタマイズもで
       <img src="../img/mate-terminal.webp" alt="mateスクリーンショット">
     </picture>
  </div>
- <div class="w-[100%] md:w-[50%]"> 
+ <div class="w-[100%] md:w-[50%]">
     <span>Budgie</span>
     <picture>
       <source srcset="../img/Budgie.avif" type="image/avif">
@@ -254,8 +254,8 @@ GnomeやKDEほどではないにしてもある程度のカスタマイズもで
 
 <div class="table-container">
 
-| 開発版                               | rating | ローリングプレビュー                               | rating | 商用版                                             | rating | クローン(無償版)                           | rating |
-|--------------------------------------|:------:|------------------------------------------|:------:|----------------------------------------------------|:------:|----------------------------------------|:------:|
+| 開発版                               | rating | ローリングプレビュー                     | rating | 商用版                                             | rating | クローン(無償版)                       | rating |
+| ------------------------------------ | :----: | ---------------------------------------- | :----: | -------------------------------------------------- | :----: | -------------------------------------- | :----: |
 | [Fedora](https://fedoraproject.org/) |  8.2   | [CentOS Stream](https://www.centos.org/) |  5.2   | [Red Hat Enterprise Linux](http://www.redhat.com/) |  7.6   | [Rocky Linux](https://rockylinux.org/) |  9.0   |
 | ^^                                   |   ^^   | ^^                                       |   ^^   | ^^                                                 |   ^^   | [AlmaLinux](https://almalinux.org/)    |  8.1   |
 
@@ -301,13 +301,13 @@ AlmaLinux/Rocky LinuxはOS技術はRHELと同等であるというのは売り�
 
 <div class="table-container">
 
-|    |                                          | rating |
-|----|------------------------------------------|:------:|
-| 親 | [Arch Linux](http://www.archlinux.org/)  |  9.2   |
-| 子 | [Manjaro](https://manjaro.org/)          |  8.1   |
-| ^^ | [EndeavourOS](https://endeavouros.com/)  |  8.5   |
-| ^^ | [CachyOS](https://cachyos.org/)          |  7.9   |
-| ^^ | [Garuda Linux](https://garudalinux.org/) |  8.4   |
+|     |                                          | rating |
+| --- | ---------------------------------------- | :----: |
+| 親  | [Arch Linux](http://www.archlinux.org/)  |  9.2   |
+| 子  | [Manjaro](https://manjaro.org/)          |  8.1   |
+| ^^  | [EndeavourOS](https://endeavouros.com/)  |  8.5   |
+| ^^  | [CachyOS](https://cachyos.org/)          |  7.9   |
+| ^^  | [Garuda Linux](https://garudalinux.org/) |  8.4   |
 
 </div>
 
@@ -376,7 +376,7 @@ Garuda Linuxは[BTRFS(英語)](https://btrfs.readthedocs.io/en/latest/)ファイ
 <div class="table-container">
 
 | 開発先行版                                       | 商用製品版            | rating | 無償安定版    | rating |
-|--------------------------------------------------|-----------------------|:------:|---------------|:------:|
+| ------------------------------------------------ | --------------------- | :----: | ------------- | :----: |
 | [openSUSE](https://www.opensuse.org/) Tumbleweed | SUSE Linux Enterprise |  8.5   | openSUSE Leap |  8.8   |
 
 </div>
@@ -418,7 +418,7 @@ openSUSEはここまでの内容を読んでもらってわかるように、も
 <div class="table-container">
 
 | 親                                      | rating | 子                                                  | rating |
-|-----------------------------------------|:------:|-----------------------------------------------------|:------:|
+| --------------------------------------- | :----: | --------------------------------------------------- | :----: |
 | [Gentoo Linux](https://www.gentoo.org/) |  8.6   | [Calculate Linux](https://www.calculate-linux.org/) |  8.1   |
 
 </div>
@@ -447,7 +447,7 @@ OSのGUIインストーラーがないという点からしてもArch Linuxを�
 ## その他の系統
 
 |                             | rating |
-|-----------------------------|:------:|
+| --------------------------- | :----: |
 | Alpine Linux                |  8.8   |
 | [NixOS](https://nixos.org/) |  9.0   |
 
@@ -675,11 +675,11 @@ Flatpakなどは、必要なライブラリやフレームワークをひとつ�
 
 <div class="table-container">
 
-| ランク | 名称                                     |  系統   | 備考                                    |
-|----:|------------------------------------------|:------:|----------------------------------------|
-|   1 | [EndeavourOS](https://endeavouros.com/)  | Arch 系 | 管理人が使用しているため。+Gnome+ChaoticAUR使用 |
-|   2 | [Garuda Linux](https://garudalinux.org/) | Arch 系 | ChaoticAURの元                           |
-|   3 | [NixOS](https://nixos.org/)              | 独立系  | 管理人が次に使うならこれと思ってるもの               |
+| ランク | 名称                                     |  系統   | 備考                                            |
+| -----: | ---------------------------------------- | :-----: | ----------------------------------------------- |
+|      1 | [EndeavourOS](https://endeavouros.com/)  | Arch 系 | 管理人が使用しているため。+Gnome+ChaoticAUR使用 |
+|      2 | [Garuda Linux](https://garudalinux.org/) | Arch 系 | ChaoticAURの元                                  |
+|      3 | [NixOS](https://nixos.org/)              | 独立系  | 管理人が次に使うならこれと思ってるもの          |
 
 </div>
 
@@ -688,18 +688,18 @@ Flatpakなどは、必要なライブラリやフレームワークをひとつ�
 
 <div class="table-container">
 
-| ランク | 名称                                                                         |    系統    | 最初の安定版<br/>リリース年 | 主な開発国/設立国 |
-|----:|------------------------------------------------------------------------------|:---------:|:----------------------:|------------------|
-|   1 | [Ubuntu](https://www.ubuntu.com/)                                            | Debian 系  |          2004          | イギリス             |
-|   2 | [Arch Linux](http://www.archlinux.org/)                                      |  Arch 系   |          2002          | アメリカ             |
-|   3 | [Fedora](https://fedoraproject.org/)                                         | Red Hat 系 |          2003          | アメリカ             |
-|   4 | [Linux Mint](https://linuxmint.com/)                                         | Ubuntu 系  |          2006          | アイルランド/フランス      |
-|   5 | [Debian](https://www.debian.org/)                                            | Debian 系  |          1993          | フランス             |
-|   6 | [Pop!\_OS](https://system76.com/pop)                                         | Ubuntu 系  |          2017          | アメリカ             |
-|   7 | [Manjaro](https://manjaro.org/)                                              |  Arch 系   |          2011          | オーストリア/フランス/ドイツ  |
-|   8 | [NixOS](https://nixos.org/)                                                  |   独立系   |          2003          | オランダ             |
-|   9 | [AlmaLinux](https://almalinux.org/) / [Rocky Linux](https://rockylinux.org/) | Red Hat 系 |          2021          | アメリカ             |
-|  10 | [openSUSE](https://www.opensuse.org/) Tumbleweed                             |  SUSE 系   |          1994          | ドイツ/スイス          |
+| ランク | 名称                                                                         |    系統    | 最初の安定版<br/>リリース年 | 主な開発国/設立国            |
+| -----: | ---------------------------------------------------------------------------- | :--------: | :-------------------------: | ---------------------------- |
+|      1 | [Ubuntu](https://www.ubuntu.com/)                                            | Debian 系  |            2004             | イギリス                     |
+|      2 | [Arch Linux](http://www.archlinux.org/)                                      |  Arch 系   |            2002             | アメリカ                     |
+|      3 | [Fedora](https://fedoraproject.org/)                                         | Red Hat 系 |            2003             | アメリカ                     |
+|      4 | [Linux Mint](https://linuxmint.com/)                                         | Ubuntu 系  |            2006             | アイルランド/フランス        |
+|      5 | [Debian](https://www.debian.org/)                                            | Debian 系  |            1993             | フランス                     |
+|      6 | [Pop!\_OS](https://system76.com/pop)                                         | Ubuntu 系  |            2017             | アメリカ                     |
+|      7 | [Manjaro](https://manjaro.org/)                                              |  Arch 系   |            2011             | オーストリア/フランス/ドイツ |
+|      8 | [NixOS](https://nixos.org/)                                                  |   独立系   |            2003             | オランダ                     |
+|      9 | [AlmaLinux](https://almalinux.org/) / [Rocky Linux](https://rockylinux.org/) | Red Hat 系 |            2021             | アメリカ                     |
+|     10 | [openSUSE](https://www.opensuse.org/) Tumbleweed                             |  SUSE 系   |            1994             | ドイツ/スイス                |
 
 </div>
 
