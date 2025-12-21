@@ -2,7 +2,7 @@
 title: 今どきのターミナルはエディターにもなる - fresh -
 description: nanoやmicroなどが以前からありましたが新たにFreshというRust製のTUIテキストエディターが登場しました
 date: 2025-12-18
-update: 2025-12-18
+update: 2025-12-21
 category:
   - blog
 tags:
@@ -127,4 +127,9 @@ HyprlandやniriなどConfigファイルを触る人にとってはファイル�
 
 このように、各種レビューなどでも高評価を得ており、2025年最後に隠れた名作として素晴らしいソフトが誕生しました。
 
+<div class="ytgrid grid grid-cols-1 md:grid-cols-2 auto-rows-auto">
+
 {ytp::https://youtu.be/BXXafRRTXWs::Fresh が新しいターミナルファーストのテキストエディタとして登場}
+{ytp::https://youtu.be/VYRdlzObBPM::FRESH - 新しいターミナル テキスト エディター (IDE)}
+
+</div>
