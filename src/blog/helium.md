@@ -81,11 +81,11 @@ Heliumはブロートゼロなので、必要に応じて追加が鉄則。
 
 パスワードマネージャは入れておくとよいかと思います。[Bitwarden](https://chromewebstore.google.com/detail/bitwarden-%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC/nngceckbapebfimnlniiiahkandclblb?hl=ja)、[1Password](https://chromewebstore.google.com/detail/1password-%E2%80%93-%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E4%BF%9D%E7%AE%A1%E5%BA%AB/aeblfdkhhhdcdjpifhhbdiojplfjncoa?hl=ja)、[Proton Pass](https://chromewebstore.google.com/detail/proton-pass-free-password/ghmbeldphafepmbegfdlkpapadhbakde?hl=ja)（ブラウザ内保存はデフォルトオフなので必須）。1Passwordを使う場合、アプリ側設定で「Heliumを許可ブラウザに手動追加」（macOS/Linux推奨）。
 
-ダークモードにするための拡張機能もいいかと思います。[Dark Reader](https://chromewebstore.google.com/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh?hl=ja)とか他にも色々あります。
+ダークモードにするための拡張機能も良いかと思います。[Dark Reader](https://chromewebstore.google.com/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh?hl=ja)とか他にも色々あります。
 
 Youtubeをよく見るのであれば、広告削除をONにすると対策されているので動画が再生されないかも知れませんがそれ以外の不要な見た目や機能を非表示にしたりするのに便利な[UnTrap](https://chromewebstore.google.com/detail/untrap-for-youtube/enboaomnljigfhfjfoalacienlhjlfil?hl=ja)はとても便利です。
 
-あと入れるとしたらWebサイトを自身の簡単なcssで改造できる[Stylus](https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne?hl=ja)やマウスジェスチャーで[crxMouse Chrome](https://chromewebstore.google.com/detail/crxmouse-chrome-gestures/jlgkpaicikihijadgifklkbpdajbkhjo?hl=ja)や[Circle Mouse Gestures](https://chromewebstore.google.com/detail/circle-mouse-gestures-pie/kkknhbbfjlibfjagilggkcelmcobgefa?hl=ja)もよいかと思います。
+あと入れるとしたらWebサイトを自身の簡単なcssで改造できる[Stylus](https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne?hl=ja)やマウスジェスチャーで[crxMouse Chrome](https://chromewebstore.google.com/detail/crxmouse-chrome-gestures/jlgkpaicikihijadgifklkbpdajbkhjo?hl=ja)や[Circle Mouse Gestures](https://chromewebstore.google.com/detail/circle-mouse-gestures-pie/kkknhbbfjlibfjagilggkcelmcobgefa?hl=ja)も良いかと思います。
 なるべく厳選して入れすぎないように注意して下さい。
 
 ## まとめ
@@ -101,14 +101,14 @@ Heliumの意義は、Chromiumベースでありながら、Googleの追跡コー
 
 Braveが論争の主役になれない理由としては、収益モデルの存在があり、仮想通貨（BAT）や独自の広告配信、VPN販売など、ブラウザ自体が「ビジネス」になっています。更にAIやウォレットなどが「ブロート」化しており、これを嫌う層にとっては「Chromeの代わりにはなっても、究極のブラウザではない」と見なされます。
 
-これを踏まえて、「Braveがあるじゃないか」という介入は、利便性や機能性を求める一般的な回答であるわけですか゜、「ブラウザはユーザーに代わって余計なことをすべきではない」という哲学に立つならば、Helium（究極の引き算）か、Firefox（独立した選択肢）かという議論こそが、真にインターネットの未来を考える人たちの論争にふさわしいと言えます。
+これを踏まえて、「Braveがあるじゃないか」という介入は、利便性や機能性を求める一般的な回答であるわけですが、「ブラウザはユーザーに代わって余計なことをすべきではない」という哲学に立つならば、Helium（究極の引き算）か、Firefox（独立した選択肢）かという議論こそが、真にインターネットの未来を考える人たちの論争にふさわしいと言えるでしょう。
 
 足していくのは機能拡張で良いのです。そのためのものです。引いていくことが大事であって、OSにしろソフトにしろシンプルであって思ったことが思うようにできることが大事ではないでしょうか？ファイルを右クリックしたら出てくるメニューはシンプルかつ効率的であるべきです。決して機能を上乗せして不便にすることではないと思います。
 
 私がHeliumを進める理由はこういう所です。
 
 そして、2026年、新しいWebエンジンを積んだブラウザが生まれます。名前は**Ladybird**。最初のアルファ版がリリースされます。2027年にベータ版が出て、一般的に出回るのは2028年になると予想されています。
-これは`LibWeb`と言う新しいレンダリングエンジンと、`LibJS`と言う新しいJavaScriptエンジンを全てゼロから新しく作られている第4のエンジンのブラウザです。ブロートゼロを体現する非営利モデルであり、収益化の否定をし、寄付とスポンサー（CloudflareやGitHub創設者など）によってのみ支えられている純粋なブラウザでMozillaと同様に非営利団体「Ladybird Browser Initiative」によって運営されます。
+これは`LibWeb`と言う新しいレンダリングエンジンと、`LibJS`と言う新しいJavaScriptエンジンを全てゼロから新しく作られる第4のエンジンのブラウザです。ブロートゼロを体現する非営利モデルであり、収益化の否定をし、寄付とスポンサー（CloudflareやGitHub創設者など）によってのみ支えられている純粋なブラウザでMozillaと同様に非営利団体「Ladybird Browser Initiative」によって運営されます。
 
 Ladybirdは、多くのユーザーが理想としながらも実現が困難だった領域に挑んでいます。Ladybirdが登場することで、
 - Firefox派は「独自エンジンだが、収益のためにGoogle等と協力せざるを得ない」
