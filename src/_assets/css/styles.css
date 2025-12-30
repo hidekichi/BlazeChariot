@@ -145,7 +145,7 @@ body {
 
 	/* h4, h5, h6 も同様に clamp() で設定 */
 	h4 {
-		font-size: clamp(1.15em, 3vw, 1.4em);
+		font-size: clamp(1.15em, 3vw, 1.3em);
 		line-height: 1.4;
 		display: flex;
 	}
@@ -775,7 +775,7 @@ strong {
 		border-left: 5px solid var(--brand);
 		padding: 1rem;
 		line-height: 1.9;
-		background-color: #080822;
+		background-color: #031a3e;
 		font-size: 0.9em;
 	}
 
