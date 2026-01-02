@@ -2,7 +2,7 @@
 title: EdgeだとかBraveだとかで迷ってるならこれで行こう！Heliumが全て解決
 description: ブラウザにAIの内蔵はいらないし、無駄な情報は送られたくもない。ましてや広告もブロックして欲しい。なのにシンプルがHeliumだ
 date: 2025-12-30
-update: 2026-01-01
+update: 2026-01-02
 category:
   - blog
 tags:
@@ -10,16 +10,16 @@ tags:
 images:
   - ../img/helium_toppage.avif
   - ../img/helium_split_view.avif
+  - ../img/heliun_bang.avif
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---
 
 ## Webブラウザってどれがいいの？
 
-Webブラウザってどれがいいの？とインターネッツではよく聞きます。どれでも好きなの使えばいいじゃないかというのが私見ではあるものの、現在の多くのWebブラウザはChrome系とFirefox系のいずれかの系統のブラウザが主流です。
-Webの最新機能はChrome系の方が実装が早いわけですが、結局モダンブラウザと言うとこれらを指していて、Edgeもマイクロソフトの自社エンジンを諦めてChromeの派生ブラウザになりました。
-
-しかし、ここでベースはそれぞれの元になるものと同じながら味付けが結構異なっていて、Chromeの基本機能に独自の外見やAIを搭載するなど色々があるわけです。
+Webブラウザってどれがいいの？とインターネッツではよく聞きます。どれでも好きなのを使えばいいじゃないかというのが私見ですが、どれが良いのかだけではそれぞれに一長一短があり選べません。
+現在の多くのWebブラウザはChrome系とFirefox系のいずれかの系統のブラウザが主流です。多くのブラウザがどちらかのエンジンを積んでいてガワや機能が違うだけとも言えます。しかしそれがそれぞれのブラウザの個性みたいなものを決めているとも思うのです。
+Web(cssやJavaScript)の最新機能はChrome系の方が実装が早いわけですが、結局モダンブラウザと言うとこれらを指していて、Edgeもマイクロソフトの自社エンジンを諦めてChromeの派生ブラウザになりました。
 
 ![helium_top_page](../img/helium_toppage.avif)
 
@@ -39,7 +39,17 @@ Webの最新機能はChrome系の方が実装が早いわけですが、結局�
 - 追加機能 → スプリットビュー（画面分割）、DuckDuckGo風の!bangs（アドレスバーから直接サイト検索）、Chrome拡張のフルサポート（Manifest V2も長く対応）。
 - Chrome Web Storeの匿名化 → 拡張インストール時のリクエストをプロキシ経由で匿名化し、Googleにトラッキングされない。
 
+<div class="grid grid-cols-1 py-4 md:grid-cols-2 auto-rows-auto">
+
 ![helium_split_view](../img/helium_split_view.avif)
+{class="block"}
+
+![helium bang](../img/heliun_bang.avif)
+{class="block !mt-0"}
+
+</div>
+
+<span>※ 左(上)側はスプリットビュー、右(下)側が!bangsです</span>{class="inline-block pb-8 text-sm leading-4"}
 
 Braveと比較されることが多く、「Braveが目指した理想形」「Braveよりシンプルでブロートがない」と評価されています。Chromeの拡張やサイト互換性を保ちつつ、Googleの影響を最小限に抑えたい人に特におすすめです。
 まだベータ版段階の部分もあり、DRMコンテンツ（Netflixなど）はWidevine非対応のため再生できませんが、日常的なブラウジングでは軽快でプライバシーが強いブラウザとして人気が出てきています。
@@ -111,9 +121,9 @@ Braveが論争の主役になれない理由としては、収益モデルの存
 これは`LibWeb`と言う新しいレンダリングエンジンと、`LibJS`と言う新しいJavaScriptエンジンを全てゼロから新しく作られる第4のエンジンのブラウザです。ブロートゼロを体現する非営利モデルであり、収益化の否定をし、寄付とスポンサー（CloudflareやGitHub創設者など）によってのみ支えられている純粋なブラウザでMozillaと同様に非営利団体「Ladybird Browser Initiative」によって運営されます。
 
 Ladybirdは、多くのユーザーが理想としながらも実現が困難だった領域に挑んでいます。Ladybirdが登場することで、
-- Firefox派は「独自エンジンだが、収益のためにGoogle等と協力せざるを得ない」
-- Helium派: 「エンジンはGoogle製（Chromium）だが、究極にクリーンである」
-- Ladybird派: 「エンジンも独自、かつ一切の収益化や不要な機能（ブロート）を排除した究極の独立」
+- Firefox派は 「独自エンジンだが、収益のためにGoogle等と協力せざるを得ない」
+- Helium派は 「エンジンはGoogle製（Chromium）だが、究極にクリーンである」
+- Ladybird派は 「エンジンも独自、かつ一切の収益化や不要な機能（ブロート）を排除した究極の独立」
 
 というような対立の構造になります。
 
