@@ -87,7 +87,7 @@ Manifest V3では、拡張機能のuBlock Originフル版がChromeで使えな�
 Heliumはブロートゼロなので、必要に応じて追加が鉄則。
 
 > ブロートゼロとは
-> ブロートは誇張と言う意味で、ブロートゼロ、あるいはゼロブロートで誇張がない、つまり無駄なものがない、不要な機能がないと言う意味になります
+> ブロートは膨張と言う意味で、ブロートゼロ、あるいはゼロブロートで膨張がない、肥大化していない、お腹が張っている状態ではない、つまり無駄なものがない、不要な機能がないと言う意味になります
 
 パスワードマネージャは入れておくとよいかと思います。[Bitwarden](https://chromewebstore.google.com/detail/bitwarden-%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC/nngceckbapebfimnlniiiahkandclblb?hl=ja)、[1Password](https://chromewebstore.google.com/detail/1password-%E2%80%93-%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E4%BF%9D%E7%AE%A1%E5%BA%AB/aeblfdkhhhdcdjpifhhbdiojplfjncoa?hl=ja)、[Proton Pass](https://chromewebstore.google.com/detail/proton-pass-free-password/ghmbeldphafepmbegfdlkpapadhbakde?hl=ja)（ブラウザ内保存はデフォルトオフなので必須）。1Passwordを使う場合、アプリ側設定で「Heliumを許可ブラウザに手動追加」（macOS/Linux推奨）。
 
