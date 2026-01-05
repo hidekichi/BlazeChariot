@@ -98,10 +98,11 @@ Youtubeをよく見るのであれば、広告削除をONにすると対策さ�
 あと入れるとしたらWebサイトを自身の簡単なcssで改造できる[Stylus](https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne?hl=ja)やマウスジェスチャーで[crxMouse Chrome](https://chromewebstore.google.com/detail/crxmouse-chrome-gestures/jlgkpaicikihijadgifklkbpdajbkhjo?hl=ja)や[Circle Mouse Gestures](https://chromewebstore.google.com/detail/circle-mouse-gestures-pie/kkknhbbfjlibfjagilggkcelmcobgefa?hl=ja)も良いかと思います。
 なるべく厳選して入れすぎないように注意して下さい。
 
-## Linuxでインストール・実行するには
+### Linuxでインストール・実行するには
 
-Windows、MacOSはWebサイトからダウンロードする場合、自動でプラットフォームが選ばれて、x86、arm版を選択してダウンロードする感じですが、LinuxはAppImageになっています。これがどういうものか知らないとLinuxで使えません。
-LinuxでAppImageを使う時は特別なソフト・インストール不要で、依存関係をすべて内包しているため、基本的な使い方はどのディストロでもほぼ同じ。
+Windows、MacOSは公式サイトからダウンロードする場合、自動でプラットフォームが選ばれて、x86・arm版を選択してダウンロードする感じですが、LinuxはAppImageになっています。これがどういうものか知らないとLinuxで使え無いと思うのでその方法を書いておきます。
+
+LinuxでAppImageのアプリを使う時は特別なソフト・インストール不要で、依存関係をすべて内包しているため、基本的な使い方はどのディストロでもほぼ同じです。
 ファイルマネージャーから<u>該当AppImageを右クリックして、権限(パーミッション)で、 **プログラムとして実行** にチェックを入れるだけ</u>です。
 
 あるいはターミナルから、
@@ -118,7 +119,7 @@ sudo apt install libfuse2
 
 普通に起動できたらそのままランチャーに登録できるとも思います。しかし、AppImageが増えてきて、色んなディレクトリに置いたりすると管理が大変になりますので**Gear Leverを利用すると一層便利になります**。
 
-### Gear Leverとは
+#### Gear Leverとは
 
 [Gear Lever](https://flathub.org/apps/it.mijorus.gearlever)とはLinuxでAppImageファイルを簡単に管理するための無料・オープンソースのGUIツールです。
 
