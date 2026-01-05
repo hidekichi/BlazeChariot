@@ -98,6 +98,47 @@ Youtubeをよく見るのであれば、広告削除をONにすると対策さ�
 あと入れるとしたらWebサイトを自身の簡単なcssで改造できる[Stylus](https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne?hl=ja)やマウスジェスチャーで[crxMouse Chrome](https://chromewebstore.google.com/detail/crxmouse-chrome-gestures/jlgkpaicikihijadgifklkbpdajbkhjo?hl=ja)や[Circle Mouse Gestures](https://chromewebstore.google.com/detail/circle-mouse-gestures-pie/kkknhbbfjlibfjagilggkcelmcobgefa?hl=ja)も良いかと思います。
 なるべく厳選して入れすぎないように注意して下さい。
 
+## Linuxでインストール・実行するには
+
+Windows、MacOSはWebサイトからダウンロードする場合、自動でプラットフォームが選ばれて、x86、arm版を選択してダウンロードする感じですが、LinuxはAppImageになっています。これがどういうものか知らないとLinuxで使えません。
+LinuxでAppImageを使う時は特別なソフト・インストール不要で、依存関係をすべて内包しているため、基本的な使い方はどのディストロでもほぼ同じ。
+ファイルマネージャーから<u>該当AppImageを右クリックして、権限(パーミッション)で、 **プログラムとして実行** にチェックを入れるだけ</u>です。
+
+あるいはターミナルから、
+```bash
+chmod +x ファイル名.AppImage
+```
+として実行権限を与えます。古いディストロや例えばUbuntu 22.04以降でFUSEが不足する場合、
+```bash
+sudo apt install libfuse2
+```
+などとしてライブラリを追加する必要があることがあります。**現行の通常ディストリビューションでは権限を与えるだけで何もすることはありません**。
+
+しかし、これだけではランチャーの登録ができなかったりするので、[AppImageLauncher](https://appimagelauncher.com/)を導入するのをよく言われますが、自分の環境(CachyOS + Hyprland)では導入するとAppImageが起動しなくなると言う事が起こりました。削除したら起動できるのでAppImageLauncherが原因なのは間違いないですが、ディストリビューションによっては動くんでしょう。
+
+普通に起動できたらそのままランチャーに登録できるとも思います。しかし、AppImageが増えてきて、色んなディレクトリに置いたりすると管理が大変になりますので**Gear Leverを利用すると一層便利になります**。
+
+### Gear Leverとは
+
+[Gear Lever](https://flathub.org/apps/it.mijorus.gearlever)とはLinuxでAppImageファイルを簡単に管理するための無料・オープンソースのGUIツールです。
+
+- AppImageファイルをドラッグ&ドロップするだけで、自動的に.desktopファイルを作成し、アプリケーションランチャー（メニュー）に登録。アイコンやメタデータも抽出してきれいに表示
+- すべてのAppImageを指定のフォルダ（デフォルト~/Applicationsなど）にまとめて管理。移動またはコピー選択可能
+- AppImageの更新を確認・適用（GitHubリリースなどに対応）。古いバージョンを残すことも可能。カスタム更新URLを設定
+- AppImage本体、.desktopファイル、アイコンを一括で削除ができる
+
+というような特徴があります。
+
+インストールの方法は、**Flatpakで全てのディストリビューション対応**です。
+```bash
+flatpak install flathub it.mijorus.gearlever
+```
+としてターミナルからコマンドを入れます。
+
+Gear Leverは、AppImageLauncherの後継的な位置づけで、現在積極的に開発されており（2025年時点でも更新あり）、多くのユーザーから「シンプルで使いやすい」と評価されています。
+
+Gear Leverではランチャー登録、あるいはアプリ一覧の表示に必要な`.desktopファイル`などを抽出登録できますが、もしすぐに反映しない場合はログインし直して下さい。
+
 ## まとめ
 
 もうこれがあればしばらくはEdgeとBraveどっちがいいの？という論争はなくなります。Heliumのダウンロードサイズは110MB～130MB程度でBraveもインストーラーは127MBとたいして変わりませんがインストールした後はかなり肥大するかと思います。1～2GBになることもあるかと。Heliumは400MB～1GB程度になるかと思いますがだいぶ軽量であると言えると思います。
