@@ -1,8 +1,8 @@
 ---
 title: EdgeだとかBraveだとかで迷ってるならこれで行こう！Heliumが全て解決
-description: ブラウザにAIの内蔵はいらないし、無駄な情報は送られたくもない。ましてや広告もブロックして欲しい。なのにシンプルがHeliumだ
+description: ブラウザにAIの内蔵はいらないし、無駄な情報は送られたくもない。閲覧を邪魔する広告は不要だからブロックして欲しい。だからシンプルで無駄がないHeliumだ
 date: 2025-12-30
-update: 2026-01-03
+update: 2026-01-07
 category:
   - blog
 tags:

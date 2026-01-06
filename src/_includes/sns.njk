@@ -1,18 +1,19 @@
 
 
 <ul class="sns-share">
-    {%- set pageUrl = site.url + page.url | url -%} {# ここを修正 #}
+    {%- set pageUrl = site.url + page.url | url -%}
     {%- set pageTitle = title | urlencode -%}
 
     {%- for platform, baseUrl in sns -%}
     <li class="{{ platform }}">
-        <a href="{{ baseUrl.url }}{{ pageUrl }}{% if platform == 'twitter' %}&text={{ pageTitle }}{% elseif platform == 'facebook' %}{% else %}&title={{ pageTitle }}{% endif %}" 
+        <a href="{{ baseUrl.url }}{{ pageUrl }}{% if platform == 'twitter' %}&text={{ pageTitle }}{% elseif platform == 'facebook' %}{% else %}&title={{ pageTitle }}{% endif %}"
          title="{{ platform }}共有ボタン"
          aria-label="{{ platform }}共有ボタン"
-         target="_blank" 
+         target="_blank"
          rel="noopener noreferrer">
         {{ baseUrl.icon | safe }}
         </a>
     </li>
     {%- endfor -%}
+    <div class="block text-center w-full mt-4 text-sm leading-4">※ Pocketのサービスが終了したため、<a href="https://raindrop.io/">Raindrop.io</a>に変更しました。</div>
 </ul>

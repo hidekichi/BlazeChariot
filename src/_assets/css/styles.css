@@ -1373,6 +1373,24 @@ ul.sns-share {
 		justify-content: center;
 		border: 3px solid #aaa;
 		align-items: center;
+
+		a {
+			position: relative;
+		}
+
+		&:nth-child(n + 4) {
+			a {
+				display: block;
+				top: -1px;
+				left: -1px;
+			}
+		}
+
+		&:nth-child(n + 5) {
+			a {
+				top: 1px;
+			}
+		}
 	}
 
 	a {
