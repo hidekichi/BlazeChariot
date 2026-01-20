@@ -6,11 +6,14 @@ import { imageModalOpen } from "./module/floatImage.js";
 import { toc } from "./module/toc.js";
 import { highlightWhenTheyIntersect } from "./module/highlightWhenTheyIntersect.js";
 import { topCoverSlideImage } from "./module/topCoverSlideImage.js";
+import { copyButton} from "./module/copyButton.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
 	await footnote();
 
 	await topCoverSlideImage();
+
+	await copyButton();
 
 	embbedYoutubePlayer();
 
