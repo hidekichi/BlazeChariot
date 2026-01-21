@@ -2,7 +2,7 @@
 title: AxOSとHyprlandについて
 description: 新しいArch Linux系のディストリビューションのAxOSについて現在わかっていることを紹介
 date: 2025-08-01
-update: 2025-08-01
+update: 2026-01-21
 category:
   - blog
 tags:
@@ -99,39 +99,58 @@ Zenカーネルは、
 従来のArch系ディストリビューションではpacmanがデフォルトでしたが、AxOSでは`Epsilon`という**Rust製のパッケージマネージャ**となっており、これはpacmanとAURの両方からのパッケージを検索・インストール可能となっており、よりわかりやすい形でパッケージ管理ができるように新設されたものです。
 そのため、他のディストリビューションで使えるように配布もされていませんし、ソースからビルドしたとして使えるのかも今の所はまだ不明です。
 
+- Just install a package or a list of packages
+- (複数)パッケージのインストール
+
 ```bash
-# Just install a package or a list of packages
-# (複数)パッケージのインストール
+# skip-copy
 epsi install <package1> <package2> ...
 epsi i <package1> <package2> ...
 epsi -S <package1> <package2> ...
 epsi sync <package1> <package2> ...
 ```
+
+- Remove a package or a list of packages
+- (複数)パッケージのアンインストール
+
 ```bash
-# Remove a package or a list of packages
-# (複数)パッケージのアンインストール
+# skip-copy
 epsi remove <package1> <package2> ...
 epsi rm <package1> <package2> ...
 epsi -R <package1> <package2> ...
 ```
+
+- Upgrades locally installed packages to their latest versions
+
 ```bash
-# Upgrades locally installed packages to their latest versions
+# skip-copy
 epsi upgrade
 epsi -Syu
+```
 
-# Upgrade with backup
+- Upgrade with backup
+
+```bash
+# skip-copy
 epsi upgrade -s -d
 epsi upgrade --with-snapshot --delete-snapshot-onfail
+```
 
+```bash
+# skip-copy
 epsi -Syu -s -x
 epsi -Syu --with-snapshot --replace-snapshot
 ```
+
+- Removes all orphaned packages and clears the package cache
+- 孤立したパッケージの削除、パッケージキャッシュの削除
+
 ```bash
-# Removes all orphaned packages and clears the package cache
-# 孤立したパッケージの削除、パッケージキャッシュの削除
+# skip-copy
 epsi clean
 epsi -C
 ```
+
 このようなコマンドで使用する形になっています。`-Syu`のようにそれぞれの意味を知っていれば3文字で良いので簡潔ですが、意味がわからない場合を想像すると`upgrade`と書く方が意味はわかりやすいと思います。
 
 ## デフォルトデスクトップ環境 Sleex
@@ -205,7 +224,8 @@ Arch Wikiでの説明は[Hyprland](https://wiki.archlinux.jp/index.php/Hyprland)
 
 </div>
 
-```scss
+```bash
+# skip-copy
 [Wayland]
    ↑
 [Hyprland Compositor]
@@ -215,6 +235,7 @@ Arch Wikiでの説明は[Hyprland](https://wiki.archlinux.jp/index.php/Hyprland)
    ├── Effects Manager (透過/アニメ)
    └── IPC (外部連携)
 ```
+
 > Waylandを直接制御するコンポジタであり、X11のウィンドウマネージャとは異なり、描画や入力を自前で処理します。
 
 他のタイル型ウィンドウマネージャに比べるとやや学習コストは高いものの、良い部分(アニメーションやデザイン、開発の活発度)などが多いと思われます。

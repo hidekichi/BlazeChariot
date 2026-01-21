@@ -2,7 +2,7 @@
 title: 新しいArchLinuxの形 - Archriot
 description: Archriotは2023年頃から活発に開発が始まったディストリビューションです。ベースにArchLinux、ウィンドウマネージャーにHyprlandを採用したタイプです。スタック型とは違ってタイル型で軽量かつ美しいデスクトップ環境をもったディストリビューションです。
 date: 2025-08-15
-update: 2025-08-23
+update: 2026-01-21
 category:
   - blog
 tags:
@@ -126,6 +126,7 @@ alias riot-update='curl -fsSL https://archriot.org/scripts/upgrade.sh | bash'
 
 まとめると
 ```shell
+# skip-copy
 sudo pacman -Syu  # システムの更新
 yay -Syu          # AURの更新
 ```
