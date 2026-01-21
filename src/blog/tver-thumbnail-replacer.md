@@ -2,7 +2,7 @@
 title: TVerの動画プレイヤーサムネイルを軽くする
 description: どの人にも役に立つかと言うとそうでもなく、テザリング環境やネット回線量を減らすために
 date: 2025-06-05
-update: 2025-06-05
+update: 2026-01-21
 category:
   - blog
 tags:
@@ -41,6 +41,7 @@ permalink: /blog/{{ page.fileSlug }}/
 大仰な名称がついてますが、大したものではありません。簡単に言うと、
 
 ```html
+# skip-copy
 <img src="https://google.com/images/xlarge/xxxx.jpg" />
 ```
 
@@ -137,6 +138,7 @@ if (existingImg) {
 コードの一部にあまり見慣れないものがあるかと思いますので、それを一応説明しておこうかと思います。
 
 ```js
+# skip-copy
 node.querySelector?.('[class*="PlayerThumbnail_wrapper__"] > img');
 ```
 
@@ -149,6 +151,7 @@ MDNのリンクにもありますが、チェーン演算子(`a.b //ドット`)�
 該当部分のコード`node.querySelector?.('[class*="PlayerThumbnail_wrapper__"] > img')`で言うと、
 
 ```js
+# skipCopy
 if (node.querySelector) {
   return node.querySelector('[class*="PlayerThumbnail_wrapper__"] > img');
 } else {
@@ -196,6 +199,7 @@ about:debugging#/setup
 manifest.jsonの`matches`にあるように、
 
 ```json
+# skip-copy
   "content_scripts": [
     {
       "matches": ["https://tver.jp/episodes/*"],

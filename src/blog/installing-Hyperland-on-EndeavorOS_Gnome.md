@@ -2,7 +2,7 @@
 title: 公式で無いなら個人でやればいいじゃない？ EndeavourOS+Gnome+hyprland
 description: EndeavourOS+Gnome環境にHyprlandを導入するというのを実際に試してみた記録です
 date: 2025-08-25
-update: 2025-10-10
+update: 2026-01-21
 category:
   - blog
 tags:
@@ -103,16 +103,19 @@ wikiによると、**Manjaro は AUR との互換性が比較的低いため、�
 
 [end-4/dots-hyprland](https://ii.clsty.link/en/ii-qs/01setup/#automated-installation)で推奨される方法として書いてある、**「Automated installation」** にあるスクリプトをターミナルに貼り付けるだけ。
 
+- 旧インストールスクリプト
 ```bash
-# 旧インストールスクリプト
 # bash <(curl -s "https://end-4.github.io/dots-hyprland-wiki/setup.sh")
+```
 
-# wikiサイトを新たにドメイン取得により以下のように短くなった模様です
+- wikiサイトを新たにドメイン取得により以下のように短くなった模様です
+```bash
 bash <(curl -s https://ii.clsty.link/setup)
 ```
 これは、`~/.cache/dots-hyprland`にリポジトリをクローンするので、もし別の場所に入れて管理したい場合は、
 
 ```shell
+# skip-copy
 cd ~/Downloads # ここで任意のディレクトリを選ぶ
 git clone https://github.com/end-4/dots-hyprland
 cd dots-hyprland
@@ -180,6 +183,7 @@ sudo pacman -S quickshell
 そこから再起動するために、次のコマンドを入れます。
 
 ```bash
+# skip-copy
 // 再起動
 sudo reboot
 
@@ -295,6 +299,7 @@ Hyprlandではすでに修正されていて、それ以外で別の問題が発
 下の方に`time`の箇所があるので、
 
 ```json
+# skip-copy
   "time": {
     "dateFormat": "ddd, dd/MM",
     "format": "h:mm ap",
@@ -321,14 +326,15 @@ Hyprlandではすでに修正されていて、それ以外で別の問題が発
 
 バーは、パッと見て今日が何日で、今が何時かわかればよいと思うので`月/日(曜日)・時:分`という形式にしたい思います。
 
-~/.config/quickshell/ii/modules/bar/ の ClockWidget.qml をテキストエディターで編集します{class="block bg-sky-500/25 px-4"}
+~/.config/quickshell/ii/modules/bar/ の ClockWidget.qml をテキストエディターで編集します{class="block bg-sky-600/25 px-4"}
 
 `// ...`部分は、何かしら記述がある部分です。
 
 ```qml
+# skip-copy
 Item {
     //...
-    
+
     RowLayout {
         // ...
 
@@ -355,9 +361,10 @@ Item {
 ```
 の部分だけを修正します。マウスを持っていった時にポップアップする所にも日付の表示があるのでそこも直します。
 
-~/.config/quickshell/ii/modules/bar/ の ClockWidgetTooltip.qml を修正{class="block bg-sky-500/25 px-4"}
+~/.config/quickshell/ii/modules/bar/ の ClockWidgetTooltip.qml を修正{class="block bg-sky-600/25 px-4"}
 
 ```qml
+# skip-copy
 # ...
 
 StyledPopup {
@@ -395,11 +402,13 @@ StyledPopup {
 
 どういう事かは定かではないのですが、ユーザーディレクトリ以下にある`picture`ディレクトリ、つまりは`画像`ディレクトリのパスは、`~/.config/quickshell/ii/modules/common/Directories.qml`だったかに設定があって、スクリーンショット自体はまた別で設定があるのですが、作者は`screenshotTemp`というパスを別で作っていて、そこにはフルパスが書かれています。
 ```qml
+# skip-copy
     property string screenshotTemp: "/tmp/quickshell/media/screenshot"
 ```
 
 画像ディレクトリは、
 ```qml
+# skip-copy
 Singleton {
     // XDG Dirs, with "file://"
     //... 他の値
@@ -414,14 +423,16 @@ Singleton {
 
 では、他に方法はないだろうかと見てみた所、`picturs`の設定の少し下に`// Other dirs used by the shell, without "file://`という箇所があるではないですか。これは使えるので追記します。
 
-~/.config/quickshell/ii/modules/common/Directories.qml{class="block bg-sky-500/25 px-4"}
+~/.config/quickshell/ii/modules/common/Directories.qml{class="block bg-sky-600/25 px-4"}
 ```qml
+# skip-copy
 property string screenshotDir: FileUtils.trimFileProtocol(Directories.pictures + "/screenshot")
 ```
 と、まず`/home/YOUR-NAME/画像/screenshot/`のパスを設定しておきます。
 
-~/.config/quickshell/ii/screenshot.qmlのパス{class="block bg-sky-500/25 px-4"}
+~/.config/quickshell/ii/screenshot.qmlのパス{class="block bg-sky-600/25 px-4"}
 ```qml
+# skip-copy
 // property string screenshotDir: Directories.screenshotTemp
 property string screenshotDir: Directories.screenshotDir
 ```
@@ -429,14 +440,16 @@ property string screenshotDir: Directories.screenshotDir
 
 次のような感じです。
 
-~/.config/quickshell/ii/modules/common/Directories.qml{class="block bg-sky-500/25 px-4"}
+~/.config/quickshell/ii/modules/common/Directories.qml{class="block bg-sky-600/25 px-4"}
 ```qml
+# skip-copy
 property string ssDir: FileUtils.trimFileProtocol(Directories.pictures + "/screenshot")
 ```
 であれば、
 
-~/.config/quickshell/ii/screenshot.qml{class="block bg-sky-500/25 px-4"}
+~/.config/quickshell/ii/screenshot.qml{class="block bg-sky-600/25 px-4"}
 ```qml
+# skip-copy
 // property string screenshotDir: Directories.screenshotTemp
 property string screenshotDir: Directories.ssDir
 ```
@@ -491,7 +504,7 @@ touch ~/.config/ghostty/config
 `touch`はファイルを作るコマンドです。ここで要注意ですが、Ghosttyは`***.conf`ではなくて、`config`と言うファイルが必要な事に気をつけて下さい。拡張子がないので右クリックでテキストエディターを選んで開くなどが必要になったりもします。
 
 ```shell
-mkdir -p ~/.config/ghostty && touch ~/.config/ghostty/config 
+mkdir -p ~/.config/ghostty && touch ~/.config/ghostty/config
 ```
 などとして、一発で書くことも可能ですが、`mkdir`は失敗するとそれ以降は実行されないので、結果的にfishの補完機能を使いつつ分けて書いても言うほどかかる時間に違いはないとも言えます。
 そもそも`mkdir -p ~/.config/ghostty`が失敗することなどほぼないですが、そういった場合でも`-p`はつけておいて損はないおまじないみたいなものなので。

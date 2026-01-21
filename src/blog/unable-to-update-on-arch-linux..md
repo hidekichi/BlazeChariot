@@ -2,7 +2,7 @@
 title: 2025-6 Arch系Linuxでアップデートができない件
 description: こちらのページでは、Linuxのディストリビューションのリリースタイプや、パッケージ管理、その特徴や諸々を系統別で記載しています。それらを諸々加味して自身に最適と思われるディストリビューションを探してみて下さい。
 date: 2025-06-30
-update: 2025-07-01
+update: 2026-01-21
 category:
   - blog
 tags:
@@ -36,7 +36,7 @@ permalink: /blog/{{ page.fileSlug }}/
 
 この解決方法は、
 
-1. まず、他のパッケージがそのファイルを所有していないか調べる  
+1. まず、他のパッケージがそのファイルを所有していないか調べる
    - `sudo pacman -Qo /path/to/file`
 2. 何かしらがそのファイルを所有していた場合はバグレポートを提出
 3. 何にも所有されていないファイルであった場合は、システムにある方のファイルの名称を変更して再度システムのアップデート。その後、問題のファイルは削除可能
@@ -71,6 +71,7 @@ pacman -S --overwrite glob package
 
 その対処方法として、
 ```shell
+# skip-copy
 sudo pacman -Rdd linux-firmware
 sudo pacman -Syu linux-firmware
 ```
@@ -168,10 +169,13 @@ iwlwifi 0000:00:14.3: Direct firmware load for iwlwifi-8265-36.ucode failed with
 #### 必要なファイルを確認・入手
 
 - 使用している無線チップのファームウェア名を確認(ログにでているもの)
-```log
+
+```shell
+# skip-copy
 iwlwifi-8265-36.ucode
 iwlwifi-8265-34.ucode
 ```
+
 これらは使用しているPCがどのチップを使用しているかで変わりますが、だいたいは以下にあると思います。以下のリンク先にない場合は、AIなどに聞いてどこから入手できるかを探して下さい。
 
 [git.kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/)
@@ -187,6 +191,7 @@ iwlwifi-8265-34.ucode
 - 対象ディレクトリ： `/usr/lib/firmware/`
 
 もしUSBメモリから該当ファイルを`ダウンロード`ディレクトリなどに移した場合も含め、ファイルマネージャーのアドレス欄をクリックするとそこまでのパスが出てくると思います。それをコピーして(ファイルマネージャーではCtrl+C可能)、ターミナルにまず貼り付けるわけですが、
+
 ```shell
 sudo cp //ここにまずファイル元のパスをペースト
 ```
@@ -195,6 +200,7 @@ sudo cp //ここにまずファイル元のパスをペースト
 
 そして、
 ```shell
+# skip-copy
 sudo cp /YOUR/COPY/FROM/ /usr/lib/firmware/
 ```
 
@@ -207,6 +213,7 @@ sudo cp /YOUR/COPY/FROM/ /usr/lib/firmware/
 
 - これらを次は再読み込みあるいは再起動する。
 ```shell
+# skip-copy
 sudo modprobe -r iwlwifi
 sudo modprobe iwlwifi
 ```
@@ -233,6 +240,7 @@ nmcli dev wifi
 - Arch Linuxで、2025年6月に`linux-firmware`パッケージの大幅変更があり、ファイル構造やリンクが変更されて、既存のファームウェアと衝突するケースが発生
 - `pacman`で更新できなかった場合の対処
 ```shell
+# skip-copy
 sudo pacman -Rdd linux-firmware
 sudo pacman -Syu linux-firmware
 ```
@@ -269,10 +277,13 @@ AIは英語も翻訳して解説してくれるため、書かれている内容
 半ば、ファームウェアの更新方法みたいな記事になりましたが、本意としては<u>上流Archでlinux-firmwareの変更が行われ、正しくアップデートができなくなった</u>事をどのように解消するかです。
 
 途中の見出しで「**結果を簡潔に書けばほんの少しのことですが**」と書いたように、それらの答えは、
+
 ```shell
+# skip-copy
 sudo pacman -Rdd linux-firmware
 sudo pacman -Syu linux-firmware
 ```
+
 と言うだけの事です。しかし、システムの更新が行われると**再起動を促すメッセージが通知される**事で、ここで再起動をしてしまうと面倒くさいことになりますよと言うのがこの記事の流れからも察してもらえるかと思います。
 
 追記などをしたので記事の内容がわかりにくくなったかも知れませんが、これらに留意して問題の対処にあたってください。

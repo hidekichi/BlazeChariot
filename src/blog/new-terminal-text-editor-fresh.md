@@ -61,6 +61,7 @@ yay -S fresh-editor
 <div>
 
 ```bash
+# skip-copy
 # yayのインストール
 sudo pacman -S yay
 
@@ -92,8 +93,8 @@ AURのインストール前にはファイルの各種情報などがでます�
 
 ### Debian / Ubuntu
 
+- リリースから.debをダウンロードして、
 ```bash
-# リリースから.debをダウンロードして
 sudo dpkg -i fresh-editor_*.deb
 ```
 

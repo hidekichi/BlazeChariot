@@ -2,7 +2,7 @@
 title: 緊急検証！CachyOSのCosmicデスクトップ環境の感じはどうだろうか？
 description: 前回、Fedora Cosmic Spinを試してみましたが、今度はArch系のディストリビューションであるCachyOSではどうだろうかを試してみました。
 date: 2025-10-30T03:43:20.025Z
-update: 2025-11-07T20:13:28.110Z
+update: 2026-01-21
 category:
   - blog
 tags:
@@ -91,6 +91,7 @@ yay -S localsend-bin
 
 Fedoraではインストールしたその後で、接続する際にFirewallが通信を止めていたので、
 ```bash
+# skip-copy
 sudo firewall-cmd --zone=public --add-port=53317/tcp --permanent
 sudo firewall-cmd --zone=public --add-port=53317/udp --permanent
 sudo firewall-cmd --reload
@@ -230,6 +231,7 @@ Hyprland Wikiの意図を正しく汲み取れないかも知れませんし、�
 便利に使えるわけではありませんが、まず設定として、`~/.config/hypr/hyprland.conf`の一番下の行にある、
 
 ```bash
+# skip-copy
 # source = ~/.config/hypr/config/user-config.conf
 ```
 の`#`を取り除いて、`~/.config/hypr/config/`ディレクトリの中に、`user-config.conf`を作ります。ターミナルからでも良いですが、面倒な場合はファイルマネージャーで右クリックして{空|から}のドキュメント(テキスト)ファイルを作り、`user-config.conf`に名前を変更します。

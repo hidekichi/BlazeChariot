@@ -1,7 +1,7 @@
 ---
 title: EndeavourOSを再導入
 date: 2024-03-12
-update: 2024-07-09
+update: 2026-01-21
 category:
   - blog
 tags:
@@ -117,6 +117,7 @@ pamacにはいくつか種類がありますが、上記Chaotic-AURのリポジ�
 > pamac-cliの削除もお忘れなく
 >
 > ```shell
+> # skip-copy
 > sudo pacman -R pamac-all //pamac-allを削除
 > //同様に、libpamac-all 等も削除が必要かも
 > //諸々を行ってから

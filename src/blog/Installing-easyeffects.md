@@ -2,7 +2,7 @@
 title: illogical-impulseを適用したEndeavourOS+Gnome環境にイコライザーを入れてみよう
 description: PCで作業をする場合には何かしら音楽を聞いたりしたりするものです。より良い音でそれらを行うためのイコライザーを設定しようという話です
 date: 2025-10-16
-update: 2025-11-06T04:09:31.451Z
+update: 2026-01-21
 category:
   - blog
 tags:
@@ -85,8 +85,12 @@ sudo pacman -S lsp-pligins
 
 次のコマンドで導入できます。
 
+1. 最初にflatpakの導入(導入されていたらスキップ)
 ```bash
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+```
+2. 該当のソフトを導入
+```bash
 flatpak install flathub com.github.wwmm.easyeffects
 ```
 

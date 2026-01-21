@@ -1,7 +1,7 @@
 ---
 title: 階層のない平打したHTMLで、見出しとその本文を任意のタグで囲むJavascript関数
 date: 2024-03-12
-update: 2024-03-12
+update: 2026-01-21
 category:
   - blog
 tags:
@@ -23,6 +23,7 @@ permalink: /blog/{{ page.fileSlug }}/
 こういったものが書かれると思いますが、Markdownのようなもので書いた場合にエディターによっては、`<div>`や何かしらのタグでひとかたまりとして囲んでおけるわけですが、たいていは次のように、
 
 ```html
+<!-- skip-copy -->
 <h3>コードブルー</h3>
 <blockquote>その概要</blockquote>
 <ul>
@@ -44,6 +45,7 @@ permalink: /blog/{{ page.fileSlug }}/
 と質問した場合、`section`が区間とか、区分、部分という意味なので、伝わりにくいのかもしれませんが、上手く伝えられません。そこで例をあげて、
 
 ```html
+<!-- skip-copy -->
 <h2></h2>
 <p></p>...
 <h3></h3>
@@ -53,6 +55,7 @@ permalink: /blog/{{ page.fileSlug }}/
 を、
 
 ```html
+<!-- skip-copy -->
 <section>
     <h2></h2>
     <p></p>...
@@ -118,12 +121,15 @@ function wrapHeadingsAndContent(parentElement, headingSelector, wrapperTagName, 
 
 これが本体で、使い方は以下のようにして使います。
 
+- article要素内の見出しタグ(h2, h3, h4)とその次の要素群をdivタグで囲む
+
 ```js
-// article要素内の見出しタグ(h2, h3, h4)とその次の要素群をdivタグで囲む
 const article = document.querySelector('article');
 wrapHeadingsAndContent(article, 'h2, h3, h4', 'div', 'section');
+```
 
-// body要素内の見出しタグ(h1, h2)とその次の要素群をsectionタグで囲む
+- body要素内の見出しタグ(h1, h2)とその次の要素群をsectionタグで囲む
+```js
 const body = document.querySelector('body');
 wrapHeadingsAndContent(body, 'h1, h2', 'section', 'content');
 ```
@@ -131,12 +137,14 @@ wrapHeadingsAndContent(body, 'h1, h2', 'section', 'content');
 引数部分がちょっとアレですが、つまりは次のような感じです。
 
 ```js
+// skip-copy
 wrapHeadingsAndContent(対象の親になる要素, 対象要素, ラップするタグ, ラップするタグのクラス名
 ```
 
 関数内の名称は`heading`とかとついていますが見出しに限っているわけではありません。これらを用いて、上記使用方法の`article`の方は、
 
 ```html
+<!-- skip-copy -->
 <div class="section">
     <h2>コードブルー</h2>
     <blockquote>その概要</blockquote>
@@ -169,10 +177,10 @@ wrapHeadingsAndContent(対象の親になる要素, 対象要素, ラップす�
 
 1. `nextUntil`と言う空の配列を用意します
 2. `header.nextElementSibling`で対象の次の要素を見つけます
-3. ターゲット要素の次の要素群があるか、ターゲット要素と違う間はループします   
-   - これら条件の間、`nextUntil`に見つけた要素を入れていきます   
+3. ターゲット要素の次の要素群があるか、ターゲット要素と違う間はループします
+   - これら条件の間、`nextUntil`に見つけた要素を入れていきます
    - 更に見つけたターゲットの次の要素のその次の要素を対象に同じことを繰り返します
-4. ラップする要素を用意します  
+4. ラップする要素を用意します
    - ラップする要素にIDとクラスを付け加えます
 5. `nextUntil`に入っている次の要素をループしてラップ要素に収納していきます
 6. ラップする要素をヘッダの前に挿入します
@@ -186,6 +194,7 @@ wrapHeadingsAndContent(対象の親になる要素, 対象要素, ラップす�
 このような場合にまず確認してほしいことは、
 
 ```js
+// skip-copy
 function wrapHeadingsAndContent(
 
 // 中略
@@ -213,6 +222,7 @@ console.log(nextUntil); //<--これ
 `insertAdjacentElement('afterend'`と同じことですが`header`の親要素を基準にするので(おそらく)必ずその要素が見つかるかと思います。これらはいずれも`header`の次に任意のタグで囲んだ`wrapper`を挿入して、その中には元々`header`の次に平書きされていた他の要素が入っています。もし`wrapper`が`section`であれば、
 
 ```html
+<!-- skip-copy -->
 <h3>何かしらの見出し</h3>
 <section>その内容のpやdiv等</section>
 ```

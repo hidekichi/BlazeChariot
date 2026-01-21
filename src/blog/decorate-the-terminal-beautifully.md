@@ -2,7 +2,7 @@
 title: end-4/dots-hyprlandを例にしてFishシェルでターミナルを速く・美しく・便利に使ってみよう
 description: 前回end-4/dots-hyprlandを導入していくつかカスタマイズしましたが今回はターミナルを飾ったり、便利に使おうという話です
 date: 2025-09-16
-update: 2025-10-10
+update: 2026-01-21
 category:
     - blog
 tags:
@@ -52,7 +52,7 @@ Windowsでコマンドを使いたい時、ターミナルを起動するかPowe
 
 - ユーザーの入力を待ち、
 - その指示でメインフレームで処理をして、
-- その結果を画面に表示する 
+- その結果を画面に表示する
 
 という流れがあり、これらはテレタイプライター(TTY:Teletypewriter)という機械で行っていました。現代ではLinuxにGUI環境がない場合に黒い画面で入力待ちになっていますが、これをTTYと呼んでいます。
 これらは`Ctrl + ALT + F1～F6`でそれぞれTTY1～6まであり、仮想コンソール(Virtual Console)と呼んでいます。GUI環境に戻る場合は`F7`((標準ではそうですが違うものもあるかも知れません))が該当します。
@@ -205,7 +205,7 @@ function post_rice_setup --description "Restore custom fish configuration after 
         echo "Please add your custom settings (e.g., zoxide init) to this directory."
         return 0
     end
-    
+
     # 2. ターゲットディレクトリを確認・作成 (Rice更新で消されている可能性があるため)
     if not test -d "$TARGET_DIR"
         echo "Creating target directory: $TARGET_DIR"
@@ -213,13 +213,13 @@ function post_rice_setup --description "Restore custom fish configuration after 
     end
 
     # 3. カスタム設定ファイルをターゲットにコピー（上書きで復元）
-    set -l source_files (ls -A "$SOURCE_DIR") 
+    set -l source_files (ls -A "$SOURCE_DIR")
 
     if test (count $source_files) -gt 0
         echo "Copying custom settings from $SOURCE_DIR to $TARGET_DIR..."
-        
+
         find "$SOURCE_DIR" -mindepth 1 -maxdepth 1 | xargs -I {} cp -r {} "$TARGET_DIR"
-        
+
         echo "Restore complete."
     else
         echo "Source directory $SOURCE_DIR is empty. Skipping copy."
@@ -272,6 +272,7 @@ zoxide init fish | source
 と追記します。これでzoxideが有効になるので、
 
 ```bash
+# skip-copy
 z foo              # foo に一致するディレクトリのうち、最もよく使う場所へ移動
 z foo bar          # foo と bar の両方に一致するディレクトリのうち、最もよく使う場所へ移動
 z foo /            # foo で始まるサブディレクトリに移動
@@ -343,7 +344,7 @@ zoxideの履歴をfzfに渡して、fzfのインクリメンタルサーチで�
 ```bash
 function zf --description 'Find and change directory using zoxide history and fzf'
     set selected (zoxide query -l | fzf --height 40% --reverse)
-    
+
     # 選択があった場合のみ移動
     if test -n "$selected"
         cd "$selected"
@@ -369,6 +370,7 @@ fzfはファジーファインダ(あいまい検索)であり、多くはコマ
 一覧表示された時に、ディレクトリとファイルが混在して表示されているのに気がつくと思いますが、例えばディレクトリだけ、ファイルだけを表示したいとかとソートしたい場合があると思います。これらは、以下のようなオプションで可能です。
 
 ```bash
+# skip-copy
 # ディレクトリだけを表示
 ls -D
 
@@ -384,6 +386,7 @@ ls -x --group-directories-last
 
 他にもありますが、こういうコマンドで表示できます。上記例の下2つに`-x`がついているのは、
 ```bash
+# skip-copy
 dir1  dir2  dir3  dir4  file1  file2 ...
 ```
 と横並びに表示するためです。`--group-directories-first`とか打つのが面倒くさいというのもわかりますが、これらはfishで途中まで入れたら補完できます。しかしこれらは「ディレクトリ/ファイル」の各名称を確認するだけなので、上記例の最初2つ、ディレクトリだけかファイルだけかのいずれかで良いのではないかと。
@@ -405,9 +408,9 @@ catはファイルの中身を確認するためのコマンドですが、bat�
 
 他にも、
 
+- https://github.com/end-4/dots-hyprland/main/README.md をbatで色分けして見る場合
+
 ```bash
-# https://github.com/end-4/dots-hyprland/main/README.md を
-# batで色分けして見る場合
 curl https://raw.githubusercontent.com/end-4/dots-hyprland/main/README.md | bat -l
 ```
 とした場合、markdown形式のファイルを確認することができます。
@@ -417,6 +420,7 @@ curl https://raw.githubusercontent.com/end-4/dots-hyprland/main/README.md | bat 
 githubに訪れずにネット環境があればローカルで更新状況が調べられます。
 
 ```bash
+# skip-copy
 cd ~/.cache
 git clone https://github.com/end-4/dots-hyprland
 cd dots-hyprland
@@ -432,9 +436,9 @@ git diff HEAD origin/main | bat -l diff
 とすると、差分ファイルが表示されます。しかし差分ファイルは差分ブロックに改行が入らないように設計されていますので見にくくさはあります。それでもどこが変更されたのかは確認できると思います。
 削除されたものは赤で、追加されたものは緑でなどと環境によって表示の色は変わるかも知れませんがだいたいこのような表示になるのではないかと。
 
-見やすくするには、
+見やすくするには、awkを使って Diff Hunk の前に改行と区切り線を追加
+
 ```bash
-# awkを使って Diff Hunk の前に改行と区切り線を追加
 git diff HEAD origin/main | awk '/^@@/{print "\n======================"; print} !/^@@/{print}' | bat -l diff
 ```
 などとすると`@@`が登場する所に区切り線を入れられるので多少わかりやすくなるかも知れません。
@@ -457,25 +461,25 @@ git diff HEAD origin/main | awk '/^@@/{print "\n======================"; print} 
 ```bash
 function ii_update_status --description "Fetch dotfile updates and display changes using bat"
     set -l DOTS_DIR $HOME/.cache/dots-hyprland
-    
+
     # 1. 目的のディレクトリに確実に移動
     if not test -d "$DOTS_DIR"
         echo "Error: Dotfiles directory not found. Please clone it first."
         return 1
     end
     cd "$DOTS_DIR"
-    
+
     echo "--- Fetching latest updates from remote ---"
-    
+
     # 2. リモートの最新情報を取得（ローカルは変更しない）
     git fetch
-    
+
     echo "--- Showing differences between local (HEAD) and remote (origin/main) ---"
-    
+
     # 3. ローカルとリモートの差分を、awkで整形し、batでハイライト表示
     # 差分Hunkの前に区切り線（========）を挿入することで見やすくする
     git diff HEAD origin/main | awk '/^@@/{print "\n======================"; print} !/^@@/{print}' | bat -l diff
-    
+
     echo "--- Status check complete. Run 'git pull origin main' to apply changes. ---"
 end
 ```
@@ -513,15 +517,25 @@ end-4/dots-hyprlandのアップデートはデフォルトだと、
 
 以下のコードは、`~/.local/fish_functions/ii_update.fish`に書きます。ディレクトリの移動や`ii_update.fish`の作成・編集はThunarなどのファイルマネージャー、テキストエディターで作っても良いですし、
 
+1. 作業ディレクトリがないのであれば作っておく(あればこれは飛ばす)
+
 ```bash
-# 作業ディレクトリがないのであれば作っておく(あればこれは飛ばす)
 mkdir -p ~/.local/fish_functions
+```
 
-# 作業ディレクトリに移動
-# cd ~/.local/fish_functions  #(としても良いですしzで移動しても良い)
+2. 作業ディレクトリに移動
+```bash
+cd ~/.local/fish_functions
+```
+
+と、しても良いですし`z`で移動しても良い
+
+```bash
 z fish_functions
+```
 
-# 移動したらファイルを作成
+3. 移動したらファイルを作成
+```bash
 touch ii_update.fish
 ```
 とすればディレクトリとファイルが作られます((もっと便利に書けますが手順通りに書いてます))。Hyprland環境でファイルマネージャーとターミナルが画面に表示されているのであればターミナルで実行した結果がすぐファイルマネージャーに反映される((ディレクトリやファイルを作成すればそれがファイルマネージャにも即表示される))ので、後はクリックでファイルマネージャーを辿っていけばよいですし、ファイルマネージャーを操作するのが面倒なら、そのままターミナルで作成したファイルを開いてコードをコピペすることもできます。
@@ -543,27 +557,27 @@ nano ~/.local/fish_functions/ii_update.fish
 ```bash
 function ii_update --description "Update end-4 dots-hyprland repository and run install script"
     set -l DOTS_DIR $HOME/.cache/dots-hyprland
-    
+
     # 1. リポジトリが存在するか確認
     if not test -d "$DOTS_DIR"
         echo "Error: Directory $DOTS_DIR not found. Please clone the repository first."
         return 1
     end
-    
+
     echo "--- 1. Changing directory to dots-hyprland ---"
     cd "$DOTS_DIR"
-    
+
     echo "--- 2. Pulling latest changes from GitHub ---"
     # git pull を実行し、変更を取得
     git pull
-    
+
     echo "--- 3. Running the install script for update ---"
     echo "Please follow the prompts, including password entry and 'y' confirmations."
-    
+
     # 2. install.sh を実行
     # ここでsudoや対話が発生する
     ./install.sh
-    
+
     echo "--- Update process finished. ---"
 end
 ```
@@ -578,13 +592,20 @@ ii_update
 ## ディレクトリを作成したら即座にその場所にcdするスクリプトを作っておく mkcd
 
 `~/.local/fish_functions/`に`mkcd.fish`を作り以下のスクリプトを書きます。ここまでを試された方であれば`fish_functions/`ディレクトリはできているでしょうから、`z`で移動してファイルを作り編集するだけです。あわせてファイルはディレクトリが移動できていれば、
-```bash
-# z fish_functions # で移動してから
-touch mkcd.fish    # でも良いですし
 
-# touch ~/.local/fish_functions/mkcd.fish  # とパスを入れても良いです
+`z fish_functions`で移動してから
+```bash
+touch mkcd.fish
 ```
+でも良いですし、
+
+```bash
+# skip-copy
+touch ~/.local/fish_functions/mkcd.fish  # とパスを入れても良いです
+```
+
 として{空|カラ}でファイル名だけつけたファイルを作っておきます。
+
 これを`nano`で開いても良いですし、例えば<u>ファイルマネージャで**Thunar**を使用しているのであれば</u>、`~/`ディレクトリからでもその画面上で`.local`とキーボードからダイレクトに入れるとそのディレクトリに移動できます。
 
 > `fish_functions/`ディレクトリは色んなfishのスクリプトを作ったり確認したりがすぐ作業できるように`.local/`ディレクトリ直下に置いています。
@@ -598,7 +619,7 @@ function mkcd --description 'Make directory and change into it'
         echo "Usage: mkcd <directory>"
         return 1
     end
-    
+
     # mkdir -p でディレクトリを作成し、成功したらそのディレクトリに移動する
     # $argv は関数に渡された全ての引数を表します
     if mkdir -p $argv

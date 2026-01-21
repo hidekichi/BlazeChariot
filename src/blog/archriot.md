@@ -130,7 +130,9 @@ alias riot-update='curl -fsSL https://archriot.org/scripts/upgrade.sh | bash'
 sudo pacman -Syu  # システムの更新
 yay -Syu          # AURの更新
 ```
+
 ↑これらと、
+
 ```bash
 curl -fsSL https://ArchRiot.org/setup.sh | bash
 ```

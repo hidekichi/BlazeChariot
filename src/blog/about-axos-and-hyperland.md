@@ -99,7 +99,6 @@ Zenカーネルは、
 従来のArch系ディストリビューションではpacmanがデフォルトでしたが、AxOSでは`Epsilon`という**Rust製のパッケージマネージャ**となっており、これはpacmanとAURの両方からのパッケージを検索・インストール可能となっており、よりわかりやすい形でパッケージ管理ができるように新設されたものです。
 そのため、他のディストリビューションで使えるように配布もされていませんし、ソースからビルドしたとして使えるのかも今の所はまだ不明です。
 
-- Just install a package or a list of packages
 - (複数)パッケージのインストール
 
 ```bash
@@ -110,7 +109,6 @@ epsi -S <package1> <package2> ...
 epsi sync <package1> <package2> ...
 ```
 
-- Remove a package or a list of packages
 - (複数)パッケージのアンインストール
 
 ```bash
@@ -120,7 +118,7 @@ epsi rm <package1> <package2> ...
 epsi -R <package1> <package2> ...
 ```
 
-- Upgrades locally installed packages to their latest versions
+- ローカルにインストールされたパッケージを最新バージョンにアップグレードします
 
 ```bash
 # skip-copy
@@ -128,7 +126,7 @@ epsi upgrade
 epsi -Syu
 ```
 
-- Upgrade with backup
+- バックアップ付きのアップグレード
 
 ```bash
 # skip-copy
@@ -142,7 +140,6 @@ epsi -Syu -s -x
 epsi -Syu --with-snapshot --replace-snapshot
 ```
 
-- Removes all orphaned packages and clears the package cache
 - 孤立したパッケージの削除、パッケージキャッシュの削除
 
 ```bash

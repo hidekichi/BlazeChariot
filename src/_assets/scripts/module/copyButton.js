@@ -5,103 +5,59 @@ export async function copyButton() {
 
   codeBlocks.forEach(pre => {
     const code = pre.querySelector('code');
-    if (!code) return;
+    if (!code || pre.querySelector('.copyButton')) return;
 
-    // 1. 最初の行が skip-copy コメントかチェック
-    const firstLine = code.innerText.split('\n')[0].trim();
-    const isSkipComment = firstLine.startsWith('# skip-copy') ||
-                          firstLine.startsWith('// skip-copy') ||
-                          firstLine.startsWith('<!-- skip-copy -->'); // HTMLコメントも対応可
+    // 1. スキップ判定とDOMクリーニング
+    // 最初のノードを取得
+    let firstNode = code.firstChild;
+    if (!firstNode) return;
 
-    if (isSkipComment) {
-      // 表示からコメント行を削除（Prismのspan構造を考慮）
-      let current = code.firstChild;
-      let foundComment = false;
+    // Prism.jsはコメントを <span> で囲むことがあるため textContent で判定
+    const isSkip = firstNode.textContent && firstNode.textContent.includes('skip-copy') || firstNode.textContent.includes('skipCopy');
 
-      while (current) {
-              if (current.nodeType === Node.ELEMENT_NODE) { // <span class="token comment"> など
-                const text = current.innerText.trim();
-                if (text.startsWith('# skip-copy') ||
-                    text.startsWith('// skip-copy') ||
-                    text.startsWith('<!-- skip-copy -->')) {
-                  current.remove();
-                  foundComment = true;
-                  break; // 最初のコメントだけ削除（複数行は考慮外）
-                }
-              }
-              current = current.nextSibling;
-            }
+    if (isSkip) {
+      // 2. コメントノードとその直後の改行を削除
+      const nextNode = firstNode.nextSibling;
+      firstNode.remove();
 
-      // 削除後に空の先頭改行が残りがちなので、最初の空テキストノードも掃除
-      if (foundComment) {
-              current = code.firstChild; // 再スキャン
-              while (current) {
-                if (current.nodeType === Node.TEXT_NODE) {
-                  // テキストノードの空白をtrim
-                  current.textContent = current.textContent.replace(/^[\s\n\r]+/, '');
-                  if (!current.textContent.trim()) {
-                    // 空になったら削除
-                    const next = current.nextSibling;
-                    current.remove();
-                    current = next;
-                    continue;
-                  }
-                } else if (current.nodeType === Node.ELEMENT_NODE && !current.innerText.trim()) {
-                  // 空spanも削除
-                  const next = current.nextSibling;
-                  current.remove();
-                  current = next;
-                  continue;
-                } else {
-                  // 非空ノードが出たら終了（削除しすぎない）
-                  break;
-                }
-                current = current.nextSibling;
-              }
-            }
-
-      // ボタン追加をスキップ
-      return;
+      // 改行テキストノードがあれば、最初の改行だけ削除して詰める
+      if (nextNode && nextNode.nodeType === Node.TEXT_NODE) {
+        nextNode.textContent = nextNode.textContent.replace(/^\r?\n/, '');
+      }
+      return; // ボタンは作らず終了
     }
 
-    // ここまで来たら skip ではない → ボタン追加
-    if (pre.querySelector('.copyButton')) return;
-
-    pre.style.position = 'relative';
-
-    const copyButton = document.createElement('button');
-    copyButton.classList.add('copyButton');
-    copyButton.setAttribute('aria-label', 'コードをコピー');
-    copyButton.setAttribute('title', 'コードをコピー');
-    copyButton.innerHTML = `
-       <svg viewBox="0 0 24 24">
-         <use href="#tabler-copy-plus"></use>
-       </svg>
-     `;
-
-    pre.appendChild(copyButton);
-
-    copyButton.addEventListener('click', async () => {
-      // クリック時はもうコメントがないのでシンプルにコピー
-      try {
-        await navigator.clipboard.writeText(code.innerText.trim());
-        copyButton.innerHTML = `
-	          <svg viewBox="0 0 24 24">
-	            <use href="#tabler-copy-check-filled"></use>
-	          </svg>
-	        `;
-        copyButton.classList.add('copied');
-        setTimeout(() => {
-        copyButton.innerHTML = `
-           <svg viewBox="0 0 24 24">
-             <use href="#tabler-copy-plus"></use>
-           </svg>
-         `;
-        copyButton.classList.remove('copied');
-        }, 2000);
-      } catch (err) {
-        console.error('コピーに失敗しました', err);
-      }
-    });
+    // 3. 通常のコードブロックにはボタンを設置
+    setupCopyButton(pre, code);
   });
+}
+
+function setupCopyButton(pre, code) {
+  pre.style.position = 'relative';
+
+  const button = document.createElement('button');
+  button.className = 'copyButton';
+  button.setAttribute('aria-label', 'コードをコピー');
+  button.innerHTML = `<svg viewBox="0 0 24 24"><use href="#tabler-copy-plus"></use></svg>`;
+
+  pre.appendChild(button);
+
+  button.addEventListener('click', async () => {
+    try {
+      // innerText は HTML タグを除去した「見えている文字」だけを取得する
+      const text = code.innerText.trim();
+      await navigator.clipboard.writeText(text);
+
+      toggleIcon(button, true);
+      setTimeout(() => toggleIcon(button, false), 2000);
+    } catch (err) {
+      console.error('Copy failed:', err);
+    }
+  });
+}
+
+function toggleIcon(button, isCopied) {
+  const iconId = isCopied ? '#tabler-copy-check-filled' : '#tabler-copy-plus';
+  button.innerHTML = `<svg viewBox="0 0 24 24"><use href="${iconId}"></use></svg>`;
+  button.classList.toggle('copied', isCopied);
 }
