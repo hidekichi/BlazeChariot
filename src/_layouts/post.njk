@@ -8,8 +8,9 @@ layout: base.njk
 		<h2 class="page-title__desc w-full md:w-2/3">{{ description }}</h2>
 	{% endif %}
 	<div class="header-meta">
-	<span class="author">{{ site.author.name }}</span>{% if date %}｜<time class="page-title__date" datetime="{{ date }}">{{ date | readableDate }}</time> {% endif %}{% if update %} → <time class="page-title__update" datetime="{{ update }}">{{ update | readableDate }}</time>{% endif %}<br>
-
+  	<div>
+  	  <span class="author">{{ site.author.name }}</span>{% if date %}｜<time class="page-title__date" datetime="{{ date }}">{{ date | readableDate }}</time> {% endif %}{% if update %} → <time class="page-title__update" datetime="{{ update }}">{{ update | readableDate }}</time>{% endif %}<br>
+    </div>
 		<div class="tags">
 		{% for tag in tags -%}
 			{% if tag !== 'posts' %}
@@ -21,9 +22,9 @@ layout: base.njk
 </header>
 <article class="body-copy">
 	{{ content | safe }}
-	
+
 	{% include "sns.njk" %}
-	
+
 	<div class="tags">
 	{% for tag in tags -%}
 		{% if tag !== 'posts' %}
