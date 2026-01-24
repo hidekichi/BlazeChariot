@@ -1288,6 +1288,38 @@ details {
 }
 
 :is(.cat-blog, .cat-guitar) {
+	.listing {
+		li {
+			margin: 0;
+			padding: var(--padding-s) 0 var(--padding-xs);
+			padding: 0;
+
+			&::after {
+				margin: var(--padding-m) 0;
+			}
+
+			.title-meta :not(time) {
+				text-decoration-color: var(--link-color);
+				filter: hue-rotate(-760deg);
+			}
+
+			a {
+				margin: 0 0 var(--padding-xs);
+
+				&:hover {
+					text-decoration: unset;
+
+					.title-meta :not(time) {
+						transition: 1s;
+						text-decoration: underline;
+						text-decoration-color: var(--link-color);
+						filter: hue-rotate(0deg);
+					}
+				}
+			}
+		}
+	}
+
 	a {
 		width: 100%;
 		color: inherit;
@@ -1354,13 +1386,20 @@ details {
 	.pagination {
 		list-style: none;
 		display: flex;
+		justify-content: flex-start;
 		flex-flow: row wrap;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--padding-s) 0;
 		/* font-size: 14px; */
 
 		li {
-			margin-bottom: 0;
+			&:nth-child(n + 1) {
+				margin: 0 var(--padding-ex-xs);
+			}
+
+			&:nth-child(n + 3) {
+				margin: 0 var(--padding-s);
+			}
 		}
 
 		a[aria-current="page"] {
@@ -2198,6 +2237,10 @@ f-left: サムネイルを左にして文字を回り込ませます
 .tag-cloud {
 	max-width: 100vw;
 	padding: var(--padding-l) var(--padding-xs) 0;
+
+	h3 {
+		padding: 0 0 var(--padding-m);
+	}
 }
 
 .copyButton {
