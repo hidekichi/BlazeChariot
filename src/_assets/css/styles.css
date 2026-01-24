@@ -781,13 +781,21 @@ strong {
 		}
 
 		:where(th, td) {
-			padding: 6px;
+			padding: var(--padding-xs);
 			border-bottom: 1px solid #225;
 		}
 
 		th {
 			background-color: var(--th-background);
-			border-bottom: 1.5px dashed #fff;
+			border-bottom: 1.5px dashed #408499;
+
+			&:not(:last-of-type) {
+				border-right: 1.5px dashed #408499;
+			}
+		}
+
+		tbody tr:nth-child(even) {
+			background-color: #204e6a0f;
 		}
 
 		img {
@@ -947,8 +955,8 @@ strong {
 }
 
 .table-container {
-	margin: 2rem 0 1rem;
-	padding: 6px 0;
+	margin: var(--padding-l) 0 var(--padding-m);
+	padding: var(--padding-s) 0;
 	overflow: auto;
 
 	table {
@@ -1309,13 +1317,14 @@ details {
 	justify-content: center;
 	gap: var(--padding-s);
 	margin-top: var(--padding-l);
+	flex-flow: row wrap;
 
 	.tag {
 		text-decoration: none;
 		color: var(--font-color);
 		background-color: var(--tag-background);
 		border-radius: 4px;
-		padding: 0 6px;
+		padding: 0 var(--padding-xs);
 		cursor: pointer;
 	}
 }
@@ -1360,7 +1369,7 @@ details {
 ul.sns-share {
 	display: none;
 	flex-flow: row wrap;
-	gap: 0 2rem;
+	gap: var(--padding-s) var(--padding-l);
 	list-style: none;
 	justify-content: center;
 	margin: 6rem 0 3rem;
@@ -1878,11 +1887,12 @@ f-left: サムネイルを左にして文字を回り込ませます
 .footnote {
 	color: var(--background-color);
 	cursor: pointer;
-	height: 0.9375rem;
+	/*height: 0.9375rem;*/
+	height: 1.25em;
 	width: fit-content;
 	display: inline-flex;
 	background-color: var(--link-color);
-	padding: 2px 3px 2px 3px;
+	padding: calc(var(--padding-xs) / 2);
 	border-radius: 2px;
 	justify-content: center;
 	align-items: center;
@@ -1925,6 +1935,7 @@ f-left: サムネイルを左にして文字を回り込ませます
 		display: grid;
 		grid-template-columns: 2rem 1fr;
 		margin: 0.5rem 0 0;
+		margin: var(--padding-ex-m) 0 0;
 	}
 
 	span {
@@ -2001,8 +2012,27 @@ f-left: サムネイルを左にして文字を回り込ませます
 	}
 
 	.toc_sitetitle {
-		margin-top: 1rem;
+		margin-top: var(--padding-s);
 		cursor: pointer;
+		border-color: var(--logo);
+
+		span {
+			&:first-of-type {
+				padding: 0 0 var(--padding-ex-s);
+				color: var(--logo);
+			}
+		}
+
+		&:hover {
+			filter: hue-rotate(200deg);
+			transition: 0.6s;
+
+			span {
+				&:first-of-type {
+					color: var(--link-color);
+				}
+			}
+		}
 	}
 
 	.toc_menu {
