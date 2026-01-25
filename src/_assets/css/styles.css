@@ -1217,16 +1217,25 @@ code {
 	border-radius: 0.1em;
 }
 
-pre code {
-	font-size: 0.875em;
+pre {
+	position: relative;
+	width: 100%;
+	overflow: hidden !important;
+
+	code {
+		display: block;
+		font-size: 0.875em;
+		overflow-x: auto;
+		padding: var(--padding-s);
+	}
 }
 
 pre[class^="language-"] {
-	overflow-x: auto;
+	/*overflow-x: auto;*/
 	background: #262d3c !important;
 	line-height: 1.2 !important;
 	font-family: "Fragment mono", monospace !important;
-	padding: var(--padding-s) !important;
+	padding: 0;
 	margin: 2em 0;
 }
 

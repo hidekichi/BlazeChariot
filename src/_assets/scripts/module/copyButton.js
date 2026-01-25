@@ -33,7 +33,7 @@ export async function copyButton() {
 }
 
 function setupCopyButton(pre, code) {
-  pre.style.position = 'relative';
+  //pre.style.position = 'relative';
 
   const button = document.createElement('button');
   button.className = 'copyButton';
