@@ -4,6 +4,10 @@ export function toc() {
 
 	if (!toc) return;
 
+	const sidebar = document.querySelector(".sidebar");
+  const backdrop = document.querySelector(".backdrop");
+  const panelSwitch = document.querySelector(".sidebar .panel-switch");
+
 	const headers = document.querySelectorAll(
 		".body-copy > :is(h1, h2, h3, h4, h5)"
 	);
@@ -30,7 +34,7 @@ export function toc() {
 	});
 
 	tocButtons.forEach((button, i) => {
-		button.addEventListener("click", function (event) {
+		button.addEventListener("click", async function (event) {
 			event.preventDefault();
 			const targetId = i;
 			const targetHeader = document.querySelector(`[data-id="${targetId}"]`); // data-idでヘッダーを特定
@@ -40,6 +44,20 @@ export function toc() {
 					block: "start",
 				});
 			}
+
+			const handleScrollEnd = () => {
+				if (sidebar) sidebar.classList.remove("active");
+				if (backdrop) backdrop.classList.add("hidden");
+				if (panelSwitch) panelSwitch.ariaExpanded = "false";
+				window.removeEventListener("scrollend", handleScrollEnd);
+			};
+
+			if ("onscrollend" in window) {
+            window.addEventListener("scrollend", handleScrollEnd);
+        } else {
+            // 未サポートブラウザ用のフォールバック（従来のsleep方式）
+            setTimeout(handleScrollEnd, 600);
+        }
 		});
 	});
 

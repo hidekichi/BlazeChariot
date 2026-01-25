@@ -1919,7 +1919,9 @@ f-left: サムネイルを左にして文字を回り込ませます
 }
 
 .panel-switch {
-	transform: translateX(-140%);
+	position: absolute;
+	top: 50%;
+	transform: translate(-140%, -50%);
 }
 
 @keyframes blink {
