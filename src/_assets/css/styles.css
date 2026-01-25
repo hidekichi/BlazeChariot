@@ -77,6 +77,7 @@ html {
 }
 
 body {
+	position: relative;
 	display: grid;
 	grid-template-areas:
 		"navi  "
@@ -1858,6 +1859,24 @@ f-left: サムネイルを左にして文字を回り込ませます
 		height: 0;
 		opacity: 0;
 		transform: scale(0);
+	}
+}
+
+.backdrop {
+	background-color: rgba(0, 51, 81, 0.9);
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	transition: 0.5s;
+	transform: translateX(0%);
+	display: unset;
+	opacity: 1;
+
+	&.hidden {
+		opacity: 0;
+		transform: translateX(100%);
 	}
 }
 

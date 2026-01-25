@@ -47,7 +47,9 @@ export function toc() {
 
 			const handleScrollEnd = () => {
 				if (sidebar) sidebar.classList.remove("active");
-				if (backdrop) backdrop.classList.add("hidden");
+				if (backdrop) {
+					backdrop.classList.add("hidden");
+				}
 				if (panelSwitch) panelSwitch.ariaExpanded = "false";
 				window.removeEventListener("scrollend", handleScrollEnd);
 			};
