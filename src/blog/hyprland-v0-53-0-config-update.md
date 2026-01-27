@@ -193,12 +193,12 @@ windowrule = float on, match:class ^(xdg-desktop-portal)$
 ```ini
 windowrule {
   name = float
-  match:class ^(gnome-calculator)$
-  match:class ^(galculator)$
-  match:class ^(blueman-manager)$
-  match:class ^(org\.gnome\.Nautilus)$
-  match:class ^(steam)$
-  match:class ^(xdg-desktop-portal)$
+  match:class = ^(gnome-calculator)$
+  match:class = ^(galculator)$
+  match:class = ^(blueman-manager)$
+  match:class = ^(org\.gnome\.Nautilus)$
+  match:class = ^(steam)$
+  match:class = ^(xdg-desktop-portal)$
   float = on
 }
 ```
