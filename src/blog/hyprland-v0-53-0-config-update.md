@@ -9,8 +9,6 @@ tags:
   - linux
   - Hyprland
   - DankMaterialShell
-images:
-  - ../img/benz_midget.avif
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---
