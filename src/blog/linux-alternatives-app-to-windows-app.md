@@ -2,7 +2,7 @@
 title: Windowsで使われるソフトはLinuxにあるか
 description: Linuxにはソフトやドライバーがないと思っている人が多いので、代替のものがあるかを調べました。あと古い知識しかなくイメージが停滞している人が多いので現状の確認のための内容も含めてあります。
 date: 2025-12-03T05:42:29.949Z
-update: 2026-01-22
+update: 2026-01-27
 category:
   - blog
 tags:
@@ -219,7 +219,8 @@ zip images.zip a.jpg b.jpg c.jpg
 
 ### Office系
 
-windowsといえばMicrosoft Officeですが、こればかりは同じものがなくOffice系としてはその代替ソフトの[LibreOffice](https://ja.libreoffice.org/)や[OnlyOffice](https://www.onlyoffice.com/ja)などが使われます。完全ではなく一部使えない機能があるけれども互換性が高いのは中国製ですが[WPS Office](https://www.wps.com/ja-JP/)でしょうか。[Microsoft 365](https://www.microsoft.com/ja-jp/microsoft-365)のWeb版をブラウザで使う（Linux完全対応、無料プランあり）。高度機能が必要ならこれが一番現実的です。
+windowsといえばMicrosoft Officeですが、こればかりは同じものがなくOffice系としてはその代替ソフトの[LibreOffice](https://ja.libreoffice.org/)や[OnlyOffice](https://www.onlyoffice.com/ja)などが使われます。完全ではなく一部使えない機能がありますが互換性が高いのは中国製の[WPS Office](https://www.wps.com/ja-JP/)でしょうか。
+[Microsoft 365](https://www.microsoft.com/ja-jp/microsoft-365)のWeb版をブラウザで使う（Linux完全対応、無料プランあり）。高度機能が必要ならこれが一番現実的です。
 どうしてもローカルで完結したいとなるとソフトを選ばざるを得ません。
 
 日本人がExcelに依存しすぎな面もあり、Wordの代替ソフトは何でも良いですがExcel完全互換はありません。特にVBAマクロがそのまま動くというものはありません。
@@ -279,6 +280,76 @@ Webサイトですが[AlternativeTo](https://alternativeto.net/)で調べるこ�
 他にも[Reddit](https://www.reddit.com/)のr/linux, r/linux4noobs, r/UnixPorn などで「WindowsのXXのLinux代替は？」と検索/質問すると、すぐに複数のソフト名が挙がります。
 
 AIに聞くのも一つの方法です。
+
+### GUIで入手する
+
+わかっていれば圧倒的にターミナルでやったほうが手撮り早いですが、やたらターミナルを嫌う人がいるのも事実です。そう言う人達にはGUIでインストールする方法もあります。
+
+#### ディストリビューション標準の「アプリストア」
+
+<style>
+    tr:nth-child(even) {
+        background-color: initial;
+    }
+    td:nth-of-type(2) {color: unset;}
+    td:nth-of-type(n+2) {color: unset;}
+    td:nth-of-type(n+3) {color: unset;}
+</style>
+
+|デスクトップ環境|ツール名|
+|----|----|
+|GNOME|GNOME software|
+|KDE Plasma|Discover|
+|Cinammon|Software Manager|
+|XFCE|GNOME Software/Pamac|
+
+この他にもelementary OSではAppCenterというのもあります。多くの場合こういった名称で、そのパッケージがどういうものかを確認しながらインストール/アンインストールすることができます。
+これらにしても内部ではShellコマンドが動作してインストールを行っていると思います。
+
+#### ユニバーサルパッケージ形式専用のGUIツール
+
+Flatpakがこの形式での現在最強勢力となっていて、ほとんどのディストリビューションで使用することができます。通常はターミナルからコマンドを入力するわけですが、Gnome Softwareなどにも組み込まれていてGUIで操作することができます。
+
+Ubuntu系が強いですが、snapdが入っている環境であれば使用することができるSnapもあります。使っているものが違うだけで登録されているパッケージがFlatpakにもSnapにもあれば同じようにして導入できます。
+
+#### 従来型のパッケージマネージャーのGUIフロントエンド（上級者向け・細かい管理に強い）
+
+<div class="table-container">
+
+|ツール名境|対応パッケージマネージャ|主なディストリビューション|
+|----|----|----|
+|Synaptic|APT (deb)|Ubuntu/Debian/Linux Mint/Debian系|
+|Pamac|Pacman + AUR + Flatpak + Snap|Manjaro, EndeavourOS, Arch系|
+|Octopi / Bauh|Pacman + AUR|Arch系|
+|YaST|zypper (rpm)|openSUSE|
+|DNFdragora|DNF|Fedora（古い。今はほとんどDiscoverに取って代わられている）|
+
+</div>
+
+導入するのにどれを選択して導入しするかや、どういう方法で導入するかなどが初心者向けではないですが、基本的には簡単に導入できます。ディストリビューションによっては最初から導入されているものもあります。
+
+Arch系は普段使っているので他のものよりは少しばかりわかります。これらを導入するために`yay`あるいは`paru`を導入する必要があります。入っていればそのまま使えばよいのでまずは`paru`で試して、なければ`yay`を試しいずれもないようであれば、paruを導入することをおすすめします。paruをyayに変えればyayを導入することができます。
+どちらも同じようなものであるので両方入れる必要はありません。おすすめする理由としてはparuの方が新しくわかりやすいと言うだけです。
+```bash
+sudo pacman -S paru
+```
+
+paruの導入ができたら、それを使用して上記表のArch系で利用できる各パッケージを導入します。
+```bash
+paru -S pamac-aur
+```
+あるいは、octopiなら、
+
+```bash
+paru -S octopi
+```
+等として、まずはユーザーディレクトリでパッケージのダウンロード及びビルドを行い、導入できる形にしてから`pacman`で自動的にインストールされますが、もちろんその際には管理者のパスワードが必要です。なので導入する前にArch wikiなどで現在誰がメンテナンスをしているのか、どれぐらい前に更新されたのかを確認して、またコメントが荒れてないかなども重要ですが、そういった情報を集めてから導入するようにして下さい。
+
+#### 別の方法として
+
+Garuda Linuxの開発グループが[Chaotic AUR](https://aur.chaotic.cx/docs)を公開しています。これらは本来ソースからビルドする必要があるものをビルド済みのバイナリパッケージとして公開していて、これらは公式パッケージマネージャでインストールが可能になります。
+導入したリポジトリは上記pamacなどにも反映されて表示されるので、同じ物がある場合、入手先の名称でChaotic AURで入れれば多くの場合がバイナリでのインストールになります。
+ただしこれはリポジトリが増えることになるのでチェックに少し時間がかかるようになったりなので、一長一短があることに注意して下さい。
 
 ## なぜ「不便だ」「使い方がわからない」という声が出るのか？
 

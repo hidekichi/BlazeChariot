@@ -217,7 +217,7 @@ main.container {
 	grid-template-areas:
 		"header header"
 		"main   side  ";
-	gap: 0 var(--padding-s);
+	gap: 0 var(--padding-xs);
 
 	&:has(.listing) {
 		grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -266,7 +266,8 @@ footer {
 
 .sidebar {
 	border-left: 0.1rem solid #333;
-	padding-left: var(--padding-xs);
+	padding: var(--padding-xs) var(--padding-ex-xs) var(--padding-xs)
+		var(--padding-s);
 	/* font-size: 16px; */
 }
 
@@ -351,7 +352,7 @@ nav .title {
 	display: block;
 	height: 0.1rem;
 	background-color: var(--transparency-1);
-	margin: 1rem auto 0rem auto;
+	margin: var(--padding-xl) auto 0rem auto;
 }
 
 img {
@@ -1385,7 +1386,7 @@ details {
 
 .header-meta {
 	/* font-size: 0.65rem; */
-	margin: var(--padding-s) 0 var(--padding-m);
+	margin: var(--padding-s) 0 var(--padding-l);
 
 	.tags {
 		margin: var(--padding-l) auto var(--padding-s);
@@ -1949,7 +1950,7 @@ f-left: サムネイルを左にして文字を回り込ませます
 .panel-switch {
 	position: absolute;
 	top: 50%;
-	transform: translate(-140%, -50%);
+	transform: translate(-170%, -50%);
 }
 
 @keyframes blink {
