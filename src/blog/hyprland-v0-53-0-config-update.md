@@ -9,6 +9,8 @@ tags:
   - linux
   - Hyprland
   - DankMaterialShell
+images:
+  - ../img/dankinstall.avif
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---
@@ -22,6 +24,54 @@ permalink: /blog/{{ page.fileSlug }}/
 
 現状で**どこをどういうふうに変更していたか**、と言うのは重要です。hyprland.confはセーブしたら即反映されるので、変更しながら不足していたものは追加していけばよいですが、これまでにカスタマイズしていた部分を把握していれば、以下のデフォルトの記述を元にして追加するのが早いのではなかろうかと。
 
+### 念の為の新規インストールとアップデートの方法
+
+#### DMSの新規インストール
+
+ターミナルに次のコマンドを貼り付けると自動でインストーラーが起動します。
+```bash
+curl -fsSL https://install.danklinux.com | sh
+```
+
+![インストール画面](../img/dankinstall.avif)
+
+このインストーラーでは、画像にあるように、
+- shell： DankMaterialShell がインストールされます
+- wm： Windowマネージャーに、niri か Hyprland いずれかを選択してインストールできます
+- term： ターミナルにGhostty、kitty、Alacritty がインストールされます
+- styles： インストールされたターミナルのテーマが自動でインストールされます
+- config： デフォルトのキーバインドやウィンドゥルール、アニメーション等が適用された設定がインストールされます
+
+#### DMSのアップデート方法
+
+■ Arch系
+```bash
+paru -Syu dms-shell-bin
+```
+もしくは、`paru -Syu dms-shell-git`でもできます。`paru`で書かれていますが、`yay`でも可能です。paru、yayは事前に導入されている必要があります。
+`-bin`の方が安定版で、`-git`の方が最新版です。
+
+■ Fedora
+```bash
+sudo dnf upgrade dms
+```
+
+■ Debian & Ubuntuでは
+```bash
+sudo apt update && sudo apt upgrade dms
+```
+
+■ OpenSUSE
+```bash
+sudo zypper refresh && sudo zypper update dms
+```
+
+他にもありますが、これらでアップデートした後は、
+```bash
+dms restart
+```
+
+で、全体をリスタートさせます。(ログインセッションは維持したままで、再起動するわけではありません)。これらの詳細は[Service Management](https://danklinux.com/docs/dankmaterialshell/managing)に記載があります。
 
 ## config
 
