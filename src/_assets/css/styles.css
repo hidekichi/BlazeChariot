@@ -2238,6 +2238,10 @@ f-left: サムネイルを左にして文字を回り込ませます
 				ul {
 					width: 100%;
 					max-width: 100vw;
+
+					li {
+						margin: var(--padding-s);
+					}
 				}
 			}
 		}
