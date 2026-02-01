@@ -66,23 +66,23 @@ layout: base.njk
 {% endfor %}
 
 {% if prevPost or nextPost %}
-      {% if prevPost %}
-        <a class="prev" href="{{ prevPost.link | url }}">
+  {% if prevPost %}
+  <a class="prev" href="{{ prevPost.link | url }}">
 		<svg class="icon" aria-hidden="true">
 			<use href="#tabler-arrow-right-from-arc" />
 		</svg>
-          <div>{{ prevPost.title }}</div>
-        </a>
-		{% else %}
+    <div>{{ prevPost.title }}</div>
+  </a>
+	{% else %}
 		<div></div>
-      {% endif %}
-      {% if nextPost %}
-        <a class="next" href="{{ nextPost.link | url }}">
-		<svg class="icon right" aria-hidden="true">
-			<use href="#tabler-arrow-right-from-arc" />
-		</svg>
-          <div>{{ nextPost.title }}</div>
-        </a>
+  {% endif %}
+  {% if nextPost %}
+    <a class="next" href="{{ nextPost.link | url }}">
+      <div>{{ nextPost.title }}</div>
+  		<svg class="icon right" aria-hidden="true">
+  			<use href="#tabler-arrow-right-from-arc" />
+  		</svg>
+    </a>
 	{% else %}
 	<div></div>
       {% endif %}

@@ -887,10 +887,10 @@ strong {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 1rem;
+		padding: var(--padding-xs) 0;
 		background-color: transparent;
 		border-radius: 8px;
-		margin: 5rem 0;
+		margin: calc(var(--padding-l) * 2) 0;
 
 		a {
 			position: relative;
@@ -956,7 +956,7 @@ strong {
 				margin-bottom: 0.5rem;
 
 				div {
-					max-width: 150px;
+					max-width: 300px;
 					margin: 0 0.5rem;
 				}
 			}
