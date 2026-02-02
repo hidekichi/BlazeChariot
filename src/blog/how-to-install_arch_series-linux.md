@@ -2,7 +2,7 @@
 title: Arch系Linuxのインストールができない人へ - CachyOSのWikiを読み解く
 description: Googleの検索ワードでCachyOSがインストールできないというのを見たのでWikiで書いてあることを翻訳して説明
 date: 2025-11-16
-update: 2026-02-3
+update: 2026-02-03
 category:
     - blog
 tags:
