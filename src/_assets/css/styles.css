@@ -1095,7 +1095,7 @@ ul.listing {
 
 .footer {
 	/* font-size: 0.75rem; */
-	margin-top: 3rem;
+	margin-top: calc(var(--padding-l) * 3);
 	margin-bottom: 1rem;
 	border-top: solid 1px var(--transparency-1);
 	padding: 1rem 0;
@@ -1381,6 +1381,10 @@ details {
 		border-radius: 4px;
 		padding: 0 var(--padding-xs);
 		cursor: pointer;
+	}
+
+	& ~ .footnotes-list {
+		margin-top: calc(var(--padding-xl) * 2);
 	}
 }
 
