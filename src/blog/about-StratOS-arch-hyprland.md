@@ -131,7 +131,7 @@ ArchLinuxがベースになっているのでパッケージ管理は`Pacman + A
 
 DistroWatchのページで明確に「Journaled File Systems: ext4」と記載されており`ext4`であることから、今どきのAtomic/Immutableなシステムではなく、またロールバックする仕組みもないようなので、これまでのArchに準ずる一般的なシステムです。
 
-Archベース + Calamaresインストーラーを使っているほとんどの現代ディストロ（EndeavourOS、Garudaなど）と同様の使用かと思われますが、設定さえすればロールバックは可能であるはずです。
+Archベース + Calamaresインストーラーを使っているほとんどの現代ディストロ（EndeavourOS、Garudaなど）と同様の仕様かと思われますが、設定さえすればロールバックは可能であるはずです。
 
 ## 個人的に思うこと
 
