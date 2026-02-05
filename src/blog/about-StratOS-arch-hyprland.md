@@ -2,7 +2,7 @@
 title: Arch + HyprlandのディストリビューションStratOSが話題に
 description: ベースディストリビューションにRice環境を適用する事が多いHyprlandで、最初から設定済みの新しいディストリビューションが話題になっています
 date: 2026-02-03
-update: 2026-02-04
+update: 2026-02-05
 category:
   - blog
 tags:
@@ -27,7 +27,7 @@ StratOSは、2025年後半〜2026年初頭に注目を集め始めた新しいAr
 
 特筆すべき注目点は、[Bedrock Linux](https://bedrocklinux.org/)の技術（{stratum|ストラータ} / 階層、あるいは塊）を組み込んでいて、Ubuntu / Fedora / Debian などのパッケージやリポジトリを簡単に混ぜて使え、実質的に「一つのシステムでpacman + apt + dnf + Flatpakなどが共存」できるのが最大の売りで、典型的なLinuxディストリビューションの枠に縛られることなく、ユーザーが自由に作業方法を決定できるシステムを提供しています。
 
-これらを実現するためにStratOSには、Bedrock Linuxもプリインストールされており、既存のArch Linuxベース上で他のディストリビューションのコンポーネント（「stratum / ストラータ(ム)」）をサポートできます。`brl fetch`(**b**ed **r**ock **l**inux)コマンドを使用して、Ubuntu、Fedora、Kali、Gentoo、Voidなどの他のディストリビューションのストラータを取得できます。
+これらを実現するためにStratOSには、Bedrock Linuxもプリインストールされており、既存の[Arch Linux](https://archlinux.org/)ベース上で他のディストリビューションのコンポーネント（「stratum / ストラータ(ム)」）をサポートできます。`brl fetch`(**b**ed **r**ock **l**inux)コマンドを使用して、[Ubuntu](https://jp.ubuntu.com/)、[Fedora](https://www.fedoraproject.org/ja/)、[Kali](https://www.kali.org/)、[Gentoo](https://www.gentoo.org/)、[Void](https://voidlinux.org/)などの他のディストリビューションのストラータを取得できます。
 
 > stratum(ストラータ、あるいはストラータム)とは
 > 一般的な意味としては階層という事ですが、levelやlayerと言うよりは、一つのディストリビューション（またはその一部）のファイル群をまとめた独立したユニットで、他のstratumと混ぜつつ干渉を最小限に抑える仕組みなのが伝わりづらい。そのため、「Fedoraのストラータをfetchした」などと、もうその単語そのもので理解するほうが良いとも言える。
@@ -66,7 +66,7 @@ update_dnf(例)
 sudo dnf install firefox
 ```
 などとして簡単に書けるわけです。しかし、ここでもわかりますがArchの`pacman`にもfirefoxはありますから、dnfで入れる必要があるだろうか？となるはずです。あわせてArchはローリングリリースなのでUbuntuやFedoraよりバージョンが新しい可能性もあり…という点で、<u>Arch以外にしかないものを入れるのであれば便利だ</u>と言えると思うわけです。
-`pacman + AUR + Flatpak`(あるいは、SnapやAppImage)では足りないという状況があるのかはわかりませんけども、アプリを作っている人がUbuntuにしかリリースしていないという状況などがあれば便利だと言えると思います。
+[pacman](https://wiki.archlinux.jp/index.php/Pacman) + [AUR](https://aur.archlinux.org/) + [Flatpak](https://flatpak.org/)(あるいは、[Snap](https://snapcraft.io/)や[AppImage](https://appimage.org/))では足りないという状況があるのかはわかりませんけども、アプリを作っている人がUbuntuにしかリリースしていないという状況などがあれば便利だと言えると思います。
 
 書くのがやや面倒なStratOSではありますが、コマンド一発で Ubuntu / Fedora / その他 の使用できる全てのストラータを更新・取得するわけではなく必要に応じて各ストラータを最新にします。その方が軽量・シンプルだからだと思います。
 パッケージ導入はどのディストリビューションでも当然の手順なので変則的なものではありません。
@@ -84,7 +84,7 @@ sudo pacman -S firefox
 
 ### 配布されているエディション
 
-配布されているエディションとしては、Hyprland、GNOME、Niriが提供されていて、HyprlandやNiriのようなWaylandコンポジター(ウィンドウマネージャー)の操作に不安があると言う人に対してもGnomeでカバーするなどがされています。
+配布されているエディションとしては、[Hyprland](https://hypr.land/)、[GNOME](https://www.gnome.org/)、[Niri](https://github.com/YaLTeR/niri)が提供されていて、HyprlandやNiriのようなWaylandコンポジター(ウィンドウマネージャー)の操作に不安があると言う人に対してもGnomeでカバーするなどがされています。
 
 ### 独自ツールやカスタム要素として
 
@@ -96,19 +96,19 @@ sudo pacman -S firefox
 
 #### プリインストールアプリ
 
-- Ghostty： ターミナル
-- Conky： システム情報表示
-- Emacs： テキストエディター
-- Kvantum Manager： 「Kvantum」のテーマを選択するためのGUI
-- Neovim： Vimベースのテキストエディター
-- Thunar： ファイルマネージャー(Xfceのファイルマネージャ)
-- Zen Browser： Webブラウザ
+- [Ghostty](https://ghostty.org/)： ターミナル
+- [Conky](https://wiki.archlinux.jp/index.php/Conky)： システム情報表示
+- [Emacs](https://www.gnu.org/software/emacs/)： テキストエディター
+- [Kvantum Manager](https://store.kde.org/p/1005410)： 「Kvantum」のテーマを選択するためのGUI
+- [Neovim](https://neovim.io/)： Vimベースのテキストエディター
+- [Thunar](https://docs.xfce.org/xfce/thunar/start)： ファイルマネージャー(Xfceのファイルマネージャ)
+- [Zen Browser](https://zen-browser.app/ja/)： Webブラウザ
 
 [公式wiki](https://stratos-linux.org/intro/)では特に明言はありませんが、ZDNetではZen Browserがプリインストールされていると書いてあります。しかしDistoWarchではChromium系と記載があります。バージョンアップなどして変更があった可能性があります。また単にインストール時に選べると言うだけの可能性もあります。
 
 > Zen Browserとは
 > Firefoxをフォークしたブラウザで美しいデザイン、プライバシー重視、機能満載のWebブラウザです。必要なければタブを非表示したり分割表示もできます。Zen Modsというプラグイン・テーマがありブラウザをカスタマイズできます。
-![zen browser](../img/zen_browser.avif)
+> {ytp::https://youtu.be/TBZZUGB_bCw::Firefox系ブラウザの『Zen browser』を徹底解説！機能・使い方など詳しくご紹介します【Arc・Sidekickの代替におすすめ】 }
 
 ### その他
 
@@ -137,6 +137,16 @@ Archベース + Calamaresインストーラーを使っているほとんどの�
 
 ZDNetのJack Wallenが、「数十年Linuxを使用しているがこれまで見た中で最もクール」と絶賛しているわけですが、インストールすれば即使えることを主に、ダークテーマであったりを言っていると想像できるものの、[Omarchy](https://omarchy.org/)や[Archriot](https://archriot.org/)、[AxOS](https://www.axos-project.com/)などを知らないなんてことがあり得るだろうかと疑問にも思え、ディストリビューションとしてISOを配布しているわけではないものの[DankMaterialShell](https://danklinux.com/)や[illogical-impulse(end4)](https://ii.clsty.link/en/)、[ML4W](https://www.ml4w.com/)より洗練されているとも見えないわけです。
 
+<div class="border-2 border-sky-300/80 text-base my-[16pt]">
+  <div class="block text-s p-4">関連記事</div>
+
+- [新しいArchLinuxの形 - Archriot](/blog/archriot/)
+- [AxOSとHyprlandについて](/blog/about-axos-and-hyperland/)
+- [公式で無いなら個人でやればいいじゃない？ EndeavourOS+Gnome+hyprland](/blog/installing-hyperland-on-endeavoros_gnome/)
+- [追加検証！CachyOSのHyprland環境にDANK Shellをぶち込んでいきなり使い勝手を良くする](/blog/cachyos-hyprland-dankshell-install-guide/)
+
+</div>
+
 日本語を使用するためには日本語のフォントも必要になり、広く使われているのはNotoフォントであろうと思いますが、それらを使用して雰囲気が変わった場合に同じ事が言えるか問題もあると思うわけです。DankMaterialShell、illogical-impulseは日本語と言語を選ぶだけで訳されたメニューが表示されます。
 現在実際に私が使用しているDankMaterialShellで言えばフォントも設定できます。日本語入力だけはfcitx5など別で導入する必要があるものの日本語を表示する環境ができている上に、所在地の天候・気温も表示でき、illogical-impulseではAIを使用するベースも搭載しています。
 
@@ -148,7 +158,7 @@ ZDNetのJack Wallenが、「数十年Linuxを使用しているがこれまで�
 
 「自分でも信じられないが、筆者はこのバージョンのStratOSを見て、Hyprlandをデフォルトのデスクトップ環境にしてもいいかもしれないと思った。」
 
-使ってないんかい、と私は絶望したわけです。Hyprlandが良いと言い切れるわけではないものの、何十年もLinux使用してきてまだスタック型のディストリビューション使用してるとしたら、よっぽど使い勝手が良いディストリビューションなんだろうけども、そんなものがどこにあるのか教えて欲しいとすら思うのです。
+使ってないんかい、と私は絶望したわけです。Hyprlandが良いと言い切れるわけではないものの、何十年もLinux使用してきてまだスタック型のディストリビューションを使用してるとしたら、よっぽど使い勝手が良いディストリビューションなんだろうけども、そんなものがどこにあるのか教えて欲しいとすら思うのです。
 SwayやNiriなど考えられるポイントはあるけれども、ディストリビューションではそんな凄いものは見たこともないし、聞いたこともなく、UbuntuやMintと言うならWindowsでいいやんと思うわけで。
 
 **Linuxを使うのはWindowsより優れているところがあるからだろう**と。
@@ -157,7 +167,7 @@ SwayやNiriなど考えられるポイントはあるけれども、ディスト
 
 昨今のメモリやパーツの高騰で、1台でなんでもできるPCを安く入手するのが難しくなり、少し前に使用していた古いPCがあれば、メモリ消費が少ないLinuxディストリビューションでHyprlandのような軽量・高速なウィンドウマネージャーを使用して、WindowsとLinuxを使い分けることで肥大化しているWindowsのメモリ消費を抑えて効率的に使用することこそが今やるべき姿なのではなかろうかと。
 
-例えば、絵を描くのはWindowsで続けて行い、となりでLinuxノートなどを置き、ブラウザによる調べ物や動画閲覧などを行うとかであれば、調べ物や動画閲覧で消費されてたメモリはLinuxノートが代替するわけですから、その分Windowsからは削減できるわけで、足りないメモリ分を少しでも補えるだろうと。
+例えば、絵を描く、ゲームをするのはWindowsで続けて行い、となりでLinuxノートなどを置き、ブラウザによる調べ物や動画閲覧などを行うとかであれば、調べ物や動画閲覧で消費されてたメモリはLinuxノートが代替するわけですから、その分Windowsからは削減できるわけで、足りないメモリ分を少しでも補えるだろうと。
 Linuxノートに既に8GB以上(推奨12GB(8GB +　4GB)以上)搭載しているのであれば、それで日常使いは間に合うだろうから、Windowsの方に高騰しているDDR5メモリを増設しなくてもいいだろうと思うわけです。現状で耐えられはしないか？と。
 
 簡単に言えばコンビニに行くのに高級ベンツに乗っていく必要はなく、乗り物であればセカンドカーにあたる軽自動車やスクーター、自転車感覚のLinuxを使えばいいやんと言うことです。徒歩で行くよりはずっと楽なはずと。そうして使い分ける環境ができたら、何でベンツなんか乗ってたんだろうと思うようにもなるはずです。
