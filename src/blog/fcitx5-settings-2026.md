@@ -158,7 +158,16 @@ GnomeはIBusとの統合が非常に強力なため、fcitx5を使用する場�
 
 #### gnome-shell-extension-kimpanelについて
 
-これのインストールの方法ですが、Gnomeのアプリ一覧(あるいはアプリ一覧画面で「extension」検索)から見つかる「拡張機能」は拡張機能自体を[extensions.gnome.org](https://extensions.gnome.org/)から探してwebから導入となりますが、拡張機能の導入だけをするのに毎回それだと結構手間でもあるので、Flatpakにある[Extension Manager](https://flathub.org/ja/apps/com.mattjakeman.ExtensionManager)を導入して、Extension Managerから導入するのが今後拡張機能を探すのも何かと便利になります。
+これのインストールの流れですが、
+- Gnomeのアプリ一覧(あるいはアプリ一覧画面で「extension」検索｜`Windows/⌘ キー + A`)から見つかる「拡張機能」アプリを開く
+  - これはGnomeの拡張機能自体を、[extensions.gnome.org](https://extensions.gnome.org/)から探し、webから導入。
+
+このようにするのが従来かつ現行の拡張機能の導入方法ですが、拡張機能の導入だけをするのに毎回それだと結構手間でもあるので、
+
+1) Flatpakにある[Extension Manager](https://flathub.org/ja/apps/com.mattjakeman.ExtensionManager)を導入
+2) Extension Managerから該当の拡張機能を導入する
+
+という手順の方が今後拡張機能を探すのも何かと便利になります。
 
 <div>
 
@@ -167,14 +176,16 @@ GnomeはIBusとの統合が非常に強力なため、fcitx5を使用する場�
 
 </div>
 
-1. Extension ManagerをFlatpakでインストール(初めて導入する場合、既に導入済みなら不要)
+上記画像のような感じで導入できるExtension Managerのインストール方法は、
+
+1. Flatpakでインストール(初めて導入する場合、既に導入済みなら不要)
     ```bash
     flatpak install flathub com.mattjakeman.ExtensionManager
     ```
     - Ubuntu/Fedoraなどではgnome-shell-extension-managerパッケージもあるが、Flatpak版の方が最新で安定しやすい
     - 「ソフトウェアの追加と削除」アプリからでも可能。Gnome純正の同アプリでExtension Managerを検索したらインストールはFlatpakになっていますのでGUIで導入できます
 
-2. Extension Managerを起動 → `Browse(検索)タブ`で「**kimpanel**」または「**Input Method Panel**」を検索(上記最初の画像)
+2. Extension Managerを起動 → `Browse(検索)タブ`で「**kimpanel**((おそらく KDE Input Method Panelだろうかと))」または「**Input Method Panel**」を検索(上記最初の画像)
 3. インストール → 有効化(上記最後の画像)
 4. Gnomeのログアウト → ログイン
 
