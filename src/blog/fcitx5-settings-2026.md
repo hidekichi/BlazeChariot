@@ -158,7 +158,7 @@ GnomeはIBusとの統合が非常に強力なため、fcitx5を使用する場�
 
 #### gnome-shell-extension-kimpanelについて
 
-これのインストールの方法ですが、Gnomeのアプリ一覧(あるいはアプリ一覧画面で「extension」検索)から見つかる「拡張機能」は拡張機能自体を[extensions.gnome.org](https://extensions.gnome.org/)から探してwebから導入となりますが、拡張機能の導入だけをするのに毎回それだと結構手間でもあるので、Flatpakにある[Extention Manager](https://flathub.org/ja/apps/com.mattjakeman.ExtensionManager)を導入して、Extention Managerから導入するのが今後拡張機能を探すのも何かと便利になります。
+これのインストールの方法ですが、Gnomeのアプリ一覧(あるいはアプリ一覧画面で「extension」検索)から見つかる「拡張機能」は拡張機能自体を[extensions.gnome.org](https://extensions.gnome.org/)から探してwebから導入となりますが、拡張機能の導入だけをするのに毎回それだと結構手間でもあるので、Flatpakにある[Extension Manager](https://flathub.org/ja/apps/com.mattjakeman.ExtensionManager)を導入して、Extension Managerから導入するのが今後拡張機能を探すのも何かと便利になります。
 
 <div>
 
