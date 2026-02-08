@@ -150,6 +150,7 @@ GnomeはIBusとの統合が非常に強力なため、fcitx5を使用する場�
 - 環境変数は基本的に不要
 - 必須な事項として、`gnome-shell-extension-kimpanel`をインストールすること。これがないと入力候補ウィンドウが変な場所に表示されたり、表示されなかったりします。公式Wikiでは<u>GNOME特有の追加ポイントとして「Fcitx5のIBus frontendが必要」（GNOMEがIBus DBusプロトコルを使っているため）と明記</u>されています
 - `/etc/xdg/autostart/`にある`org.fcitx.Fcitx5.desktop`が機能していればOK
+  - `org.fcitx.Fcitx5.desktop`はfcitx5をインストールすると自動で作成される
   - 存在していれば基本的には問題ないが、IBusが優先されてfcitx5をブロックし、fcitx5が起動しない場合もあるようです。
     - この場合はGnome TweaksのStartup Applicationsでfcitx5を手動追加
     - あるいは`~/.config/autostart/`に`org.fcitx.Fcitx5.desktop`を`/etc/xdg/autostart/`からコピー
