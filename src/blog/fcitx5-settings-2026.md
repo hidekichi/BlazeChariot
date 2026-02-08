@@ -2,13 +2,17 @@
 title: fcitx5の公式から見る2026年の設定事情
 description: X11からWaylandへの過渡期ということもあり、設定が色々ややこしくなってきているようです
 date: 2026-02-05
-update: 2026-02-07
+update: 2026-02-08
 category:
   - blog
 tags:
   - Arch系
   - 日本語入力
   - Linux
+images:
+  - ../img/etc_xdg_autostart_fcitx5.avif
+  - ../img/input_panel_flatpak_extension_manager_1.avif
+  - ../img/input_panel_flatpak_extension_manager_2.avif
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---
@@ -146,6 +150,37 @@ GnomeはIBusとの統合が非常に強力なため、fcitx5を使用する場�
 - 環境変数は基本的に不要
 - 必須な事項として、`gnome-shell-extension-kimpanel`をインストールすること。これがないと入力候補ウィンドウが変な場所に表示されたり、表示されなかったりします。公式Wikiでは<u>GNOME特有の追加ポイントとして「Fcitx5のIBus frontendが必要」（GNOMEがIBus DBusプロトコルを使っているため）と明記</u>されています
 - `/etc/xdg/autostart/`にある`org.fcitx.Fcitx5.desktop`が機能していればOK
+  - 存在していれば基本的には問題ないが、IBusが優先されてfcitx5をブロックし、fcitx5が起動しない場合もあるようです。
+    - この場合はGnome TweaksのStartup Applicationsでfcitx5を手動追加
+    - あるいは`~/.config/autostart/`に`org.fcitx.Fcitx5.desktop`を`/etc/xdg/autostart/`からコピー
+
+![autostart内のfcitx5.desktop](../img/etc_xdg_autostart_fcitx5.avif)
+
+#### gnome-shell-extension-kimpanelについて
+
+これのインストールの方法ですが、Gnomeのアプリ一覧(あるいはアプリ一覧画面で「extension」検索)から見つかる「拡張機能」は拡張機能自体を[extensions.gnome.org](https://extensions.gnome.org/)から探してwebから導入となりますが、拡張機能の導入だけをするのに毎回それだと結構手間でもあるので、Flatpakにある[Extention Manager](https://flathub.org/ja/apps/com.mattjakeman.ExtensionManager)を導入して、Extention Managerから導入するのが今後拡張機能を探すのも何かと便利になります。
+
+<div>
+
+![ExtensionManagerでkimpanelを検索](../img/input_panel_flatpak_extension_manager_1.avif)![ExtensionManagerでkimpanelを導入](../img/input_panel_flatpak_extension_manager_2.avif)
+{class="grid grid-cols-1 md:grid-cols-2 auto-rows-auto"}
+
+</div>
+
+1. Extension ManagerをFlatpakでインストール(初めて導入する場合、既に導入済みなら不要)
+    ```bash
+    flatpak install flathub com.mattjakeman.ExtensionManager
+    ```
+    - Ubuntu/Fedoraなどではgnome-shell-extension-managerパッケージもあるが、Flatpak版の方が最新で安定しやすい
+    - 「ソフトウェアの追加と削除」アプリからでも可能。Gnome純正の同アプリでExtension Managerを検索したらインストールはFlatpakになっていますのでGUIで導入できます
+
+2. Extension Managerを起動 → `Browse(検索)タブ`で「**kimpanel**」または「**Input Method Panel**」を検索(上記最初の画像)
+3. インストール → 有効化(上記最後の画像)
+4. Gnomeのログアウト → ログイン
+
+- Flatpak版Fcitx5を使っている場合、IME自体をFlatpakで入れているとIMモジュールがホストに届かないので、fcitx5はネイティブインストール((パッケージマネージャーあるいはそれらGUI版から導入する事))推奨。Kimpanelはシェル拡張なので影響なし
+
+これらの方法は<u>古いバージョンのGnomeだとエラーが出る可能性</u>があります。2026年2月現行版のGnomeだと問題ありません(実証済み。画像参考)
 
 ### KDE Plasma(6.0以降)
 
