@@ -2,12 +2,13 @@
 title: DankMaterialShellを使用中でシステムの更新によりHyprland v0.53.0あたりでエラーが出ている場合に
 description: システムの更新をしたらHyprlandが新しい仕様になってエラーが出てしまいどう修復したらよいかわからない人へ
 date: 2026-01-27
-update: 2026-01-31
+update: 2026-02-10
 category:
   - blog
 tags:
   - linux
   - Hyprland
+  - Niri
   - DankMaterialShell
 images:
   - ../img/dankinstall.avif
@@ -560,3 +561,11 @@ Hyprlandはかなり高頻度で更新されているプロジェクトなので
 使用しているDotfiles([Dank Material Shell](https://danklinux.com/))などもあわせてブックマークしておくとよいかと思います。
 
 Dank Material Shellは、HyprlandだけではなくNiriにも対応しています。
+同様の問題が起こっているので、まずアップデートしてから、[niri.kdl](https://github.com/AvengeMedia/DankMaterialShell/blob/master/core/internal/config/embedded/niri.kdl)、及び`~/.config/niri/dms/`の中の[binds.kdl](https://github.com/AvengeMedia/DankMaterialShell/blob/master/core/internal/config/embedded/niri-binds.kdl)の修正が必要です。
+
+あまり使用していないようであれば、新規インストールすればそれまでにカスタマイズしていた元々のconfigファイルはバックアップされるので、追記していたもの(キーレイアウトやモニター解像度、キーバインドでブラウザなどの起動キーの組み合わせ)などを書き換えれば元通り使用できます。
+
+config(kdl)ファイルは上記作業をして保存したら即適用されますが、ターミナルから`dms restart`として全体の設定の再起動をします(ログアウトはしません)。
+
+Dank Material Shellはシステムチェックもできます。`windowsキー + ,`で設定画面を出し、一番下の「詳細」の中にあるシステムチェックをすれば何に問題があるか、それらの情報に対してのリンクがあるのでクリックするとブラウザで公式サイトの該当ページ飛びます。
+それらで解決できるのではないかと思います。
