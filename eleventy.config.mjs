@@ -77,6 +77,7 @@ const embedYoutubeDiv = function (md) {
 };
 
 export default async function (eleventyConfig) {
+
   // -----------------------------------------------------------------
   // Vite Plugin Config
   // -----------------------------------------------------------------
@@ -142,8 +143,8 @@ export default async function (eleventyConfig) {
   eleventyConfig
     .addPassthroughCopy("src/static")
     .addPassthroughCopy("src/*.{txt,xsl,ico}")
-    .addPassthroughCopy("src/blog/**/*.{jpg,jpeg,png,webp,svg,gif,avif}")
-    .addPassthroughCopy("src/guitar/**/*.{jpg,jpeg,png,webp,svg,gif,avif,ogg}")
+    .addPassthroughCopy("src/blog/img/**/*.{jpg,jpeg,png,webp,svg,gif,avif}")
+    .addPassthroughCopy("src/guitar/img/**/*.{jpg,jpeg,png,webp,svg,gif,avif,ogg}")
     .addPassthroughCopy("src/pages/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
 
   // -----------------------------------------------------------------
