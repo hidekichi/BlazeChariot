@@ -69,6 +69,27 @@ export function externalLink() {
 
 			link.setAttribute("rel", newRel);
 
+			let iconId = "#icon_external-link";
+			let extraClass = "icon_external-link";
+
+			if (href.includes("amzn.to/")) {
+				iconid = "#icon-amazon";
+				extraClass = "amazon";
+				link.setAttribute("title", "Amazonへのリンクです");
+			}
+
+			const wrapper = document.createElement('span');
+      wrapper.className = 'external-link-wrapper';
+			//wrapper.style.display = 'inline-flex';
+			wrapper.style.position = 'relative';
+      //wrapper.style.alignItems = 'baseline'; // アイコンを文字の高さに合わせる
+      // wrapper.style.whiteSpace = 'normal';   // 折り返しを許可
+
+      // 2. リンクの直前にラッパーを挿入し、その中にリンクを移動
+      link.parentNode.insertBefore(wrapper, link);
+      wrapper.appendChild(link);
+
+
 			if (href.includes("amzn.to/")) {
 				// アイコンを追加
 				const amazonIcon = document.createElementNS(
@@ -101,7 +122,8 @@ export function externalLink() {
 			icon.setAttributeNS(null, "width", "13.35px");
 			icon.setAttributeNS(null, "height", "13.35px");
 			icon.appendChild(use);
-			link.appendChild(icon);
+			wrapper.appendChild(icon);
+
 		}
 
 		document.querySelectorAll(".icon_external-link.insert").forEach((icon) => {
