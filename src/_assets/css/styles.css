@@ -705,8 +705,9 @@ strong {
 	}
 
 	u {
-		text-underline-offset: 4px;
-		text-decoration-color: #f6339a;
+		text-decoration-thickness: 0.05em;
+		text-underline-offset: 5px;
+		text-decoration-color: #ea68c9;
 		text-decoration-style: dashed;
 	}
 
