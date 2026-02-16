@@ -9,7 +9,7 @@
 	--text-red: #db1b51;
 	--brand: #90e0ef;
 	--logo: #ff5757;
-	--background-color: #e9ebf9;
+	--background-color: #f9ffff;
 	--link-color: #0b8ac8;
 	--muted: #aaa;
 	--lightest: #efefef;
@@ -18,7 +18,17 @@
 	--tag-background: #cde;
 	--share-svg-color: var(--background-color);
 	--code-color: var(--font-color);
+	--strong--code-color: revert;
 	--code-background: #262d3c30;
+	--underline-color: #d71ac2;
+	--underline-text-color: #ec0000;
+	--maker-color: #4a7ddd;
+	--blockquote-background: rgba(179, 197, 251, 0.25);
+	--summary-background: oklch(0.85 0.25 145 / 0.5);
+	--summary-div-background: hsla(188.1, 46.4%, 78%, 0.27);
+	--description-color: oklch(0.65 0.5 250);
+	--strong-color: oklch(0.95 0.01 210.3);
+	--strong-background: oklch(0.5 0.05 220.05);
 
 	--padding-xs: 8pt;
 	--padding-s: 16pt;
@@ -49,7 +59,17 @@
 		--tag-background: #2b3535;
 		--share-svg-color: #5679a6;
 		--code-color: var(--font-color);
+		--strong--code-color: var(--font-color);
 		--code-background: #262d3c;
+		--underline-color: #39a6a7;
+		--underline-text-color: #a0c3e9;
+		--maker-color: #90e0ef;
+		--blockquote-background: rgb(3, 26, 62);
+		--summary-background: lab(34% -9 -25);
+		--summary-div-background: hsla(0, 0%, 20%, 0.25);
+		--description-color: hsl(200, 100%, 78%);
+		--strong-color: rgb(255, 223, 47);
+		--strong-background: rgb(32, 50, 70);
 	}
 }
 
@@ -312,7 +332,7 @@ nav .title {
 	max-width: 50vw;
 	line-height: 1.5;
 	font-size: 0.875em;
-	color: hsl(200, 100%, 78%);
+	color: var(--description-color);
 }
 
 @media (width < 768px) {
@@ -400,9 +420,13 @@ img {
 b,
 strong {
 	font-weight: 700;
-	background-color: #203246;
+	background-color: var(--strong-background);
 	padding: 0 4px;
-	color: #ffdf2f;
+	color: var(--strong-color);
+
+	code {
+		color: var(--strong--code-color) !important;
+	}
 }
 
 :root {
@@ -707,8 +731,9 @@ strong {
 	u {
 		text-decoration-thickness: 0.05em;
 		text-underline-offset: 5px;
-		text-decoration-color: #ea68c9;
+		text-decoration-color: var(--underline-color);
 		text-decoration-style: dashed;
+		color: var(--underline-text-color);
 	}
 
 	s {
@@ -735,7 +760,7 @@ strong {
 			line-height: 1.5;
 
 			&::marker {
-				color: var(--brand);
+				color: var(--maker-color);
 			}
 
 			li {
@@ -794,7 +819,7 @@ strong {
 		border-left: 5px solid var(--brand);
 		padding: var(--padding-s);
 		line-height: 1.9;
-		background-color: #031a3e;
+		background-color: var(--blockquote-background);
 		font-size: 0.9em;
 	}
 
@@ -1268,7 +1293,7 @@ details {
 		cursor: pointer;
 		padding: var(--padding-ex-s) var(--padding-s);
 		line-height: 1.2;
-		background-color: lab(34% -9 -25);
+		background-color: var(--summary-background);
 
 		&::after {
 			content: "(クリックで開きます)";
@@ -1277,10 +1302,10 @@ details {
 
 		& + div {
 			/*margin-top: 1rem;*/
-			background-color: hsla(0, 0%, 20%, 0.25);
+			background-color: var(--summary-div-background);
 			padding: var(--padding-m);
 			padding-top: var(--padding-ex-xs);
-			border: 1px solid #286684;
+			border: 1px solid var(--summary-background);
 		}
 	}
 
