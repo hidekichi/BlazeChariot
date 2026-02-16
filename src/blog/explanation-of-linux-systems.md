@@ -9,8 +9,8 @@ tags:
   - linux
 images:
   - ../img/xfce4_20.webp
-  - ../img/LXQt labwc.webp
-  - ../img/kde plasma.webp
+  - ../img/LXQt_labwc.webp
+  - ../img/kde_plasma.webp
   - ../img/mate-terminal.webp
   - ../img/Budgie.webp
   - ../img/cinnamon-6-2-1.webp
@@ -167,8 +167,8 @@ Debian系ではバイナリパッケージの他にソースパッケージも�
 [Plasma](https://kde.org/ja/plasma-desktop/)のモダンで美しいデスクトップ環境は豊富なカスタマイズが可能です。細かな設定をどこかに記述して実行せずともWindowsのように位置を変えたり表示方法を変更したりなどが簡単に行えます。
 
 <picture>
-  <source srcset="../img/kde plasma.avif" type="image/avif">
-  <img src="../img/kde plasma.webp" alt="kde plasmaのスクリーンショット">
+  <source srcset="../img/kde_plasma.avif" type="image/avif">
+  <img src="../img/kde_plasma.webp" alt="kde plasmaのスクリーンショット">
 </picture>
 
 デスクトップエフェクトや多彩なテーマなどが多いと思います。KDE の統合されたアプリケーションがあり、Dolphin(ファイルマネージャー)、kMail(メールクライアント)、konsole(ターミナル)などがシームレスに統合されています。
@@ -189,8 +189,8 @@ GnomeやKDEほどではないにしてもある程度のカスタマイズもで
 以前はLXDEでしたが、現在は[LXQt](https://lxqt-project.org/)になっています。公式フレーバーの中では最軽量な部類でリソース消費も低く、少ないメモリ、CPU でも動作するように設計されています。
 
 <picture>
-  <source srcset="../img/LXQt labwc.avif" type="image/avif">
-  <img src="../img/LXQt labwc.webp" alt="LXQt lavwc(Wayland)の公式スクリーンショット">
+  <source srcset="../img/LXQt_labwc.avif" type="image/avif">
+  <img src="../img/LXQt_labwc.webp" alt="LXQt lavwc(Wayland)の公式スクリーンショット">
 </picture>
 
 古いPCや非常に限られたリソースしか持たないデバイスでもインストールするのに最適だろうと思います。その分、余計な機能は削られWebブラウジング、オフィス作業、メディア再生などの基本的な日常よくやることに特化しているという感じでしょうか。

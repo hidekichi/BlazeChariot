@@ -18,11 +18,38 @@ sitemap:
 <ul class="listing">
 	{% for entry in blog %}
 
+	{% set pub     = entry.date %}
+	{% set upd     = entry.data.update %}
+	{% set pubStr  = pub | readableDate %}
+	{% set updStr  = upd | readableDate %}
+	{% set pubYear = pubStr | replace(r/年.*/, "") %}
+	{% set updYear = updStr | replace(r/年.*/, "") %}
+
 		<li>
 			<a href="{{ entry.url }}">
+  			<span class="post_update">
+  			{% if upd and upd > pub %}
+          <span class="isUpdate" title="更新してます" alt="I've updated it since the first post">★</span>
+       	  {% if pubYear == updYear %}
+            <!-- 同年 → 年を省略して「2026年2月1日★2月15日」 -->
+            <time datetime="{{ pub }}">{{ pubStr }}</time><span class="separator">→</span>
+            <time datetime="{{ upd }}">{{ updStr | replace(r/^[0-9]{4}年/, "") }}</time>
+          {% else %}
+            <!-- 異なる年 → 両方年付き -->
+            <time datetime="{{ pub }}">{{ pubStr }}<span class="separator">→</span>{{ updStr }}</time>
+          {% endif %}
+
+        {% else %}
+        <time datetime="{{ pub }}">{{ pubStr }}</time>
+  			{% endif %}
+  			</span>
 			<div class="title-meta">
-				<span class="title">{{ symbol }} {{ entry.data.title }}</span>
+			<!--
 				<time datetime="{{ entry.date }}">{{ entry.date | readableDate }}</time>
+				<time datetime="{{ entry.data.update }}">{{ entry.data.update | readableDate }}</time>
+			-->
+
+				<span class="title">{{ symbol }} {{ entry.data.title }}</span>
 			</div>
 			<div class="summary">
 				{{ entry.data.description or entry.templateContent | striptags | truncate(100) }}
