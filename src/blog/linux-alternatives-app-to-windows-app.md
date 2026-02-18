@@ -187,7 +187,7 @@ After Effectsの代替としては[Natron](https://natrongithub.github.io/)と�
 
 Illustratorのようなベクターグラフィックは[Inkscape](https://inkscape.org/ja/)が有名です。これもWindows、Linux共にあります。
 
-Lightroomのようなものには[Draktable](https://www.darktable.org/)というものがあります。最新バージョン(5.x系)では、Wayland対応も進み、レビューではプロ級の現像ができると公表が多数あります。
+Lightroomのようなものには[Draktable](https://www.darktable.org/)というものがあります。最新バージョン(5.x系)では、Wayland対応も進み、レビューではプロ級の現像ができると好評が多数あります。
 Darktableと並ぶもう一つの強力なRAW現像ツールに、クロスプラットフォームでWindows/MacOS/Linuxにもリリースされている[RawTherapee](https://rawtherapee.com/)の評価が高いです。写真家コミュニティで「RAW一択ならこれ」と支持されているとかなんとか。
 
 先日Affinityがペイント、ベクターを統合して無料で登場したことを受け、現在はWindowsだけのソフトですがいずれLinuxにも登場するかも知れません。WindowsでもPhotoshop離れが進んでいて、業務で使用する場合はAdobeのソフトを使う人が多いでしょうが、個人向けとしてはAffinityかGIMPを使用する人が多いように思います。
@@ -371,7 +371,7 @@ Garuda Linuxの開発グループが[Chaotic AUR](https://aur.chaotic.cx/docs)�
 そこには**期待値のミスマッチ**があると思います。例えば、[DistroWatch](https://distrowatch.com/)ランキングやおすすめ記事で「一番人気」「初心者向けNo.1」と見るため、「Windowsより優れてるはず！」と高い期待を抱く人が多いのはあると思います。
 
 > DistroWatchのページヒットランキングについて
-> DistroWatch自体が 「これはページ閲覧数でしかなく、実際の使用率や人気を正確に反映しない」 と明記しています。ランキングは興味を持った人がページを訪れる回数を示す指標に過ぎません。
+> DistroWatch自体が 「<u>これはページ閲覧数でしかなく、実際の使用率や人気を正確に反映しない</u>」 と明記しています。ランキングは興味を持った人がページを訪れる回数を示す指標に過ぎません。
 
 更には、Windows 10サポート終了（2025年10月）で、急いでLinuxに移行する人が増え、<u>事前準備不足でつまずく</u>のも考えられます。
 よくあるIT系の記事のコメントを見ると、自称PC使える人がWindowsしか使ったことがないのにLinuxをちょっと入れてみて「これは使えない」という感想を述べます。するとそれを見たインストールすらしない人は「やっぱりそうか」と思うわけです。
