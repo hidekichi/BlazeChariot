@@ -765,6 +765,7 @@ strong {
 
 			li {
 				margin-bottom: var(--padding-xs);
+				font-size: 0.925em;
 
 				&:last-of-type {
 					margin-bottom: 1.6rem;
