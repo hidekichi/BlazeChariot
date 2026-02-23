@@ -6,7 +6,8 @@ import { imageModalOpen } from "./module/floatImage.js";
 import { toc } from "./module/toc.js";
 import { highlightWhenTheyIntersect } from "./module/highlightWhenTheyIntersect.js";
 import { topCoverSlideImage } from "./module/topCoverSlideImage.js";
-import { copyButton} from "./module/copyButton.js";
+import { copyButton } from "./module/copyButton.js";
+import { updateMarkLast2weeks } from "./module/utils.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
 	await footnote();
@@ -18,6 +19,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 	embbedYoutubePlayer();
 
 	initPanelSwitch();
+
+	updateMarkLast2weeks();
 
 	externalLink();
 

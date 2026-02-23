@@ -227,6 +227,15 @@ export default async function (eleventyConfig) {
     return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
   });
 
+  eleventyConfig.addFilter("blogImage", function(path) {
+    if (!path) return "";
+
+    // "../img/xxx.avif" → "xxx.avif" を抜き出して /blog/img/ に整形
+    const filename = path.split("/").pop();   // ファイル名だけ取り出す
+    return `/blog/img/${filename}`;
+  });
+
+
   // -----------------------------------------------------------------
   // Collections
   // -----------------------------------------------------------------

@@ -20,6 +20,34 @@ export function initPanelSwitch() {
 	});
 }
 
+// Mark updates within the last two weeks
+export function updateMarkLast2weeks() {
+	const today = new Date();
+  // 14日前
+  const limit = new Date(today.getTime() - 14 * 24 * 60 * 60 * 1000);
+
+  document.querySelectorAll(".listing .post_update").forEach(postUpdate => {
+    // 更新済み（.separatorあり）かチェック
+		let lastTime;
+		if (postUpdate.querySelector(".separator")) {
+			lastTime = postUpdate.querySelector("time:last-of-type");
+		} else {
+			lastTime = postUpdate.querySelector("time");
+		}
+
+		if (!lastTime) return;
+
+		const updateDate = new Date(lastTime.getAttribute("datetime"));
+
+    // 比較（ISO形式なら new Date() で正しくパースされます）
+    if (updateDate >= limit) {
+      // 一番近い親の記事要素を探して ★ を表示
+      const badge = postUpdate.querySelector(".isUpdate");
+			if (badge) badge.classList.add("show");
+    }
+  });
+}
+
 //add load lazy
 export function insertLoadlazy() {
 	const images = document.querySelectorAll("img");
