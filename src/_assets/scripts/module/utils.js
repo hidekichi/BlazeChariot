@@ -101,9 +101,15 @@ export function externalLink() {
 			let extraClass = "icon_external-link";
 
 			if (href.includes("amzn.to/")) {
-				iconid = "#icon-amazon";
+				iconId = "#icon-amazon";
 				extraClass = "amazon";
 				link.setAttribute("title", "Amazonへのリンクです");
+			}
+
+			if (href.includes("github")) {
+				iconId = "#icon-github";
+				extraClass = "github";
+				link.setAttribute("title", "GitHubへのリンクです");
 			}
 
 			const wrapper = document.createElement('span');
@@ -136,6 +142,26 @@ export function externalLink() {
 				amazonIcon.appendChild(amazonUse);
 				link.appendChild(amazonIcon);
 				link.setAttribute("title", "Amazonへのリンクです");
+			}
+
+			if (href.includes("github")) {
+				// アイコンを追加
+				const githubIcon = document.createElementNS(
+					"http://www.w3.org/2000/svg",
+					"svg"
+				);
+				githubIcon.classList.add("github");
+				const githubUse = document.createElementNS(
+					"http://www.w3.org/2000/svg",
+					"use"
+				);
+				githubUse.setAttributeNS(null, "href", "#icon-github");
+				githubIcon.setAttributeNS(null, "role", "img");
+				githubIcon.setAttributeNS(null, "width", "13.35px");
+				githubIcon.setAttributeNS(null, "height", "13.35px");
+				githubIcon.appendChild(githubUse);
+				link.appendChild(githubIcon);
+				link.setAttribute("title", "githubへのリンクです");
 			}
 
 			// アイコンを追加

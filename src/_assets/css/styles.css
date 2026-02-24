@@ -408,11 +408,23 @@ img {
 }
 
 .amazon {
-	margin: 4px 0 0 2px;
-	padding: 1px 2px;
-	width: 1.35em;
-	height: 1.2em;
+	display: inline-flex;
+	align-items: center;
+	margin: -4px 0 0 2px;
+	width: 1.1rem;
+	height: 1.1rem;
 	background-color: #285a8e;
+	color: #fff;
+	border-radius: 4px;
+}
+
+.github {
+	display: inline-flex;
+	align-items: center;
+	margin: -5px 0 0 3px;
+	width: 1rem;
+	height: 1rem;
+	background-color: #424c57;
 	color: #fff;
 	border-radius: 4px;
 }
