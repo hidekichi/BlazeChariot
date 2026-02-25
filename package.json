@@ -9,7 +9,7 @@
 		"build:postcss": "postcss src/_assets/css/styles.css -o dist/assets/styles.min.css",
 		"build:scripts": "esbuild src/_assets/scripts/scripts.js --bundle --minify --outfile=dist/assets/scripts.min.js --format=esm",
 		"build:11ty": "cross-env ELEVENTY_ENV=production eleventy",
-		"dev": "eleventy --serve --watch",
+		"dev": "eleventy --serve",
 		"build": "cross-env ELEVENTY_ENV=production run-s clean build:postcss build:scripts build:11ty"
 	},
 	"author": "HIDEKICHI",
@@ -41,8 +41,9 @@
 		"postcss-import": "^16.1.1",
 		"postcss-preset-env": "^10.2.3",
 		"sharp": "^0.33.5",
-		"tailwindcss": "^3.4.13",
+		"tailwindcss": "^4.1.0",
 		"terser": "^5.34.1",
-		"vite": "^6.3.5"
+		"vite": "^6.3.5",
+		"@tailwindcss/postcss": "^4.1.0"
 	}
 }

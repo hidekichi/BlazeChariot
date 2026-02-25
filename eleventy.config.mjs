@@ -13,10 +13,6 @@ import pluginNavigation from "@11ty/eleventy-navigation";
 import sitemap from "@quasibit/eleventy-plugin-sitemap";
 import EleventyPluginVite from "@11ty/eleventy-plugin-vite";
 
-// 削除: 使われていなかった imports
-// import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
-// import path from "path";
-
 const isProduction = process.env.ELEVENTY_ENV === "production";
 
 /**
@@ -88,23 +84,80 @@ export default async function (eleventyConfig) {
   if (!isProduction) {
     eleventyConfig.addPlugin(EleventyPluginVite, {
       viteOptions: {
+        // eleventy-plugin-vite は Vite の root を dist/ に設定して起動するため、
+        // テンプレート内の /src/... という絶対パスはそのままでは dist/src/... を
+        // 探しに行って見つからない。このエイリアスで src/ 本体へ読み替える。
         resolve: {
           alias: {
-            // "/src" というパスを、実際の src フォルダへの絶対パスに紐付ける
             "/src": path.resolve(".", "src"),
           },
         },
-        // TailwindなどPostCSSの設定ファイルを自動検知させる
+        // postcss.config.js はルートに置いておけば自動検知されるが、念のため明示
         css: {
           postcss: "./postcss.config.js",
         },
         // 画面クリアを無効化（ログが見やすくなります）
         clearScreen: false,
-        // 11tyの再構築トリガー設定
         server: {
-          mode: "development",
-          middlewareMode: true,
+          open: false,
         },
+        plugins: [
+          // 開発時、CSS の HMR を有効にするプラグイン。
+          // /assets/styles.min.css へのリクエストを src/ の元ファイルに転送する。
+          // HTML には一切手を加えないため njk の更新・リロードに影響しない。
+          {
+            name: "hmr-css",
+            configureServer(server) {
+              server.middlewares.use(async (req, res, next) => {
+                if (!req.url?.includes("styles.min.css")) return next();
+
+                // src/ の元 CSS を Vite のモジュールグラフに乗せて返す
+                // これにより CSS 編集時に Vite が HMR を発行できる
+                const { createReadStream, promises: fs } = await import("fs");
+                const srcCss = path.resolve(".", "src/_assets/css/styles.css");
+                try {
+                  await fs.access(srcCss);
+                  const transformed = await server.transformRequest(
+                    "/src/_assets/css/styles.css"
+                  );
+                  if (transformed) {
+                    res.setHeader("Content-Type", "text/css");
+                    res.setHeader("Cache-Control", "no-store");
+                    res.end(transformed.code);
+                    return;
+                  }
+                } catch {}
+                next();
+              });
+            },
+          },
+          // 開発時、画像を dist/ ではなく src/ から直接配信するプラグイン。
+          // passthrough copy が完了する前に Vite がリロードしても画像が表示される。
+          {
+            name: "serve-src-images",
+            configureServer(server) {
+              server.middlewares.use(async (req, res, next) => {
+                const imgExts = /\.(jpg|jpeg|png|webp|svg|gif|avif|ogg)$/i;
+                if (!imgExts.test(req.url)) return next();
+
+                const { createReadStream, promises: fs } = await import("fs");
+                const srcPath = path.resolve(".", "src", req.url.replace(/^\//, ""));
+                try {
+                  await fs.access(srcPath);
+                  res.setHeader("Cache-Control", "no-store");
+                  // SVG は Vite がモジュールとして変換しようとするため
+                  // Content-Type を明示してバイナリ配信に固定する
+                  if (req.url.endsWith(".svg")) {
+                    res.setHeader("Content-Type", "image/svg+xml");
+                  }
+                  createReadStream(srcPath).pipe(res);
+                } catch {
+                  next();
+                }
+              });
+            },
+          },
+        ],
       },
     });
   }

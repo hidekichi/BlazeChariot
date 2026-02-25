@@ -54,7 +54,11 @@
 			</svg>
 		</a>
 		</div>
-		<ul>
+		<ul class="mobile md:hidden">
+			<li><a href="/blog/" class="{{ 'active' if '/blog' in page.url }}">Blog</a></li>
+			<li><a href="/guitar/contents/" class="{{ 'active' if '/guitar' in page.url }}">Guitar</a></li>
+		</ul>
+		<ul class="hidden md:inline-flex">
 			<li><a href="/" class="{{ 'active' if '/' === page.url }}">Home</a></li>
 			<li><a href="/blog/" class="{{ 'active' if '/blog' in page.url }}">Blog</a></li>
 			<li><a href="/guitar/contents/" class="{{ 'active' if '/guitar' in page.url }}">ギターを弾き語れ！</a></li>
