@@ -2,18 +2,20 @@
 title: illogical-impulseを適用したEndeavourOS+Gnome環境にイコライザーを入れてみよう
 description: PCで作業をする場合には何かしら音楽を聞いたりしたりするものです。より良い音でそれらを行うためのイコライザーを設定しようという話です
 date: 2025-10-16
-update: 2026-01-21
+update: 2026-02-26
 category:
   - blog
 tags:
   - linux
   - Arch系
   - Hyprland
+  - アプリ
 images:
   - ../img/easyeffects.avif
   - ../img/easyeffects_official_preset.avif
   - ../img/easyeffects_device_config.avif
   - ../img/easyeffects_right_panel.avif
+  - ../img/cava.avif
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---
@@ -56,12 +58,12 @@ EndeavourOSもPipeWireがデフォルトなのでEasyEffectsを入れるのが�
 sudo pacman -S easyeffects
 ```
 
-EasyEffectsの起動は、`Superキー`(windowsキー)でメニューを開いて、easyあたりまで入力すれば起動できます。
+EasyEffectsの起動は、`Superキー`(windowsキー)でメニューを開いて、easyあたりまで入力すれば起動できます((使用しているディストリビューションによる。Super+AあるいはSuper+Spaceの可能性も))。
 しかしこのままだとプリセットは何も無い素の状態なので[公式Github](https://github.com/JackHack96/EasyEffects-Presets)からプリセットを導入します。
 
 ### プリセットの導入
 
-インストールはターミナルから以下のスクリプトを動作させます。
+インストールはターミナルから以下のスクリプトを動作させます。これは公式サイトに書いてあるものです。
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh)"
@@ -74,8 +76,9 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-
 EasyEffectsのウィンドウ左上にある`プリセット`でローカルにインストールされたプリセットを選ぶわけですが、ここまでの手順でやると`Linux Studio Plugins`というのが不足しているとなります。Flatpakでインストールすると全部入っているようですが、順番にすると不足しているので、それらもインストールします。
 
 ```bash
-sudo pacman -S lsp-pligins
+sudo pacman -S lsp-plugins
 ```
+<span class="text-sm text-amber-500">※ pluginsのスペルに間違いがありました。修正しました。</span>
 
 どこから入れるかを聞かれると思いますが、デフォルトの`1`で良いのではなかろうかと思います。これはやや重く、25MBちょっとありますのでテザリングなどよりはWi-Fiに繋いでが良いでしょうか。
 
@@ -85,17 +88,21 @@ sudo pacman -S lsp-pligins
 
 次のコマンドで導入できます。
 
-1. 最初にflatpakの導入(導入されていたらスキップ)
-```bash
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-```
-2. 該当のソフトを導入
+1. 最初にflatpakの導入。公式の[セットアップ](https://flathub.org/setup)を参照のこと。<u>最初からFlatpakが導入されているディストリビューションもあります</u>ので、次のコマンドでソフトの導入を試してみて、何かしら足りないというようなメッセージが出たら、各ディストリビューションのセットアップを試したら良いかと思います。
+2. 該当のソフトを導入。2026年のインストールスクリプトは次のようになっています。
 ```bash
 flatpak install flathub com.github.wwmm.easyeffects
 ```
 
-> --if-not-existsの記載通り、入ってなかったらflatpakが導入され、もし導入されていたらスキップされるので、既にflatpakを導入している場合は上記最初の行は不要です
-> またEasyEffects公式のWikiページの情報が更新されておらず、上記の2行目のリンクが間違っていましたのでflathubのリンクに合わせて修正しました。2025/10/18
+もし、「<u>flathubというリモートが見つからない</u>」というようなメッセージが出る環境では「リモート追加」による導入を先に試してみて下さい。
+
+```bash
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
+
+> --if-not-existsの記載通り、入ってなかったらflatpakが導入され、もし導入されていたらスキップされるので、既にflatpakを導入している場合は上記の操作は不要です
+> またEasyEffects公式のWikiページの情報が更新されておらず、上記のインストールスクリプトが間違っていましたのでflathubの「インストール」に合わせて修正しました。2025/10/18
+> 詳細を書き直し修正 2026/2月 追記
 
 現在ご覧になってるこの記事は、<u>Arch系のディストロでの記事なので関係ない</u>ですがUbuntuではFlathubからインストールしようとすると、「could not unmount revokefs-fuse filesystem」エラー（revokefs-fuseファイルシステムのアンマウント失敗）が発生し、インストールが中断するという報告があるので注意してください。
 これら問題はパッチがリリースされており、apparmor 5.0.0~alpha1-0ubuntu8.1の更新で解決すると言われています。→ [Updated: Flatpak Doesn’t Work in Ubuntu 25.10, But a Fix is Coming](https://www.omgubuntu.co.uk/2025/10/flatpak-broken-ubuntu-25-10-apparmor-bug)
@@ -122,3 +129,27 @@ EasyEffectsはインストールされて動作し始めると、右サイドパ
 
 このサイドパネルにあるEasyEffectsのアイコンはクリックするとoffになり、EasyEffectsのウィンドウ左側上部にあるOn/Offアイコンの動作と連動しているように思います。
 音楽を再生中にサイドパネルのアイコンをoffにすると`MPV`の場合は停止して、再度MPVを再生するとEasyEffectsのエフェクトが効いていない状態で再生されました。Onにするとエフェクトがかかって再生されるのを確認しました。
+
+## その他
+
+EasyEffectsは、イコライザー + 各種オーディオエフェクトの総合ツールです。システム全体（PipeWire経由）の出力/入力音声をリアルタイムで加工します。しかし、ディストリビューションの紹介・レビュー動画などでよく使われているのはCavaというオーディオビジュアライザーなのでこれを探している人もいるかも知れません。
+
+![cava](../img/cava.avif)
+
+丁度以前撮っていたスクリーンショット<span class="f-img" data-target="../img/cava.avif">FIX</span>がでてきたので貼っておきます。左上のがcavaです。右のターミナルでコマンドも入ってますが、Arch系のディストリビューションであれば、AURを使用して、
+```bash
+paru -S cava
+```
+
+で導入できます。`yay`でも同様です。
+CachyOS + Hyprland(DankMaterialShell)上で、サザンのLova affairを再生している所です。画面上部のバーとその下中央でコントロールできるというのをスクショした所ですが、思いがけず全部入で撮っていました。
+
+cavaは、純粋なオーディオビジュアライザーなので、音自体は加工せず視覚化するだけのものです。
+
+2026年現在では、pipeWireがほぼ標準になっていますので、イコライザーはEasyEffectsが音に関してはまず最初の入口になるソフトと思いますが、他にも色々とあります。例えば、[JamesDSP](https://github.com/Audio4Linux/JDSP4Linux)(JDSP4Linux・[Flatpak](https://flathub.org/ja/apps/me.timschneeberger.jdsp4linux))はAndroidの同タイトルをLinux向けに移植したものです。イコライザーも優秀ですがEasyEffectsよりも軽量志向で、ViPERっぽい味付けが欲しい人向けだと言います。派手好きな人向けということです。
+
+{ytp::https://youtu.be/UdJDEu2pJac::How to EQ Audio on Linux!(オートダビング・字幕)}
+
+上級者向けにも、LSPのLV2プラグイン（parametric EQなど）をCarlaで繋ぐ[lsp-plugins](https://github.com/lsp-plugins/lsp-plugins) + [Carla](https://github.com/falkTX/Carla) / [Ardour](https://ardour.org/)や、pipeWire純正でconfファイルでEQ設定をする、[filter-chain](https://docs.pipewire.org/page_module_filter_chain.html)もありますがGUIがないのと、プリセット管理が手動になるので、初心者には非推奨です。
+
+ほとんどの人に対してはEasyEffectsで十分かと思います。

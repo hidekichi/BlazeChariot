@@ -7,15 +7,30 @@ export function embbedYoutubePlayer() {
 		let convertIframe;
 		let getThumb;
 
+		// URL 形式を順に判定して ID を抽出する
+		// 対応形式:
+		//   youtu.be/XXXXX
+		//   youtube.com/watch?v=XXXXX
+		//   youtube.com/shorts/XXXXX
+		//   youtube.com/embed/XXXXX
 		if (url.includes('youtu.be/')) {
 			pickupID = url.split('youtu.be/')[1];
-		} else {
+		} else if (url.includes('v=')) {
 			pickupID = url.split('v=')[1];
+		} else if (url.includes('/shorts/')) {
+			pickupID = url.split('/shorts/')[1];
+		} else if (url.includes('/embed/')) {
+			pickupID = url.split('/embed/')[1];
 		}
 
-		if (pickupID.includes('&')) {
-			pickupID = pickupID.split('&')[0];
+		// ID が取得できなかった場合は処理を中断してエラーを防ぐ
+		if (!pickupID) {
+			console.warn('[embedYoutubePlayer] YouTube URL から ID を取得できませんでした:', url);
+			return null;
 		}
+
+		// クエリパラメータやフラグメントを除去
+		pickupID = pickupID.split('&')[0].split('?')[0].split('#')[0];
 
 		const uId = randobet(6);
 		// <iframe src="https://www.youtube.com/embed/7BAj3TiAJmU?si=bx0rtK_XIP8Q7TNi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -73,11 +88,17 @@ export function embbedYoutubePlayer() {
 	Array.from(youtubePlayers).forEach((ytp) => {
 		const youtubeAddress = ytp.textContent;
 		ytp.textContent = '';
-		
+
 		const mvTitle = ytp.dataset.title;
 
-		// data[convertIframe,getThumb,pickupID]
+		// data[convertIframe,getThumb,uId]
 		const data = makeData(youtubeAddress);
+
+		// URL が無効で ID を取得できなかった場合はスキップ
+		if (!data) {
+			console.warn('[embedYoutubePlayer] スキップ:', youtubeAddress);
+			return;
+		}
 
 		// set wrapper & background-image
 		const thumbnail = `background-image: url(${data[1]})`;
@@ -85,7 +106,7 @@ export function embbedYoutubePlayer() {
 		const playbackButton = `<button class='button play-button inner' data-target='${data[2]}' title='${titleText}'></button>`;
 		let container = `<div class='container'>${playbackButton}${data[0]}</div>`;
 		if (!mvTitle) {
-			container = container; 
+			container = container;
 		} else {
 			container = `<span class="title">${mvTitle}</span>${container}`;
 		}

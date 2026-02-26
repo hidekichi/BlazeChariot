@@ -81,6 +81,10 @@ export default async function (eleventyConfig) {
   // そのため if (dev) の条件を外すことも検討できますが、
   // 現在のpackage.json構成に合わせて「開発時はVite」「本番は11ty + 後処理」とするならこのまま維持します。
   // ただし、Viteの強みを活かすなら以下のようにオプションを追加します。
+  // viteServer は capture-vite-server プラグインと eleventy.after の両方から
+  // 参照するため、どちらの if ブロックよりも外側で宣言する
+  let viteServer = null;
+
   if (!isProduction) {
     eleventyConfig.addPlugin(EleventyPluginVite, {
       viteOptions: {
@@ -100,8 +104,41 @@ export default async function (eleventyConfig) {
         clearScreen: false,
         server: {
           open: false,
+          // HTML レスポンスのキャッシュを無効化する。
+          // 11ty のリビルド後にブラウザが古い HTML を受け取らないようにする。
+          headers: {
+            "Cache-Control": "no-store",
+          },
         },
         plugins: [
+          // Vite サーバーのインスタンスを保持し、full-reload を debounce する。
+          // プラグイン内部と自作フックの両方が full-reload を送るため、
+          // 100ms 以内の重複を合体させて1回だけ送信する。
+          // 送信前に必ず invalidateAll() を呼ぶことで Vite の HTML キャッシュを確実に破棄する。
+          {
+            name: "capture-vite-server",
+            configureServer(server) {
+              viteServer = server;
+
+              const _wsSend = server.ws.send.bind(server.ws);
+              let reloadTimer = null;
+
+              server.ws.send = (data) => {
+                if (data?.type === "full-reload") {
+                  // full-reload は debounce して1回にまとめる
+                  if (reloadTimer) clearTimeout(reloadTimer);
+                  reloadTimer = setTimeout(() => {
+                    reloadTimer = null;
+                    // キャッシュを破棄してから送信
+                    server.moduleGraph.invalidateAll();
+                    _wsSend({ type: "full-reload" });
+                  }, 100);
+                  return;
+                }
+                _wsSend(data);
+              };
+            },
+          },
           // 開発時、CSS の HMR を有効にするプラグイン。
           // /assets/styles.min.css へのリクエストを src/ の元ファイルに転送する。
           // HTML には一切手を加えないため njk の更新・リロードに影響しない。
@@ -159,6 +196,22 @@ export default async function (eleventyConfig) {
           },
         ],
       },
+    });
+  }
+
+  // -----------------------------------------------------------------
+  // 開発時: ビルド完了後に Vite 経由でリロードを送る
+  // -----------------------------------------------------------------
+  // eleventy-plugin-vite と 11ty 内蔵サーバーの両方が eleventy.after で
+  // リロードを送るため二重リロードになる。
+  // server.headers の Cache-Control: no-store により、どのリロードで
+  // ブラウザがリクエストしても常に最新の dist/ を返すようにする。
+  if (!isProduction) {
+    // full-reload は capture-vite-server の debounce 機構で合体・送信される。
+    // ここでは送信だけ行えばよい（invalidateAll は debounce 側で実行される）。
+    eleventyConfig.on("eleventy.after", () => {
+      if (!viteServer) return;
+      viteServer.ws.send({ type: "full-reload" });
     });
   }
 
