@@ -77,138 +77,115 @@ export default async function (eleventyConfig) {
   // -----------------------------------------------------------------
   // Vite Plugin Config
   // -----------------------------------------------------------------
-  // 開発環境だけでなく、ビルド時もViteを通してアセット処理を行うと構成がシンプルになります。
-  // そのため if (dev) の条件を外すことも検討できますが、
-  // 現在のpackage.json構成に合わせて「開発時はVite」「本番は11ty + 後処理」とするならこのまま維持します。
-  // ただし、Viteの強みを活かすなら以下のようにオプションを追加します。
-  // viteServer は capture-vite-server プラグインと eleventy.after の両方から
-  // 参照するため、どちらの if ブロックよりも外側で宣言する
+
   let viteServer = null;
 
-  if (!isProduction) {
-    eleventyConfig.addPlugin(EleventyPluginVite, {
-      viteOptions: {
-        // eleventy-plugin-vite は Vite の root を dist/ に設定して起動するため、
-        // テンプレート内の /src/... という絶対パスはそのままでは dist/src/... を
-        // 探しに行って見つからない。このエイリアスで src/ 本体へ読み替える。
-        resolve: {
-          alias: {
-            "/src": path.resolve(".", "src"),
-          },
+  // Vite は開発・本番どちらでも有効にする。
+  // 開発時: CSS/JS の HMR を担当、serve-fresh-html で HTML キャッシュを回避
+  // 本番時: vite build で CSS/JS をバンドルし HTML を自動更新する
+  eleventyConfig.addPlugin(EleventyPluginVite, {
+    viteOptions: {
+      // eleventy-plugin-vite は Vite の root を dist/ に設定して起動するため、
+      // テンプレート内の /src/... という絶対パスはそのままでは dist/src/... を
+      // 探しに行って見つからない。このエイリアスで src/ 本体へ読み替える。
+      resolve: {
+        alias: {
+          "/src": path.resolve(".", "src"),
         },
-        // postcss.config.js はルートに置いておけば自動検知されるが、念のため明示
-        css: {
-          postcss: "./postcss.config.js",
-        },
-        // 画面クリアを無効化（ログが見やすくなります）
-        clearScreen: false,
-        server: {
-          open: false,
-          // HTML レスポンスのキャッシュを無効化する。
-          // 11ty のリビルド後にブラウザが古い HTML を受け取らないようにする。
-          headers: {
-            "Cache-Control": "no-store",
-          },
-        },
-        plugins: [
-          // Vite サーバーのインスタンスを保持し、full-reload を debounce する。
-          // プラグイン内部と自作フックの両方が full-reload を送るため、
-          // 100ms 以内の重複を合体させて1回だけ送信する。
-          // 送信前に必ず invalidateAll() を呼ぶことで Vite の HTML キャッシュを確実に破棄する。
-          {
-            name: "capture-vite-server",
-            configureServer(server) {
-              viteServer = server;
-
-              const _wsSend = server.ws.send.bind(server.ws);
-              let reloadTimer = null;
-
-              server.ws.send = (data) => {
-                if (data?.type === "full-reload") {
-                  // full-reload は debounce して1回にまとめる
-                  if (reloadTimer) clearTimeout(reloadTimer);
-                  reloadTimer = setTimeout(() => {
-                    reloadTimer = null;
-                    // キャッシュを破棄してから送信
-                    server.moduleGraph.invalidateAll();
-                    _wsSend({ type: "full-reload" });
-                  }, 100);
-                  return;
-                }
-                _wsSend(data);
-              };
-            },
-          },
-          // 開発時、CSS の HMR を有効にするプラグイン。
-          // /assets/styles.min.css へのリクエストを src/ の元ファイルに転送する。
-          // HTML には一切手を加えないため njk の更新・リロードに影響しない。
-          {
-            name: "hmr-css",
-            configureServer(server) {
-              server.middlewares.use(async (req, res, next) => {
-                if (!req.url?.includes("styles.min.css")) return next();
-
-                // src/ の元 CSS を Vite のモジュールグラフに乗せて返す
-                // これにより CSS 編集時に Vite が HMR を発行できる
-                const { createReadStream, promises: fs } = await import("fs");
-                const srcCss = path.resolve(".", "src/_assets/css/styles.css");
-                try {
-                  await fs.access(srcCss);
-                  const transformed = await server.transformRequest(
-                    "/src/_assets/css/styles.css"
-                  );
-                  if (transformed) {
-                    res.setHeader("Content-Type", "text/css");
-                    res.setHeader("Cache-Control", "no-store");
-                    res.end(transformed.code);
-                    return;
-                  }
-                } catch {}
-                next();
-              });
-            },
-          },
-          // 開発時、画像を dist/ ではなく src/ から直接配信するプラグイン。
-          // passthrough copy が完了する前に Vite がリロードしても画像が表示される。
-          {
-            name: "serve-src-images",
-            configureServer(server) {
-              server.middlewares.use(async (req, res, next) => {
-                const imgExts = /\.(jpg|jpeg|png|webp|svg|gif|avif|ogg)$/i;
-                if (!imgExts.test(req.url)) return next();
-
-                const { createReadStream, promises: fs } = await import("fs");
-                const srcPath = path.resolve(".", "src", req.url.replace(/^\//, ""));
-                try {
-                  await fs.access(srcPath);
-                  res.setHeader("Cache-Control", "no-store");
-                  // SVG は Vite がモジュールとして変換しようとするため
-                  // Content-Type を明示してバイナリ配信に固定する
-                  if (req.url.endsWith(".svg")) {
-                    res.setHeader("Content-Type", "image/svg+xml");
-                  }
-                  createReadStream(srcPath).pipe(res);
-                } catch {
-                  next();
-                }
-              });
-            },
-          },
-        ],
       },
-    });
-  }
+      // postcss.config.js はルートに置いておけば自動検知されるが、念のため明示
+      css: {
+        postcss: "./postcss.config.js",
+      },
+      // 画面クリアを無効化（ログが見やすくなります）
+      clearScreen: false,
+      server: {
+        open: false,
+        headers: {
+          "Cache-Control": "no-store",
+        },
+      },
+      plugins: [
+        // Vite サーバーのインスタンスを eleventy.after フック用に保持する
+        {
+          name: "capture-vite-server",
+          configureServer(server) {
+            viteServer = server;
+          },
+        },
+        // HTML を dist/ から毎回ディスク直読みするミドルウェア。
+        // Vite・eleventy-dev-server どちらのキャッシュも完全にバイパスするため
+        // 「1つ前の変更が反映される」問題を根本から防ぐ。
+        {
+          name: "serve-fresh-html",
+          configureServer(server) {
+            server.middlewares.use(async (req, res, next) => {
+              const url = req.url?.split("?")[0] ?? "";
+              const acceptsHtml = req.headers.accept?.includes("text/html");
+              if (!acceptsHtml) return next();
+
+              const { promises: fs } = await import("fs");
+              const path2 = await import("path");
+
+              // URL から dist/ 内の候補パスを生成して順番に存在確認する
+              const candidates = [
+                path2.resolve("dist", url.replace(/^\//, "")),
+                path2.resolve("dist", url.replace(/^\//, ""), "index.html"),
+                path2.resolve("dist", (url.replace(/^\//, "") || "index") + ".html"),
+              ];
+
+              for (const candidate of candidates) {
+                try {
+                  const stat = await fs.stat(candidate);
+                  if (!stat.isFile()) continue;
+                  const html = await fs.readFile(candidate, "utf-8");
+                  res.setHeader("Content-Type", "text/html; charset=utf-8");
+                  res.setHeader("Cache-Control", "no-store");
+                  res.end(html);
+                  return;
+                } catch {}
+              }
+              next();
+            });
+          },
+        },
+        // 開発時、画像を dist/ ではなく src/ から直接配信するプラグイン。
+        // passthrough copy が完了する前に Vite がリロードしても画像が表示される。
+        {
+          name: "serve-src-images",
+          configureServer(server) {
+            server.middlewares.use(async (req, res, next) => {
+              const imgExts = /\.(jpg|jpeg|png|webp|svg|gif|avif|ogg)$/i;
+              if (!imgExts.test(req.url)) return next();
+
+              const { createReadStream, promises: fs } = await import("fs");
+              const srcPath = path.resolve(".", "src", req.url.replace(/^\//, ""));
+              try {
+                await fs.access(srcPath);
+                res.setHeader("Cache-Control", "no-store");
+                // SVG は Vite がモジュールとして変換しようとするため
+                // Content-Type を明示してバイナリ配信に固定する
+                if (req.url.endsWith(".svg")) {
+                  res.setHeader("Content-Type", "image/svg+xml");
+                }
+                createReadStream(srcPath).pipe(res);
+              } catch {
+                next();
+              }
+            });
+          },
+        },
+      ],
+    },
+  });
 
   // -----------------------------------------------------------------
-  // 開発時: ビルド完了後に Vite 経由でリロードを送る
+  // 開発時: njk 編集後に Vite 経由でリロードを送る
   // -----------------------------------------------------------------
-  // eleventy-plugin-vite と 11ty 内蔵サーバーの両方が eleventy.after で
-  // リロードを送るため二重リロードになる。
-  // server.headers の Cache-Control: no-store により、どのリロードで
-  // ブラウザがリクエストしても常に最新の dist/ を返すようにする。
+  // CSS は main.js の import で Vite のモジュールグラフに登録されているため
+  // CSS 編集時は Vite が自動で HMR を処理する（ここでの処理は不要）。
+  // njk 編集時のみ full-reload を送ればよい。
   if (!isProduction) {
-    // full-reload は capture-vite-server の debounce 機構で合体・送信される。
-    // ここでは送信だけ行えばよい（invalidateAll は debounce 側で実行される）。
     eleventyConfig.on("eleventy.after", () => {
       if (!viteServer) return;
       viteServer.ws.send({ type: "full-reload" });
@@ -341,6 +318,24 @@ export default async function (eleventyConfig) {
     return `/blog/img/${filename}`;
   });
 
+  eleventyConfig.addFilter("limit", (array, limit) => {
+    return array.slice(0, limit);
+  });
+
+  eleventyConfig.addFilter("sortByTagMatch", (posts, currentTags, currentUrl) => {
+    if (!currentTags || currentTags.length === 0) return [];
+
+    return [...posts]
+      .filter((post) => post.url !== currentUrl)
+      .map((post) => {
+        const postTags = post.data.tags || [];
+        const matchCount = postTags.filter((tag) => currentTags.includes(tag)).length;
+        return { post, matchCount };
+      })
+      .filter((item) => item.matchCount > 0)  // 一致が0件は除外
+      .sort((a, b) => b.matchCount - a.matchCount)
+      .map((item) => item.post);
+  });
 
   // -----------------------------------------------------------------
   // Collections
@@ -393,6 +388,19 @@ export default async function (eleventyConfig) {
       });
     });
     return categoryTags;
+  });
+
+  eleventyConfig.addCollection("postsSortedByUpdate", (api) => {
+    const normalizeDate = (val) => {
+      if (!val) return "0000-00-00";
+      const d = new Date(val);
+      return isNaN(d.getTime()) ? "0000-00-00" : d.toISOString().slice(0, 10);
+    };
+    return api.getFilteredByGlob("src/blog/*.md").sort((a, b) => {
+      const dateA = normalizeDate(a.data.update || a.data.updated || a.data.lastmod || a.data.date);
+      const dateB = normalizeDate(b.data.update || b.data.updated || b.data.lastmod || b.data.date);
+      return dateB.localeCompare(dateA);
+    });
   });
 
   // -----------------------------------------------------------------

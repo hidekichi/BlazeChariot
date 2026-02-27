@@ -14,9 +14,35 @@ sitemap:
   ignore: true
 ---
 
+<section>
 <h3>Now Entering Page {{ pagination.pageNumber + 1 }}</h3>
-<ul class="listing">
-	{% for entry in blog %}
+
+<div class="blog-wrapper">
+  <div class="lastmod-10">
+  <h4 class="my-[0]!">最新更新記事10件</h4>
+  <ul class="listing listR">
+    {% for entryR in collections.postsSortedByUpdate | limit(10) %}
+      {% set itemUrl = entryR.url %}
+      {% set itemTitle = entryR.data.title %}
+      {% set postOrigin = entryR.data.date %}
+      {% set originalPost = entryR.data.date | readableDate %}
+      {% set lastmod = entryR.data.update %}
+      {% set upDateStr = lastmod | readableDate %}
+
+      <li>
+            <div class="lastmod-meta text-sm">
+              <time datetime="{{ lastmod }}">更新日：{{ upDateStr }}</time>
+              <time class="originalPost text-teal-600" datetime="{{ postOrigin }}">投稿日：{{ originalPost }}</time>
+            </div>
+        <a href="{{ itemUrl }}">
+            <span class="text-md text-sky-200">{{ itemTitle }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+<ul class="listing left">
+  {% for entry in blog %}
 
 	{% set pub     = entry.date | dateToRfc3339 %}
 	{% set upd     = entry.data.update | dateToRfc3339 %}
@@ -62,6 +88,9 @@ sitemap:
 		</li>
 	{% endfor %}
 </ul>
+
+</div>
+</section>
 
 <nav id="articleList-pagination" aria-labelledby="pagination">
   <ol class="pagination">

@@ -262,7 +262,7 @@ main.container {
 
 	&:has(.listing) {
 		grid-template-columns: repeat(1, minmax(0, 1fr));
-		max-width: 960px;
+		max-width: 1200px;
 	}
 
 	&:has(:is(.cat-about, .cat-now)) {
@@ -1189,6 +1189,12 @@ ul.listing {
 	}
 }
 
+@media (width < 768px) {
+	.blog-wrapper {
+		grid-template-columns: unset;
+	}
+}
+
 @container global-menu (width < 480px) {
 	.post_update {
 		.title_meta {
@@ -1520,7 +1526,7 @@ details {
 @container title-meta (width > 500px) {
 	.title-meta {
 		grid-template-areas: "left right" !important;
-		grid-template-columns: 1fr minmax(0, 200px);
+		grid-template-columns: 2fr 1fr;
 		column-gap: 1rem;
 
 		& > span {
@@ -1949,7 +1955,9 @@ f-left: サムネイルを左にして文字を回り込ませます
 		position: absolute;
 		bottom: 0.5rem;
 		left: 0.5rem;
-		color: var(--font-color);
+		color: oklch(92.4% 0.12 95.746);
+		padding: var(--padding-ex-xs);
+		background-color: #111;
 		font-size: 0.75rem;
 		mix-blend-mode: difference;
 	}
@@ -2444,6 +2452,88 @@ f-left: サムネイルを左にして文字を回り込ませます
 		width: 100vw;
 		ul {
 			flex-flow: column wrap;
+		}
+	}
+}
+
+.listing.listR {
+	li {
+		a {
+			margin: 0;
+
+			&:hover {
+				text-decoration: underline;
+				text-decoration-color: oklch(54.6% 0.245 262.881);
+				text-decoration-thickness: 0.1em;
+			}
+		}
+
+		&::after {
+			content: "";
+			margin: var(--padding-ex-s) 0;
+			border-top: 1px solid rgb(21, 67, 81);
+			border-bottom: 0;
+		}
+	}
+}
+
+.lastmod-meta {
+	display: flex;
+	column-gap: var(--padding-ex-xs);
+	padding: var(--padding-ex-s) 0;
+}
+
+@media (width < 1000px) {
+	.lastmod-meta {
+		flex-flow: row wrap;
+	}
+}
+
+.originalPost {
+	&::before {
+		content: "(";
+	}
+	&::after {
+		content: ")";
+	}
+	&::before,
+	&::after {
+		padding: 0 var(--padding-ex-xs);
+	}
+}
+
+.body-copy {
+	&.cat-blog {
+		.blog-wrapper {
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+			column-gap: var(--padding-m);
+		}
+	}
+}
+
+@media (width < 768px) {
+	.body-copy {
+		&.cat-blog {
+			.blog-wrapper {
+				grid-template-columns: 1fr;
+				column-gap: unset;
+			}
+		}
+	}
+}
+
+.body-copy {
+	.related {
+		h4 {
+			margin: var(--padding-l) 0 0;
+			padding: 0;
+		}
+
+		ul {
+			margin: var(--padding-m) 0;
+			padding: var(--padding-m);
+			border: 1px solid oklch(68.5% 0.169 237.323);
 		}
 	}
 }
