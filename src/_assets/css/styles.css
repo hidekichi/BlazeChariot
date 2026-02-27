@@ -30,24 +30,24 @@
 	--text-red: #db1b51;
 	--brand: #90e0ef;
 	--logo: #ff5757;
-	--background-color: #f9ffff;
-	--link-color: #0b8ac8;
+	--background-color: oklch(92% 0.004 286.32);
+	--link-color: oklch(54.6% 0.245 262.881);
 	--muted: #aaa;
 	--lightest: #efefef;
 	--transparency-1: rgba(0, 0, 0, 0.05);
-	--th-background: #9bb7d2;
-	--tag-background: #cde;
+	--th-background: oklch(70.5% 0.015 286.067);
+	--tag-background: oklch(86.8% 0.007 39.5);
 	--share-svg-color: var(--background-color);
 	--code-color: var(--font-color);
 	--strong--code-color: revert;
 	--code-background: #262d3c30;
-	--underline-color: #d71ac2;
-	--underline-text-color: #ec0000;
+	--underline-color: oklch(51.8% 0.253 323.949);
+	--underline-text-color: oklch(51.4% 0.222 16.935);
 	--maker-color: #4a7ddd;
-	--blockquote-background: rgba(179, 197, 251, 0.25);
+	--blockquote-background: oklch(88% 0.011 106.6);
 	--summary-background: oklch(0.85 0.25 145 / 0.5);
 	--summary-div-background: hsla(188.1, 46.4%, 78%, 0.27);
-	--description-color: oklch(0.65 0.5 250);
+	--description-color: oklch(37.9% 0.146 265.522);
 	--strong-color: oklch(0.95 0.01 210.3);
 	--strong-background: oklch(0.5 0.05 220.05);
 
@@ -2526,7 +2526,7 @@ f-left: サムネイルを左にして文字を回り込ませます
 .body-copy {
 	.related {
 		h4 {
-			margin: var(--padding-l) 0 0;
+			margin: var(--padding-xxl) 0 0;
 			padding: 0;
 		}
 

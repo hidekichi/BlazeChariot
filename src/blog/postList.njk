@@ -30,12 +30,12 @@ sitemap:
       {% set upDateStr = lastmod | readableDate %}
 
       <li>
-            <div class="lastmod-meta text-sm">
-              <time datetime="{{ lastmod }}">更新日：{{ upDateStr }}</time>
-              <time class="originalPost text-teal-600" datetime="{{ postOrigin }}">投稿日：{{ originalPost }}</time>
-            </div>
+        <div class="lastmod-meta text-sm">
+          <time datetime="{{ lastmod }}">更新日：{{ upDateStr }}</time>
+          <time class="originalPost text-teal-600" datetime="{{ postOrigin }}">投稿日：{{ originalPost }}</time>
+        </div>
         <a href="{{ itemUrl }}">
-            <span class="text-md text-sky-200">{{ itemTitle }}</span>
+          <span class="text-md text-sky-200">{{ itemTitle }}</span>
         </a>
       </li>
     {% endfor %}

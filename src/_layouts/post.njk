@@ -37,15 +37,15 @@ layout: base.njk
 
     {% if related.length %}
     <ul>
-        {% for item in related %}
+      {% for item in related %}
         {% set url = item.url %}
         {% set p = item.data.title %}
 
-          <li>
-            <a href="{{ item.url | url }}">{{ p }}</a>
-          </li>
+      <li>
+        <a href="{{ item.url | url }}">{{ p }}</a>
+      </li>
 
-        {% endfor %}
+      {% endfor %}
     </ul>
     {% endif %}
   </div>
