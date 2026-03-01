@@ -99,6 +99,12 @@ export default async function (eleventyConfig) {
       },
       // 画面クリアを無効化（ログが見やすくなります）
       clearScreen: false,
+      build: {
+        // Vite build は outDir(dist/) をクリアしてからビルドするが、
+        // 11ty の passthrough copy で配置した static/ が消えてしまう。
+        // emptyOutDir: false にすることで既存ファイルを保持する。
+        emptyOutDir: false,
+      },
       server: {
         open: false,
         headers: {
@@ -163,11 +169,23 @@ export default async function (eleventyConfig) {
               try {
                 await fs.access(srcPath);
                 res.setHeader("Cache-Control", "no-store");
-                // SVG は Vite がモジュールとして変換しようとするため
-                // Content-Type を明示してバイナリ配信に固定する
-                if (req.url.endsWith(".svg")) {
-                  res.setHeader("Content-Type", "image/svg+xml");
-                }
+
+                // 拡張子ごとに Content-Type を明示する。
+                // 設定しないとブラウザがバイナリをテキストとして解釈して文字化けする。
+                const ext = req.url.split("?")[0].split(".").pop().toLowerCase();
+                const mimeTypes = {
+                  jpg: "image/jpeg",
+                  jpeg: "image/jpeg",
+                  png: "image/png",
+                  webp: "image/webp",
+                  svg: "image/svg+xml",
+                  gif: "image/gif",
+                  avif: "image/avif",
+                  ogg: "audio/ogg",
+                };
+                const mime = mimeTypes[ext];
+                if (mime) res.setHeader("Content-Type", mime);
+
                 createReadStream(srcPath).pipe(res);
               } catch {
                 next();
@@ -323,19 +341,19 @@ export default async function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("sortByTagMatch", (posts, currentTags, currentUrl) => {
-    if (!currentTags || currentTags.length === 0) return [];
+      if (!currentTags || currentTags.length === 0) return [];
 
-    return [...posts]
-      .filter((post) => post.url !== currentUrl)
-      .map((post) => {
-        const postTags = post.data.tags || [];
-        const matchCount = postTags.filter((tag) => currentTags.includes(tag)).length;
-        return { post, matchCount };
-      })
-      .filter((item) => item.matchCount > 0)  // 一致が0件は除外
-      .sort((a, b) => b.matchCount - a.matchCount)
-      .map((item) => item.post);
-  });
+      return [...posts]
+        .filter((post) => post.url !== currentUrl)
+        .map((post) => {
+          const postTags = post.data.tags || [];
+          const matchCount = postTags.filter((tag) => currentTags.includes(tag)).length;
+          return { post, matchCount };
+        })
+        .filter((item) => item.matchCount > 0)  // 一致が0件は除外
+        .sort((a, b) => b.matchCount - a.matchCount)
+        .map((item) => item.post);
+    });
 
   // -----------------------------------------------------------------
   // Collections
