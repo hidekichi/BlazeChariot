@@ -85,6 +85,7 @@ export default async function (eleventyConfig) {
   // 本番時: vite build で CSS/JS をバンドルし HTML を自動更新する
   eleventyConfig.addPlugin(EleventyPluginVite, {
     viteOptions: {
+      publicDir: "src/static",
       // eleventy-plugin-vite は Vite の root を dist/ に設定して起動するため、
       // テンプレート内の /src/... という絶対パスはそのままでは dist/src/... を
       // 探しに行って見つからない。このエイリアスで src/ 本体へ読み替える。
