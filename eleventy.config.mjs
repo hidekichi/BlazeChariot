@@ -85,6 +85,7 @@ export default async function (eleventyConfig) {
   // 本番時: vite build で CSS/JS をバンドルし HTML を自動更新する
   eleventyConfig.addPlugin(EleventyPluginVite, {
     viteOptions: {
+      publicDir: 'static',
       // eleventy-plugin-vite は Vite の root を dist/ に設定して起動するため、
       // テンプレート内の /src/... という絶対パスはそのままでは dist/src/... を
       // 探しに行って見つからない。このエイリアスで src/ 本体へ読み替える。
@@ -241,12 +242,12 @@ export default async function (eleventyConfig) {
   // Passthroughs
   // -----------------------------------------------------------------
   // Vite使用時、CSS/JSはimportで解決するためPassthroughは画像やフォント等の静的ファイルに絞るのが理想です。
-  eleventyConfig
-    .addPassthroughCopy("src/static/**/*")
-    .addPassthroughCopy("src/*.{txt,xsl,ico}")
-    .addPassthroughCopy("src/blog/img/**/*.{jpg,jpeg,png,webp,svg,gif,avif}")
-    .addPassthroughCopy("src/guitar/img/**/*.{jpg,jpeg,png,webp,svg,gif,avif,ogg}")
-    .addPassthroughCopy("src/pages/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
+  eleventyConfig.addPassthroughCopy("src/static/**/*");
+  eleventyConfig.addPassthroughCopy({"static/images": "dist/asset/images"});
+  eleventyConfig.addPassthroughCopy("src/*.{txt,xsl,ico}");
+  eleventyConfig.addPassthroughCopy("src/blog/img/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
+  eleventyConfig.addPassthroughCopy("src/guitar/img/**/*.{jpg,jpeg,png,webp,svg,gif,avif,ogg}");
+  eleventyConfig.addPassthroughCopy("src/pages/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
 
   // -----------------------------------------------------------------
   // Filters
