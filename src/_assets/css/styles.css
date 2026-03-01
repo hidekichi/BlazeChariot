@@ -455,7 +455,6 @@
 		border-left: 0.1rem solid #333;
 		padding: var(--padding-xs) var(--padding-ex-xs) var(--padding-xs)
 			var(--padding-s);
-		overflow-y: auto;
 
 		&.active {
 			transform: translate(-100%, 0);
