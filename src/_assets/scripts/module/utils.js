@@ -185,3 +185,10 @@ export function externalLink() {
 		});
 	});
 }
+
+export function credit() {
+	const pageCredit = document.querySelector('footer .credit');
+	const year = new Date().getFullYear();
+
+	pageCredit.innerText = pageCredit.textContent.replace(/2025/g, `2025 - ${year}`);
+}

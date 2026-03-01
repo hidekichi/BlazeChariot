@@ -8,6 +8,7 @@ import { highlightWhenTheyIntersect } from "./module/highlightWhenTheyIntersect.
 import { topCoverSlideImage } from "./module/topCoverSlideImage.js";
 import { copyButton } from "./module/copyButton.js";
 import { updateMarkLast2weeks } from "./module/utils.js";
+import { credit } from "./module/utils.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
 	await footnote();
@@ -33,6 +34,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 	highlightWhenTheyIntersect();
 
 	imageModalOpen();
+
+	credit();
 });
 
 window.addEventListener("load", () => {

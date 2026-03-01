@@ -29,13 +29,13 @@ layout: base.njk
 	{{ content | safe }}
 
   <div class="related">
-    <h4>関連記事5件</h4>
     {% set currentTags = tags %}
     {% set related = collections.blog
       | sortByTagMatch(currentTags, page.url)
       | limit(5) %}
 
     {% if related.length %}
+    <h4>関連記事5件</h4>
     <ul>
       {% for item in related %}
         {% set url = item.url %}

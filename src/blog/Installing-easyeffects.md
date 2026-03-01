@@ -63,7 +63,7 @@ EasyEffectsの起動は、`Superキー`(windowsキー)でメニューを開い�
 
 ### プリセットの導入
 
-インストールはターミナルから以下のスクリプトを動作させます。これは公式サイトに書いてあるものです。
+インストールはターミナルから以下のスクリプトを動作させます。これは公式サイトに書いてあるものです。<span class="f-img" data-target="../img/easyeffects_official_preset.avif">FIX</span>
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh)"
