@@ -85,7 +85,6 @@ export default async function (eleventyConfig) {
   // 本番時: vite build で CSS/JS をバンドルし HTML を自動更新する
   eleventyConfig.addPlugin(EleventyPluginVite, {
     viteOptions: {
-      publicDir: "src/static",
       // eleventy-plugin-vite は Vite の root を dist/ に設定して起動するため、
       // テンプレート内の /src/... という絶対パスはそのままでは dist/src/... を
       // 探しに行って見つからない。このエイリアスで src/ 本体へ読み替える。
@@ -243,7 +242,7 @@ export default async function (eleventyConfig) {
   // -----------------------------------------------------------------
   // Vite使用時、CSS/JSはimportで解決するためPassthroughは画像やフォント等の静的ファイルに絞るのが理想です。
   eleventyConfig
-    .addPassthroughCopy("src/static")
+    .addPassthroughCopy("src/static", { expand: true })
     .addPassthroughCopy("src/*.{txt,xsl,ico}")
     .addPassthroughCopy("src/blog/img/**/*.{jpg,jpeg,png,webp,svg,gif,avif}")
     .addPassthroughCopy("src/guitar/img/**/*.{jpg,jpeg,png,webp,svg,gif,avif,ogg}")
