@@ -242,7 +242,7 @@ export default async function (eleventyConfig) {
   // -----------------------------------------------------------------
   // Vite使用時、CSS/JSはimportで解決するためPassthroughは画像やフォント等の静的ファイルに絞るのが理想です。
   eleventyConfig
-    .addPassthroughCopy("src/static", { expand: true })
+    .addPassthroughCopy("src/static/**/*")
     .addPassthroughCopy("src/*.{txt,xsl,ico}")
     .addPassthroughCopy("src/blog/img/**/*.{jpg,jpeg,png,webp,svg,gif,avif}")
     .addPassthroughCopy("src/guitar/img/**/*.{jpg,jpeg,png,webp,svg,gif,avif,ogg}")
