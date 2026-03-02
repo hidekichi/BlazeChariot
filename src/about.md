@@ -15,7 +15,7 @@ permalink: /about/
 
 <div class="float-left">
 
-![Hidekichi](/static/images/unnamed.jpg)
+![Hidekichi](/images/unnamed.jpg)
 
 </div>
 
