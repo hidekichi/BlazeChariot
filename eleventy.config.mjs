@@ -85,7 +85,7 @@ export default async function (eleventyConfig) {
   // 本番時: vite build で CSS/JS をバンドルし HTML を自動更新する
   eleventyConfig.addPlugin(EleventyPluginVite, {
     viteOptions: {
-      publicDir: 'static',
+      publicDir: false,
       // eleventy-plugin-vite は Vite の root を dist/ に設定して起動するため、
       // テンプレート内の /src/... という絶対パスはそのままでは dist/src/... を
       // 探しに行って見つからない。このエイリアスで src/ 本体へ読み替える。
@@ -118,6 +118,30 @@ export default async function (eleventyConfig) {
           name: "capture-vite-server",
           configureServer(server) {
             viteServer = server;
+          },
+        },
+        // Vite build 完了後に静的ファイルを再コピーするプラグイン。
+        // eleventy-plugin-vite が emptyOutDir の設定を上書きするため
+        // passthrough copy で配置したファイルが Vite build で消えてしまう。
+        // closeBundle フックは Vite build の最後に実行されるため
+        // ファイルが消えた後に確実に再コピーできる。
+        {
+          name: "copy-static-after-build",
+          async closeBundle() {
+            const { cpSync, existsSync } = await import("fs");
+            const path2 = await import("path");
+            const copies = [
+              { from: "src/static/images", to: "dist/images" },
+              { from: "src/static/favicons", to: "dist/favicons" },
+            ];
+            for (const { from, to } of copies) {
+              const fromPath = path2.resolve(".", from);
+              const toPath = path2.resolve(".", to);
+              if (existsSync(fromPath)) {
+                cpSync(fromPath, toPath, { recursive: true, force: true });
+                console.log(`[copy-static] ${from} → ${to}`);
+              }
+            }
           },
         },
         // HTML を dist/ から毎回ディスク直読みするミドルウェア。
@@ -242,7 +266,15 @@ export default async function (eleventyConfig) {
   // Passthroughs
   // -----------------------------------------------------------------
   // Vite使用時、CSS/JSはimportで解決するためPassthroughは画像やフォント等の静的ファイルに絞るのが理想です。
-  //eleventyConfig.addPassthroughCopy("src/static/**/*");
+  eleventyConfig.setServerPassthroughCopyBehavior("copy");  // dev時もbuildと同じ実コピー（重要）
+
+  // src/static/images → dist/images/ に直接展開（これが一番確実）
+  eleventyConfig.addPassthroughCopy({
+    "src/static/images": "images"
+  });
+  eleventyConfig.addPassthroughCopy({
+    "src/static/favicons": "favicons"
+  });
   eleventyConfig.addPassthroughCopy("src/*.{txt,xsl,ico}");
   eleventyConfig.addPassthroughCopy("src/blog/img/**/*.{jpg,jpeg,png,webp,svg,gif,avif}");
   eleventyConfig.addPassthroughCopy("src/guitar/img/**/*.{jpg,jpeg,png,webp,svg,gif,avif,ogg}");

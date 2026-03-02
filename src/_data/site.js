@@ -9,7 +9,7 @@ export default {
 	},
 	meta_data: {
 		twitter: "@ko_hidekichi",
-		opengraph_default: "/static/opengraph-default.webp"
+		opengraph_default: "/images/opengraph-default.jpg"
 	},
 	env: process.env.ELEVENTY_ENV === 'production'
 };
