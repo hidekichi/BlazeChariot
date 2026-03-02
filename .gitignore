@@ -63,7 +63,7 @@ typings/
 # Mac
 .DS_Store
 
-# Build 
+# Build
 dist/
 .vite/
 
@@ -76,3 +76,6 @@ src/_includes/styles.min.css
 .zed/settings.json
 .frontmatter/database/taxonomyDb.json
 frontmatter.json
+
+# .tmp-generated/
+.tmp-generated/

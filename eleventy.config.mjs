@@ -128,18 +128,41 @@ export default async function (eleventyConfig) {
         {
           name: "copy-static-after-build",
           async closeBundle() {
-            const { cpSync, existsSync } = await import("fs");
+            const { cpSync, copyFileSync, existsSync } = await import("fs");
             const path2 = await import("path");
-            const copies = [
+
+            const dirCopies = [
               { from: "src/static/images", to: "dist/images" },
               { from: "src/static/favicons", to: "dist/favicons" },
             ];
-            for (const { from, to } of copies) {
+            for (const { from, to } of dirCopies) {
               const fromPath = path2.resolve(".", from);
               const toPath = path2.resolve(".", to);
               if (existsSync(fromPath)) {
                 cpSync(fromPath, toPath, { recursive: true, force: true });
-                console.log(`[copy-static] ${from} → ${to}`);
+                console.log(`[copy-static] ${from} → dist/`);
+              }
+            }
+
+            const fileCopies = [
+              { from: "src/robots.txt",           to: "dist/robots.txt" },
+              { from: "src/pretty-atom-feed.xsl", to: "dist/pretty-atom-feed.xsl" },
+              { from: "src/favicon.ico",          to: "dist/favicon.ico" },
+            ];
+            for (const { from, to } of fileCopies) {
+              const fromPath = path2.resolve(".", from);
+              const toPath = path2.resolve(".", to);
+              if (existsSync(fromPath)) {
+                copyFileSync(fromPath, toPath);
+                console.log(`[copy-static] ${from} → dist/`);
+              }
+            }
+            for (const file of ["sitemap.xml", "feed.xml"]) {
+              const src = path2.resolve(".", `.11ty-vite/${file}`);  // .11ty-vite/ から
+              const dest = path2.resolve(".", `dist/${file}`);        // dist/ へ
+              if (existsSync(src)) {
+                copyFileSync(src, dest);
+                console.log(`[copy-static] ${file} → dist/`);
               }
             }
           },
@@ -322,7 +345,7 @@ export default async function (eleventyConfig) {
     }).toJSDate();
   });
 
-  eleventyConfig.addLiquidFilter("dateToRfc3339", pluginRss.dateToRfc3339);
+  eleventyConfig.addFilter("dateToRfc3339", pluginRss.dateToRfc3339);
 
   eleventyConfig.addFilter("randomize", function (items) {
     if (!Array.isArray(items)) return items;
