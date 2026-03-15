@@ -59,9 +59,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/_plugins");
   eleventyConfig.addPassthroughCopy("src/blog/img");
   eleventyConfig.addPassthroughCopy("src/guitar/img");
+  eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/pretty-atom-feed.xsl");
-    eleventyConfig.addPassthroughCopy("src/robots.txt");
-eleventyConfig.addPassthroughCopy("src/public");
+  eleventyConfig.addPassthroughCopy("src/public");
 
 
   /*
