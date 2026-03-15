@@ -63,7 +63,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/pretty-atom-feed.xsl");
   eleventyConfig.addPassthroughCopy("src/public");
 
-
   /*
   eleventyConfig.addPassthroughCopy({
     "src/images": "images"
@@ -143,7 +142,7 @@ export default function (eleventyConfig) {
   // collections
   // -----------------------------------------------------------------
   eleventyConfig.addCollection("blog", (api) =>
-    api.getFilteredByGlob("src/blog/**/*.md")
+    api.getFilteredByGlob("src/blog/**/*.md").reverse()
   );
   eleventyConfig.addCollection("guitar", (api) =>
     api.getFilteredByGlob("src/guitar/**/*.md")
