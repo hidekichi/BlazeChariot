@@ -22,7 +22,7 @@
 
 @font-face {
   font-family: "Fragment Mono"; /* 同じ名前を使う */
-  src: url("../fonts/fragment_Mono/FragmentMono-Regular.ttf") format("truetype");
+  src: url("../fonts/Fragment_Mono/FragmentMono-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
