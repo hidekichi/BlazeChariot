@@ -64,7 +64,7 @@ typings/
 .DS_Store
 
 # Build
-dist/
+_site/
 .vite/
 
 # Don't commit temp build files
