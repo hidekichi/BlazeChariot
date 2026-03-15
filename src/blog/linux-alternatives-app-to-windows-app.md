@@ -2,7 +2,7 @@
 title: Windowsで使われるソフトはLinuxにあるか
 description: Linuxにはソフトやドライバーがないと思っている人が多いので、代替のものがあるかを調べました。あと古い知識しかなくイメージが停滞している人が多いので現状の確認のための内容も含めてあります。
 date: 2025-12-03T05:42:29.949Z
-update: 2026-02-17
+update: 2026-03-15
 category:
   - blog
 tags:
@@ -101,7 +101,7 @@ Linuxもたいてい古くからカーネルがありますが、古い家は毎
 > 2025年12月上旬、Linux Kernel Maintainers Summitで、LinuxのカーネルのRust統合ついて議論され「実験的（experimental）」ステータスを外すことが合意されました。
 > Rustは新ドライバやサブシステムで積極的に使われるようになり、将来的に一部の領域（例: グラフィックスドライバ）でC言語の新規コードを制限する動きも出てきそうです。ただし、カーネル全体をRustで書き換えるわけではなく、Cが主流のままです。
 
-## Windowsで良く使われているソフトをAIに聞いてみる
+### Windowsで良く使われているソフトをAIに聞いてみる
 
 <div class="table-container">
 <style>
@@ -136,7 +136,7 @@ Linuxもたいてい古くからカーネルがありますが、古い家は毎
 
 </div>
 
-### ウェブブラウザ
+#### ウェブブラウザ
 
 Google Chrome、Microsoft Edge、Firefoxはもちろんの事、BraveやVivaldiもLinuxにはあります。基本的にはどのディストリビューションでもFirefoxがデフォルトですが、最近はBraveのディストリビューションとかもあります。
 ディストリビューションをインストールする際、あるいはインストールした後に公式パッケージマネージャーでChrome、Braveなどはインストールできるようになっています。
@@ -153,7 +153,7 @@ Windowsで一般的に使われるもの以外にもたくさん派生したブ�
 
 - [EdgeだとかBraveだとかで迷ってるならこれで行こう！Heliumが全て解決](/blog/helium/)と言う記事を書きました
 
-### 動画再生
+#### 動画再生
 
 MPC-HC(MPC-BE)はWindowsで良く使われている動画プレーヤーです。これらはWindowsにしかないかもしれませんが[MPV](https://mpv.io/)はWindows、Linuxいずれにもあって、他にも[VLC](https://www.videolan.org/vlc/index.ja.html)などがよく使われているように思います。
 細かく設定すればMPVが最強とも言えますが、設定できない人にとってはVLCが簡単かと思います。
@@ -164,7 +164,7 @@ MPVやCelluloidはウィンドウの枠がないのでタイル型のウィン�
 
 {ytp::https://youtu.be/w-g04TLp0tg::MPV - A Lightweight Powerful Video Player for Linux}
 
-### 動画編集
+#### 動画編集
 
 [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve/)はLinuxにもあります。Adobeのソフトはありませんが、[Kdenlive](https://kdenlive.org/)はLinuxに最適化されているのでWindowsで使うよりも安定して使えます。
 
@@ -181,7 +181,7 @@ After Effectsの代替としては[Natron](https://natrongithub.github.io/)と�
 
 {ytp::https://youtu.be/ZNu_mx3ojs8::Natron Tutorial for Beginners | Learn the Basics in Less Than 30 Minutes}
 
-### 画像編集・管理
+#### 画像編集・管理
 
 これも動画編集と同じくAdobeのソフトはありませんが、[GIMP](https://www.gimp.org/)や[Krita](https://krita.org/ja/)はLinuxにもあります、というかLinuxのソフトです。
 
@@ -192,23 +192,23 @@ Darktableと並ぶもう一つの強力なRAW現像ツールに、クロスプ�
 
 先日Affinityがペイント、ベクターを統合して無料で登場したことを受け、現在はWindowsだけのソフトですがいずれLinuxにも登場するかも知れません。WindowsでもPhotoshop離れが進んでいて、業務で使用する場合はAdobeのソフトを使う人が多いでしょうが、個人向けとしてはAffinityかGIMPを使用する人が多いように思います。
 
-### 3Dモデリング
+#### 3Dモデリング
 
 [Blender](https://www.blender.org/)はLinuxにもあります。[FreeCAD](https://www.freecad.org/index.php?lang=ja)もあるのでたいていの3DモデリングはLinuxでも可能です。[Onshape](https://www.onshape.com/ja/)と言う業務に耐えられるものもあります。これはクラウドベースの3D CADソフトであるためOS関係なくブラウザで利用することができます。
 
 {ytp::https://youtu.be/1A3lpf-eusQ::New crazy blender 5.0 features & updates}
 
-### 音声編集・DAW
+#### 音声編集・DAW
 
 [Audacity](https://www.audacityteam.org/)、[Reaper](https://www.reaper.fm/)はLinuxにもあります。
 
 LinuxネイティブなDAWとしては[Ardour](https://ardour.org/)が最も機能が充実しているでしょうか。[Bitwig Studio](https://www.bitwig.com/)、[Waveform Free](https://www.tracktion.com/products/waveform-free)などWindowsよりもむしろLinuxの方がソフトとしては充実している分野かもしれません。これらはプロフェッショナルな現場でも使用されたりしています。
 
-### ゲーム録画・配信
+#### ゲーム録画・配信
 
 [OBS Studio](https://obsproject.com/ja)はLinuxにもあります。ほとんどこれ一択な感じでもありますが、Linuxでは[SimpleScreenRecorder](https://simplescreenrecorder.com/)や[vokoscreenNG](https://linuxecke.volkoh.de/vokoscreen/vokoscreen.html)なども考えられると思います。ゲームを配信するならOBS Studio、もっとシンプルに配信するならSimpleScreenRecorder、vokoscreenNGを利用してもできると言う感じです
 
-### ファイル解凍
+#### ファイル解凍
 
 [7-Zip](https://7-zip.opensource.jp/download.html)はLinuxにもあります。Linuxでは特定のソフトを使うというよりはディストリビューションのデスクトップ環境の一部として提供されていることが多く、有名なものとしてはGnomeの[File Roller](https://gitlab.gnome.org/GNOME/file-roller)、KDEでは[ARK](https://apps.kde.org/ark/)などがあります。Linuxの場合、GUIで操作するよりはCLIで操作することも多く、ターミナルのシェルにもよりますがFishであればファイル名やパスを補完してくれるのでより手軽にCLI環境で圧縮解凍が可能です。これらには特別なソフトが必要というよりは必要なものを予めシステムに導入しておく、あるいは始めからディストリビューション・デスクトップ環境に組み込まれていると言う感じです。
 
@@ -229,7 +229,7 @@ zip images.zip a.jpg b.jpg c.jpg
 
 圧縮解凍に関してはGUIでやる方が随分と楽なのでユーティリティを使用するか、ファイルマネージャのプラグインなどでできるものもあります。あるいはデフォルトで装備されているものもあるかも知れません。それらならファイルを選んで右クリックから操作できるので深く考えなくても圧縮解凍できるのが良いですね。
 
-### Office系
+#### Office系
 
 windowsといえばMicrosoft Officeですが、こればかりは同じものがなくOffice系としてはその代替ソフトの[LibreOffice](https://ja.libreoffice.org/)や[OnlyOffice](https://www.onlyoffice.com/ja)などが使われます。完全ではなく一部使えない機能がありますが互換性が高いのは中国製の[WPS Office](https://www.wps.com/ja-JP/)でしょうか。
 [Microsoft 365](https://www.microsoft.com/ja-jp/microsoft-365)のWeb版をブラウザで使う（Linux完全対応、無料プランあり）。高度機能が必要ならこれが一番現実的です。
@@ -241,11 +241,11 @@ windowsといえばMicrosoft Officeですが、こればかりは同じものが
 日本だけではなく世界的にもExcelに依存している所は多いです。これはしばらくは変わらないと思いますが最近ではAIを用いて見積書や各種データの自動化するソフトやクラウドサービスが急速に普及していて従来のExcel中心のワークフローから、これらのAIサービスへと移行する動きは確実に出てきています。
 なので現在、無理やりWindowsに合わせる必要は全くないので、Linuxでどうのと言うよりは今の所はWindowsでやればいいやんと言う形になるかと思います。
 
-### PDF編集・閲覧
+#### PDF編集・閲覧
 
 PDFはブラウザで見れますが、KDEの[Okular](https://okular.kde.org/ja/)で簡単な書き込みも可能です。他のLinuxのソフトとしては[Master PDF Editor](https://code-industry.net/masterpdfeditor/)ではAdobe Acrobat Proに近い操作も可能です。
 
-### テキストエディタ・コード
+#### テキストエディタ・コード
 
 [Visual Studio Code](https://code.visualstudio.com/)はLinuxにもあります。[Sublime Text](https://www.sublimetext.com/)や最近では[Zed](https://zed.dev/)などLinuxでは多くのコードエディタが存在します。
 
@@ -253,11 +253,11 @@ PDFはブラウザで見れますが、KDEの[Okular](https://okular.kde.org/ja/
 
 Linuxではターミナルから直接テキストファイルを開くためにnanoや[micro](https://micro-editor.github.io/)などターミナルベースのテキストエディターもあります
 
-### 仮想環境・開発
+#### 仮想環境・開発
 
 これはWindowsでLinuxの仮想環境を作るというような目的なので、Linuxそのものが対象になります。ターミナル エミュレーターとしてはGhosttyがイチオシですが、Kittyなどもかなり良いと思います。軽快でシンプルかつ設定がどうかという判断です。
 
-### セキュリティ(アンチウイルス)
+#### セキュリティ(アンチウイルス)
 
 Windowsほどウィルスに感染することはありませんが、OS問わず多くの場合が人為的なものが感染源ですから、もし感染した場合にどうするかと言う点からしてもアンチウイルスソフトもあります。[ClamAV](https://www.clamav.net/)、[Comodo Antivirus for Linux](https://www.comodo.com/home/internet-security/antivirus-for-linux.php)、などがあります。
 
@@ -298,7 +298,7 @@ AIに聞くのも一つの方法です。
 
 ### GUIで入手する
 
-わかっていれば圧倒的にターミナルでやったほうが手撮り早いですが、やたらターミナルを嫌う人がいるのも事実です。そう言う人達にはGUIでインストールする方法もあります。
+わかっていれば圧倒的にターミナルでやったほうが手っ取り早いですが、やたらターミナルを嫌う人がいるのも事実です。そう言う人達にはGUIでインストールする方法もあります。
 
 #### ディストリビューション標準の「アプリストア」
 
@@ -341,7 +341,7 @@ Ubuntu系が強いですが、snapdが入っている環境であれば使用す
 
 </div>
 
-導入するのにどれを選択して導入しするかや、どういう方法で導入するかなどが初心者向けではないですが、基本的には簡単に導入できます。ディストリビューションによっては最初から導入されているものもあります。
+導入するのにどれを選択して導入し、行うかや、どういう方法で導入するかなどが初心者向けではないですが、基本的には簡単に導入できます。ディストリビューションによっては最初から導入されているものもあります。
 
 Arch系は普段使っているので他のものよりは少しばかりわかります。これらを導入するために`yay`あるいは`paru`を導入する必要があります。入っていればそのまま使えばよいのでまずは`paru`で試して、なければ`yay`を試しいずれもないようであれば、paruを導入することをおすすめします。paruをyayに変えればyayを導入することができます。
 どちらも同じようなものであるので両方入れる必要はありません。おすすめする理由としてはparuの方が新しくわかりやすいと言うだけです。

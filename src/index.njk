@@ -8,7 +8,7 @@ category: home
 	<div class="cover relative">
 		<span class="text">Seek what you truly need. Keep moving even in darkness.</span>
 		<span class="text">Somewhere, something incredible is waiting to be known.</span>
-		
+
 		<nav class="navigation" aria-labelledby="primary-navigation">
 		<ul>
 			<li><a href="/" class="{{ 'active' if '/' === page.url }}">Home</a></li>
@@ -49,7 +49,7 @@ category: home
 			</table>
 		</div>
 	</aside>
-	
+
 	<div class="tag-cloud w-full flex">
 	{% for tag in collections.allTags %}
 		<div class="tag m-[.6rem]  rounded-full border border-sky-100 bg-sky-50 px-2 py-0.5 text-xs text-center dark:text-sky-300 dark:border-sky-500/15 dark:bg-sky-500/10"><a href="/tags/{{ tag | urlencode }}">{{ tag }}</a></div>
