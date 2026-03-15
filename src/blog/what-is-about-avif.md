@@ -20,11 +20,11 @@ permalink: /blog/{{ page.fileSlug }}/
 
 従来からアニメーションさせることができる画像フォーマットはGIFが有名ですが、現在では色々なタイプのフォーマットでアニメーション画像を作ることができます。
 
-| フォーマット | ファイルサイズ      |
-| ------ | ------------ |
-| GIF    | 約1MB         |
-| WebP   | 約300KB～500KB |
-| AVIF   | 約100KB～300KB |
+| フォーマット | ファイルサイズ |
+| ------------ | -------------- |
+| GIF          | 約1MB          |
+| WebP         | 約300KB～500KB |
+| AVIF         | 約100KB～300KB |
 
 ぐらいと言われています。もちろん使用する色数やピクセルサイズ、時間、フレーム/秒の設定等によってサイズは変わりますが、目安としてこれぐらいと言えます。
 
@@ -34,8 +34,8 @@ permalink: /blog/{{ page.fileSlug }}/
 
 ```html
 <picture>
-    <source srcset="example.com/images/test.avif" type="image/avif" />
-    <img src="example.com/images/test.webp" alt="テスト画像" />
+  <source srcset="example.com/images/test.avif" type="image/avif" />
+  <img src="example.com/images/test.webp" alt="テスト画像" />
 </picture>
 ```
 
@@ -48,11 +48,12 @@ permalink: /blog/{{ page.fileSlug }}/
 これらは`picture`タグの中に`img`があるので`picture`が親要素になると思う方もいるかも知れませんが`picture`タグはコンテナ要素で、`img`で使用するためのソースなどをまとめて書いておけるものであるので、上記の例であっても基本的には一般的な`img`タグと同じようにして使用します。そのため、もし親要素が必要であれば、`picture`タグの外に`div`なりを置く必要があります。
 
 最も良い例としては、
+
 ```html
 <picture>
-    <source srcset="example.com/images/test.avif" type="image/avif" />
-    <source srcset="example.com/images/test.webp" type="image/webp" />
-    <img src="example.com/images/test.jpg" alt="テスト画像" />
+  <source srcset="example.com/images/test.avif" type="image/avif" />
+  <source srcset="example.com/images/test.webp" type="image/webp" />
+  <img src="example.com/images/test.jpg" alt="テスト画像" />
 </picture>
 ```
 
@@ -106,14 +107,14 @@ SquooshはGoogleが開発したオンライン画像圧縮ツールです。画�
 
 #### 通常画像
 
-|jpg|webp|avif|
-|:------:|:------:|:------:|
-|![jpgサンプル](../img/o0316023613964580922.jpg)|![webpサンプル](../img/o0316023613964580922.webp)|![avifサンプル](../img/o0316023613964580922.avif)|
-|30 KB|40 KB|21.4 KB|
+|                       jpg                       |                       webp                        |                       avif                        |
+| :---------------------------------------------: | :-----------------------------------------------: | :-----------------------------------------------: |
+| ![jpgサンプル](../img/o0316023613964580922.jpg) | ![webpサンプル](../img/o0316023613964580922.webp) | ![avifサンプル](../img/o0316023613964580922.avif) |
+|                      30 KB                      |                       40 KB                       |                      21.4 KB                      |
 
 #### アニメーション画像
 
-|gif|webp|avif|
-|:------:|:------:|:------:|
-|![gifアニメーションサンプル](../img/test.gif)|![webpアニメーションサンプル](../img/ezgif-6fc03a911e022f.webp)|![avifアニメーションサンプル](../img/ezgif-618346c85f73f9.avif)|
-|962 KB|99 KB|34.1 KB|
+|                      gif                      |                              webp                               |                              avif                               |
+| :-------------------------------------------: | :-------------------------------------------------------------: | :-------------------------------------------------------------: |
+| ![gifアニメーションサンプル](../img/test.gif) | ![webpアニメーションサンプル](../img/ezgif-6fc03a911e022f.webp) | ![avifアニメーションサンプル](../img/ezgif-618346c85f73f9.avif) |
+|                    962 KB                     |                              99 KB                              |                             34.1 KB                             |

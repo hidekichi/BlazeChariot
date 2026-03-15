@@ -211,17 +211,17 @@ EndeavourOSでは、デスクトップ環境あるいはウィンドウマネー
 
 <div class="table-container">
 
-|            | 開発元                                                      |
-| ---------- | ----------------------------------------------------------- |
-| Xfce       | Xfce Development Team                                       |
-| KDE Plasma | KDE                                                         |
-| Gnome      | GNOME developers                                            |
-| Mate       | Perberos 及び MATE Developers                               |
-| Cinnamon   | Linux Mint チーム                                           |
+|            | 開発元                                                   |
+| ---------- | -------------------------------------------------------- |
+| Xfce       | Xfce Development Team                                    |
+| KDE Plasma | KDE                                                      |
+| Gnome      | GNOME developers                                         |
+| Mate       | Perberos 及び MATE Developers                            |
+| Cinnamon   | Linux Mint チーム                                        |
 | Budgie     | Ikey Doherty、Joshua StroblおよびSolusプロジェクトチーム |
-| LxQt       | LXDE                                                        |
-| LxDE       | LXDE開発チーム                                             |
-| deepin     | 武漢深之度科技有限公司                                      |
+| LxQt       | LXDE                                                     |
+| LxDE       | LXDE開発チーム                                           |
+| deepin     | 武漢深之度科技有限公司                                   |
 
 </div>
 
@@ -273,7 +273,7 @@ Warpinatorは特別高速というわけではありませんが、テザリン�
 
 WarpinatorはAndroidにもアプリがあるので、写真のバックアップとか諸々にも使えます。
 
-他の候補として、[LocalSend](https://localsend.org/ja){target="_blank"}というのもあります。これは、Windows、macOS、iOS、Android、Linuxと対応しており無料です。
+他の候補として、[LocalSend](https://localsend.org/ja){target="\_blank"}というのもあります。これは、Windows、macOS、iOS、Android、Linuxと対応しており無料です。
 同じLAN(無線・有線問わず)内に接続されているのであれば、おおよそ全てのデバイス間でファイルのやり取りができるようになります。1対1での通信も1対多のファイルの送(受)信などもできます。
 
 ## 最後に

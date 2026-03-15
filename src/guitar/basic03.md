@@ -71,13 +71,13 @@ permalink: /guitar/{{ page.fileSlug }}/
 2025年現在で評価が高いモデルは、
 
 - [YAMAHA FG800～FG830](https://jp.yamaha.com/products/musical_instruments/guitars_basses/ac_guitars/fg_series/fg_800/index.html)
-  - 5万円までから5万円前後ぐらいだが、バランスもよくコストパフォーマンスが高い
+   - 5万円までから5万円前後ぐらいだが、バランスもよくコストパフォーマンスが高い
 - [Eastman PCH2‑D](https://www.eastmanguitars.com/pch2_d)
-  - 6～7 万円前後ぐらい。作りも丁寧で Pingwell RM 1171-CVR 3+3 という良さげなチューナーも装備されている。YAMAHAはたくさんの人が使ってるんで「なんか嫌」というこだわりある人におすすめ。見た目は普通のアコギなのでどこにでも持っていける。
+   - 6～7 万円前後ぐらい。作りも丁寧で Pingwell RM 1171-CVR 3+3 という良さげなチューナーも装備されている。YAMAHAはたくさんの人が使ってるんで「なんか嫌」というこだわりある人におすすめ。見た目は普通のアコギなのでどこにでも持っていける。
 - [Taylor Academy12e](https://jp.taylorguitars.com/guitars/acoustic/academy-12e)
-  - 10万円から買える本格派ギター。初心者向け最高峰。中～上級者が使っても全然恥ずかしくない。Taylor が初心者のために本気で考えた1本。
+   - 10万円から買える本格派ギター。初心者向け最高峰。中～上級者が使っても全然恥ずかしくない。Taylor が初心者のために本気で考えた1本。
 - [Enya X4 Pro Carbon Fiber](https://www.enya-music.com/products/x4-cutaway)
-  - 7～10万円ぐらい。フルカーボンで耐候性抜群。あわせて温度湿度耐性も高い。音も豊かでレスポンス良好でBluetooth付きピックアップモデルもあり。
+   - 7～10万円ぐらい。フルカーボンで耐候性抜群。あわせて温度湿度耐性も高い。音も豊かでレスポンス良好でBluetooth付きピックアップモデルもあり。
 
 <div class="ytgrid grid grid-cols-1 md:grid-cols-2 auto-rows-auto">
 
@@ -108,17 +108,17 @@ permalink: /guitar/{{ page.fileSlug }}/
 2025年現在で評価が高いモデルは、
 
 - [Taylor 214ce](https://jp.taylorguitars.com/guitars/acoustic/214ce)
-  - 9～15万円ぐらいだろうか。プロ仕様に匹敵する完成度と評される。ES2ピックアップ搭載でライブ・録音でも高評価
+   - 9～15万円ぐらいだろうか。プロ仕様に匹敵する完成度と評される。ES2ピックアップ搭載でライブ・録音でも高評価
 - [Guild D-140](https://guildguitars.com/ja/g/westerly-d-140-nat/)
-  - 10～15万円ぐらい。Martin は嫌いなんだよという方でMartinに匹敵する重厚感ある音をよりリーズナブルに選びたい場合はこれ。
+   - 10～15万円ぐらい。Martin は嫌いなんだよという方でMartinに匹敵する重厚感ある音をよりリーズナブルに選びたい場合はこれ。
 - [Martin D‑18 Standard](https://www.martinguitar.com/guitars/D-18.html?dwvar_D-18_color=gloss&cgid=guitars)
-  - 25～30万クラスで、趣味で買うならこれ以上は不要とも言われるギター。豊かな音、中音域の輪郭がはっきりとして幅広く使用できる生涯使えるギター。
+   - 25～30万クラスで、趣味で買うならこれ以上は不要とも言われるギター。豊かな音、中音域の輪郭がはっきりとして幅広く使用できる生涯使えるギター。
 - [Gibson J‑45 Standard](https://gibson.jp/acoustic/j-45-standard)
-  - 25～30万クラス。言わずと知れたギターなので説明不要
+   - 25～30万クラス。言わずと知れたギターなので説明不要
 - [Larrivée D-03](https://www.larrivee.com/products/d-03-recording-series)
-  - 20～30万円クラス。カナダ発のハンドメイド系ブランドで、シンプルなルックスながら精密で抜群のバランス。Taylor よりもナチュラルでMartinよりもクリアと言う声もあるとか。
+   - 20～30万円クラス。カナダ発のハンドメイド系ブランドで、シンプルなルックスながら精密で抜群のバランス。Taylor よりもナチュラルでMartinよりもクリアと言う声もあるとか。
 - [Maton EBG808TE](https://matonguitars.jp/products/ebg808te/)
-  - 38～45万円。Tommy Emmanuelシグネチャーモデル。万能フィンガースタイル向け。Maton独自のピックアップシステムAP5-Proが圧倒的高評価を得ている。ピエゾ+マイクのミックス方式で、ラインでもナチュラルに鳴ると言う。オーストラリア材を使用しており、職人製ながらやや粗さもあるがオーストラリアでは国民的ブランド。
+   - 38～45万円。Tommy Emmanuelシグネチャーモデル。万能フィンガースタイル向け。Maton独自のピックアップシステムAP5-Proが圧倒的高評価を得ている。ピエゾ+マイクのミックス方式で、ラインでもナチュラルに鳴ると言う。オーストラリア材を使用しており、職人製ながらやや粗さもあるがオーストラリアでは国民的ブランド。
 
 <div class="ytgrid grid grid-cols-1 md:grid-cols-2 auto-rows-auto">
 

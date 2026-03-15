@@ -36,18 +36,18 @@ Windowsのような多種多様なソフトウェアメーカー、デバイス�
 
 ### 最小要求スペック
 
-| |Plasma|Calla|Sleex|Theom|
-|---:|:---:|:---:|:---:|:---:|
-|CPU|64bit(x86_64)|64bit(x86_64)|64bit(x86_64)|64bit(x86_64)|
-|RAM|4GB|2GB|4GB|2GB|
-|DiskSpace|10GB|10GB|10GB|10GB|
+|           |    Plasma     |     Calla     |     Sleex     |     Theom     |
+| --------: | :-----------: | :-----------: | :-----------: | :-----------: |
+|       CPU | 64bit(x86_64) | 64bit(x86_64) | 64bit(x86_64) | 64bit(x86_64) |
+|       RAM |      4GB      |      2GB      |      4GB      |      2GB      |
+| DiskSpace |     10GB      |     10GB      |     10GB      |     10GB      |
 
 ### 推奨スペック
 
-| |Plasma|Calla|Sleex|Theom|
-|---:|:---:|:---:|:---:|:---:|
-|RAM|8GB|4GB|8GB|4GB|
-|DiskSpace|50GB|20GB|40GB|20GB|
+|           | Plasma | Calla | Sleex | Theom |
+| --------: | :----: | :---: | :---: | :---: |
+|       RAM |  8GB   |  4GB  |  8GB  |  4GB  |
+| DiskSpace |  50GB  | 20GB  | 40GB  | 20GB  |
 
 ### インストール時のオプション
 
@@ -88,6 +88,7 @@ Windowsのような多種多様なソフトウェアメーカー、デバイス�
 - サーバー向けの不要なドライバや機能を一部省き、デスクトップに特化した構成にしている
 
 Zenカーネルは、
+
 - サーバー用途、エンタープライズ系アプリ
 - 安定性を最優先する環境
 - 特殊なハードウェアを使う場合
@@ -101,52 +102,52 @@ Zenカーネルは、
 
 - (複数)パッケージのインストール
 
-```bash
-# skip-copy
-epsi install <package1> <package2> ...
-epsi i <package1> <package2> ...
-epsi -S <package1> <package2> ...
-epsi sync <package1> <package2> ...
-```
+   ```bash
+   # skip-copy
+   epsi install <package1> <package2> ...
+   epsi i <package1> <package2> ...
+   epsi -S <package1> <package2> ...
+   epsi sync <package1> <package2> ...
+   ```
 
 - (複数)パッケージのアンインストール
 
-```bash
-# skip-copy
-epsi remove <package1> <package2> ...
-epsi rm <package1> <package2> ...
-epsi -R <package1> <package2> ...
-```
+   ```bash
+   # skip-copy
+   epsi remove <package1> <package2> ...
+   epsi rm <package1> <package2> ...
+   epsi -R <package1> <package2> ...
+   ```
 
 - ローカルにインストールされたパッケージを最新バージョンにアップグレードします
 
-```bash
-# skip-copy
-epsi upgrade
-epsi -Syu
-```
+   ```bash
+   # skip-copy
+   epsi upgrade
+   epsi -Syu
+   ```
 
 - バックアップ付きのアップグレード
 
-```bash
-# skip-copy
-epsi upgrade -s -d
-epsi upgrade --with-snapshot --delete-snapshot-onfail
-```
+   ```bash
+   # skip-copy
+   epsi upgrade -s -d
+   epsi upgrade --with-snapshot --delete-snapshot-onfail
+   ```
 
-```bash
-# skip-copy
-epsi -Syu -s -x
-epsi -Syu --with-snapshot --replace-snapshot
-```
+   ```bash
+   # skip-copy
+   epsi -Syu -s -x
+   epsi -Syu --with-snapshot --replace-snapshot
+   ```
 
 - 孤立したパッケージの削除、パッケージキャッシュの削除
 
-```bash
-# skip-copy
-epsi clean
-epsi -C
-```
+   ```bash
+   # skip-copy
+   epsi clean
+   epsi -C
+   ```
 
 このようなコマンドで使用する形になっています。`-Syu`のようにそれぞれの意味を知っていれば3文字で良いので簡潔ですが、意味がわからない場合を想像すると`upgrade`と書く方が意味はわかりやすいと思います。
 
@@ -164,6 +165,7 @@ Sleex(スリークス)は、Hyprlandをベースに構築された、洗練さ�
 これらの設定は、`super + F1`で設定画面が表示され、各種キーバインドの設定が可能です。
 
 ### ウィジェットとUI各種
+
 #### トップバー
 
 トップバーには、タイトル表示、リソースモニタ、ワークスペースナビ、日付表示などがあります。
@@ -209,15 +211,15 @@ Arch Wikiでの説明は[Hyprland](https://wiki.archlinux.jp/index.php/Hyprland)
 
 <div class="table-container">
 
-| 特徴          | 内容                                                |
-|--------------|---------------------------------------------------|
-| ダイナミックタイル管理 | i3wmなどと同様、ウィンドウを自動で整列・管理。マウスでも柔軟に操作可能 |
-| 高速描画      | Waylandネイティブで、アニメーションや透明効果が非常に滑らか            |
-| カスタマイズ性      | hyprland.conf と Hyprlang で柔軟に設定可能             |
-| エフェクト統合     | 透過・ぼかし・アニメーション・角丸などが最初から組み込まれている            |
-| プラグイン不要     | i3やbspwmで必要だったような拡張が、最初から内蔵されている            |
-| スクリプト対応     | 外部ツール（Waybar、rofi、swayncなど）との連携も可能            |
-| マルチモニタ対応    | ワークスペースとモニタを柔軟に割り当て可能。Waylandのマルチモニタ制御に強い  |
+| 特徴                   | 内容                                                                        |
+| ---------------------- | --------------------------------------------------------------------------- |
+| ダイナミックタイル管理 | i3wmなどと同様、ウィンドウを自動で整列・管理。マウスでも柔軟に操作可能      |
+| 高速描画               | Waylandネイティブで、アニメーションや透明効果が非常に滑らか                 |
+| カスタマイズ性         | hyprland.conf と Hyprlang で柔軟に設定可能                                  |
+| エフェクト統合         | 透過・ぼかし・アニメーション・角丸などが最初から組み込まれている            |
+| プラグイン不要         | i3やbspwmで必要だったような拡張が、最初から内蔵されている                   |
+| スクリプト対応         | 外部ツール（Waybar、rofi、swayncなど）との連携も可能                        |
+| マルチモニタ対応       | ワークスペースとモニタを柔軟に割り当て可能。Waylandのマルチモニタ制御に強い |
 
 </div>
 

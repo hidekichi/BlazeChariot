@@ -34,29 +34,35 @@ StratOSは、2025年後半〜2026年初頭に注目を集め始めた新しいAr
 > 意味合い的には「Fedoraのファイル群をまとめた独立したユニットをfetchした」と言う事。
 
 例としてFrdoraの`dnf`を使用する場合、
+
 ```bash
 sudo brl fetch fedora
 ```
 
 stratumを取得したら、安全のためにアップグレードを実行します。
+
 ```bash
 sudo dnf upgrade
 ```
 
 その後で目的のパッケージを導入します。ここまでの流れから、
+
 ```bash
 sudo brl fetch fedora && sudo dnf upgrade
 ```
 
 と`&&`で繋げば、1行で書けるとも言えると思います。`&&`は前半コマンドが成功したら後半も実行します。前半失敗だと後半は実行されません。
 これはArchで言う、
+
 ```bash
 sudo pacman -Syu
 ```
+
 の後、目的のパッケージを入れるのと手順は同じ事です。Archのシンプルで簡潔と言うのが強調される部分ですが、{Alias|エイリアス}を書けば省略して書けるのでどっちでも同じようなことです。
 例えば、`update_dnf`と使用するコマンド自体を決めておき`sudo brl fetch fedora && sudo dnf upgrade`が実行されるように、デフォルトのシェルが何かはわかりませんが、bashであれば`.bashrc`にエイリアスを作ります。
 
 こうしておけば(実際は、予め作ったコマンドのエイリアスになりますが)、
+
 ```bash
 # skip-copy
 update_dnf(例)
@@ -65,6 +71,7 @@ update_dnf(例)
 ↓
 sudo dnf install firefox
 ```
+
 などとして簡単に書けるわけです。しかし、ここでもわかりますがArchの`pacman`にもfirefoxはありますから、dnfで入れる必要があるだろうか？となるはずです。あわせてArchはローリングリリースなのでUbuntuやFedoraよりバージョンが新しい可能性もあり…という点で、<u>Arch以外にしかないものを入れるのであれば便利だ</u>と言えると思うわけです。
 [pacman](https://wiki.archlinux.jp/index.php/Pacman) + [AUR](https://aur.archlinux.org/) + [Flatpak](https://flatpak.org/)(あるいは、[Snap](https://snapcraft.io/)や[AppImage](https://appimage.org/))では足りないという状況があるのかはわかりませんけども、アプリを作っている人がUbuntuにしかリリースしていないという状況などがあれば便利だと言えると思います。
 
@@ -72,6 +79,7 @@ sudo dnf install firefox
 パッケージ導入はどのディストリビューションでも当然の手順なので変則的なものではありません。
 
 Archであれば、
+
 ```bash
 # skip-copy
 sudo pacman -Syu
@@ -80,6 +88,7 @@ sudo pacman -Syu
 ↓
 sudo pacman -S firefox
 ```
+
 ですから。同じですよね。エイリアスを作っていない場合は記述が多いので面倒ですが、UbuntuやFedoraを使っている人は普段からやっていることですし、シェルが`fish`や`zsh`なら補完もできるわけで多少マシとなるでしょう。
 
 ### 配布されているエディション

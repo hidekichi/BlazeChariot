@@ -30,7 +30,7 @@ permalink: /blog/{{ page.fileSlug }}/
 > package: /path/to/file がファイルシステムに存在しています
 > エラーが発生したため、パッケージは更新されませんでした。
 
-*これは、pacman がファイルの衝突を検出し、仕様によりファイルを上書きしないために発生します。これは仕様によるものであり、欠陥ではありません。*
+_これは、pacman がファイルの衝突を検出し、仕様によりファイルを上書きしないために発生します。これは仕様によるものであり、欠陥ではありません。_
 
 まさにこれ。
 
@@ -46,6 +46,7 @@ permalink: /blog/{{ page.fileSlug }}/
 皆が同じ内容をそれぞれに出す必要はありません。いつまでも解決しない場合は課長・係長より、まずは主任に伺いを立てるみたいな感じで、コミュニティーフォーラムを調べるべきです。
 
 1番のものは今回の例であれば、
+
 ```shell
 sudo pacman -Qo /usr/lib/firmware/nvidia/ad103
 ```
@@ -53,6 +54,7 @@ sudo pacman -Qo /usr/lib/firmware/nvidia/ad103
 などのような感じかと思います。
 
 arch wikiの同じ箇所で、該当ファイルが破損していたり、{空|から}であったり、存在していない場合は、上記3番であるようにどうせファイルを後で削除するのであれば、
+
 ```shell
 pacman -S --overwrite glob package
 ```
@@ -70,6 +72,7 @@ pacman -S --overwrite glob package
 コミュニティでは、これらの問題を把握していて、これはEndeavourOSだけの話ではなく、上流のArchでの問題が下流にも広がっているとして、Arch公式アナウンスで「linux-firmwareの構造変更」に伴い`/usr/lib/firmware/nvidia/ad103…` が既存ファイルと競合し更新できなくなったと発表。
 
 その対処方法として、
+
 ```shell
 # skip-copy
 sudo pacman -Rdd linux-firmware
@@ -112,6 +115,7 @@ EndeavourOSフォーラムでもやはり更新に失敗したなどのユーザ
 > なので、必ず、`sudo pacman -Syu linux-firmware`とするか、`sudo pacman -Syu`の実行後に`sudo pacman -S linux-firmware`を忘れないように。
 
 ここで`sudo pacman -Syu linux-firmware`と`sudo pacman -S linux-firmware`の違いも書いておきます。
+
 - `-Syu` = 全体のシステムアップデート（upgrade）を行いつつ、linux-firmwareもアップグレードする
 - `-S` = install（インストール）
 - `-y` = sync（リポジトリの最新状態に更新）
@@ -121,6 +125,7 @@ EndeavourOSフォーラムでもやはり更新に失敗したなどのユーザ
 `-S`は、つまりは`linux-firmware`をインストールするという事だけが対象になり、何かしらが必要であればアップデートされるかもしれませんし、既にインストールされている場合には「再インストールしますか？」と言う問い合わせがあるかと思ます。
 
 `linux-firmware`は、`linux`カーネルや、`linux-headers`などとの整合性をとるためにも一緒に更新するのが理想であり、そのためにも`Syu`でインストールするのが望ましいと思います。{class="!mb-[0px]"}
+
 </div>
 
 ## 解決に至るまで
@@ -143,7 +148,7 @@ EndeavourOSフォーラムでもやはり更新に失敗したなどのユーザ
   ```shell
   ip a
   ```
-これらにより、`wlan0`や`wlp3s0`などのWifiインターフェースが表示されないことから、
+  これらにより、`wlan0`や`wlp3s0`などのWifiインターフェースが表示されないことから、
 - NetworkManagerの状態確認
   ```shell
   systemctl status NetworkManager
@@ -156,25 +161,30 @@ EndeavourOSフォーラムでもやはり更新に失敗したなどのユーザ
 ```shell
 journalctl -b | grep firmware
 ```
+
 上記コマンド以外にも、使えるのであれば、以下でも可能
+
 ```shell
 dmesg | grep iwlwifi
 ```
+
 これらを行うと、次のようなログが表示される。
+
 ```log
 iwlwifi 0000:00:14.3: Direct firmware load for iwlwifi-8265-36.ucode failed with error -2
 ```
+
 これらのように、`iwlwifi-8265-36.ucode`の読み込みの失敗があった場合、ファームウェアが存在しない、あるいは壊れていると判断できる
 
 #### 必要なファイルを確認・入手
 
 - 使用している無線チップのファームウェア名を確認(ログにでているもの)
 
-```shell
-# skip-copy
-iwlwifi-8265-36.ucode
-iwlwifi-8265-34.ucode
-```
+  ```shell
+  # skip-copy
+  iwlwifi-8265-36.ucode
+  iwlwifi-8265-34.ucode
+  ```
 
 これらは使用しているPCがどのチップを使用しているかで変わりますが、だいたいは以下にあると思います。以下のリンク先にない場合は、AIなどに聞いてどこから入手できるかを探して下さい。
 
@@ -199,6 +209,7 @@ sudo cp //ここにまずファイル元のパスをペースト
 ターミナル上でペーストする場合は、Windowsなどのように`Ctrl + V`ではなく、`Ctrl + shift + V`でペーストします。パスを覚えていれば別にペーストする必要もなくそのままダイレクトに入力してももちろんOKです。
 
 そして、
+
 ```shell
 # skip-copy
 sudo cp /YOUR/COPY/FROM/ /usr/lib/firmware/
@@ -210,13 +221,14 @@ sudo cp /YOUR/COPY/FROM/ /usr/lib/firmware/
 
 これらの確認はファイルマネージャーのアドレス欄に`/usr/lib/firmware/`を入れれば確認はできますから、ペーストしたファイルがあるかどうかは視認できると思います。
 
-
 - これらを次は再読み込みあるいは再起動する。
-```shell
-# skip-copy
-sudo modprobe -r iwlwifi
-sudo modprobe iwlwifi
-```
+
+  ```shell
+  # skip-copy
+  sudo modprobe -r iwlwifi
+  sudo modprobe iwlwifi
+  ```
+
 あるいは、システムを再起動しても良いと思います。
 
 再起動する前にコマンドを試すのは、再起動する前ならOS自体は作動しているため何かしらの手を打つことができますが、再起動してしまうとそれらが問題で起動しなくなったり、別の問題がでてしまう場合があるためではあります。
@@ -227,23 +239,28 @@ sudo modprobe iwlwifi
 簡単なのは、Firefoxなどを起動して何かしらのページが表示されるかを見ることです。しかし、そこでも表示がなかった場合は、
 
 - サービスの再起動
-```shell
-sudo systemctl restart NetworkManager
-```
+
+  ```shell
+  sudo systemctl restart NetworkManager
+  ```
+
 - wifiが検出されるか確認
-```shell
-nmcli dev wifi
-```
+
+  ```shell
+  nmcli dev wifi
+  ```
 
 ## 経緯のまとめと正しいと思われる修正方法
 
 - Arch Linuxで、2025年6月に`linux-firmware`パッケージの大幅変更があり、ファイル構造やリンクが変更されて、既存のファームウェアと衝突するケースが発生
 - `pacman`で更新できなかった場合の対処
-```shell
-# skip-copy
-sudo pacman -Rdd linux-firmware
-sudo pacman -Syu linux-firmware
-```
+
+  ```shell
+  # skip-copy
+  sudo pacman -Rdd linux-firmware
+  sudo pacman -Syu linux-firmware
+  ```
+
 - `linux-firmware`を強制的に削除
 - システムの更新をしつつ`linux-firmware`を再インストール
 
@@ -256,14 +273,14 @@ AIは英語も翻訳して解説してくれるため、書かれている内容
 
 <div class="table-container">
 
-| 目的          | 使用例                                                                     |
-| ----------- | ----------------------------------------------------------------------- |
-| ネットワーク確認    | `ip a`                                                                  |
-| ログ確認        | `dmesg \| grep firmware` か<br/>`journalctl -b \| grep firmware`           |
-| ファームウェア所有確認 | `pacman -Qo /usr/lib/firmware/iwlwifi-8265-36.ucode`                    |
-| モジュール再読み込み  | `modprobe -r iwlwifi && modprobe iwlwifi`                               |
-| 接続確認・設定     | `nmcli`,`nmtui`                                                         |
-| ファームウェア再構築  | `pacman -Rdd linux-firmware && pacman -S linux-firmware` |
+| 目的                   | 使用例                                                           |
+| ---------------------- | ---------------------------------------------------------------- |
+| ネットワーク確認       | `ip a`                                                           |
+| ログ確認               | `dmesg \| grep firmware` か<br/>`journalctl -b \| grep firmware` |
+| ファームウェア所有確認 | `pacman -Qo /usr/lib/firmware/iwlwifi-8265-36.ucode`             |
+| モジュール再読み込み   | `modprobe -r iwlwifi && modprobe iwlwifi`                        |
+| 接続確認・設定         | `nmcli`,`nmtui`                                                  |
+| ファームウェア再構築   | `pacman -Rdd linux-firmware && pacman -S linux-firmware`         |
 
 </div>
 

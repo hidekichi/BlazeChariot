@@ -62,6 +62,7 @@ Windows Updateは1週間とか決めた分だけ停止(延長)することも可
 
 - Stable：安定版
 - LTS：Long Term Support長期サポート
+
 </div>
 
 ### ローリングリリースタイプのディストリビューション
@@ -198,19 +199,19 @@ GnomeやKDEほどではないにしてもある程度のカスタマイズもで
 他にも、
 
 - Ubuntu [MATE](https://mate-desktop.org/ja/)
-  - Gnome2 のデスクトップ環境を蘇らせたMATEデスクトップを採用。Xfceのような古いWindowsのような感じで使用できます
+   - Gnome2 のデスクトップ環境を蘇らせたMATEデスクトップを採用。Xfceのような古いWindowsのような感じで使用できます
 - Ubuntu [Budgie](https://buddiesofbudgie.org/)
-  - モダンで美しい Budgie デスクトップ環境を採用し、シンプルながら洗練されたデザインが特徴的
+   - モダンで美しい Budgie デスクトップ環境を採用し、シンプルながら洗練されたデザインが特徴的
 - Ubuntu Studio
-  - マルチメディア制作に特化したフレーバーで、低遅延カーネルと関連する多数のプロ向けソフトウェアがプリインストールされています
+   - マルチメディア制作に特化したフレーバーで、低遅延カーネルと関連する多数のプロ向けソフトウェアがプリインストールされています
 - Edubuntu
-  - 教育機関向けに設計され、それら用途に適したソフトウェアがプリインストールされています
+   - 教育機関向けに設計され、それら用途に適したソフトウェアがプリインストールされています
 - Ubuntu [Cinnamon](https://projects.linuxmint.com/cinnamon/)
-  - Linix Mint のCinnamonデスクトップ環境を採用。Gnome2ベースの伝統的ながらモダンな操作感でWindowsユーザーにもわかりやすいデスクトップ環境です
+   - Linix Mint のCinnamonデスクトップ環境を採用。Gnome2ベースの伝統的ながらモダンな操作感でWindowsユーザーにもわかりやすいデスクトップ環境です
 - Ubuntu [Unity](https://unityd.org/)
-  - かつてのUbuntuの標準デスクトップであったUnity環境を継続して提供
+   - かつてのUbuntuの標準デスクトップであったUnity環境を継続して提供
 - Ubuntu Kylin
-  - 中国市場向けに最適化されたフレーバーで、中国語のフォントや、IME、一般的な中国のサービスとの統合が含まれます。
+   - 中国市場向けに最適化されたフレーバーで、中国語のフォントや、IME、一般的な中国のサービスとの統合が含まれます。
 
 <div class="imgContainer flex flex-wrap gap-y-[0.5rem] mb-[1rem]">
   <div class="w-[100%] md:w-[50%]">

@@ -30,6 +30,7 @@ permalink: /blog/{{ page.fileSlug }}/
 #### DMSの新規インストール
 
 ターミナルに次のコマンドを貼り付けると自動でインストーラーが起動します。
+
 ```bash
 curl -fsSL https://install.danklinux.com | sh
 ```
@@ -37,6 +38,7 @@ curl -fsSL https://install.danklinux.com | sh
 ![インストール画面](../img/dankinstall.avif)
 
 このインストーラーでは、画像にあるように、
+
 - shell： DankMaterialShell がインストールされます
 - wm： Windowマネージャーに、niri か Hyprland いずれかを選択してインストールできます
 - term： ターミナルにGhostty、kitty、Alacritty がインストールされます
@@ -46,28 +48,34 @@ curl -fsSL https://install.danklinux.com | sh
 #### DMSのアップデート方法
 
 ■ Arch系
+
 ```bash
 paru -Syu dms-shell-bin
 ```
+
 もしくは、`paru -Syu dms-shell-git`でもできます。`paru`で書かれていますが、`yay`でも可能です。paru、yayは事前に導入されている必要があります。
 `-bin`の方が安定版で、`-git`の方が最新版です。
 
 ■ Fedora
+
 ```bash
 sudo dnf upgrade dms
 ```
 
 ■ Debian & Ubuntuでは
+
 ```bash
 sudo apt update && sudo apt upgrade dms
 ```
 
 ■ OpenSUSE
+
 ```bash
 sudo zypper refresh && sudo zypper update dms
 ```
 
 他にもありますが、これらでアップデートした後は、
+
 ```bash
 dms restart
 ```
@@ -263,10 +271,13 @@ windowrule {
 #### fcitx5を読み込ませる
 
 日本語のIMEに当たるfcitx5ですが、既に導入している場合は、モニターの設定の下にある`STARTUP APPS`の最後に、
+
 ```ini
 exec-once = fcitx5 -d
 ```
+
 と追記して下さい。`-d`(デーモンをバックグラウンドで実行する)だけで問題ないことがほとんどですが、まれに正しく動作しない環境があるかも知れないのでその場合は、
+
 ```ini
 exec-once = fcitx5 -rd
 ```

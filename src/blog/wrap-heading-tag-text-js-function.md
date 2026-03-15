@@ -123,16 +123,16 @@ function wrapHeadingsAndContent(parentElement, headingSelector, wrapperTagName, 
 
 - article要素内の見出しタグ(h2, h3, h4)とその次の要素群をdivタグで囲む
 
-```js
-const article = document.querySelector('article');
-wrapHeadingsAndContent(article, 'h2, h3, h4', 'div', 'section');
-```
+   ```js
+   const article = document.querySelector('article');
+   wrapHeadingsAndContent(article, 'h2, h3, h4', 'div', 'section');
+   ```
 
 - body要素内の見出しタグ(h1, h2)とその次の要素群をsectionタグで囲む
-```js
-const body = document.querySelector('body');
-wrapHeadingsAndContent(body, 'h1, h2', 'section', 'content');
-```
+   ```js
+   const body = document.querySelector('body');
+   wrapHeadingsAndContent(body, 'h1, h2', 'section', 'content');
+   ```
 
 引数部分がちょっとアレですが、つまりは次のような感じです。
 
@@ -256,8 +256,8 @@ function wrapHeadingsAndContent(parentElement, headingSelector, wrapperTagName, 
         wrapper.classList.add(wrapperClassName);
         nextUntil.forEach(element => wrapper.appendChild(element));
         //wrapper.insertAdjacentElement('afterend', header);
-        header.parentNode.insertBefore(wrapper, header.nextSibling);
-        wrapper.insertBefore(header, wrapper.firstChild);
+        header.parentNode.insertBefore(wrapper, header.nextSibling);
+        wrapper.insertBefore(header, wrapper.firstChild);
     });
 }
 ```
