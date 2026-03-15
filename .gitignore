@@ -67,10 +67,6 @@ typings/
 _site/
 .vite/
 
-# Don't commit temp build files
-src/static/build
-src/_includes/styles.min.css
-
 .cache/
 .vscode/settings.json
 .zed/settings.json

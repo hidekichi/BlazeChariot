@@ -46,7 +46,8 @@ export default function (eleventyConfig) {
       viteOptions: {
         root: "src",
         plugins: [tailwind()],
-        tempFolderName: ".11ty-vite-temp"
+        publicDir: "public",
+      tempFolderName: ".11ty-vite-temp",
       }
     });
 
@@ -58,7 +59,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/_plugins");
   eleventyConfig.addPassthroughCopy("src/blog/img");
   eleventyConfig.addPassthroughCopy("src/guitar/img");
-  eleventyConfig.addPassthroughCopy("src/*.{txt,xml,xsl}");
+  eleventyConfig.addPassthroughCopy("src/pretty-atom-feed.xsl");
+    eleventyConfig.addPassthroughCopy("src/robots.txt");
+eleventyConfig.addPassthroughCopy("src/public");
+
 
   /*
   eleventyConfig.addPassthroughCopy({
@@ -140,8 +144,6 @@ export default function (eleventyConfig) {
   // -----------------------------------------------------------------
   eleventyConfig.addCollection("blog", (api) =>
     api.getFilteredByGlob("src/blog/**/*.md")
-      .filter(post => process.env.ELEVENTY_ENV === "production" ? !post.data.draft : true)
-      .reverse()
   );
   eleventyConfig.addCollection("guitar", (api) =>
     api.getFilteredByGlob("src/guitar/**/*.md")
@@ -149,12 +151,21 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("guitarAll", (api) =>
     api.getFilteredByGlob("src/guitar/**/*.md")
   );
+
+  eleventyConfig.addCollection("allPosts", function(collectionApi) {
+    const all = collectionApi.getFilteredByGlob("./src/{blog,guitar}/*.md");
+
+    if (process.env.ELEVENTY_ENV === "production") {
+      return all.filter(item => !item.data.draft);
+    }
+
+    return all;
+  });
+
   eleventyConfig.addCollection("latestPosts", (api) => {
     return api.getFilteredByGlob("src/**/*.md").sort((a, b) => b.date - a.date);
   });
-  eleventyConfig.addCollection("allPosts", (api) =>
-    api.getFilteredByGlob("src/**/*.md")
-  );
+
   eleventyConfig.addCollection("posts", (api) => {
     return api.getFilteredByGlob("src/blog/*.md").sort((a, b) => b.date - a.date);
   });

@@ -65,9 +65,11 @@ WaylandはGTKやQTなどの特定のツールキットに依存しなくても�
 **理想は「モジュールなし」** ですが、<u>現実の快適さを取るなら</u> **「モジュールを入れておく」** のが<u>現時点での</u> **ベストプラクティス** です。
 
 Arch Linux系で`pacman`を使用できる場合では、ターミナルから、
+
 ```bash
 sudo pacman -S fcitx5-im fcitx5-mozc
 ```
+
 でインストールできます。上記の`GTKとQT`を理解していれば、インストール時に何を選択したら良いかがわかるようになるのではないでしょうか？
 仮にPamacや他のディストリビューションでGUIなパッケージ操作ができたとしても、インストール時には選択肢が表示されると思います。それらで迷わないように。
 
@@ -83,16 +85,19 @@ sudo pacman -S fcitx5-im fcitx5-mozc
 <div>
 
 #### Ubuntu / Debian / Mint 系（apt使用）{class="!mt-[16px]"}
+
 ```bash
 sudo apt install fcitx5 fcitx5-frontend-gtk3 fcitx5-frontend-qt5 fcitx5-configtool fcitx5-mozc
 ```
 
 #### Fedora / RHEL / CentOS Stream 系（dnf使用）
+
 ```bash
 sudo dnf install fcitx5 fcitx5-gtk fcitx5-qt fcitx5-configtool fcitx5-mozc
 ```
 
 #### openSUSE / Tumbleweed / Leap 系（zypper使用）
+
 ```bash
 sudo zypper install fcitx5 fcitx5-gtk3 fcitx5-qt5 fcitx5-configtool fcitx5-mozc
 ```
@@ -128,6 +133,7 @@ ibus-typerというものが開発中で、IBusをよりモダンなRust言語�
 2026年は多くのディストリビューションがWaylandに対応しつつあり、現在の主流では**環境変数を最小限にし、Waylandプロトコルに任せる**という方向に進化しています。
 
 これまでX11の場合は、
+
 ```ini
 # skip-copy
 # システム全体に適用する場合: /etc/environmentに、
@@ -137,6 +143,7 @@ XMODIFIERS=@im=fcitx
 GTK_IM_MODULE=fcitx
 QT_IM_MODULE=fcitx
 ```
+
 このような記述が必要でした。以前のように「とりあえず`/etc/environment`に3行書く」というやり方は、<u>Wayland環境ではむしろ推奨されないケースが増えています</u>。
 
 ### text-input プロトコルの活用
@@ -170,6 +177,7 @@ Ibusもフォールバックする場合は、
 ```ini
 QT_IM_MODULES="wayland;fcitx;ibus"
 ```
+
 という事です。
 
 主に非KDEではこのように書いて、<u>KDEでは書かないのがベスト</u>とされています。また`fcitx5`ではなく`fcitx`である所も注意です。
@@ -195,6 +203,7 @@ export QT_IM_MODULES="wayland;fcitx"
 ```bash
 QT_IM_MODULES=wayland;fcitx
 ```
+
 のようにクォートを書きません。systemd/pam_envの仕様でクォートは不要です（むしろ剥がされる）。
 
 これらのように**設定場所に応じて使い分ける必要がある** ということです。こういった所がややこしいわけです。
@@ -223,6 +232,7 @@ GnomeはIBusとの統合が非常に強力なため、fcitx5を使用する場�
 #### gnome-shell-extension-kimpanelについて
 
 これのインストールの流れですが、
+
 - Gnomeのアプリ一覧(あるいはアプリ一覧画面で「extension」検索｜`Windows/⌘ キー + A`)から見つかる「拡張機能」アプリを開く
   - これはGnomeの拡張機能自体を、[extensions.gnome.org](https://extensions.gnome.org/)から探し、webから導入。
 
@@ -243,11 +253,13 @@ GnomeはIBusとの統合が非常に強力なため、fcitx5を使用する場�
 上記画像のような感じで導入できるExtension Managerのインストール方法は、
 
 1. Flatpakでインストール(初めて導入する場合、既に導入済みなら不要)
-    ```bash
-    flatpak install flathub com.mattjakeman.ExtensionManager
-    ```
-    - Ubuntu/Fedoraなどではgnome-shell-extension-managerパッケージもあるが、Flatpak版の方が最新で安定しやすい
-    - 「ソフトウェアの追加と削除」アプリからでも可能。Gnome純正の同アプリでExtension Managerを検索したらインストールはFlatpakになっていますのでGUIで導入できます
+
+   ```bash
+   flatpak install flathub com.mattjakeman.ExtensionManager
+   ```
+
+   - Ubuntu/Fedoraなどではgnome-shell-extension-managerパッケージもあるが、Flatpak版の方が最新で安定しやすい
+   - 「ソフトウェアの追加と削除」アプリからでも可能。Gnome純正の同アプリでExtension Managerを検索したらインストールはFlatpakになっていますのでGUIで導入できます
 
 2. Extension Managerを起動 → `Browse(検索)タブ`で「**kimpanel**((おそらく KDE Input Method Panelだろうかと))」または「**Input Method Panel**」を検索(上記最初の画像)
 3. インストール → 有効化(上記最後の画像)
@@ -261,6 +273,7 @@ GnomeはIBusとの統合が非常に強力なため、fcitx5を使用する場�
 #### Gnomeのまとめ
 
 インストールの方法なども書いたので{煩雑|はんざつ}になってしまいましたが、簡単にまとめると、
+
 - **設定不要**（XWaylandアプリで稀に必要になる場合を除き、グローバルに設定しないのが公式推奨）
 - 拡張機能で、`kimpanel`を探して入れる
 - (ほぼ大丈夫だが、自動起動が効いているか念のため確認）
@@ -280,7 +293,7 @@ KDEはfcitx5と<u>最も相性が良い環境</u>です。Wayland-onlyの宣言�
 ### Hyprland / Sway
 
 - `~/.config/hypr/hyprland.conf`などで`exec-once = fcitx5 -d`を記述する。ログインしたらfcitx5が実行されるようにする設定
-  - 「などで」という意味としては、自動起動するものだけ別でまとめて書いてある場合があるからです
+   - 「などで」という意味としては、自動起動するものだけ別でまとめて書いてある場合があるからです
 - 同様に、環境変数で`env = XMODIFIERS, @im=fcitx`は書いておくと無難です。無くても問題ないですが古いアプリでfcitx5が動作しないなどがあった場合に。他の変数は特定のアプリ(VSCodeなど)で文字入力ができない場合にのみ追加します
 
 ---
@@ -296,11 +309,11 @@ Hyprland、Niriの設定はユーザーディレクトリ以下にあるので�
 
 - Chromium / Chrome / Electron (VSCode, Discord等)をWaylandで動かす場合、フラグが必要なことがあります。
 
-  ```bash
-  --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime
-  ```
+   ```bash
+   --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime
+   ```
 
-  ※ 最近のバージョンでは --wayland-text-input-version=3 を指定するとより安定します。
+   ※ 最近のバージョンでは --wayland-text-input-version=3 を指定するとより安定します。
 
 - Flatpak アプリでは、ホストのIME設定が見えないことがあるため、[Flatseal](https://flathub.org/en/apps/com.github.tchx84.Flatseal) などのツールで環境変数を個別に許可する必要があります。
 ただしこれも基本と同様に、必要に迫ったらと言う感じです。
@@ -311,8 +324,7 @@ Chromium / Electronアプリのフラグの設定方法は、起動コマンド�
 Arch Linuxなどの一部のディストロでは`~/.config/`ディレクトリ以下にフラグ用のファイルを置くだけでランチャーからの起動時にも自動適用される仕組みがあります。
 
 - VSCode(OSS版)の場合
-   `~/.config/electron-flags.conf`あるいは、`electron-バージョン番号-flags.conf`があれば、そのファイルの中身を、
-
+   `~/.config/electron-flags.conf`あるいは、`electron-バージョン番号-flags.conf`があれば、そのファイルの中身を   
    ```ini
    --enable-features=UseOzonePlatform
    --ozone-platform=wayland
@@ -322,6 +334,7 @@ Arch Linuxなどの一部のディストロでは`~/.config/`ディレクトリ�
    と記入します。
 
 もし、メニューやドックからアイコンをクリックして起動する場合は、システムのショートカットファイルを自分の設定で上書きするという方法もあります。
+
 1. `/usr/share/applications/discord.desktop`などを`~/.local/share/applications/`にコピーします。これで使用しているユーザーの環境でだけ設定変更することができます
 2. コピーしたファイルをテキストエディターなどで開き、`Exec=`の行を書き換えます
    - 修正前は、`Exec=/usr/bin/discord`
@@ -329,14 +342,14 @@ Arch Linuxなどの一部のディストロでは`~/.config/`ディレクトリ�
 
 - Hyprlandなどでは、
 
-  キーバインドの設定(`~/.config/hypr/`以下の`bind.conf`)で、
+   キーバインドの設定(`~/.config/hypr/`以下の`bind.conf`)で、
 
-  ```ini
-  # ターミナルからVSCodeを起動する場合のバインド例
-  bind = $mainMod, C, exec, code --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime
-  ```
+   ```ini
+   # ターミナルからVSCodeを起動する場合のバインド例
+   bind = $mainMod, C, exec, code --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime
+   ```
 
-  のように書けば同じ事になります。
+   のように書けば同じ事になります。
 
   `$mainMod`は大抵の場合`SUPER(Windowsキー/Macでは⌘キー)`で、続く`C`は任意のキーの組み合わせです。つまり上記の例で言うと、`SUPER(Windowsキー/⌘キー) + C`のキーの組み合わせで`code`が起動する際、`code`に続くフラグがオプションとして起動します。
 
@@ -357,6 +370,7 @@ IBusが強力に統合されているディストリビューション（特にG
 今はまだX11もWaylandも混在しているような環境でもある上に、色んなデスクトップ環境がありすぎてどれが正解かを模索している状況でもあると感じています。
 
 つい最近ですが、
+
 - [Linuxゲーム開発者が協力してゲームエコシステム全体を改善する「Open Gaming Collective」を結成 - GIGAZINE](https://gigazine.net/news/20260201-linux-gaming/)
 - [OpenGamingCollective - Github](https://github.com/OpenGamingCollective)
 
