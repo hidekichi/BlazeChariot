@@ -15,6 +15,7 @@ images:
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 templateEngineOverride: md
+draft: true
 ---
 
 ## なんで今更11ty(eleventy)なのかという話
