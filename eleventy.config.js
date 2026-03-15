@@ -3,11 +3,10 @@ import vitePlugin from "@11ty/eleventy-plugin-vite";
 import tailwind from "@tailwindcss/vite";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import pluginNavigation from "@11ty/eleventy-navigation";
-import { EleventyHtmlBasePlugin, EleventyDraftPlugin } from "@11ty/eleventy";
+import { HtmlBasePlugin } from "@11ty/eleventy";
 import sitemap from "@quasibit/eleventy-plugin-sitemap";
 import Image from "@11ty/eleventy-img";
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
-import { HtmlBasePlugin } from "@11ty/eleventy";
 import markdownIt from "markdown-it";
 import rubyPlugin from "markdown-it-ruby";
 import attrs from "markdown-it-attrs";
@@ -21,7 +20,6 @@ export default function (eleventyConfig) {
   // -----------------------------------------------------------------
   eleventyConfig.addPlugin(HtmlBasePlugin);
   eleventyConfig.addPlugin(pluginNavigation);
-  eleventyConfig.addPlugin(EleventyDraftPlugin);
   eleventyConfig.addPlugin(sitemap, {
     sitemap: {
       hostname: "https://blazechariot.netlify.app",
@@ -140,9 +138,10 @@ export default function (eleventyConfig) {
   // -----------------------------------------------------------------
   // collections
   // -----------------------------------------------------------------
-
   eleventyConfig.addCollection("blog", (api) =>
-    api.getFilteredByGlob("src/blog/**/*.md").reverse()
+    api.getFilteredByGlob("src/blog/**/*.md")
+      .filter(post => process.env.ELEVENTY_ENV === "production" ? !post.data.draft : true)
+      .reverse()
   );
   eleventyConfig.addCollection("guitar", (api) =>
     api.getFilteredByGlob("src/guitar/**/*.md")
