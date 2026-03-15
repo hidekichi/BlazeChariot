@@ -205,11 +205,15 @@ export default function (eleventyConfig) {
       const d = new Date(val);
       return isNaN(d.getTime()) ? "0000-00-00" : d.toISOString().slice(0, 10);
     };
-    return api.getFilteredByGlob("src/blog/*.md").sort((a, b) => {
+    const posts = api.getFilteredByGlob("src/blog/*.md").sort((a, b) => {
       const dateA = normalizeDate(a.data.update || a.data.updated || a.data.lastmod || a.data.date);
       const dateB = normalizeDate(b.data.update || b.data.updated || b.data.lastmod || b.data.date);
       return dateB.localeCompare(dateA);
     });
+    if (process.env.ELEVENTY_ENV === "production") {
+      return posts.filter(post => !post.data.draft);
+    }
+    return posts;
   });
 
   // -----------------------------------------------------------------
