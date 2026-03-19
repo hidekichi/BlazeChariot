@@ -80,7 +80,7 @@ export async function topCoverSlideImage() {
 	// 画像設定
 	await setBackgroundImage(
 		".cover",
-		"/assets/images/covertreasure.avif",
+		"/assets/images/covertreasure-BCZ_PYMK.avif",
 		"/assets/images/covertreasure.webp"
 	);
 
