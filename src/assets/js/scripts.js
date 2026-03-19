@@ -1,4 +1,5 @@
 import "../css/style.css";
+import img from "../images/covertreasure.avif";
 import { footnote } from "./module/footnote.js";
 import { initPanelSwitch, insertLoadlazy, externalLink } from "./module/utils.js";
 import { embbedYoutubePlayer } from "./module/embedYoutubePlayer.js";

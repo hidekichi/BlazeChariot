@@ -48,6 +48,10 @@ export default function (eleventyConfig) {
         plugins: [tailwind()],
         publicDir: "public",
       tempFolderName: ".11ty-vite-temp",
+      build: {
+          outDir: "../_site",
+          emptyOutDir: false, // ← 必須
+        }
       }
     });
 
@@ -56,6 +60,10 @@ export default function (eleventyConfig) {
   // -----------------------------------------------------------------
 
   eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy({
+    "src/assets/images": "assets/images",
+    "src/assets/fonts": "assets/fonts"
+  });
   eleventyConfig.addPassthroughCopy("src/_plugins");
   eleventyConfig.addPassthroughCopy("src/blog/img");
   eleventyConfig.addPassthroughCopy("src/guitar/img");
