@@ -1029,8 +1029,9 @@
         margin: var(--padding-m) 0;
       }
 
-      br {
-        margin-bottom: calc((var(--padding-m) + 0.35em) / 2);
+      cr {
+        display: block;
+        margin-top: calc((var(--padding-m) + 0.35em) / 2);
       }
 
       img {
