@@ -18,9 +18,11 @@ import { toc } from "./module/tocAutoOpen.js";
 document.addEventListener("DOMContentLoaded", async () => {
   await footnote();
 
-
-  await setBackgroundImage(".cover", imgAvif, imgWebp);
-   await topCoverSlideImage();
+  const coverEle = document.querySelector(".cover");
+  if (coverEle) {
+    await setBackgroundImage(".cover", imgAvif, imgWebp);
+    await topCoverSlideImage();
+  }
 
 	await copyButton();
 
