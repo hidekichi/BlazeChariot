@@ -39,10 +39,12 @@ permalink: /about/
 
 このサイトはstatic site generator(静的サイトジェネレーター)である、[11ty/eleventy](https://www.11ty.dev/) によって作成されています。
 
-static site generator(SSG)とは、Wordpressなどがデータベースからそのデータを読み取り動的にサイトを構築しているのに対して、元になるMarkdownファイルなどからhtmlを生成します。その場でその都度組み立てるのではなく、出来あがったものを表示しているため軽量であるのが特徴の一つです。
+static site generator(SSG)とは、Wordpressなどがデータベースからそのデータを読み取り動的にサイトを構築しているのに対して、元になるMarkdownファイルなどからhtmlを生成します。
+その場でその都度組み立てるのではなく、出来あがったものを表示しているため軽量であるのが特徴の一つです。
 もちろんJavascriptは使用できますし、Tailwind.cssなどを組み込む事もできます。他のcssフレームワークも使用できます。
 
-出来あがったものを公開しているということはローカルで組み立てるわけですが、ここには[node.js](https://nodejs.org/ja/download){title="node.js ダウンロードページ"}をベースにしているため、VS CodeやZedなどのテキストエディタ(コードエディタ)があれば開発できるようになっています。Wordpressや昔使用していた[GRAV](https://getgrav.org/)などであれば、レンタルサーバーにPHPの環境が必要で、またそのバージョンによっては動作しなかったりもあるので、そういったある程度クリアしなくてはいけないそれら環境は不要になります。
+出来あがったものを公開しているということはローカルで組み立てるわけですが、ここには[node.js](https://nodejs.org/ja/download){title="node.js ダウンロードページ"}をベースにしているため、VS CodeやZedなどのテキストエディタ(コードエディタ)があれば開発できるようになっています。
+Wordpressや昔使用していた[GRAV](https://getgrav.org/)などであれば、レンタルサーバーにPHPの環境が必要で、またそのバージョンによっては動作しなかったりもあるので、そういったある程度クリアしなくてはいけないそれら環境は不要になります。
 
 > - 2025/2/25 現在、Gravで要求するPHPのバージョンは7.3.6以上になります。
 > - windowsを使用していて、上述リンクからnode.jsへ行くとダウンロード方法がいくつかありますが、全くの初心者は下の方にあるインストーラーをダウ ンロードして導入するのが良いかと思います。
@@ -51,14 +53,15 @@ static site generator(SSG)とは、Wordpressなどがデータベースからそ
 
 サイトができるまでは、ローカルでいじれるので、その間に色々と下調べしてみてください。
 例えば公式サイトには、ここで使用している以外にもいくつも[スターターキット](https://www.11ty.dev/docs/starter/)があります。それらで見るべきは<u>面倒な部分が組み込まれているかどうか</u>と**わかりやすいドキュメントがあるかどうか**です。
+
 日本人の作者もどこかを探せばいるのかも知れませんが、たいていは英語で書いてあるので最小限HTMLやその他諸々の知識が必要な場面もあるかと思います。最近ではAIもあるのでたいていは何とでもなります。
 
 Markdownで記事を書き、画像を用意してCSSでスタイルするというだけの事ですのでベースキットがどんなものであろうと後から好きなようにできるわけですが、Tailwind.cssが最初から使えるかどうかやPostCSSでcssを整えて更にはjavascript共にminify化してくれるとか、これらも後でどうとでもなる部分ではあるものの最初からキットに組み込んであればほとんどそのまま使うことができます。
 
-こちらではNetlifyで公開していますが、Github pagesでも公開が可能です。
+こちらではNetlifyで公開していますが、Github/Cloudflare pagesでも公開が可能です。
 
-Youtubeの動画プレイヤー読み込みは、管理人オリジナルのjavascriptによって実装されています。
-参考: [Youtube address convert to embed iframe](http://codepen.io/Hidekichi/pen/dowOgr?target=_blank)
+Youtubeの動画プレイヤー読み込みは、管理人オリジナルのJavaScriptによって実装されています。
+参考: [Youtube address convert to embed iframe](http://codepen.io/Hidekichi/pen/dowOgr)
 
 ベースのテンプレートに、 [chrissy.dev](https://github.com/chrissy-dev/chrissy.dev)の[eleventy-web-starter](https://github.com/chrissy-dev/eleventy-web-starter) を用いて、それを魔改造して使用しています。古いスターターキットなのでもう原型はほぼ無いぐらいになっています。
 

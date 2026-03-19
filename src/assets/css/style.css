@@ -42,11 +42,13 @@
 @layer base {
   /* ------ デザイントークン（ライトモード） ------ */
   :root {
-    --background-color: oklch(92.2% 0.005 325.62);
+    --background-color: rgb(218, 227, 231);
     --brand: #90e0ef;
-    --blockquote-background: oklch(86.9% 0.022 252.894);
-    --code-background: oklch(87.2% 0.01 258.338);
-    --code-color: var(--font-color);
+    --blockquote-background: rgb(209, 225, 220);
+    --code-background: #142e66cf;
+    --code-color: var(--background-color);
+    --color-one: #cf2626;
+    --color-two: #443d95;
     --description-color: oklch(37.9% 0.146 265.522);
     --font-color: #263542;
     --heading-color: oklch(21.8% 0.008 223.9);
@@ -56,6 +58,7 @@
     --muted: #aaa;
     --maker-color: #4a7ddd;
     --notes: oklch(45.7% 0.24 277.023);
+    --page-title-color: #71b7be;
     --share-svg-color: var(--background-color);
     --summary-background: oklch(37.8% 0.077 168.94);
     --summary-div-background: hsla(188.1, 46.4%, 78%, 0.27);
@@ -69,7 +72,7 @@
     --th-background: oklch(70.5% 0.015 286.067);
     --transparency-1: rgba(0, 0, 0, 0.05);
     --underline-color: oklch(51.8% 0.253 323.949);
-    --underline-text-color: oklch(51.4% 0.222 16.935);
+    --underline-text-color: transparent;
 
     --padding-xs: 8pt;
     --padding-s: 16pt;
@@ -86,28 +89,6 @@
     --padding-ex-xxl: 40pt;
 
     --c: var(--color-teal-600);
-
-    /* @container style()用の設定 */
-
-    /*
-		--isWide: false;
-		--isNarrow: false;
-		--isMobile: false;
-		--isUptoWide: false;
-
-		@media (width >= 960px) {
-			--isWide: true;
-		}
-		@media (768px < width < 960px) {
-			--isUptoWide: true;
-		}
-		@media (480px <= width <=768px) {
-			--isNarrow: true;
-		}
-		@media (10px < width < 480px) {
-			--isMobile: true;
-		}
-		*/
   }
 
   /* ------ デザイントークン（ダークモード） ------ */
@@ -118,7 +99,9 @@
       --brand: #38acc1;
       --code-color: var(--font-color);
       --code-background: #072041;
-      --description-color: hsl(200, 100%, 78%);
+      --color-one: #ddf918;
+      --color-two: #0ec5fd;
+      --description-color: hsl(194.4, 100%, 89.4%);
       --font-color: #ccc;
       --heading-color: oklch(96.7% 0.001 286.375);
       --logo: #ff5757;
@@ -127,6 +110,7 @@
       --muted: #444;
       --maker-color: #90e0ef;
       --notes: oklch(87.9% 0.169 91.605);
+      --page-title-color: #daebf2;
       --share-svg-color: #5679a6;
       --strong--code-color: var(--font-color);
       --strong-color: oklch(85.2% 0.199 91.936);
@@ -138,7 +122,7 @@
       --th-background: #123;
       --transparency-1: rgba(255, 255, 255, 0.05);
       --underline-color: #39a6a7;
-      --underline-text-color: #62cfe1;
+      --underline-text-color: transparent;
     }
   }
 
@@ -147,7 +131,7 @@
     --base-size: 16px;
     --scale-ratio: 1.2;
     --body-weight: 300;
-    --body-line-height: 1.7;
+    --body-line-height: 1.75;
     --body-letter-spacing: normal;
 
     --heading-weight: 700;
@@ -230,10 +214,10 @@
   html {
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
-    /* font-size: clamp(1rem,.9209rem + .3721vw,1.2rem); */
-    line-height: 1.7;
-    /* font-weight: 400; */
-    font-family: "Reddit Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+    font-family: "Reddit Sans", "BIZ UDPGothic", sans-serif;
   }
 
   img {
@@ -296,7 +280,7 @@
       display: block;
       font-size: 0.875em;
       overflow-x: auto;
-      padding: var(--padding-ex-s) 0;
+      padding: var(--padding-ex-s) 0 var(--padding-ex-m);
     }
   }
 
@@ -424,21 +408,6 @@
 
     gap: 0 var(--padding-xs);
     container: main / inline-size;
-
-    /* リストページ: サイドバーなし（どの幅でも1カラム） */
-    &:has(.cat-blog) {
-      max-width: 1200px;
-    }
-
-    /* About / Now ページ: 幅を狭める */
-    &:has(:is(.cat-about, .cat-now)) {
-      max-width: 960px;
-    }
-
-    /* ギター目次ページ: サイドバーなし */
-    &:has(.cat-guitarContent) {
-      max-width: 960px;
-    }
   }
 
   main.container header.page-title {
@@ -483,7 +452,13 @@
 
   /* ------ バックドロップ（サイドバードロワー用オーバーレイ） ------ */
   .backdrop {
-    background-color: rgba(0, 51, 81, 0.9);
+    mix-blend-mode: multiply;
+    background-image: linear-gradient(
+      to left,
+      #2f6fcf 0%,
+      #66bdc1 35%,
+      #141414 100%
+    );
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -653,6 +628,34 @@
    YouTube埋め込み、フットノート、モーダル画像、TOCなど
    ============================================================ */
 @layer component {
+  main.container {
+    /* リストページ: サイドバーなし（どの幅でも1カラム） */
+    &:has(.cat-blog) {
+      .body-copy {
+        width: 100%;
+        max-width: 1200px;
+      }
+    }
+
+    /* About / Now ページ: 幅を狭める */
+    &:has(:is(.cat-about, .cat-now)) {
+      .body-copy {
+        width: 100%;
+        max-width: 768px;
+        margin-inline: auto;
+      }
+    }
+
+    /* ギター目次ページ: サイドバーなし */
+    &:has(.cat-guitarContent) {
+      .body-copy {
+        width: 100%;
+        max-width: 960px;
+        margin-inline: auto;
+      }
+    }
+  }
+
   /* ==================== ナビゲーション ==================== */
 
   .navigation {
@@ -779,27 +782,45 @@
   /* ==================== ページタイトル（記事ヘッダー） ==================== */
 
   .page-title {
-    /*margin: 3rem 0;
-		margin: var(--padding-xl) 0;
-		*/
-    padding: var(--padding-l) 0;
-    font-size: 1rem;
-    text-align: center;
+    display: grid;
+    grid-template-areas:
+      "headerMeta"
+      "title"
+      "description"
+      "headerTags";
+    grid-template-rows: auto auto auto auto;
+    padding: var(--padding-m) 0 var(--padding-l);
+    row-gap: var(--padding-xs);
+
+    .header-meta {
+      grid-area: headerMeta;
+      margin: 0;
+      text-align: right;
+    }
+
+    .tags {
+      grid-area: headerTags;
+    }
   }
 
   .page-title__title {
-    font-size: 2.4rem;
-    line-height: 1.2;
+    grid-area: title;
+    color: var(--page-title-color);
+    font-family: var(--font-sans);
+    font-weight: var(--heading-weight);
+    font-size: clamp(2.4em, 7.25cqw, 10em) !important;
+    line-height: 1;
+    word-break: normal;
+    word-break: auto-phrase;
+    line-break: loose;
   }
 
   .page-title__desc {
+    grid-area: description;
     font-weight: 400;
-    max-width: 768px;
     /*margin: 1.5rem auto 1rem;*/
-    margin: var(--padding-s) auto var(--padding-xl);
-    max-width: 50vw;
     line-height: 1.5;
-    font-size: 0.875em;
+    font-size: clamp(0.875em, 1.6cqw, 1.7em);
     color: var(--description-color);
 
     /* モバイルでは幅制限を解除 */
@@ -847,17 +868,19 @@
   .body-copy {
     padding: 0 var(--padding-ex-m);
     position: relative;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    word-break: auto-phrase;
     word-break: normal;
     line-break: strict;
     font-size: calc(var(--base-size) * 1.1);
-    line-height: calc(var(--body-line-height) * 1.08);
+    /*line-height: calc(var(--body-line-height) * 1.08);*/
 
     /* 見出しサイズ（clamp でレスポンシブ） */
     h1 {
       font-size: clamp(2em, 5vw, 2.5em);
       line-height: 1.2;
       font-weight: bold;
+      line-break: loose;
     }
 
     h2 {
@@ -959,12 +982,25 @@
     }
 
     /* 下線装飾 */
+
     u {
+      --bg-size: 600%;
       text-decoration-thickness: 0.05em;
       text-underline-offset: 5px;
       text-decoration-color: var(--underline-color);
       text-decoration-style: dashed;
       color: var(--underline-text-color);
+      padding: 0.1em var(--padding-ex-xs);
+      background: linear-gradient(
+          90deg,
+          var(--color-one),
+          var(--color-two),
+          var(--color-one)
+        )
+        0 0 / var(--bg-size) 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: 15s linear infinite movebg;
     }
 
     s {
@@ -986,7 +1022,7 @@
       letter-spacing: 0.02em;
 
       & + p {
-        margin-top: var(--padding-m);
+        margin-top: calc(var(--padding-m) + 0.35em);
       }
 
       & + :where(.ytp) {
@@ -994,7 +1030,7 @@
       }
 
       br {
-        margin-bottom: var(--padding-ex-s);
+        margin-bottom: calc((var(--padding-m) + 0.35em) / 2);
       }
 
       img {
@@ -1838,7 +1874,7 @@
     padding: var(--padding-ex-s) 0;
 
     /* 幅が狭い時は折り返し */
-    @media (width < 1000px) {
+    @media (width < 1200px) {
       flex-flow: row wrap;
     }
   }
@@ -2345,6 +2381,16 @@
     transform: translate(-70%, -50%);
   }
 
+  @media (prefers-color-scheme: light) {
+    .panel-switch {
+      background-color: #001e3f;
+
+      svg {
+        color: #ccc;
+      }
+    }
+  }
+
   @keyframes blink {
     0% {
       border-color: #dc3545;
@@ -2412,7 +2458,7 @@
 
     &.intersection {
       animation: filterblink 1s forwards;
-      animation-iteration-count: 3;
+      animation-iteration-count: 6;
       line-height: 1.4;
     }
   }
@@ -2556,6 +2602,12 @@
       content: "表が見切れている時はスクロール可能";
       font-size: 0.75rem;
       color: var(--notes);
+    }
+  }
+
+  :where(h2, h3, h4, h5) {
+    & + .table-container {
+      padding-top: 0;
     }
   }
 
@@ -2803,6 +2855,12 @@
    フッター、モバイル時の全体補正など
    ============================================================ */
 @layer utility {
+  @keyframes movebg {
+    to {
+      background-position: var(--bg-size) 0;
+    }
+  }
+
   /* emgitのtdが伸びるのを防ぐ */
   td.hljs-ln-line.hljs-ln-numbers {
     width: min-content !important;
