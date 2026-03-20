@@ -2865,8 +2865,9 @@
   /* emgitのtdが伸びるのを防ぐ */
   .emgithub-container {
     pre {
-      overflow-x: auto;
+      overflow-x: scroll;
     }
+
     .emgithub-file .code-area {
       td.hljs-ln-line.hljs-ln-numbers {
         width: min-content !important;
@@ -2876,6 +2877,7 @@
         tr {
           display: flex;
           justify-content: start;
+          flex-wrap: nowrap;
         }
       }
     }
