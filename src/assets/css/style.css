@@ -2863,11 +2863,23 @@
   }
 
   /* emgitのtdが伸びるのを防ぐ */
-  td.hljs-ln-line.hljs-ln-numbers {
-    width: min-content !important;
-  }
-
   .emgithub-container {
+    pre {
+      overflow-x: auto;
+    }
+    .emgithub-file .code-area {
+      td.hljs-ln-line.hljs-ln-numbers {
+        width: min-content !important;
+      }
+
+      .hljs-ln {
+        tr {
+          display: flex;
+          justify-content: start;
+        }
+      }
+    }
+
     svg {
       display: none;
     }

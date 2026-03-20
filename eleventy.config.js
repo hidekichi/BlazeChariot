@@ -49,8 +49,9 @@ export default function (eleventyConfig) {
         publicDir: "public",
       tempFolderName: ".11ty-vite-temp",
       build: {
-          outDir: "../_site",
-          emptyOutDir: false, // ← 必須
+          // outDir: "../_site",
+          // emptyOutDir: false, // ← 必須
+          cssCodeSplit: true,
         }
       }
     });
