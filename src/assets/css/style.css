@@ -128,7 +128,7 @@
 
   /* ------ タイポグラフィトークン ------ */
   :root {
-    --base-size: 16px;
+    --base-size: clamp(15px, 0.2vw + 15px, 18px);
     --scale-ratio: 1.2;
     --body-weight: 300;
     --body-line-height: 1.75;
@@ -137,6 +137,12 @@
     --heading-weight: 700;
     --heading-line-height: 1.1;
     --heading-letter-spacing: normal;
+  }
+
+  @width (width > 1200px) {
+    :root {
+      --base-size: clamp(18px, 0.5vw + 12px, 20px);
+    }
   }
 
   /* ------ グリッド変数（JS連携） ------ */
@@ -218,6 +224,7 @@
     line-height: 1.8;
     letter-spacing: 0.01em;
     font-family: "Reddit Sans", "BIZ UDPGothic", sans-serif;
+    font-size: var(--base-size);
   }
 
   img {
@@ -371,7 +378,7 @@
 
   /* ------ body テキストスタイル（layout 直下に置くことで base を上書き可能） ------ */
   body {
-    font-size: var(--base-size);
+    /*font-size: var(--base-size);*/
     line-height: var(--body-line-height);
     letter-spacing: var(--body-letter-spacing);
 
@@ -873,7 +880,7 @@
     word-break: auto-phrase;
     word-break: normal;
     line-break: strict;
-    font-size: calc(var(--base-size) * 1.1);
+    /*font-size: calc(var(--base-size) * 1.1);*/
     /*line-height: calc(var(--body-line-height) * 1.08);*/
 
     /* 見出しサイズ（clamp でレスポンシブ） */
