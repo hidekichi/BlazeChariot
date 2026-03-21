@@ -72,7 +72,7 @@
     --th-background: oklch(70.5% 0.015 286.067);
     --transparency-1: rgba(0, 0, 0, 0.05);
     --underline-color: oklch(51.8% 0.253 323.949);
-    --underline-text-color: transparent;
+    --underline-text-color: #af0063; /*transparent*/
 
     --padding-xs: 8pt;
     --padding-s: 16pt;
@@ -122,7 +122,7 @@
       --th-background: #123;
       --transparency-1: rgba(255, 255, 255, 0.05);
       --underline-color: #39a6a7;
-      --underline-text-color: transparent;
+      --underline-text-color: #6aeae4; /*transparent;*/
     }
   }
 
@@ -985,13 +985,15 @@
     /* 下線装飾 */
 
     u {
-      --bg-size: 600%;
       text-decoration-thickness: 0.05em;
       text-underline-offset: 5px;
       text-decoration-color: var(--underline-color);
       text-decoration-style: dashed;
       color: var(--underline-text-color);
       padding: 0.1em var(--padding-ex-xs);
+
+      /*
+      --bg-size: 600%;
       background: linear-gradient(
           90deg,
           var(--color-one),
@@ -1002,6 +1004,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       animation: 15s linear infinite movebg;
+      */
     }
 
     s {
