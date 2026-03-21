@@ -274,8 +274,8 @@ export default function (eleventyConfig) {
       Multibody: true,
     });
 
-  mdLib.renderer.rules.softbreak = () => '<cr>';
-  mdLib.renderer.rules.hardbreak = () => '<cr>';
+  mdLib.renderer.rules.softbreak = () => '<cr></cr>';
+  mdLib.renderer.rules.hardbreak = () => '<cr></cr>';
 
   eleventyConfig.setLibrary("md", mdLib);
 

@@ -99,8 +99,8 @@
       --brand: #38acc1;
       --code-color: var(--font-color);
       --code-background: #072041;
-      --color-one: #ddf918;
-      --color-two: #0ec5fd;
+      --color-one: #0ec5fd;
+      --color-two: #cef3fb;
       --description-color: hsl(194.4, 100%, 89.4%);
       --font-color: #ccc;
       --heading-color: oklch(96.7% 0.001 286.375);
@@ -260,17 +260,6 @@
     font-family: "Fragment Mono", monospace;
   }
 
-  :not(pre) > code {
-    font-size: 0.875em;
-    margin: 0 4px;
-    padding: 0.125em 0.4em 0.1em !important;
-    background: var(--code-background) !important;
-    color: var(--code-color);
-    vertical-align: 1px;
-    box-shadow: 0px 0px 2px hsl(216.6, 100%, 58.2%);
-    border-radius: 0.1em;
-  }
-
   pre {
     position: relative;
     width: 100%;
@@ -284,6 +273,18 @@
     }
   }
 
+  :where(p, :not(pre)) {
+    & > code {
+      font-size: 0.875em;
+      margin: 0 4px;
+      padding: 0.125em 0.4em 0.1em !important;
+      background: var(--code-background) !important;
+      color: var(--code-color);
+      vertical-align: 1px;
+      box-shadow: 0px 0px 2px hsl(216.6, 100%, 58.2%);
+      border-radius: 0.1em;
+    }
+  }
   /* pluginの関係で!important必須 */
   pre[class*="language-"] {
     /*overflow-x: auto;*/
@@ -1031,7 +1032,7 @@
 
       cr {
         display: block;
-        margin-top: calc((var(--padding-m) + 0.35em) / 2);
+        margin-top: calc(var(--padding-m) / 3);
       }
 
       img {
