@@ -128,10 +128,10 @@
 
   /* ------ タイポグラフィトークン ------ */
   :root {
-    --base-size: clamp(15px, 0.3vw + 14px, 17.6px);
+    --base-size: clamp(16px, 0.3vw + 14px, 18.5px);
     --scale-ratio: 1.2;
     --body-weight: 300;
-    --body-line-height: 1.75;
+    --body-line-height: 1.6;
     --body-letter-spacing: normal;
 
     --heading-weight: 700;
@@ -141,7 +141,7 @@
 
   @width (width > 1200px) {
     :root {
-      --base-size: clamp(17.6px, 0.4vw + 12.8px, 21px);
+      --base-size: clamp(18px, 1vw + 12.6px, 24px);
     }
   }
 
@@ -1892,6 +1892,7 @@
   }
 
   .originalPost {
+    font-size: 0.85em;
     &::before {
       content: "(";
     }
