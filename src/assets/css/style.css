@@ -128,7 +128,7 @@
 
   /* ------ タイポグラフィトークン ------ */
   :root {
-    --base-size: clamp(15px, 0.2vw + 15px, 18px);
+    --base-size: clamp(15px, 0.3vw + 14px, 17.6px);
     --scale-ratio: 1.2;
     --body-weight: 300;
     --body-line-height: 1.75;
@@ -141,7 +141,7 @@
 
   @width (width > 1200px) {
     :root {
-      --base-size: clamp(18px, 0.5vw + 12px, 20px);
+      --base-size: clamp(17.6px, 0.4vw + 12.8px, 21px);
     }
   }
 
