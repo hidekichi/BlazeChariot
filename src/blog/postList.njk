@@ -53,37 +53,37 @@ sitemap:
 	{% set image   = entry.data.images[0] %}
 
 		<li>
-			<a href="{{ entry.url }}">
+		  <a href="{{ entry.url }}">
   			<span class="post_update">
-          <span class="isUpdate" title="2週間以内の更新があります" alt="I've updated it since the first post">★</span>
-  			{% if upd and upd > pub %}
-       	  {% if pubYear == updYear %}
-            <!-- 同年 → 年を省略して「2026年2月1日★2月15日」 -->
-            <time datetime="{{ pub }}">{{ pubStr }}</time><span class="separator">→</span>
-            <time datetime="{{ upd }}">{{ updStr | replace(r/^[0-9]{4}年/, "") }}</time>
-          {% else %}
+              <span class="isUpdate" title="2週間以内の更新があります" alt="I've updated it since the first post">★</span>
+   			{% if upd and upd > pub %}
+                {% if pubYear == updYear %}
+                  <!-- 同年 → 年を省略して「2026年2月1日★2月15日」 -->
+                  <time datetime="{{ pub }}">{{ pubStr }}</time><span class="separator">→</span>
+                  <time datetime="{{ upd }}">{{ updStr | replace(r/^[0-9]{4}年/, "") }}</time>
+                {% else %}
 
-            <!-- 異なる年 → 両方年付き -->
-            <time datetime="{{ pub }}">{{ pubStr }}</time><span class="separator">→</span>
-            <time datetime="{{ upd }}">{{ updStr }}</time>
-          {% endif %}
-
-        {% else %}
-        <time datetime="{{ pub }}">{{ pubStr }}</time>
-  			{% endif %}
+                  <!-- 異なる年 → 両方年付き -->
+                  <time datetime="{{ pub }}">{{ pubStr }}</time><span class="separator">→</span>
+                  <time datetime="{{ upd }}">{{ updStr }}</time>
+                {% endif %}
+            {% else %}
+                  <time datetime="{{ pub }}">{{ pubStr }}</time>
+   			{% endif %}
   			</span>
-			<div class="title-meta">
-				<span class="title">{{ symbol }} {{ entry.data.title }}</span>
 
-				{% if image %}
-				  <div>
-						<img src="{{ image | blogImage }}" alt="first image in article"/>
-					</div>
-				{% endif %}
+            <div class="title-meta">
+				<span class="title">{{ symbol }} {{ entry.data.title }}</span>
+     			{% if image %}
+                    <div class="list-thumb">
+                      <img src="{{ image | blogImage }}" alt="first image in article"/>
+                    </div>
+     			{% endif %}
 			</div>
-			<div class="summary">
-				{{ entry.data.description or entry.templateContent | striptags | truncate(100) }}
-			</div>
+
+            <div class="summary">
+             	{{ entry.data.description or entry.templateContent | striptags | truncate(100) }}
+            </div>
 			</a>
 		</li>
 	{% endfor %}

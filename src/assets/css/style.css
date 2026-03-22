@@ -285,12 +285,13 @@
     & > code {
       font-size: 0.875em;
       margin: 0 4px;
-      padding: 0.125em 0.4em 0.1em !important;
+      /*padding: 0.125em 0.4em 0.1em !important;*/
       background: var(--code-background) !important;
       color: var(--code-color);
-      vertical-align: 1px;
+      vertical-align: middle;
       box-shadow: 0px 0px 2px hsl(216.6, 100%, 58.2%);
-      border-radius: 0.1em;
+      border-radius: 2px;
+      padding: 0 var(--padding-ex-xs) !important;
     }
   }
   /* pluginの関係で!important必須 */
@@ -305,7 +306,13 @@
   }
 
   code[class^="language-"] {
-    font-family: inherit !important;
+    font-family: "Fragment Mono", sans-serif !important;
+  }
+
+  u {
+    code {
+      border-color: var(--underline-color);
+    }
   }
 
   /* ------ 見出し共通 ------ */
@@ -903,7 +910,7 @@
         display: inline-block;
         width: 1em;
         margin-right: 0.5rem;
-        margin-right: var(--padding-xs);
+        margin-right: var(--padding-ex-xs);
       }
     }
 
@@ -2112,6 +2119,7 @@
     align-items: center;
     margin: 0 2px 0 2px;
     min-width: 0.85rem;
+    vertical-align: middle;
 
     span {
       font-size: 0.75rem;
