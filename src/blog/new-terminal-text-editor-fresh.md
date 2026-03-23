@@ -43,9 +43,9 @@ freshで言うとIDEライクを言うようにGUI風の標準キー設定(`Ctrl
 
 贅沢な問題点ですが、シンプルに編集だけしたい人にとってはオーバースペックとも言えます。もっと機能を絞っても良いという人らがいることでしょう。
 
-## インストールの方法
+### インストールの方法
 
-### Arch Linux
+#### Arch Linux
 
 ```bash
 yay -S fresh-editor
@@ -97,7 +97,7 @@ AURのインストール前にはファイルの各種情報などがでます�
 </div>
 </details>
 
-### Debian / Ubuntu
+#### Debian / Ubuntu
 
 - リリースから.debをダウンロードして、
 
@@ -107,13 +107,13 @@ sudo dpkg -i fresh-editor_*.deb
 
 リリースとはGithubの[Releases](https://github.com/sinelaw/fresh/releases)のことです。
 
-### MacOS
+#### MacOS
 
 ```bash
 brew tap sinelaw/fresh && brew install fresh-editor
 ```
 
-### npm
+#### npm
 
 ```bash
 npm install -g @fresh-editor/fresh-editor

@@ -283,15 +283,15 @@
 
   :where(p, :not(pre)) {
     & > code {
-      font-size: 0.875em;
       margin: 0 4px;
-      /*padding: 0.125em 0.4em 0.1em !important;*/
       background: var(--code-background) !important;
       color: var(--code-color);
-      vertical-align: middle;
       box-shadow: 0px 0px 2px hsl(216.6, 100%, 58.2%);
       border-radius: 2px;
       padding: 0 var(--padding-ex-xs) !important;
+      display: inline-block;
+      vertical-align: text-bottom;
+      font-size: 0.825em;
     }
   }
   /* pluginの関係で!important必須 */
@@ -1087,13 +1087,13 @@
     /* リスト */
     :where(ul, ol) {
       /*font-size: 15px;*/
-      margin-bottom: 1.7rem;
-      padding: var(--padding-s) 0 0 var(--padding-m);
+      margin-bottom: var(--padding-m); /*1.7rem;*/
+      padding: var(--padding-s) 0 0 var(--padding-s);
 
       li {
-        margin: 0 0 var(--padding-xs);
+        margin: 0 0 var(--padding-ex-m);
         margin-left: var(--padding-ex-xs);
-        padding-left: 0.5em;
+        padding-left: var(--padding-ex-xs); /*0.5em;*/
         line-height: 1.7;
 
         &::marker {
@@ -1155,12 +1155,12 @@
 
     /* 引用 */
     blockquote {
-      margin: 1.7rem 0 1.7rem 1rem;
+      margin: var(--padding-m) 0 var(--padding-m); /*1.7rem 0 1.7rem 1rem;*/
       border-left: 5px solid var(--brand);
       padding: var(--padding-s);
       line-height: 1.7;
       background-color: var(--blockquote-background);
-      font-size: 0.9em;
+      font-size: 0.925em;
 
       table {
         background-color: var(--table-bg);
@@ -2119,7 +2119,6 @@
     align-items: center;
     margin: 0 2px 0 2px;
     min-width: 0.85rem;
-    vertical-align: middle;
 
     span {
       font-size: 0.75rem;
