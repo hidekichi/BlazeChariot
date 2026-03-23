@@ -7,7 +7,9 @@
     {%- for platform, baseUrl in sns -%}
     <li class="{{ platform }}">
         <a href="{{ baseUrl.url }}{{ pageUrl }}{% if platform == 'twitter' %}&text={{ pageTitle }}{% elseif platform == 'facebook' %}{% else %}&title={{ pageTitle }}{% endif %}"
-         title="{{ platform }}共有ボタン"
+         {% if platform == 'raindrop' %}title="Pocketサ終で {{ platform }} 変更"
+          {% else %}title="{{ platform }}共有ボタン"
+         {% endif %}
          aria-label="{{ platform }}共有ボタン"
          target="_blank"
          rel="noopener noreferrer">
@@ -15,5 +17,5 @@
         </a>
     </li>
     {%- endfor -%}
-    <div class="block text-center w-full mt-4 text-sm leading-4">※ Pocketのサービスが終了したため、<a href="https://raindrop.io/">Raindrop.io</a>に変更しました。</div>
+    <div class="block text-center w-full mt-4 text-sm text-amber-300 leading-4"><a href="https://raindrop.io/" title="Raindrop.ioは無料でも使用できますが要登録">Raindrop.ioへはこちらから</a></div>
 </ul>

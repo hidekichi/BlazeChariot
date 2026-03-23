@@ -14,6 +14,7 @@ import { updateMarkLast2weeks } from "./module/utils.js";
 import { credit } from "./module/utils.js";
 import { stickyTable } from "./module/utils.js";
 import { toc } from "./module/tocAutoOpen.js";
+import { initTooltip } from "./module/tooltip.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   await footnote();
@@ -46,8 +47,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 	credit();
 
-	stickyTable();
+  stickyTable();
+
+  initTooltip();
 });
+
 
 window.addEventListener("load", () => {
 	const snsIcon = document.querySelector("ul.sns-share");

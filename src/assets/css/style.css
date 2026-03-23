@@ -140,9 +140,9 @@
     --heading-letter-spacing: normal;
   }
 
-  @width (width > 1200px) {
+  @media (width > 1200px) {
     :root {
-      --base-size: clamp(18px, 1vw + 12.6px, 24px);
+      --base-size: clamp(1.125rem, 1.0096rem + 0.1538vw, 1.25rem);
     }
   }
 
@@ -2905,6 +2905,28 @@
 
     svg {
       display: none;
+    }
+  }
+
+  /* ==================== tooltip  ==================== */
+  #custom-tooltip {
+    position: fixed;
+    background: #333;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 0.725em;
+    pointer-events: none;
+    max-width: 25em; /* 長文を折り返す上限 */
+    word-break: break-word;
+    white-space: normal; /* 折り返しを許可 */
+    line-height: 1.5;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 9999;
+
+    &.visible {
+      opacity: 1;
     }
   }
 

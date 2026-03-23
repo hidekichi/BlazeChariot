@@ -1,6 +1,7 @@
 import { DateTime } from "luxon";
 import vitePlugin from "@11ty/eleventy-plugin-vite";
 import tailwind from "@tailwindcss/vite";
+// import  Critters  from 'critters';
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import pluginNavigation from "@11ty/eleventy-navigation";
 import { HtmlBasePlugin } from "@11ty/eleventy";
@@ -43,7 +44,7 @@ export default function (eleventyConfig) {
   // eleventyConfig.addPlugin(youtubeEmbedPlugin, { defaultClass: "video-embed" });
 
   eleventyConfig.addPlugin(vitePlugin, {
-      viteOptions: {
+    viteOptions: {
         root: "src",
         plugins: [tailwind()],
         publicDir: "public",
@@ -52,10 +53,9 @@ export default function (eleventyConfig) {
           // outDir: "../_site",
           // emptyOutDir: false, // ← 必須
           cssCodeSplit: true,
-        }
+      },
       }
     });
-
   // -----------------------------------------------------------------
   // Passthrough
   // -----------------------------------------------------------------
