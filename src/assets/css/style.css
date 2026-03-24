@@ -40,6 +40,35 @@
    リセット・変数・素の要素（html, body, a, h1-h6, img など）
    ============================================================ */
 @layer base {
+  :root {
+    /* Base Color */
+    --color-base: #2e70b8;
+
+    /* Tints - Lighter variations */
+    --color-tint-50: #327bc8;
+    --color-tint-100: #4085cf;
+    --color-tint-150: #5190d3;
+    --color-tint-200: #619bd8;
+    --color-tint-250: #72a5dc;
+    --color-tint-300: #83b0e0;
+    --color-tint-350: #93bae4;
+    --color-tint-400: #a4c5e8;
+    --color-tint-450: #b5d0ec;
+    --color-tint-500: #c6daf1;
+
+    /* Shades - Darker variations */
+    --color-shade-50: #2b69ab;
+    --color-shade-100: #27619e;
+    --color-shade-150: #245991;
+    --color-shade-200: #215184;
+    --color-shade-250: #1e4977;
+    --color-shade-300: #1a416a;
+    --color-shade-350: #17395d;
+    --color-shade-400: #143150;
+    --color-shade-450: #112943;
+    --color-shade-500: #0d2136;
+  }
+
   /* ------ デザイントークン（ライトモード） ------ */
   :root {
     --background-color: rgb(218, 227, 231);
@@ -95,13 +124,13 @@
   @media (prefers-color-scheme: dark) {
     :root {
       --background-color: rgb(5, 20, 30); /*original 1e1e1e*/
-      --blockquote-background: rgb(3, 26, 62);
+      --blockquote-background: var(--color-shade-400); /*#092334; ;*/
       --brand: #38acc1;
       --code-color: var(--font-color);
-      --code-background: #072041;
+      --code-background: var(--color-shade-500); /*#040f16;*/
       --color-one: #0ec5fd;
       --color-two: #cef3fb;
-      --description-color: hsl(194.4, 100%, 89.4%);
+      --description-color: var(--color-tint-500); /* hsl(194.4, 100%, 89.4%);*/
       --font-color: #ccc;
       --heading-color: oklch(96.7% 0.001 286.375);
       --logo: #ff5757;
@@ -119,10 +148,10 @@
       --summary-div-background: hsla(0, 0%, 20%, 0.25);
       --tag-background: #2b3535;
       --table-bg: #0b081ce3;
-      --th-background: #123;
+      --th-background: var(--color-shade-400); /*#123;*/
       --transparency-1: rgba(255, 255, 255, 0.05);
-      --underline-color: #39a6a7;
-      --underline-text-color: #6aeae4; /*transparent;*/
+      --underline-color: var(--color-shade-100); /*#39a6a7;*/
+      --underline-text-color: #6aeae4;
     }
   }
 
@@ -288,10 +317,12 @@
       color: var(--code-color);
       box-shadow: 0px 0px 2px hsl(216.6, 100%, 58.2%);
       border-radius: 2px;
-      padding: 0 var(--padding-ex-xs) !important;
+      border-color: #1a1a1a;
+      padding: 0 var(--padding-ex-xs) 0 !important;
       display: inline-block;
-      vertical-align: text-bottom;
       font-size: 0.825em;
+      position: relative;
+      top: -0.125em;
     }
   }
   /* pluginの関係で!important必須 */
