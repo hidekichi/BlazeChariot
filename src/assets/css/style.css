@@ -161,7 +161,7 @@
     --base-size: calc(var(--font-base) * 1.1);
     --scale-ratio: 1.2;
     --body-weight: 300;
-    --body-line-height: 1.75;
+    --body-line-height: 1.8;
     --body-letter-spacing: normal;
 
     --heading-weight: 700;
@@ -250,10 +250,8 @@
   html {
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
-    font-size: 16px;
-    line-height: 1.8;
     letter-spacing: 0.01em;
-    font-family: "Reddit Sans", "BIZ UDPGothic", sans-serif;
+    font-family: "Reddit Sans", sans-serif;
     font-size: var(--base-size);
   }
 
@@ -313,16 +311,32 @@
   :where(p, :not(pre)) {
     & > code {
       margin: 0 4px;
-      background: var(--code-background) !important;
+      /*background: var(--code-background) !important;*/
       color: var(--code-color);
-      box-shadow: 0px 0px 2px hsl(216.6, 100%, 58.2%);
-      border-radius: 2px;
-      border-color: #1a1a1a;
       padding: 0 var(--padding-ex-xs) 0 !important;
-      display: inline-block;
       font-size: 0.825em;
+      --code-space: 0.04em;
+      display: inline-grid;
+      vertical-align: text-bottom;
+      transform: translateY(calc((1lh - calc(1lh - var(--code-space))) / 2));
+      line-height: inherit;
+      height: calc(1lh - var(--code-space));
       position: relative;
-      top: -0.125em;
+
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        place-content: center;
+        background: var(--code-background) !important;
+        box-shadow: 0px 0px 2px hsl(216.6, 100%, 58.2%);
+        border-radius: 2px;
+        border-color: #1a1a1a;
+        isolation: isolate;
+        z-index: -1;
+      }
     }
   }
   /* pluginの関係で!important必須 */
@@ -920,7 +934,7 @@
     word-break: normal;
     line-break: strict;
     /*font-size: calc(var(--base-size) * 1.1);*/
-    /*line-height: calc(var(--body-line-height) * 1.08);*/
+    line-height: var(--body-line-height);
 
     /* 見出しサイズ（clamp でレスポンシブ） */
     h1 {
