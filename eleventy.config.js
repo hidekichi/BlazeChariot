@@ -1,6 +1,7 @@
+//import path from "path";
 import { DateTime } from "luxon";
 import vitePlugin from "@11ty/eleventy-plugin-vite";
-import tailwind from "@tailwindcss/vite";
+//import tailwind from "@tailwindcss/vite";
 // import  Critters  from 'critters';
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import pluginNavigation from "@11ty/eleventy-navigation";
@@ -15,6 +16,9 @@ import markdownItMultimdTable from "markdown-it-multimd-table-ext";
 import youtubeEmbedPlugin, { markdownItYoutube } from "./src/_plugins/markdown-youtube.js";
 
 export default function (eleventyConfig) {
+
+  eleventyConfig.addPassthroughCopy("public");
+  eleventyConfig.watchIgnores.add("src/assets/css/style.css");
 
   // -----------------------------------------------------------------
   // plugins
@@ -43,41 +47,81 @@ export default function (eleventyConfig) {
   // オプションを渡す場合
   // eleventyConfig.addPlugin(youtubeEmbedPlugin, { defaultClass: "video-embed" });
 
-  eleventyConfig.addPlugin(vitePlugin, {
-    viteOptions: {
-        root: "src",
-        plugins: [tailwind()],
-        publicDir: "public",
-      tempFolderName: ".11ty-vite-temp",
-      build: {
-          // outDir: "../_site",
-          // emptyOutDir: false, // ← 必須
-          cssCodeSplit: true,
+  const isServe = process.env.ELEVENTY_RUN_MODE === "serve";
+
+  if (isServe) {
+    eleventyConfig.setServerPassthroughCopyBehavior("copy");
+    eleventyConfig.watchIgnores.add(".11ty-vite/**");
+    //eleventyConfig.setServerOptions({
+    //  domDiff: false,  // ← これがキー
+    //});
+
+    eleventyConfig.addPlugin(vitePlugin, {
+      serverOptions: {
+        domDiff: false,
       },
-      }
+      viteOptions: {
+        publicDir: "public",
+        assetsInclude: ["**/*.xml", "**/*.txt"],
+        server: {
+          mode: "development",
+          middlewareMode: true,
+          hmr: { overlay: true },
+            watch: {
+              // パススルーコピーされるJSはViteの監視対象から除外
+
+              ignored: [
+                "**/assets/js/*.js",
+                "**/assets/js/**/*.js",
+            //"**/assets/css/style.css",
+              ],
+            },
+          },
+        build: {
+          emptyOutDir: true,
+          /*
+          manifest: true,
+          rollupOptions: {
+            output: {
+              assetFileNames: "assets/css/[name].[hash].css",
+              chunkFileNames: "assets/js/[name].[hash].js",
+              entryFileNames: "assets/js/[name].[hash].js",
+            },
+          },
+            */
+        },
+      },
     });
-  // -----------------------------------------------------------------
+  }
+
+    // -----------------------------------------------------------------
   // Passthrough
   // -----------------------------------------------------------------
 
-  eleventyConfig.addPassthroughCopy("src/assets");
-  eleventyConfig.addPassthroughCopy({
-    "src/assets/images": "assets/images",
-    "src/assets/fonts": "assets/fonts"
-  });
+  //eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy("src/assets/css/style.css");
+  eleventyConfig.addPassthroughCopy("src/assets/fonts");
+  eleventyConfig.addPassthroughCopy("src/assets/images");
+  eleventyConfig.addPassthroughCopy("src/assets/js");
   eleventyConfig.addPassthroughCopy("src/_plugins");
   eleventyConfig.addPassthroughCopy("src/blog/img");
   eleventyConfig.addPassthroughCopy("src/guitar/img");
   eleventyConfig.addPassthroughCopy("src/guitar/sound/**/*.ogg");
-  eleventyConfig.addPassthroughCopy("src/robots.txt");
-  eleventyConfig.addPassthroughCopy("src/pretty-atom-feed.xsl");
-  eleventyConfig.addPassthroughCopy("src/public");
+  eleventyConfig.addPassthroughCopy("src/*.{txt,xsl,jpg}");
+  //eleventyConfig.addPassthroughCopy({ "src/public/**/*.css": "/assets/css" });
 
   /*
   eleventyConfig.addPassthroughCopy({
     "src/images": "images"
   })
   */
+
+  // -----------------------------------------------------------------
+  // ignore
+  // -----------------------------------------------------------------
+
+  eleventyConfig.ignores.add("src/pretty-atom-feed.xsl");
+
 
   // -----------------------------------------------------------------
   // filter

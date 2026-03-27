@@ -1,6 +1,4 @@
-import "../css/style.css";
-import imgAvif from "../images/covertreasure.avif";
-import imgWebp from "../images/covertreasure.webp";
+// import "../css/style.css";
 import { footnote } from "./module/footnote.js";
 import { initPanelSwitch, insertLoadlazy, externalLink } from "./module/utils.js";
 import { embbedYoutubePlayer } from "./module/embedYoutubePlayer.js";
@@ -21,6 +19,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const coverEle = document.querySelector(".cover");
   if (coverEle) {
+    const imgAvif = "/assets/images/covertreasure.avif";
+    const imgWebp = "/assets/images/covertreasure.webp";
     await setBackgroundImage(".cover", imgAvif, imgWebp);
     await topCoverSlideImage();
   }

@@ -1,9 +1,9 @@
 @font-face {
   font-family: "Reddit Sans";
   src:
-    url("../fonts/Reddit_Sans/RedditSans-VariableFont_wght.ttf")
+    url("/assets/fonts/Reddit_Sans/RedditSans-VariableFont_wght.ttf")
       format("truetype-variations"),
-    url("../fonts/Reddit_Sans/RedditSans-VariableFont_wght.ttf")
+    url("/assets/fonts/Reddit_Sans/RedditSans-VariableFont_wght.ttf")
       format("truetype");
   font-weight: 100 900;
   font-style: normal;
@@ -13,7 +13,7 @@
 /* Italic版があれば別途（ファイル名がRedditSans-Italic-VariableFont_wght.ttf とかの場合） */
 @font-face {
   font-family: "Reddit Sans";
-  src: url("../fonts/Reddit_Sans/RedditSans-Italic-VariableFont_wght.ttf")
+  src: url("/assets/fonts/Reddit_Sans/RedditSans-Italic-VariableFont_wght.ttf")
     format("truetype-variations");
   font-weight: 100 900;
   font-style: italic;
@@ -22,7 +22,8 @@
 
 @font-face {
   font-family: "Fragment Mono"; /* 同じ名前を使う */
-  src: url("../fonts/Fragment_Mono/FragmentMono-Regular.ttf") format("truetype");
+  src: url("/assets/fonts/Fragment_Mono/FragmentMono-Regular.ttf")
+    format("truetype");
   font-weight: 400;
   font-style: normal;
 }
@@ -30,7 +31,8 @@
 /* 2. 斜体（Italic）の設定 */
 @font-face {
   font-family: "Fragment Mono"; /* ここも同じ名前にする */
-  src: url("../fonts/fragment_Mono/FragmentMono-Italic.ttf") format("truetype");
+  src: url("/assets/fonts/fragment_Mono/FragmentMono-Italic.ttf")
+    format("truetype");
   font-weight: 400;
   font-style: italic; /* ここで斜体であることを指定 */
 }
