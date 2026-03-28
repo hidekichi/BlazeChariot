@@ -202,7 +202,8 @@ export default function (eleventyConfig) {
 
  eleventyConfig.addCollection("blog", (api) => {
    const posts = api.getFilteredByGlob("src/blog/**/*.md").reverse();
-   if (process.env.ELEVENTY_ENV === "production") {
+
+   if (isServe === "build") {
      return posts.filter(post => !post.data.draft);
    }
    return posts;
@@ -218,7 +219,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("allPosts", function(collectionApi) {
     const all = collectionApi.getFilteredByGlob("./src/{blog,guitar}/*.md");
 
-    if (process.env.ELEVENTY_ENV === "production") {
+    if (isServe === "build") {
       return all.filter(item => !item.data.draft);
     }
 
