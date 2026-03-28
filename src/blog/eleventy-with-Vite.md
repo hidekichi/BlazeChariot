@@ -2,7 +2,7 @@
 title: 11tyでVITE
 description: 静的サイトジェネレーターである11tyを使用してブログを書こうぜという話。簡単ではないが、きっとできる、誰でもできると前置きしながらWindowsをこき下ろす
 date: 2026-03-04
-update: 2026-03-18
+update: 2026-03-28
 category:
   - blog
 tags:
@@ -16,6 +16,8 @@ layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 templateEngineOverride: md
 ---
+
+> ※ 2026/3/28 - 11tyの記事の正しい書き方 で Draftを可能にする というりを最新版に修正しました。おそらくこちらのほうが良いです。
 
 ## なんで今更11ty(eleventy)なのかという話
 
@@ -703,7 +705,10 @@ draft: "true" # trueならビルド除外（便利）
 
 #### draftを可能にする
 
+<span class="text-pink-600 dark:text-amber-300">※ 2026年3月28日修正版を後に書いています。</span>
+
 またDraftを可能にするには、スクリプトが必要です。様々な書き方があると思いますが、`eleventy.config.js`に次のスクリプトを追加して下さい。
+
 
 ```js
 eleventyConfig.addCollection("allPosts", function(collectionApi) {
@@ -736,6 +741,45 @@ npm install --save-dev cross-env
 
 jsの`return all.filter(item => !item.data.draft);`ここが重要でそれぞれのフロントマターにdraftのデータがなければ通すというような仕組みが大事になります。
 `src/posts/`にある記事が全てを対象に、production、つまりは本番環境であれば、記事のフロントマターでdraftがついてないものだけを集めるというようなスクリプトです。ローカルでは本番環境でないですから全部集められて表示されるということです。
+
+<div class="border border-sky-500 p-4 mt-8">
+
+3/28修正版
+
+設定を書き始める部分の外側で、次のように`isServe`というのを書いておくと、グローバルスコープになってどこでも`isServe`が使えるようになります。内側で書いてもローカルスコープになって、設定の中でだけと限定的になりますがもちろん使用できます。
+
+```js
+const isServe = process.env.ELEVENTY_RUN_MODE === "serve"; //これ
+
+export default function (eleventyConfig) {
+// ...各種設定
+}
+````
+
+`ELEVENTY_RUN_MODE`は、build、serve、watch のいずれかになります。これを利用して、`isServe = serve`の時だけ`true`ですからローカルで使用する際は`if (isServe)`、それ以外では`if (!isServe)`として区別できます。
+
+よって以前書いていたコードは、次のように書けます。`reverse()`は日時順にデータはオブジェクトで入っていると思いますがそれを逆順、つまり新しい記事から先に表示したい場合などに使用します。
+テンプレート側(nunjucks)でも同じ事ができると思いますが、役割を分けるとか面倒臭さの面でjsで書いておいた方がなにかと良いと思うのです。
+テンプレートで使用箇所に全部`| reverse`を書くのが面倒くさいということです。これはどういう表示をするかでやり方はお好みで。
+以下のコードで逆順にするのは不要であれば単純に`.reverse()`を取り除くだけです。勢い余って末尾の`;`まで取り除かないように注意です。
+
+```js
+eleventyConfig.addCollection("allPosts", (api) => {
+  const all = api.getFilteredByGlob("./src/posts/*.md");
+
+  // 本番ビルド時（!isServe）のみ下書きを除外
+  if (!isServe) {
+    return all.filter(item => !item.data.draft).reverse(); // reverse()はお好みで
+  }
+
+  return all.reverse(); // reverse()はお好みで
+});
+```
+
+またこの方法だと`package.json`で`cross-env ELEVENTY_ENV=production`を書く必要がなくなります。
+合わせて、`cross-env`も不要になります。これは他で使用することもあるかも知れないので確実に**不要になれば** 、`npm uninstall cross-env`などとして削除しても構いません。
+
+</div>
 
 #### 上手なpostsの利用方法
 
