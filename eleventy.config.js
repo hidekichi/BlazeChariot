@@ -203,7 +203,7 @@ export default function (eleventyConfig) {
  eleventyConfig.addCollection("blog", (api) => {
    const posts = api.getFilteredByGlob("src/blog/**/*.md").reverse();
 
-   if (isServe === "build") {
+   if (!isServe) {
      return posts.filter(post => !post.data.draft);
    }
    return posts;
@@ -219,7 +219,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("allPosts", function(collectionApi) {
     const all = collectionApi.getFilteredByGlob("./src/{blog,guitar}/*.md");
 
-    if (isServe === "build") {
+    if (!isServe === "build") {
       return all.filter(item => !item.data.draft);
     }
 
@@ -265,7 +265,7 @@ export default function (eleventyConfig) {
       const dateB = normalizeDate(b.data.update || b.data.updated || b.data.lastmod || b.data.date);
       return dateB.localeCompare(dateA);
     });
-    if (process.env.ELEVENTY_ENV === "production") {
+    if (!isServe) {
       return posts.filter(post => !post.data.draft);
     }
     return posts;
