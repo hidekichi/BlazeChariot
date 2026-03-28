@@ -75,3 +75,6 @@ frontmatter.json
 
 # .tmp-generated/
 .tmp-generated/
+
+# Tailwind generates style.css
+src/assets/css/style.css

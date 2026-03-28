@@ -219,7 +219,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("allPosts", function(collectionApi) {
     const all = collectionApi.getFilteredByGlob("./src/{blog,guitar}/*.md");
 
-    if (!isServe === "build") {
+    if (!isServe) {
       return all.filter(item => !item.data.draft);
     }
 
