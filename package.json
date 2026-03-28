@@ -28,7 +28,7 @@
   "type": "module",
   "scripts": {
     "build:css": "npx @tailwindcss/cli -i ./src/assets/css/styles.css -o ./src/assets/css/style.css",
-    "build": "npm run build:css && eleventy",
+    "build": "cross-env ELEVENTY_ENV=production npm run build:css && eleventy",
     "dev": "concurrently \"eleventy --serve --incremental\" \"npx @tailwindcss/cli -i ./src/assets/css/styles.css -o ./src/assets/css/style.css --watch\" ",
     "preview": "npx serve _site",
     "clean": "node --eval \"fs.rmSync('_site',{recursive:true,force:true}); fs.rmSync('.cache',{recursive:true,force:true}); fs.rmSync('.vite',{recursive:true,force:true}); fs.rmSync('.11ty-vite-temp',{recursive:true,force:true})\""

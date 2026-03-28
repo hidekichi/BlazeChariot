@@ -200,13 +200,13 @@ export default function (eleventyConfig) {
   //   api.getFilteredByGlob("src/blog/**/*.md").reverse()
   // );
 
-  eleventyConfig.addCollection("blog", (api) => {
-    const posts = api.getFilteredByGlob("src/blog/**/*.md").reverse();
-    if (process.env.ELEVENTY_ENV === "production") {
-      return posts.filter(post => !post.data.draft);
-    }
-    return posts;
-  });
+ eleventyConfig.addCollection("blog", (api) => {
+   const posts = api.getFilteredByGlob("src/blog/**/*.md").reverse();
+   if (process.env.ELEVENTY_ENV === "production") {
+     return posts.filter(post => !post.data.draft);
+   }
+   return posts;
+ });
 
   eleventyConfig.addCollection("guitar", (api) =>
     api.getFilteredByGlob("src/guitar/**/*.md")
