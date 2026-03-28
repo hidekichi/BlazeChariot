@@ -10,6 +10,7 @@ eleventyExcludeFromCollections: true
         <url>
             <loc>{{ site.url }}{{ path }}</loc>
             <lastmod>{{ (page.data.update or page.date).toISOString() }}</lastmod>
+            <priority>{{ page.data.priority if page.data.priority else "0.5" }}</priority>
             <changefreq>{{ page.data.changeFreq if page.data.changeFreq else "monthly" }}</changefreq>
         </url>
         {% endif %}
