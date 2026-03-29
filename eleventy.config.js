@@ -229,7 +229,7 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
   });
 
   eleventyConfig.addCollection("latestPosts", (api) => {
-    return noDraft(api.getFilteredByGlob("src/**/*.md")).sort((a, b) => b.date - a.date);
+    return noDraft(api.getFilteredByGlob("src/{blog,guitar}/*.md")).sort((a, b) => b.date - a.date);
   });
 
   eleventyConfig.addCollection("posts", (api) => {
