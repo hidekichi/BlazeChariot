@@ -3,9 +3,21 @@ layout: base.njk
 ---
 
 <header class="page-title">
+
   <div class="header-meta">
-   	  <span class="author">{{ site.author }}</span>{% if date %}｜<time class="page-title__date" datetime="{{ date }}">{{ date | readableDate }}</time> {% endif %}{% if update %} → <time class="page-title__update" datetime="{{ update }}">{{ update | readableDate }}</time>{% endif %}<br>
-     </div>
+    {% if tags and tags.length > 0 %}
+      <div class="tags">
+		{% for tag in tags -%}
+   			{% if tag !== 'posts' %}
+				<a class="tag" href="/tags/{{ tag }}/" title="{{ tag }}">{{ tag }}</a>
+   			{% endif %}
+		{%- endfor %}
+      </div>
+   {% endif %}
+    <div>
+   	  <span class="author">{{ site.author }}</span>{% if date %}｜<time class="page-title__date" datetime="{{ date }}">{{ date | readableDate }}</time> {% endif %}{% if update %} → <time class="page-title__update" datetime="{{ update }}">{{ update | readableDate }}</time>{% endif %}
+    </div>
+  </div>
 
 	<h1 class="page-title__title">{{ title }}</h1>
 
@@ -13,15 +25,7 @@ layout: base.njk
 		<h2 class="page-title__desc">{{ description }}</h2>
 	{% endif %}
 
-	{% if tags and tags.length > 0 %}
-<div class="tags">
-   		{% for tag in tags -%}
-   			{% if tag !== 'posts' %}
-   				<a class="tag" href="/tags/{{ tag }}/" title="{{ tag }}">{{ tag }}</a>
-   			{% endif %}
-   		{%- endfor %}
-</div>
-{% endif %}
+
 </header>
 <article class="body-copy">
 	{{ content | safe }}

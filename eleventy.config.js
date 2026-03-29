@@ -1,24 +1,30 @@
-//import path from "path";
+
+import path from "path";
 import { DateTime } from "luxon";
-import vitePlugin from "@11ty/eleventy-plugin-vite";
-//import tailwind from "@tailwindcss/vite";
-// import  Critters  from 'critters';
+import { HtmlBasePlugin } from "@11ty/eleventy";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import pluginNavigation from "@11ty/eleventy-navigation";
-import { HtmlBasePlugin } from "@11ty/eleventy";
+import tailwind from "@tailwindcss/vite";
 import sitemap from "@quasibit/eleventy-plugin-sitemap";
 import Image from "@11ty/eleventy-img";
+import EleventyVitePlugin from "@11ty/eleventy-plugin-vite";
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import markdownIt from "markdown-it";
 import rubyPlugin from "markdown-it-ruby";
 import attrs from "markdown-it-attrs";
 import markdownItMultimdTable from "markdown-it-multimd-table-ext";
 import youtubeEmbedPlugin, { markdownItYoutube } from "./src/_plugins/markdown-youtube.js";
+import EleventyPassthroughBridge from './src/_plugins/eleventy-passthrough-bridge.js';
+
+const isServe = process.env.ELEVENTY_RUN_MODE === "serve";
 
 export default function (eleventyConfig) {
+  //ignore
+  eleventyConfig.watchIgnores.add("src/assets");
 
+  // passthrough を実コピーにする（Vite の root から見えるようにするため）
+  eleventyConfig.setServerPassthroughCopyBehavior("copy");
   eleventyConfig.addPassthroughCopy("public");
-  eleventyConfig.watchIgnores.add("src/assets/css/style.css");
 
   // -----------------------------------------------------------------
   // plugins
@@ -47,81 +53,84 @@ export default function (eleventyConfig) {
   // オプションを渡す場合
   // eleventyConfig.addPlugin(youtubeEmbedPlugin, { defaultClass: "video-embed" });
 
-  const isServe = process.env.ELEVENTY_RUN_MODE === "serve";
-
-  if (isServe) {
-    eleventyConfig.setServerPassthroughCopyBehavior("copy");
-    eleventyConfig.watchIgnores.add(".11ty-vite/**");
-    //eleventyConfig.setServerOptions({
-    //  domDiff: false,  // ← これがキー
-    //});
-
-    eleventyConfig.addPlugin(vitePlugin, {
-      serverOptions: {
-        domDiff: false,
+  // Vite プラグインは最後に追加
+  eleventyConfig.addPlugin(EleventyVitePlugin, {
+    tempFolderName: ".11ty-vite",
+    serverOptions: {
+      domDiff: false, // Vite HMR と競合するため無効化推奨
+    },
+    viteOptions: {
+      plugins: [tailwind({
+        content: ['./src/**/*.{html,njk,md,js}'],
+      })],
+      publicDir: "public",
+      clearScreen: false,
+      appType: "mpa",          // ← MPA必須。変えない
+      assetsInclude: ["**/*.xml", "**/*.txt"],
+      server: {
+        middlewareMode: true,
+        watch: {
+            ignored: [
+              '**/.11ty-vite/assets/js/**',
+              '**/.11ty-vite/assets/images/**',
+            '**/.11ty-vite/assets/fonts/**',
+              '**/_site/**',
+            ]
+          }
       },
-      viteOptions: {
-        publicDir: "public",
-        assetsInclude: ["**/*.xml", "**/*.txt"],
-        server: {
-          mode: "development",
-          middlewareMode: true,
-          hmr: { overlay: true },
-            watch: {
-              // パススルーコピーされるJSはViteの監視対象から除外
-
-              ignored: [
-                "**/assets/js/*.js",
-                "**/assets/js/**/*.js",
-            //"**/assets/css/style.css",
-              ],
+      build: {
+        emptyOutDir: true,
+        manifest: true,
+        assetsInlineLimit: 0,
+        rollupOptions: {
+          output: {
+            /*
+            assetFileNames: (assetInfo) => {
+              if (assetInfo.name?.endsWith('.css')) {
+                return 'assets/css/[name].[hash][extname]';
+              }
+              if (/\.(png|jpe?g|gif|svg|avif|webp|ico)$/.test(assetInfo.name ?? '')) {
+                return 'assets/images/[name].[hash][extname]';
+              }
+              if (/\.(woff2?|ttf|eot|otf)$/.test(assetInfo.name ?? '')) {
+                return 'assets/fonts/[name].[hash][extname]';
+              }
+              return 'assets/[name].[hash][extname]';
             },
-          },
-        build: {
-          emptyOutDir: true,
-          /*
-          manifest: true,
-          rollupOptions: {
-            output: {
-              assetFileNames: "assets/css/[name].[hash].css",
-              chunkFileNames: "assets/js/[name].[hash].js",
-              entryFileNames: "assets/js/[name].[hash].js",
-            },
-          },
             */
+            // assetFileNames: "assets/css/[name].[hash].css",
+            chunkFileNames: "assets/js/[name].[hash].js",
+            entryFileNames: "assets/js/[name].[hash].js",
+          },
         },
       },
-    });
-  }
+      resolve: {
+        alias: {
+          '@css': path.resolve('./src/assets/css'),
+          "/node_modules": path.resolve(".", "node_modules"),
+        },
+      },
+    },
+  });
+  eleventyConfig.addPlugin(EleventyPassthroughBridge, { verbose: true });
 
-    // -----------------------------------------------------------------
-  // Passthrough
-  // -----------------------------------------------------------------
 
-  //eleventyConfig.addPassthroughCopy("src/assets");
-  eleventyConfig.addPassthroughCopy("src/assets/css/style.css");
-  eleventyConfig.addPassthroughCopy("src/assets/fonts");
-  eleventyConfig.addPassthroughCopy("src/assets/images");
-  eleventyConfig.addPassthroughCopy("src/assets/js");
-  eleventyConfig.addPassthroughCopy("src/_plugins");
-  eleventyConfig.addPassthroughCopy("src/blog/img");
-  eleventyConfig.addPassthroughCopy("src/guitar/img");
-  eleventyConfig.addPassthroughCopy("src/guitar/sound/**/*.ogg");
-  eleventyConfig.addPassthroughCopy("src/*.{txt,xsl,jpg}");
-  //eleventyConfig.addPassthroughCopy({ "src/public/**/*.css": "/assets/css" });
+// -----------------------------------------------------------------
+// Passthrough
+// -----------------------------------------------------------------
 
-  /*
-  eleventyConfig.addPassthroughCopy({
-    "src/images": "images"
-  })
-  */
-
-  // -----------------------------------------------------------------
-  // ignore
-  // -----------------------------------------------------------------
-
-  eleventyConfig.ignores.add("src/pretty-atom-feed.xsl");
-
+eleventyConfig.addPassthroughCopy("src/assets");
+//eleventyConfig.addPassthroughCopy("src/assets/css/style.css");
+eleventyConfig.addPassthroughCopy("src/assets/fonts");
+eleventyConfig.addPassthroughCopy("src/assets/images");
+eleventyConfig.addPassthroughCopy("src/assets/js");
+//eleventyConfig.addPassthroughCopy("src/assets/css");
+eleventyConfig.addPassthroughCopy("src/_plugins");
+eleventyConfig.addPassthroughCopy("src/blog/img");
+eleventyConfig.addPassthroughCopy("src/guitar/img");
+eleventyConfig.addPassthroughCopy("src/guitar/sound/**/*.ogg");
+eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
+//eleventyConfig.addPassthroughCopy({ "src/public/**/*.css": "/assets/css" });
 
   // -----------------------------------------------------------------
   // filter
@@ -184,7 +193,7 @@ export default function (eleventyConfig) {
     return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
   });
 
-  eleventyConfig.addFilter("dateToRfc3339", pluginRss.dateToRfc3339);
+  //eleventyConfig.addFilter("dateToRfc3339", pluginRss.dateToRfc3339);
 
   eleventyConfig.addFilter("blogImage", function (filePath) {
     if (!filePath) return "";
@@ -325,16 +334,15 @@ export default function (eleventyConfig) {
   eleventyConfig.setLibrary("md", mdLib);
 
   return {
-      templateFormats: ["md", "njk", "html"],
-      markdownTemplateEngine: "njk",
-      htmlTemplateEngine: "njk",
+    templateFormats: ["md", "njk", "html"],
+    markdownTemplateEngine: "njk",
+    htmlTemplateEngine: "njk",
 
-      dir: {
-        input: "src",
-        output: "_site",
-        includes: "_includes",
-        layouts: "_includes/layouts"
-      }
+    dir: {
+      input: "src",
+      output: "_site",
+      includes: "_includes",
+      layouts: "_includes/layouts"
     }
-
-  }
+  };
+}

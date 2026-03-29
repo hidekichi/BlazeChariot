@@ -78,3 +78,4 @@ frontmatter.json
 
 # Tailwind generates style.css
 src/assets/css/style.css
+old/
