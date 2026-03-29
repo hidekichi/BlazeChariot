@@ -243,6 +243,20 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
     return api.getFilteredByGlob("src/blog/*.md").sort((a, b) => b.date - a.date);
   });
 
+
+  eleventyConfig.addCollection("allTags", function (collectionApi) {
+    return [
+      ...new Set(
+        collectionApi
+          .getAll()
+          // 1. 公開設定（!isServe かつ draft: true）をフィルタリング
+          .filter((item) => isServe || !item.data.draft)
+          // 2. tags配列が存在するものだけを抽出し、一つの配列に平坦化
+          .flatMap((item) => item.data.tags || [])
+      )
+    ].sort();
+  });
+  /*
   eleventyConfig.addCollection("allTags", function (collectionApi) {
     const allTags = new Set();
 
@@ -256,7 +270,7 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
     });
     return Array.from(allTags).sort();
   });
-
+*/
   eleventyConfig.addCollection("categoryTags", function (collectionApi) {
     let categoryTags = {};
     collectionApi.getAll().forEach((post) => {
