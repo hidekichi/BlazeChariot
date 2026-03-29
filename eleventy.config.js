@@ -236,8 +236,6 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
   });
 
   eleventyConfig.addCollection("latestPosts", (api) => {
-    const isServe = process.env.ELEVENTY_RUN_MODE === "serve";
-
     return api
       .getFilteredByGlob("src/**/*.md")
       .filter((post) => isServe || !post.data.draft)
