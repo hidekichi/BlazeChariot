@@ -242,15 +242,21 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
   eleventyConfig.addCollection("posts", (api) => {
     return api.getFilteredByGlob("src/blog/*.md").sort((a, b) => b.date - a.date);
   });
+
   eleventyConfig.addCollection("allTags", function (collectionApi) {
     const allTags = new Set();
+
     collectionApi.getAll().forEach((item) => {
+      if (!isServe && item.data.draft) {
+        return;
+      }
       if (item.data.tags) {
         item.data.tags.forEach((tag) => allTags.add(tag));
       }
     });
     return Array.from(allTags).sort();
   });
+
   eleventyConfig.addCollection("categoryTags", function (collectionApi) {
     let categoryTags = {};
     collectionApi.getAll().forEach((post) => {
