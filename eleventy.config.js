@@ -250,7 +250,7 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
         collectionApi
           .getAll()
           // 1. 公開設定（!isServe かつ draft: true）をフィルタリング
-          .filter((item) => isServe || !item.data.draft)
+          .filter((item) => !isServe || item.data.draft)
           // 2. tags配列が存在するものだけを抽出し、一つの配列に平坦化
           .flatMap((item) => item.data.tags || [])
       )
