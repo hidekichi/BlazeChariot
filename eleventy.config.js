@@ -236,7 +236,12 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
   });
 
   eleventyConfig.addCollection("latestPosts", (api) => {
-    return api.getFilteredByGlob("src/**/*.md").sort((a, b) => b.date - a.date);
+    const isServe = process.env.ELEVENTY_RUN_MODE === "serve";
+
+    return api
+      .getFilteredByGlob("src/**/*.md")
+      .filter((post) => isServe || !post.data.draft)
+      .sort((a, b) => b.date - a.date);
   });
 
   eleventyConfig.addCollection("posts", (api) => {
@@ -244,14 +249,18 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
   });
 
 
-  eleventyConfig.addCollection("allTags", function (collectionApi) {
+  eleventyConfig.addCollection("allTags", (api) => {
+
     return [
       ...new Set(
-        collectionApi
+        api
           .getAll()
-          // 1. 公開設定（!isServe かつ draft: true）をフィルタリング
-          .filter((item) => !isServe || item.data.draft)
-          // 2. tags配列が存在するものだけを抽出し、一つの配列に平坦化
+          .filter((item) => {
+            // ローカル実行中(isServe)なら、下書きも含め「すべて」通す
+            if (isServe) return true;
+            // 本番ビルドなら、下書き(draft: true)ではないものだけを通す
+            return !item.data.draft;
+          })
           .flatMap((item) => item.data.tags || [])
       )
     ].sort();
