@@ -209,78 +209,45 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
   //   api.getFilteredByGlob("src/blog/**/*.md").reverse()
   // );
 
- eleventyConfig.addCollection("blog", (api) => {
-   const posts = api.getFilteredByGlob("src/blog/**/*.md").reverse();
+  // ドラフト記事を除外する関数
+  // isServeの設定必須
+  // const isServe = process.env.ELEVENTY_RUN_MODE === "serve";
+  const noDraft = (items) => {
+    return isServe ? items : items.filter(item => !item.data.draft);
+  };
 
-   if (!isServe) {
-     return posts.filter(post => !post.data.draft);
-   }
-   return posts;
- });
+  eleventyConfig.addCollection("blog", (api) => {
+    return noDraft(api.getFilteredByGlob("src/blog/**/*.md")).reverse();
+  });
 
-  eleventyConfig.addCollection("guitar", (api) =>
-    api.getFilteredByGlob("src/guitar/**/*.md")
-  );
-  eleventyConfig.addCollection("guitarAll", (api) =>
-    api.getFilteredByGlob("src/guitar/**/*.md")
-  );
+  eleventyConfig.addCollection("guitar", (api) => {
+    return noDraft(api.getFilteredByGlob("src/guitar/**/*.md"));
+  });
 
-  eleventyConfig.addCollection("allPosts", function(collectionApi) {
-    const all = collectionApi.getFilteredByGlob("./src/{blog,guitar}/*.md");
-
-    if (!isServe) {
-      return all.filter(item => !item.data.draft);
-    }
-
-    return all;
+  eleventyConfig.addCollection("allPosts", (api) => {
+    return noDraft(api.getFilteredByGlob("src/{blog,guitar}/*.md"));
   });
 
   eleventyConfig.addCollection("latestPosts", (api) => {
-    return api
-      .getFilteredByGlob("src/**/*.md")
-      .filter((post) => isServe || !post.data.draft)
-      .sort((a, b) => b.date - a.date);
+    return noDraft(api.getFilteredByGlob("src/**/*.md")).sort((a, b) => b.date - a.date);
   });
 
   eleventyConfig.addCollection("posts", (api) => {
-    return api.getFilteredByGlob("src/blog/*.md").sort((a, b) => b.date - a.date);
+    return noDraft(api.getFilteredByGlob("src/blog/*.md")).sort((a, b) => b.date - a.date);
   });
 
 
   eleventyConfig.addCollection("allTags", (api) => {
-
     return [
       ...new Set(
-        api
-          .getAll()
-          .filter((item) => {
-            // ローカル実行中(isServe)なら、下書きも含め「すべて」通す
-            if (isServe) return true;
-            // 本番ビルドなら、下書き(draft: true)ではないものだけを通す
-            return !item.data.draft;
-          })
-          .flatMap((item) => item.data.tags || [])
+        noDraft(api.getAll()).flatMap((item) => item.data.tags || [])
       )
     ].sort();
   });
-  /*
-  eleventyConfig.addCollection("allTags", function (collectionApi) {
-    const allTags = new Set();
 
-    collectionApi.getAll().forEach((item) => {
-      if (!isServe && item.data.draft) {
-        return;
-      }
-      if (item.data.tags) {
-        item.data.tags.forEach((tag) => allTags.add(tag));
-      }
-    });
-    return Array.from(allTags).sort();
-  });
-*/
-  eleventyConfig.addCollection("categoryTags", function (collectionApi) {
+  eleventyConfig.addCollection("categoryTags", (api) => {
     let categoryTags = {};
-    collectionApi.getAll().forEach((post) => {
+    noDraft(api.getAll()).forEach((post) => {
       let category = post.filePathStem.split("/")[1];
       let tags = post.data.tags || [];
       if (!categoryTags[category]) categoryTags[category] = {};
@@ -290,21 +257,22 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
     });
     return categoryTags;
   });
+
   eleventyConfig.addCollection("postsSortedByUpdate", (api) => {
+    const rawPosts = api.getFilteredByGlob("src/blog/*.md");
+    const posts = noDraft(rawPosts);
+
     const normalizeDate = (val) => {
       if (!val) return "0000-00-00";
       const d = new Date(val);
       return isNaN(d.getTime()) ? "0000-00-00" : d.toISOString().slice(0, 10);
     };
-    const posts = api.getFilteredByGlob("src/blog/*.md").sort((a, b) => {
+
+    return posts.sort((a, b) => {
       const dateA = normalizeDate(a.data.update || a.data.updated || a.data.lastmod || a.data.date);
       const dateB = normalizeDate(b.data.update || b.data.updated || b.data.lastmod || b.data.date);
       return dateB.localeCompare(dateA);
     });
-    if (!isServe) {
-      return posts.filter(post => !post.data.draft);
-    }
-    return posts;
   });
 
   // -----------------------------------------------------------------

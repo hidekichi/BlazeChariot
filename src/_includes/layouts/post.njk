@@ -54,13 +54,13 @@ layout: base.njk
 
   {% include "components/sns.njk" %}
 
-	<div class="tags">
-	{% for tag in tags -%}
-		{% if tag !== 'posts' %}
-			<a class="tag" href="/tags/{{ tag }}/" title="{{ tag }}の記事一覧" aria-label="{{ tag }}の記事一覧">{{ tag }}</a>
-		{% endif %}
-	{%- endfor %}
-	</div>
+  <div class="tags">
+  {% for tag in tags -%}
+  	{% if tag !== 'posts' %}
+  		<a class="tag" href="/tags/{{ tag }}/" title="{{ tag }}の記事一覧" aria-label="{{ tag }}の記事一覧">{{ tag }}</a>
+  	{% endif %}
+  {%- endfor %}
+  </div>
 
 {% if "/guitar" in page.url %}
 <section class="pageNavi">
