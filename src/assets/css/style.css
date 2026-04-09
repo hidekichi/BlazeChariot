@@ -315,7 +315,9 @@
       display: block;
       font-size: 0.875em;
       overflow-x: auto;
-      padding: var(--padding-ex-s) 0 var(--padding-ex-m);
+      /*padding: var(--padding-ex-s) 0 var(--padding-ex-m);*/
+      padding-block-start: var(--padding-ex-s);
+      padding-block-end: var(--padding-ex-m);
     }
   }
 
@@ -356,9 +358,12 @@
     background: #262d3c !important;
     line-height: 1.2 !important;
     font-family: "Fragment mono", monospace !important;
-    margin: var(--padding-s) 0 !important;
-    padding: var(--padding-xs) var(--padding-l) var(--padding-xs)
-      var(--padding-s) !important;
+    /*margin: var(--padding-s) 0 !important;*/
+    margin-block: var(--padding-s) !important;
+    /*padding: var(--padding-xs) var(--padding-l) var(--padding-xs)
+      var(--padding-s) !important;*/
+    padding-block: var(--padding-xs) !important;
+    padding-inline: var(--padding-s) var(--padding-l) !important;
   }
 
   code[class^="language-"] {
@@ -451,6 +456,7 @@
     font-weight: var(--body-weight);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scrollbar-gutter: stable;
   }
 
   /* ------ ナビゲーション配置 ------ */
@@ -496,8 +502,8 @@
   /* ------ ラッパー（最大幅制限） ------ */
   .container {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--padding-s);
+    margin-inline: auto;
+    padding-inline: var(--padding-s);
     width: 100vw;
   }
 
@@ -515,8 +521,10 @@
     z-index: 9;
     /* デスクトップから引き継ぐ見た目系スタイル */
     border-left: 0.1rem solid #333;
-    padding: var(--padding-xs) var(--padding-ex-xs) var(--padding-xs)
-      var(--padding-s);
+    /*padding: var(--padding-xs) var(--padding-ex-xs) var(--padding-xs)
+      var(--padding-s);*/
+    padding-block: var(--padding-xs);
+    padding-inline: var(--padding-s) var(--padding-ex-xs);
 
     &.active {
       transform: translate(-100%, 0);
@@ -861,7 +869,8 @@
       "title"
       "description";
     grid-template-rows: 1fr auto auto;
-    padding: var(--padding-m) 0 var(--padding-xxl);
+    /*padding: var(--padding-m) 0 var(--padding-xxl);*/
+    padding-block: var(--padding-m) var(--padding-xxl);
     row-gap: var(--padding-xs);
     align-content: center;
 
@@ -871,7 +880,7 @@
       display: flex;
       justify-content: flex-end;
       align-items: flex-end;
-      column-gap: var(--padding-m);
+      column-gap: var(--padding-ex-s);
       margin: 0;
       padding: 0;
       font-size: 0.925em;
@@ -879,7 +888,7 @@
 
     .tags {
       font-size: 1em;
-      padding-bottom: var(--padding-ex-xs);
+      padding-block-end: var(--padding-ex-xs);
     }
   }
 
@@ -904,6 +913,7 @@
     font-weight: var(--heading-weight);
     font-size: clamp(2.4em, 7.25cqw, 10em) !important;
     line-height: 1;
+    margin-block-start: var(--padding-m);
     word-break: normal;
     word-break: auto-phrase;
     line-break: loose;
@@ -961,7 +971,7 @@
   /* ==================== 記事本文（.body-copy） ==================== */
 
   .body-copy {
-    padding: 0 var(--padding-ex-m);
+    padding-inline: var(--padding-ex-s);
     position: relative;
     overflow-wrap: break-word;
     word-break: auto-phrase;
@@ -969,6 +979,14 @@
     line-break: strict;
     /*font-size: calc(var(--base-size) * 1.1);*/
     line-height: var(--body-line-height);
+
+    & > * + * {
+      margin-top: var(--padding-l);
+    }
+
+    &.cat-guitarContent {
+      margin-block-end: var(--padding-l);
+    }
 
     /* 見出しサイズ（clamp でレスポンシブ） */
     h1 {
@@ -981,7 +999,7 @@
     h2 {
       font-size: clamp(1.6em, 4vw, 1.8em);
       line-height: 1.25;
-      margin: calc(var(--padding-xl) * 1.25) 0 var(--padding-ex-m);
+      margin-block: calc(var(--padding-xl) * 1.25) var(--padding-ex-m);
       font-weight: bold;
 
       &::before {
@@ -1024,12 +1042,12 @@
       border-bottom: solid 0.1rem rgba(84, 156, 168, 0.3);
 
       & + :where(h2, h3, h4, h5) {
-        margin-top: 2rem;
+        margin-block-start: 2rem;
       }
     }
 
     h2 {
-      margin-bottom: var(--padding-m);
+      margin-block-end: var(--padding-m);
       /* font-size: 1.8rem; */
       /*padding-bottom: 0.5rem;*/
       /*border-bottom: solid 0.1rem var(--transparency-1);*/
@@ -1048,21 +1066,21 @@
     }
 
     & > :where(h2, h3, h4, h5):first-child {
-      margin-top: 0;
+      margin-block-start: 0;
     }
 
     :where(h2, h3, h4) {
       & + :where(h3, h4, h5, h6) {
-        margin-top: 0;
+        margin-block-start: 0;
       }
 
       & + :is(ol, ul) {
-        padding-top: 0;
+        margin-block-start: 0;
       }
     }
 
     & + :where(ol, ul) {
-      padding-top: 0;
+      padding-block-start: 0;
     }
 
     /* リンク */
@@ -1115,25 +1133,50 @@
 
     /* 段落 */
     p {
-      margin-bottom: 0;
+      /*margin-bottom: 0;*/
+      margin-block-start: var(--padding-l);
       line-height: inherit;
       letter-spacing: 0.02em;
 
+      /*
       & + p {
         margin-top: calc(var(--padding-m) + 0.35em);
       }
+      */
+
+      /*
+      &:first-of-type {
+        margin-block-start: 0;
+      }
+      */
 
       & + :where(.ytp) {
-        margin: var(--padding-m) 0;
+        margin-block: var(--padding-l);
       }
 
       cr {
         display: block;
-        margin-top: calc(var(--padding-m) / 2);
+        margin-top: calc(var(--padding-l) / 2);
       }
 
       img {
         display: block;
+      }
+
+      &:has(img) {
+        margin-block-start: 0;
+      }
+
+      &[class*="float"]:has(img) {
+        padding-block: var(--padding-m);
+
+        & + p {
+          margin-block: var(--padding-m);
+        }
+      }
+
+      &:not([class*="float"]):has(img) {
+        margin-block-start: var(--padding-l);
       }
     }
 
@@ -1166,8 +1209,10 @@
     /* リスト */
     :where(ul, ol) {
       /*font-size: 15px;*/
-      margin-bottom: var(--padding-m); /*1.7rem;*/
-      padding: var(--padding-s) 0 0 var(--padding-s);
+      /*margin-bottom: var(--padding-m);*/ /*1.7rem;*/
+      margin-block-start: var(--padding-l);
+      /*padding: var(--padding-s) 0 0 var(--padding-s);*/
+      padding-inline: var(--padding-s);
 
       li {
         margin: 0 0 var(--padding-ex-m);
@@ -1215,7 +1260,7 @@
 
     /* 画像キャプション */
     figure {
-      margin: 4rem 0;
+      margin-block: 4rem;
 
       img {
         width: 100%;
@@ -1234,7 +1279,8 @@
 
     /* 引用 */
     blockquote {
-      margin: var(--padding-m) 0 var(--padding-m); /*1.7rem 0 1.7rem 1rem;*/
+      /*margin: var(--padding-m) 0 var(--padding-m);*/ /*1.7rem 0 1.7rem 1rem;*/
+      margin-block: var(--padding-l);
       border-left: 5px solid var(--brand);
       padding: var(--padding-s);
       line-height: 1.7;
@@ -1243,6 +1289,16 @@
 
       table {
         background-color: var(--table-bg);
+      }
+
+      p {
+        margin-block: 0;
+      }
+    }
+
+    div {
+      & > p:first-of-type {
+        margin: 0;
       }
     }
 
@@ -1253,14 +1309,14 @@
       width: 100%;
       border-collapse: collapse;
       /*font-size: 16px;*/
-      margin: 1rem 0;
+      margin-block: var(--padding-m);
       border-left: 1px solid #225;
       border-right: 1px solid #225;
       border-top: 1px solid #225;
       border-bottom: 1px solid #225;
 
       :where(th, td) {
-        padding: var(--padding-xs);
+        padding-block: var(--padding-xs);
         border-bottom: 1px solid #225;
 
         &:not(:last-child) {
@@ -1303,12 +1359,12 @@
     /* 関連記事 */
     .related {
       h4 {
-        margin: var(--padding-xxl) 0 0;
+        margin-block-start: var(--padding-xxl);
         padding: 0;
       }
 
       ul {
-        margin: var(--padding-m) 0;
+        margin-block: var(--padding-m);
         padding: var(--padding-m);
         border: 1px solid oklch(68.5% 0.169 237.323);
       }
@@ -1413,6 +1469,8 @@
     .body-copy {
       blockquote {
         margin: 1.7rem 0 1rem -1rem;
+        margin-inline-start: 0;
+        margin-inline-end: var(--padding-xs);
       }
     }
   }
@@ -1918,6 +1976,12 @@
     }
   }
 
+  @container (width > 768px) {
+    ul.listing {
+      margin-block: 0;
+    }
+  }
+
   .listing.listR {
     padding: var(--padding-xs);
     border-radius: var(--padding-ex-xs);
@@ -1941,7 +2005,7 @@
 
       &::after {
         content: "";
-        margin: var(--padding-ex-s) 0;
+        margin-block: var(--padding-ex-s);
         border-top: 1px solid rgb(21, 67, 81);
         border-bottom: 0;
       }
@@ -1970,7 +2034,7 @@
   .lastmod-meta {
     display: flex;
     column-gap: var(--padding-ex-xs);
-    padding: var(--padding-ex-s) 0;
+    padding-block: var(--padding-ex-s);
 
     /* 幅が狭い時は折り返し */
     @media (width < 1200px) {
@@ -1997,10 +2061,8 @@
   .tags {
     display: flex;
     width: fit-content;
-    height: auto;
     justify-content: center;
     gap: var(--padding-s);
-    margin-top: var(--padding-l);
     flex-flow: row wrap;
 
     .tag {
@@ -2008,9 +2070,8 @@
       color: var(--font-color);
       background-color: var(--tag-background);
       border-radius: 4px;
-      padding: 0 var(--padding-xs);
+      padding-inline: var(--padding-xs);
       cursor: pointer;
-      height: 1.25em;
       display: flex;
       align-items: center;
     }
@@ -2022,7 +2083,7 @@
 
   .header-meta {
     /* font-size: 0.65rem; */
-    margin: var(--padding-s) 0 var(--padding-l);
+    margin-block: var(--padding-s) var(--padding-l);
   }
 
   /* ==================== タグクラウド ==================== */
@@ -2063,14 +2124,16 @@
       align-items: center;
       gap: var(--padding-s) 0;
       /* font-size: 14px; */
+      margin-block: var(--padding-m) var(--padding-l);
 
       li {
         &:nth-child(n + 1) {
-          margin: 0 var(--padding-ex-xs);
+          margin-block: 0;
+          margin-inline: var(--padding-ex-xs);
         }
 
         &:nth-child(n + 3) {
-          margin: 0 var(--padding-s);
+          margin-inline: var(--padding-s);
         }
       }
 
@@ -2097,8 +2160,9 @@
     gap: var(--padding-s) var(--padding-l);
     list-style: none;
     justify-content: center;
-    margin: 6rem 0 3rem;
-    margin: calc(var(--padding-xl) * 2) 0 var(--padding-xl);
+    /*margin: 6rem 0 3rem;*/
+    /*margin: calc(var(--padding-xl) * 2) 0 var(--padding-xl);*/
+    margin-block: calc(var(--padding-xl) * 2.4);
     padding: 0;
     align-items: center;
     position: relative;

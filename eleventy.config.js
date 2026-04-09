@@ -49,9 +49,9 @@ export default function (eleventyConfig) {
     errorOnInvalidLanguage: false,
   });
 
-  eleventyConfig.addPlugin(youtubeEmbedPlugin);
   // オプションを渡す場合
   // eleventyConfig.addPlugin(youtubeEmbedPlugin, { defaultClass: "video-embed" });
+  eleventyConfig.addPlugin(youtubeEmbedPlugin);
 
   // Vite プラグインは最後に追加
   eleventyConfig.addPlugin(EleventyVitePlugin, {
@@ -65,7 +65,7 @@ export default function (eleventyConfig) {
       })],
       publicDir: "public",
       clearScreen: false,
-      appType: "mpa",          // ← MPA必須。変えない
+      appType: "mpa",
       assetsInclude: ["**/*.xml", "**/*.txt"],
       server: {
         middlewareMode: true,
@@ -73,7 +73,7 @@ export default function (eleventyConfig) {
             ignored: [
               '**/.11ty-vite/assets/js/**',
               '**/.11ty-vite/assets/images/**',
-            '**/.11ty-vite/assets/fonts/**',
+              '**/.11ty-vite/assets/fonts/**',
               '**/_site/**',
             ]
           }
@@ -85,6 +85,7 @@ export default function (eleventyConfig) {
         rollupOptions: {
           output: {
             /*
+            // Viteがアセットをbase64でcss化してしまう場合に
             assetFileNames: (assetInfo) => {
               if (assetInfo.name?.endsWith('.css')) {
                 return 'assets/css/[name].[hash][extname]';
@@ -288,7 +289,7 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
         widths: [400, 800, 1200],
         formats: ["avif", "webp", "jpeg"],
 
-        outputDir: "_site/images/",
+        outputDir: "_site/assets/images/",
         urlPath: "/images/"
       })
 
