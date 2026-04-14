@@ -12,7 +12,6 @@ images:
   - ../img/11ty-vite-plugin.avif
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
-draft: true
 ---
 
 ## EleventyVite.js(11ty公式Viteプラグイン)から読み解くベスト設定ガイド
