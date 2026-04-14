@@ -1,4 +1,3 @@
-
 import path from "path";
 import { DateTime } from "luxon";
 import { HtmlBasePlugin } from "@11ty/eleventy";
@@ -214,7 +213,7 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
   // isServeの設定必須
   // const isServe = process.env.ELEVENTY_RUN_MODE === "serve";
   const noDraft = (items) => {
-    return isServe ? items : items.filter(item => !item.data.draft);
+    return isServe ? [...items] : items.filter(item => !item.data.draft);
   };
 
   eleventyConfig.addCollection("blog", (api) => {
@@ -277,7 +276,7 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
   });
 
   // -----------------------------------------------------------------
-  // shortcord
+  // shortcode
   // -----------------------------------------------------------------
 
   eleventyConfig.addNunjucksAsyncShortcode(

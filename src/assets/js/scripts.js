@@ -1,4 +1,3 @@
-//import "../css/style.css";
 import "@css/style.css";
 import imgAvif from "../images/covertreasure.avif";
 import imgWebp from "../images/covertreasure.webp";
