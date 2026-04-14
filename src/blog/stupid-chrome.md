@@ -264,23 +264,23 @@ br {
 
 となっている所に`<br>`がブロックになるとレイアウト崩壊)と言うてたやないかと。
 
-待て待て待てと、何のための`inline-block`やねんと。<div class="text-4xl align-middle">これがレイアウト崩れ</div>になるかと。
+待て待て待てと、何のための`inline-block`やねんと。たとえ`block`として<div class="text-4xl">これがレイアウト崩れ</div>になるかと。
 
+<span class="text-xs leading-none text-amber-300">※ これが～の上部にスペースがあるのはサイトcssのせいです。通常はありません。なくせますが敢えてそのまま</span>
 上記は、
 
 ```njk
 _skipCopy_
-待て待て待てと、何のための`inline-block`やねんと。<div class="text-4xl align-middle">これがレイアウト崩れ</div>になるかと。
+待て待て待てと、何のための`inline-block`やねんと。たとえ`block`として<div class="text-4xl">これがレイアウト崩れ</div>になるかと。
 ```
+
 
 と書いています。つまり、
 
 ```css
 div {
   font-size: var(--text-4xl); /* 2.25rem (36px) */ 
-  line-height: var(--text-4xl--line-height); /* calc(2.5 / 2.25) */ 
-  vertical-align: middle;
-}
+  line-height: var(--text-4xl--line-height); /* calc(2.5 / 2.25) */
 ```
 
 と、同義です。
