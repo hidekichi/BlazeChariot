@@ -251,14 +251,18 @@ resolve: {
 
 - 11tyがビルド
   - この時点でTailwindが未処理だとHTMLにTailwindCSSのClassは書いてあるが<u>CSSがない</u>ということになります
+  - 11tyが出力する前にTailwindのcssが存在する必要がありますが、デフォルトではそれら処理がないのでhtmlにクラスがあるだけという状態です
 - outputを`.11ty-vite`にリネームする
 - ViteがHTMLをバンドル処理
+  - ここで各種設定が行われるわけなので、素のHTMLが表示された後それをViteが上書きしてようやく完成形が表示される
+
+つまりTailwindCSSは予め使用できる状態になったものを用意してからHTMLを用意しないといけないが、HTMLの記載がなければ使用するものが何かを判断もできないというタイミング問題があるのです。
 
 #### Tailwind を ViteのPostCSSプラグインとして組み込んだ場合
 
 - TailwindのJITはHTMLを走査して必要なクラスを確定する
-- Viteの`root`はoutput(HTMLが生成された後のフォルダ)なので、元のテンプレートファイル(`src/`)を参照できない
-- Tailwindcssの`content`のパスを`src/**/*.njk`などと明示すると動作するが、build/devでrootが変わるため`content`の相対パスが壊れやすい
+- Viteの`root`はoutput(HTMLが生成された後のフォルダ、デフォルトは`_site/`)なので、元のテンプレートファイル(`src/`)を参照できない
+- Tailwindcssの`content`のパスを`src/**/*.njk`などと明示すると動作するが、build時/dev時でrootが変わるため`content`の相対パスが壊れやすい
 
 > JITモードとは
 > テンプレートを解析してスタイルをオンデマンドで生成する仕組みです。
@@ -295,6 +299,10 @@ npm install -D concurrently @tailwindcss/cli
 |`dev`|ローカルで作業するためのコマンド。<br>Tailwindcssでまず処理させてから変更を監視。その後11tyを起動して作業できるようにする|
 
 </div>
+
+build時、つまりはリモートではまずTailwindcssを用意してから11tyをビルドします。
+dev時、つまりはローカルで作業する際は`concurrently`でこれらを同時にやります。build時にもなぜ同様にしないかは、htmlの各種変更の監視、Tailwindcssの監視とかが必要になるからです。build時には監視するという作業は必要ありません。
+ローカルでhtmlだけ更新しても対応するcssが更新されないと意味がないですしまた逆も然り。なのでそれぞれの変更のたびに監視する機能の並行起動がdev時には必要なのです。build時は全部できていますから順番にそれぞれをビルドするだけでいいということです。
 
 #### バージョンの違いによって書くものが変わる
 
