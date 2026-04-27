@@ -387,7 +387,7 @@ systemctl status display-manager
 とターミナルで入力し、今どんなログインマネージャーを使用しているのかを確認します。COSMICが有効になっていた場合、`COSMIC Greeter`が有効になっているはずです。
 こいつがだいたい悪さをしています。
 
-GNOMEを一緒に導入していた場合は必ず`GDM`が入っているでしょうし、Plasmaなら`SDDM`が入っているかと思います。これらの方が枯れた技術で信用できます。そのためこれらに切り替えます。
+GNOMEを一緒に導入していた場合は必ず`GDM`が入っているでしょうし、Plasmaなら`plasmalogin`(旧sddm)が入っているかと思います。これらの方が枯れた技術で信用できます。そのためこれらに切り替えます。
 
 1. Gnomeが入っていない場合、`sudo pacman -S gdm` 入っている場合は 2 から行う
 2. `sudo systemctl disable cosmic-greeter`
