@@ -343,8 +343,12 @@ Limineをおすすめしている理由は、モダン・超軽量・見た目�
 
 ### デスクトップ環境の選択
 
-何かしらをまず選択する必要がありますが、その後で他のデスクトップ環境も選択できます。最初に選んだものがデフォルトになるわけではなさそうなので好きなものを選べばよいですが**多すぎる選択はあまり良いことはありません**。
+何かしらをまず選択する必要がありますが、その後で他のデスクトップ環境も選択できます。~~最初に選んだものがデフォルトになるわけではなさそうなので~~好きなものを選べばよいですが**多すぎる選択はあまり良いことはありません**。
 ダウンロードサイズも多くなりますし、Archのシステムはできるだけシンプルに保つべきです。
+
+> 2026年4月にCachyOSを新規で入れましたが、最初に選んだものがデフォルトデスクトップになりました。
+> これはインストーラーがアップデートされたことで仕様が変わったということだと思います。
+> この事から、最初に選ぶのはGNOMEかPlasmaが良さそうです。オンラインインストールであればその後で他のデスクトップ環境を選ぶことができます。
 
 CachyOSには、[KDE Plasma](https://kde.org/ja/plasma-desktop/)、[GNOME](https://www.gnome.org/)、[XFCE](https://www.xfce.org/?lang=ja)、[bspwm](https://github.com/baskerville/bspwm)、[Budgie](https://buddiesofbudgie.org/)、[Cinnamon](https://github.com/linuxmint/cinnamon)、[Cosmic](https://system76.com/cosmic)、[i3](https://i3wm.org/)、[Hyprland](https://hypr.land/)、[LXDE](http://www.lxde.org/)、[LXQt](https://lxqt-project.org/)、[Mate Desktop](https://mate-desktop.org/ja/)、[Openbox](https://openbox.org/)、[Qtile](https://qtile.org/)、[Sway](https://swaywm.org/)、[UKUI](https://github.com/ukui/ukui-desktop-environment)、[Wayfire](https://wayfire.org/)、[Niri](https://github.com/YaLTeR/niri)などがサポートされています。
 
