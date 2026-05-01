@@ -483,7 +483,7 @@
 			"main";
 
 			*/
-    max-width: 798px;
+    /*max-width: 798px;*/
 
     gap: 0 var(--padding-xs);
     container: main / inline-size;
