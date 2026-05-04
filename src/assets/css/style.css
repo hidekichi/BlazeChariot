@@ -1214,7 +1214,11 @@
       /*margin-bottom: var(--padding-m);*/ /*1.7rem;*/
       margin-block-start: var(--padding-l);
       /*padding: var(--padding-s) 0 0 var(--padding-s);*/
-      padding-inline: var(--padding-s);
+      padding-inline: var(--padding-s) 0;
+
+      :where(ul, ol) {
+        margin-block: var(--padding-ex-m) 0;
+      }
 
       li {
         margin: 0 0 var(--padding-ex-m);
