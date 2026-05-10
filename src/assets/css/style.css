@@ -359,11 +359,15 @@
     line-height: 1.2 !important;
     font-family: "Fragment mono", monospace !important;
     /*margin: var(--padding-s) 0 !important;*/
-    margin-block: var(--padding-s) !important;
+    margin-block: var(--padding-s) var(--padding-xs) !important;
     /*padding: var(--padding-xs) var(--padding-l) var(--padding-xs)
       var(--padding-s) !important;*/
     padding-block: var(--padding-xs) !important;
     padding-inline: var(--padding-s) var(--padding-l) !important;
+
+    & + p {
+      margin-block: var(--padding-m) !important;
+    }
   }
 
   code[class^="language-"] {

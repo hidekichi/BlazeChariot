@@ -2,7 +2,7 @@
 title: fcitx5の公式から見る2026年の設定事情
 description: X11からWaylandへの過渡期ということもあり、設定が色々ややこしくなってきているようです
 date: 2026-02-05
-update: 2026-02-14
+update: 2026-05-11
 category:
   - blog
 tags:
@@ -213,6 +213,38 @@ QT_IM_MODULES=wayland;fcitx
 ### GNOME(Wayland)
 
 GnomeはIBusとの統合が非常に強力なため、fcitx5を使用する場合は少し工夫が必要です。
+
+<div class="block border-2 rounded-md border-red-500 p-4 mt-[--padding-xl]">
+
+<span class="text-2xl">2026年5月 追記</span>
+
+**GNOMEが50になったことにより**、拡張機能で不具合が出ている模様です。以下で紹介していた`kimpanel`ですが、これが元でいわゆるGNOMEのトップバーがクラッシュし、道連れとなってセッションがキルされています。
+`kimpanel`は公式が勧めていたものですが、拡張機能自体の対応がまだ不十分な感じです。
+このため例えば、Dank Material Shellを導入しHyprlandのセッションは起動するがGNOMEの<u>セッションと切り替えできなかったり</u>、あるいは<u>キーボードが一部入力しにくい状態</u>にあったりする事があります。
+
+何かしらのデスクトップ環境に入れれば、`~/.local/share/gnome-shell/`にある`extensions`ディレクトリの中の`kimpanel（Input Method Panel）`を削除し、再起動してセッションの切り替えができるかを確かめてください。
+もしログイン画面から進めないような重大な事態であれば、`Ctrl + ALT + F2`などでtty(黒い画面でコマンド操作はできる状態)に入り、
+
+```bash
+# 拡張機能ディレクトリへ移動
+cd ~/.local/share/gnome-shell/
+
+# 一時的な退避用ディレクトリを作成
+mkdir -p ~/extensions_backup
+
+# 全ての拡張機能をバックアップへ移動（これで完全に「素」のGNOMEになる）
+mv extensions/* ~/extensions_backup/
+```
+
+と順番に入力してみてください。原因が`kimpanel`であればこれで解決すると思います。
+
+IMEのアイコンなどの表示ができないと通知が鬱陶しいので、拡張機能の代替品ですがひとまず`AppIndicator/KStatusNotifierItem Support`を使用するのが良いのではないかと。
+拡張機能のインストールなどは、以下に書いてある`Extension Manager`をFlatpakで探して、このアプリから検索すると良いと思います。
+
+バージョンが変わったり、拡張機能の対応が遅れるとよくあることですが拡張機能だけをキルできず、デスクトップ画面が表示されないまで影響が及んでいるので**困ったことですね**では済まない状態でもあります。
+もしこれら以外にもGNOMEで何かしら不具合が出ているようであれば、拡張機能をひとまず全てOFFにしてみるのが良いかと思います。探せるようであれば拡張機能の作者のサイトに注視して、新しいバージョンのリリースなどを待ってみてください。
+
+</div>
 
 - 環境変数は基本的に**不要**
 - 必須な事項として、`gnome-shell-extension-kimpanel`をインストール。

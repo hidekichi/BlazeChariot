@@ -62,6 +62,7 @@ export default function (eleventyConfig) {
       plugins: [tailwind({
         content: ['./src/**/*.{html,njk,md,js}'],
       })],
+      //plugins: [tailwind()],
       publicDir: "public",
       clearScreen: false,
       appType: "mpa",
