@@ -159,7 +159,7 @@ sudo dnf upgrade
 
 ---
 
-バージョンアップのフローしては、
+バージョンアップのフローとしては、
 
 1. 既存システムの最新化 → `sudo dnf upgrade --refresh`
    - 前述しましたが`--refresh`は普段は不要
