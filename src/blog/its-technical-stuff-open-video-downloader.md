@@ -23,7 +23,7 @@ permalink: /blog/{{ page.fileSlug }}/
 ## Open Video Downloaderとは
 
 ![Open Video Downloader](../img/open-video-downloader.avif)
-{class="md:float-left md:w-[30vw] md:mx-[1rem]"}
+{class="md:float-left md:w-[45%] md:mx-[1rem]"}
 
 GitHub公式： [https://github.com/jely2002/youtube-dl-gui](https://github.com/jely2002/youtube-dl-gui)
 公式サイト： [https://jely2002.github.io/youtube-dl-gui/](https://jely2002.github.io/youtube-dl-gui/)
@@ -33,14 +33,14 @@ GitHub公式： [https://github.com/jely2002/youtube-dl-gui](https://github.com/
 <div class="clear-both"></div>
 
 ![VideoDownloader](../img/video-downloader.avif)
-{class="md:float-right md:w-[30vw] md:mt-[1rem]"}
+{class="md:float-right md:w-[45%] md:mt-[1rem]"}
 
 Linux用のソフトとしてダウンローダーはいくつかあります。名前もそのままの[VideoDownloader](https://github.com/Unrud/video-downloader)(linuxパッケージでは、video-downloader)は、1つのウィンドウで1つの動画や音声ファイルしか扱えません。とてもシンプルで2つ、3つとウィンドウを開いておけば並行してダウンロードできるわけですが、やや面倒くさいのは否めません。
 
 <div class="clear-both"></div>
 
 ![parabolic](../img/parabolic.avif)
-{class="block md:float-left md:w-[30vw] md:p-[1rem] md:mt-[2rem] md:mx-[1rem]"}
+{class="block md:float-left md:w-[45%] md:p-[1rem] md:mt-[2rem] md:mx-[1rem]"}
 
 そこで複数のアドレスをキュー登録しておいて一挙にダウンロードできるようにしたのが、[Parabolic](https://flathub.org/apps/org.nickvision.tubeconverter)です。これであればウィンドウをいくつも開いておく必要はなく、1つのウィンドウで対応できます。
 アドレスを追加するとメタデータを取得しに行き、個別にダウンロードの設定をすることができるので、それらを設定してダウンロードができるようになります。例えばタイトルの変更、保存ディレクトリの変更、動画/形式の変更もできます。ダウンロードボタンで即ダウンロードが始まりますが、その間にもダウンロードするアドレスを追加可能です。

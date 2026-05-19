@@ -70,7 +70,7 @@ CachyOSではキーボードのレイアウト(英語配列か日本語配列)�
 1. `fcitx5`を導入する
 2. それらの設定をする
 
-だけなんですが、CachyOSではArch系なので、
+だけです。CachyOSではArch系なので、
 
 ```bash
 sudo pacman -S fcitx5-im fcitx5-mozc
