@@ -2,7 +2,7 @@
 title: EleventyVite.js から読み解くベスト設定ガイド 11ty+Vite
 description: 公式ドキュメントからではわからないので、直接本体ソースを読み解いて、11ty本体はどう設定したら良いのか、Viteはどう言うことが想定されているのかを解説します。
 date: 2026-03-26
-update: 2026-04-15
+update: 2026-05-31
 category:
   - blog
 tags:
@@ -899,6 +899,13 @@ async function restoreEntry(entry, inputDir, outputDir, projectRoot, verbose) {
 
 #### 当サイトのeleventy.config.js抜粋
 
+<div class="border-2 border-indigo-500 p-4">
+
+一部、旧バージョンのコードを載せてしまっていたため正しく動作しなかったのが発覚しました。修正したものを掲載しました。
+場所的には、以下の`viteOptions:`の下にある`plugins: [tailwind({...}),`の後、`{name: 'watch-src-js, ...}'`の部分です。これがないとJavaScriptを更新してもブラウザの自動リロードが行われませんでした。
+2026/5/31の修正版(以下)では正しく動作するのを当サイト、また今作ってる[VidPick](https://vidpick.pages.dev/)でも確認しました。
+</div>
+
 ```js
 // 必要なものだけ抜粋してあるのでフィルターその他で必要であれば別途導入・インポートが必要
 
@@ -933,7 +940,20 @@ export default function (eleventyConfig) {
     viteOptions: {
       plugins: [tailwind({
         content: ['./src/**/*.{html,njk,md,js}'],
-      })],
+      }),
+          {
+            name: 'watch-src-js',
+            configureServer(server) {
+                server.watcher.add(path.resolve('./src/assets/js'));
+                server.watcher.on('change', (file) => {
+                  // バックスラッシュをスラッシュに統一して比較
+                  if (file.replace(/\\/g, '/').includes('src/assets/js')) {
+                    server.ws.send({ type: 'full-reload' });
+                  }
+                });
+              }
+          }
+      ],
       publicDir: "public",
       clearScreen: false,
       appType: "mpa",
