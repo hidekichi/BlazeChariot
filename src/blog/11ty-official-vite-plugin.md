@@ -938,9 +938,9 @@ export default function (eleventyConfig) {
       domDiff: false, // Vite HMR と競合するため無効化推奨
     },
     viteOptions: {
-      plugins: [tailwind({
-        content: ['./src/**/*.{html,njk,md,js}'],
-      }),
+      plugins: [tailwind(
+        // { content: ['./src/**/*.{html,njk,md,js}'], } 
+      ),
           {
             name: 'watch-src-js',
             configureServer(server) {
