@@ -941,18 +941,39 @@ export default function (eleventyConfig) {
       plugins: [tailwind(
         // { content: ['./src/**/*.{html,njk,md,js}'], } 
       ),
-          {
-            name: 'watch-src-js',
-            configureServer(server) {
+      {
+              name: 'serve-src-js',
+              configureServer(server) {
+                server.middlewares.use(async (req, res, next) => {
+                  if (req.url?.startsWith('/assets/js/')) {
+                    const relPath = req.url.split('?')[0].slice('/assets/js/'.length);
+                    const absPath = path.resolve('./src/assets/js', relPath)
+                      .replace(/\\/g, '/');
+                    const fsUrl = '/@fs/' + absPath;
+                    try {
+                      const result = await server.transformRequest(fsUrl);
+                      if (result) {
+                        res.setHeader('Content-Type', 'application/javascript');
+                        res.setHeader('Cache-Control', 'no-store');
+                        res.end(result.code);
+                        return;
+                      }
+                    } catch (e) {
+                      console.error('[serve-src-js]', e);
+                    }
+                  }
+                  next();
+                });
+      
                 server.watcher.add(path.resolve('./src/assets/js'));
                 server.watcher.on('change', (file) => {
-                  // バックスラッシュをスラッシュに統一して比較
                   if (file.replace(/\\/g, '/').includes('src/assets/js')) {
+                    server.moduleGraph.invalidateAll();
                     server.ws.send({ type: 'full-reload' });
                   }
                 });
               }
-          }
+            }
       ],
       publicDir: "public",
       clearScreen: false,
@@ -962,7 +983,7 @@ export default function (eleventyConfig) {
         middlewareMode: true,
         watch: {
             ignored: [
-              '**/.11ty-vite/assets/js/**',
+              //'**/.11ty-vite/assets/js/**',
               '**/.11ty-vite/assets/images/**',
               '**/.11ty-vite/assets/fonts/**',
               '**/_site/**',
@@ -991,8 +1012,8 @@ export default function (eleventyConfig) {
             },
             */
             // assetFileNames: "assets/css/[name].[hash].css",
-            chunkFileNames: "assets/js/[name].[hash].js",
-            entryFileNames: "assets/js/[name].[hash].js",
+            //chunkFileNames: "assets/js/[name].[hash].js",
+            //entryFileNames: "assets/js/[name].[hash].js",
           },
         },
       },
