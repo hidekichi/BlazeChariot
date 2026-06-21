@@ -106,7 +106,7 @@ Youtubeをよく見るのであれば、広告削除をONにすると対策さ�
 これまでから古いバージョンを使用していた方でアップデートが来ないと思われていた人も、現行バージョンにアップデートすると次回からは自動アップデートされるはずです。
 
 <div class="relative">
-  <div class="absolute block z-100000 size-full bg-slate-800/70"></div>
+  <div class="absolute block z-8 size-full bg-slate-800/70"></div>
 <div class="p-4">
 
 自動アップデート、またその通知はまだ実装されていないので、頃合いを見てアップデートする必要がありますが特に難しいことはなく、インストーラーをダウンロードして実行するだけです。
