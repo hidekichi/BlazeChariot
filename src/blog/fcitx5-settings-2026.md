@@ -2,7 +2,7 @@
 title: fcitx5の公式から見る2026年の設定事情
 description: X11からWaylandへの過渡期ということもあり、設定が色々ややこしくなってきているようです
 date: 2026-02-05
-update: 2026-05-20
+update: 2026-06-23
 category:
   - blog
 tags:
