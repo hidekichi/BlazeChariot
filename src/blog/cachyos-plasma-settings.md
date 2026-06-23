@@ -24,8 +24,8 @@ GNOMEもPlasmaも最近バージョンアップしたばかりで、そういう
 ### GNOMEとHyprland
 
 > 2026年6月23日 追記
-> 現在、GNOME 50(および最近のバージョン)でkimpanel(Input Method Panel拡張機能)は正式に対応しました。[GNOME EXTENSIONS](https://extensions.gnome.org/extension/261/kimpanel/)の少しスクロールした所に対応状況が記載されています。これによりGNOME環境でkimpanelを使用してもトップバーがクラッシュなどはなくなったと思われます。
-> 公式対応しているので問題はなくなったと思われます。もし導入してもまだ問題が出た場合は薄く表示してますが以下の方法を参考に拡張機能を削除できれば復帰できます
+> 現在、GNOME 50(および最近のバージョン)でkimpanel(Input Method Panel拡張機能)は正式に対応しました。[GNOME EXTENSIONS](https://extensions.gnome.org/extension/261/kimpanel/)の少しスクロールした所に対応状況が記載されています。これによりGNOME環境でkimpanelを使用してもトップバーのクラッシュなどに伴う問題はなくなったと思われます。
+> 公式対応しているので問題はなくなったと思われますが、もし最新バージョンを導入しても尚、問題が出るようであれば下に薄く表示してますが、拡張機能を削除できれば復帰できます。下の薄くなってるのはCSS(tailwind)で上からグレーを被しているだけなのでDEVツールでサクッと一時的に無効にできます。
 
 <div class="relative">
   <div class="absolute block z-8 size-full bg-slate-800/70"></div>
