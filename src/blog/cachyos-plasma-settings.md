@@ -2,7 +2,7 @@
 title: CachyOSのPlasma環境の設定はどうなってるんだろうか
 description: GNOMEの環境がどうも怪しかったのでPlasmaの環境を試してみた
 date: 2026-05-16
-update: 2026-05-18
+update: 2026-06-23
 category:
     - blog
 tags:
@@ -22,6 +22,14 @@ GNOMEもPlasmaも最近バージョンアップしたばかりで、そういう
 以前のバージョンであれば問題はなかったけれども、今回のバージョンではX11を廃止しWayland onlyの体制になったりでこれまでとは違った状況が生まれています。
 
 ### GNOMEとHyprland
+
+> 2026年6月23日 追記
+> 現在、GNOME 50(および最近のバージョン)でkimpanel(Input Method Panel拡張機能)は正式に対応しました。[GNOME EXTENSIONS](https://extensions.gnome.org/extension/261/kimpanel/)の少しスクロールした所に対応状況が記載されています。これによりGNOME環境でkimpanelを使用してもトップバーがクラッシュなどはなくなったと思われます。
+> 公式対応しているので問題はなくなったと思われます。もし導入してもまだ問題が出た場合は薄く表示してますが以下の方法を参考に拡張機能を削除できれば復帰できます
+
+<div class="relative">
+  <div class="absolute block z-8 size-full bg-slate-800/70"></div>
+<div class="p-4">
 
 GNOMEで私が体験した最大の問題は拡張機能の挙動です。GNOME自体はibusの使用を勧めていてfcitx5などでもほとんどの場合問題ないのですが、
 
@@ -45,6 +53,9 @@ GNOMEで私が体験した最大の問題は拡張機能の挙動です。GNOME�
 という対応でいけます。詳細は[fcitx5の公式から見る2026年の設定事情](blog/fcitx5-settings-2026/)のGNOMEの項に追記しました。
 
 これでGNOMEとHyprlandのセッションの切り替えが可能になるかと思います。
+
+</div>
+</div>
 
 ### スリープ復帰時の謎のキー入力不具合
 
