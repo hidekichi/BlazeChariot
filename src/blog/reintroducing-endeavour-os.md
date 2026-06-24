@@ -5,7 +5,7 @@ update: 2026-01-21
 category:
   - blog
 tags:
-  - linux
+  - Linux
   - Arch系
 layout: post.njk
 images:

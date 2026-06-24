@@ -7,7 +7,7 @@ category:
   - blog
 tags:
   - Arch系
-  - linux
+  - Linux
   - Terminal
 images:
   - ../img/fresh_manual.avif

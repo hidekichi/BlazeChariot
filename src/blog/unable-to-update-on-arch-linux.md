@@ -7,7 +7,7 @@ category:
   - blog
 tags:
   - EndeavourOS
-  - linux
+  - Linux
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---

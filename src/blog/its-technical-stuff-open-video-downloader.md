@@ -8,7 +8,7 @@ category:
 tags:
     - Arch系
     - CachyOS
-    - linux
+    - Linux
     - アプリ
 images:
     - ../img/open-video-downloader.avif

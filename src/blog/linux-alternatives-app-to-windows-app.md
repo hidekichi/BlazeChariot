@@ -6,7 +6,7 @@ update: 2026-03-15
 category:
   - blog
 tags:
-  - linux
+  - Linux
   - ソフトウェア
 images:
   - ../img/benz_midget.avif

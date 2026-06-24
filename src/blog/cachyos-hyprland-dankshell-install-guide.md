@@ -9,7 +9,7 @@ tags:
   - Arch系
   - CachyOS
   - Hyprland
-  - linux
+  - Linux
   - DankShell
 images:
   - ../img/cachyos_desktop.avif

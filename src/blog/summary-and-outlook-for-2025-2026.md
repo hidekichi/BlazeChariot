@@ -6,7 +6,7 @@ update: 2026-01-20
 category:
   - blog
 tags:
-  - linux
+  - Linux
 images:
   - ../img/famicom.avif
   - ../img/nso.avif

@@ -8,7 +8,7 @@ category:
 tags:
     - Fedora
     - Arch系
-    - linux
+    - Linux
 images:
     - ../img/fedora-has-won-influencers.avif
 permalink: /blog/{{ page.fileSlug }}/

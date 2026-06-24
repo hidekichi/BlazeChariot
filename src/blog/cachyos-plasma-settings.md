@@ -9,7 +9,7 @@ tags:
     - CachyOS
     - Arch系
     - Plasma
-    - linux
+    - Linux
 images:
     - ../img/plasma_virtual_keyboard.avif
     - ../img/plasma_ime.avif

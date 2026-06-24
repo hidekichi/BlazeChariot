@@ -56,7 +56,7 @@ layout: base.njk
 
   <div class="tags">
   {% for tag in tags -%}
-  	{% if tag !== 'posts' %}
+  	{% if tag !== posts %}
   		<a class="tag" href="/tags/{{ tag }}/" title="{{ tag }}の記事一覧" aria-label="{{ tag }}の記事一覧">{{ tag }}</a>
   	{% endif %}
   {%- endfor %}

@@ -6,7 +6,7 @@ update: 2026-02-10
 category:
   - blog
 tags:
-  - linux
+  - Linux
   - Hyprland
   - Niri
   - DankMaterialShell

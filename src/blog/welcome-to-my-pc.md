@@ -8,7 +8,7 @@ category:
 tags:
     - Arch系
     - CachyOS
-    - linux
+    - Linux
     - Ryzen
 images:
     - ../img/porsche550spyder.avif

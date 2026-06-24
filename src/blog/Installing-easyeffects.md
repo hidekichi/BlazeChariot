@@ -6,7 +6,7 @@ update: 2026-02-26
 category:
   - blog
 tags:
-  - linux
+  - Linux
   - Arch系
   - Hyprland
   - アプリ

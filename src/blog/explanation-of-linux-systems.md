@@ -6,7 +6,7 @@ update: 2026-01-25
 category:
   - blog
 tags:
-  - linux
+  - Linux
 images:
   - ../img/xfce4_20.webp
   - ../img/LXQt_labwc.webp

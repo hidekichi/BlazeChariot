@@ -6,7 +6,7 @@ update: 2026-03-01
 category:
   - blog
 tags:
-  - linux
+  - Linux
   - Arch系
   - Hyprland
 images:

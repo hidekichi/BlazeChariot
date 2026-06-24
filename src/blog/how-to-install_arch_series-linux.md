@@ -8,7 +8,7 @@ category:
 tags:
     - Arch系
     - CachyOS
-    - linux
+    - Linux
 images:
     - ../img/ja_en_keyboard.avif
     - ../img/cachyos-hello.avif

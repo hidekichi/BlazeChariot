@@ -6,7 +6,7 @@ update: 2025-10-25T05:33:12.581Z
 category:
   - blog
 tags:
-  - linux
+  - Linux
   - RedHat系
   - Fedora
   - Cosmic

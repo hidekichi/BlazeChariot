@@ -6,7 +6,7 @@ update: 2025-06-04
 category:
   - blog
 tags:
-  - linux
+  - Linux
   - Arch系
 images:
   - ../img/t470s.webp

@@ -6,7 +6,7 @@ update: 2025-12-20
 category:
   - blog
 tags:
-  - linux
+  - Linux
   - Pop!_OS
   - Cosmic
 images:

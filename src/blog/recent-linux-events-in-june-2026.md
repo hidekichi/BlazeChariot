@@ -6,7 +6,7 @@ update: 2026-06-21
 category:
     - blog
 tags:
-    - linux
+    - Linux
 images:
     - ../img/flathub_install_command.avif
     - ../img/cachyos-plasma6_7.avif
