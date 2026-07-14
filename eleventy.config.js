@@ -271,11 +271,17 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
   });
 
   eleventyConfig.addCollection("allPosts", (api) => {
-    return noDraft(api.getFilteredByGlob("src/{blog,guitar}/*.md"));
+    return noDraft([
+      ...api.getFilteredByGlob("src/blog/**/*.md"),
+      ...api.getFilteredByGlob("src/guitar/**/*.md"),
+    ]).reverse();
   });
 
   eleventyConfig.addCollection("latestPosts", (api) => {
-    return noDraft(api.getFilteredByGlob("src/{blog,guitar}/*.md")).sort((a, b) => b.date - a.date);
+    return noDraft([
+      ...api.getFilteredByGlob("src/blog/**/*.md"),
+      ...api.getFilteredByGlob("src/guitar/**/*.md"),
+    ]).sort((a, b) => b.date - a.date);
   });
 
   eleventyConfig.addCollection("posts", (api) => {
