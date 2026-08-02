@@ -374,6 +374,12 @@
     font-family: "Fragment Mono", sans-serif !important;
   }
 
+  pre[class="language-apl"] {
+    code[class="language-apl"] {
+      font-family: monospace !important;
+    }
+  }
+
   u {
     code {
       border-color: var(--underline-color);
