@@ -119,7 +119,7 @@ curl https://raw.githubusercontent.com/sinelaw/fresh/refs/heads/master/scripts/i
 fresh ~/.config/mango/config.conf
 ```
 
-とするだけです。むしろ`fresh`ではファイルも直接開けますしマウスも使用できるのでfrshが起動できればいいだけです。
+とするだけです。むしろ`fresh`ではファイルも直接開けますしマウスも使用できるのでfreshが起動できればいいだけです。
 しかしCachyOSのデフォルトシェルがFishであるのでパスの入力も比較的楽にできますし上記のようにして起動しておけば、次からはターミナルで上下矢印キーの操作だけでも済みますし、上記のような起動方法でよいかと思います。
 
 ### WMが違ってもやることは同じ
@@ -139,7 +139,7 @@ fresh ~/.config/mango/config.conf
 xkb_rules_layout=jp
 ```
 
-とする必要がありますが、この記述の内`_`と`=`が設定が完了するまでたいていは英語配列のキーボードなので、
+とする必要がありますが、この記述の内`_`と`=`が設定が完了するまでたいていは英語配列のキーボードになっていて、日本語キーボードの印字されているキーでは入力できないので、
 
 <div class="table-container">
 
@@ -150,7 +150,7 @@ xkb_rules_layout=jp
 
 </div>
 
-これらを参考に何とか`xkb_rules_layout=jp`を入力して、保存したらすぐに日本語配列になります。
+これらを参考に何とか`xkb_rules_layout=jp`を入力します。保存したらすぐに日本語配列に切り替わります。
 
 #### fcitx5を使えるようにする
 
