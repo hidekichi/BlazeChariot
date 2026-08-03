@@ -29,13 +29,20 @@ Waylandのコンポジター(ウィンドウマネージャー)です。上記�
 
 ## 基本設定
 
+### 作業の流れ
+
 まず、既に使用しているものと別で入れて試してみてから、良かったと感じたら既存の環境に合流させたほうが良いと思うので、例えばPlasma環境であれば、
 
-1. Plasmaの設定からユーザーを追加(アカウントID、パスワード)、
+1. Plasmaの設定からユーザーを追加(アカウントID、パスワード)
 2. ログアウト後、作成したユーザーでログイン
-3. ユーザーファイルは新しく作られるのでDMSのインストール時にMango WMを選択して導入
+3. ユーザーファイルが新しく作られるので、DMSのインストール時にMango WMを選択して導入
 
 と言う流れでテスト環境を作ります。
+DMSのインストール及びMango WMの導入が終わったら、Plasma環境であればログイン画面で新たに作ったユーザーと左下でMango WMを選択してからパスワードを入れてログインする。
+
+- 起動したばかりだとファイルマネージャーなどが開けないので、画面左上のメニューか`SUPER + SPACE`でランチャーを開いてファイルマネージャーを探して起動する必要があります。
+
+#### 念のためDMSのインストールスクリプト
 
 これまでから色んなところで書いているので不要かもしれませんが念のため、インストールスクリプトを書いておくと、
 
@@ -60,11 +67,60 @@ curl -fsSL https://install.danklinux.com | sh
 - Bizin Gothic NF
 
 などが良いのではないかと思います。もちろんお気に入りがあればそれらを使用しても何も問題ありませんが、そのための設定が別途必要になるかも知れません。
+上記フォントは以下の「サポートされているレイアウト」の所でリンクを張ってあります。
+レイアウトを罫線で書いているためズレないブラウザの固定(等幅)幅フォントなどの説明で書いてあります。
 
 ### 設定(config)ファイル
 
 `~/.config/mango/`に`config.conf`があります。同じ階層に`dms/...`とファイルがあり`bind.conf`などはこのディレクトリの中にあります。
 Dank Material Shellでは、設定ファイルで基本的なことは設定する必要がありますが、Hyprland同様にDMS設定(GUI)でほとんどのことが設定できるようにもなっています。
+
+<u>ユーザーファイルなので通常のテキストエディターでも何でも使用することができます</u>。
+私はGnomeの[テキストエディター](https://apps.gnome.org/ja/TextEditor/)で設定していますが、DMSでは[Zed](https://zed.dev/)が諸々の候補の中に入っているのでZedを使用してもいいと思います。
+
+```shell
+# GNOME Text Editor (gnome-text-editor)
+
+paru -S gnome-text-editor
+
+# or
+
+sudo pacman -S gnome-text-editor
+
+# or
+
+paru -S zed
+```
+
+zedもpacmanで導入してももちろん良いです。GUIのパッケージマネージャーを使用してももちろん良いです。
+CachyOSでは[Shelly](https://www.seafoam-labs.org/shelly-alpm/overview/)という新しいGUIのパッケージマネージャーが入っています。これらを使用してもよいですが、リリースされてまだそんなに時間も経っていないと思うので、どれぐらい完成度が上がったのか不明でもあり、GUIであるから簡単かと言われるとそういうわけでもないと思うので、利用してみてどうかを各自試してもらうしかありません。
+
+#### ターミナルでconfigを編集する
+
+ターミナルで編集するのであれば、CachyOSでは[micro](https://micro-editor.github.io/)が入っていたはずなので、それでも良いですしもっと使用方法をWindowsみたいにするのであれば[fresh](https://getfresh.dev/)も良いと思います。
+
+```shell
+micro ~/.config/mango/config.conf
+```
+
+`fresh`の場合は導入する必要があります。
+
+```shell
+paru -S fresh-editor-bin
+
+# or
+
+curl https://raw.githubusercontent.com/sinelaw/fresh/refs/heads/master/scripts/install.sh | sh
+```
+
+起動方法はmicroと同じで、
+
+```shell
+fresh ~/.config/mango/config.conf
+```
+
+とするだけです。むしろ`fresh`ではファイルも直接開けますしマウスも使用できるのでfrshが起動できればいいだけです。
+しかしCachyOSのデフォルトシェルがFishであるのでパスの入力も比較的楽にできますし上記のようにして起動しておけば、次からはターミナルで上下矢印キーの操作だけでも済みますし、上記のような起動方法でよいかと思います。
 
 ### WMが違ってもやることは同じ
 
@@ -94,7 +150,7 @@ xkb_rules_layout=jp
 
 </div>
 
-このような対応になっています。`xkb_rules_layout=jp`を入力して保存したらすぐに日本語配列になります。
+これらを参考に何とか`xkb_rules_layout=jp`を入力して、保存したらすぐに日本語配列になります。
 
 #### fcitx5を使えるようにする
 
