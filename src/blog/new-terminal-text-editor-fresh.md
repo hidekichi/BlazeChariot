@@ -2,7 +2,7 @@
 title: 今どきのターミナルはエディターにもなる - fresh -
 description: nanoやmicroなどが以前からありましたが新たにFreshというRust製のTUIテキストエディターが登場しました
 date: 2025-12-18
-update: 2025-12-22
+update: 2026-08-03
 category:
   - blog
 tags:
@@ -44,6 +44,16 @@ freshで言うとIDEライクを言うようにGUI風の標準キー設定(`Ctrl
 贅沢な問題点ですが、シンプルに編集だけしたい人にとってはオーバースペックとも言えます。もっと機能を絞っても良いという人らがいることでしょう。
 
 ### インストールの方法
+
+#### 2026/8/3 追記 CachyOSでの
+
+CachyOSでは、paruが入っているので、
+
+```shell
+paru -S fresh-editor-bin
+```
+
+で、バイナリでの配布がありました。yayで入れてもparuで入れてもどちらでも良いですが、バイナリで入れるのが良いかと思います。
 
 #### Arch Linux
 
