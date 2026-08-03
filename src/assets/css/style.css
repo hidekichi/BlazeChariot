@@ -2267,8 +2267,10 @@
     color: var(--background-color);
     cursor: pointer;
     /*height: 0.9375rem;*/
-    height: 1.25em;
-    width: fit-content;
+    /*height: 1.25em;*/
+    /*width: fit-content;*/
+    width: 1lh;
+    aspect-ratio: 1 / 1;
     display: inline-flex;
     background-color: var(--link-color);
     padding: calc(var(--padding-xs) / 2);
