@@ -2,7 +2,7 @@
 title: Waylandコンポジターでキーが時々効かなくなる場合のfcitx5の設定
 description: 長時間スリープから復帰後、主要キーが一時的に効かなくなる場合に
 date: 2026-08-08
-update: 2026-08-12
+update: 2026-08-22
 category:
   - blog
 tags:
@@ -21,6 +21,40 @@ layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---
 
+## 手を入れてから使用するのが面倒くさいので報告した事を報告 8/22追記
+
+先週あたりに、毎回fcitx5の再起動も面倒くさいので**報告してしまおう**とfictx5のGithubにissueとして報告しました。
+
+[[Wayland] Key input freezes after sleep/idle until Fcitx5 is restarted or unblocked #1642](https://github.com/fcitx/fcitx5/issues/1642)
+
+すると、Fcitx5の開発者からコメントがあり、<u>コンポジター側じゃね？</u>という返答とそのログのとり方を教えてもらいました。
+内容的には、fcitx5はコンポジターからの通知を単に受け取ってるだけなので、fcitx5がなにかしている可能性は低いという事でした。親切にDMSのソースコードまで見てもらい、「DMSのクリップボード機能あたりに問題があるかもしれんね」というアタリを付けてもらいました。
+エラーが起こることで何かしらのキーが押しっぱになって、それが原因で入力ができなくなるのかも知れないと。
+
+その後、DMS側にも同じ事を報告してみました。
+
+[Key input / focus gets stuck after sleep when running DMS #3073](https://github.com/AvengeMedia/DankMaterialShell/issues/3073)
+
+するとDMS側は、「仮想キーボードを常駐させているわけではなく、クリップボードから貼り付ける際に明示的に接続を開き終了時に切断する仕組みになっているので、クリップボードの関係は低いと思う」とコメントをもらいました。
+しかし、「明確な原因になる所は見当たらないが、関連する要因がないかをもう少し見てみる」という返答をもらい、その後すぐに、
+
+- [clipboard: release virtual keyboard keys on paste error paths ef05dbe](https://github.com/AvengeMedia/DankMaterialShell/commit/ef05dbed9b02204080b91ed0165cda6554dc4aad)
+- [displays: apply refresh rate changes without compositor config reload fdf0d73](https://github.com/AvengeMedia/DankMaterialShell/commit/fdf0d73b30ecd02d3ea3bc68a8f5444451cdf96e)
+
+と2点の修正が入りました。fcitx5の開発者がアタリをつけたあたりに何かしら問題があったようです。下の修正はクリップボードとは関係ないのですが、何かしら手が入ったという感じです。
+
+これら修正版は2026/8/22の早朝では**まだリリースされていない**ので、これらで直るかどうかは<u>リリース後にテストしてみてからでしかわかりません</u>。
+
+長時間のスリープ後に発症したり、fcitx5のデフォルト設定ではトレイアイコンの「再起動」では直らず、←矢印押しっぱで直し、以下の記事のWayland寄りの設定にしてからはトレイアイコンの「再起動で」直るようにはなったが、Hyprlandのバインドは効くけどもキーボードから入力できないと理由のわからない挙動を見せていたわけです。
+
+これはfcitx5の設定でどうにかなるものではないと思ったので報告したわけですが、以下の記事に書いた**Wayland寄りの設定**は、少なからず有効だと思います。
+現状ではGTKの環境変数を入れているものの、もしこのDMSの修正で正常になり、環境変数はXWaylandだけ書いて、GTK/Qtの設定はなるべく書かないというfcitx5の理想の形に持っていき、かつPlasmaやGNOMEでもはたまたDMSの様々なコンポジターでも使用できるのであれば、この数ヶ月、色々試して・調べてとしたことは決して無駄ではなかった……と、なるといいなと。
+自分が報告したことがきっかけで直るのなら尚良いなと思うわけです。
+直るかどうかはわかりませんけども、障害となっていたことの一つを取り除くことができたと言えると思うので。
+
+まずは現在の進捗を報告した次第です。
+
+---
 
 これら設定を行っても完全に直るわけではありません。症状が出にくくなるか、出てもすぐに収まるそう言う類のものです。
 本当の解決にはfcitx5自体が今後のアップデートで現在よりももっとWaylandに対応される必要があります。それを前置きしておきます。
