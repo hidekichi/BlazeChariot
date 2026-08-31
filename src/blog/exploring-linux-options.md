@@ -2,7 +2,7 @@
 title: MintやUbuntuをWindowsの代替に使うのは止めてFedoraにしとこう
 description: どうしてもそれが良いという場合はこの全てではなく…という体で、Dank Material Shellの設定とArch系を勧める話
 date: 2026-04-29
-update: 2026-08-30
+update: 2026-09-01
 category:
     - blog
 tags:
@@ -400,12 +400,24 @@ curl -fsSL https://install.danklinux.com | sh
 #### 日本語キーボードから正しく入力するために
 
 設定ファイルを書く前に、日本語のキーボード配列で文字が入力できるようにします。
-Hyprlandの設定ファイルは、`~/.config/hypr/hyprland.conf`を開きます。ユーザーディレクトリのファイルなので好きなエディターで開いて編集保存できます。
+Hyprlandの設定ファイルは、`~/.config/hypr/hyprland.conf`を開きます(→新Verでは、`~/.config/hypr/hyprland.lua`)。ユーザーディレクトリのファイルなので好きなエディターで開いて編集保存できます。
 
 ```bash
+# 旧バージョン(Hyprland.conf)
 input {
     kb_layout = us
 }
+```
+
+新バージョンでは以下のようになっています。
+
+```bash
+hl.config({
+  input = {
+    --  empty inhrits XKB_DEFAULT_LAYOUT (libxkbcommon), fall back to "US"
+    kb_layout = "",
+  },
+})
 ```
 
 とある部分の`us`を`jp`に変更します。`Ctrl + S`で保存すれば即座に設定は反映されるので、日本語キーボードなのに英語配列であったものが正しく日本語配列になります。
@@ -415,7 +427,20 @@ input {
 キーボードの配列を直した上に`STARTUP APPS`という場所があります。ここに、
 
 ```bash
+# 旧バージョン(Hyprland.conf)
 exec-once = fcitx5 -d
+```
+
+新バージョンでは、
+
+```bash
+-- DMS_STARTUP_BEGIN
+hl.on("hyprland.start", function()
+  hl.exec_cmd("dbus-update-activation-environment --systemd --all")
+  hl.exec_cmd("systemctl --user start hyprland-settion.target")
+  hl.exec_cmd("fcitx5 -d")
+end)
+-- DMS_STARTUP_END
 ```
 
 と追記します。通常はこれで使用できるはずですが、まだfcitx5が動作していないかも知れません。`SUPER + space`でアプリ一覧から`fcitx5`を探します。タイトルの下の説明に「Fcitx5を開始する」とあるやつを起動します。
@@ -436,16 +461,24 @@ exec-once = fcitx5 -d
 
 #### バインドを追加する
 
-Hyprlandのバインドの設定ファイルは、`~/.config/hypr/DMS/bind.conf`にあります。主に設定しておくと便利なのは、ファイルマネージャーとブラウザぐらいですが、他に必要なものがあれば追加もできます。
+Hyprlandのバインドの設定ファイルは、`~/.config/hypr/DMS/bind.conf`にあります(→ 新バージョンは `~/.config/hypr/dms/binds-user.lua`)。主に設定しておくと便利なのは、ファイルマネージャーとブラウザぐらいですが、他に必要なものがあれば追加もできます。
 ドックなどもあるためにそのあたりは臨機応変に。
 
 ```bash
-bind = SUPER, E, exec, thunar # thunar file-Manager
+# 旧バージョン(bind.conf)
 bind = SUPER, B, exec, firefox # Firefox
+bind = SUPER, E, exec, thunar # thunar file-Manager
+```
+
+新バージョンでは、
+
+```bash
+hl.bind("SUPER + B", hl.dsp.exec_cmd("firefox"))
+hl.bind("SUPER + E", hl.dsp.exec_cmd("thunar"))
 ```
 
 これをわかりやすい場所に書いてください。HyprlandもNiri共に(書き方は異なりますが)設定は保存したら即座に反映されます。もし記述に間違いがあればこれも即座にエラーが上部に表示されますので、正しく書き直します。
-正しい書き方は公式Wikiの[Hyprland Wiki(v0.54.0) - bind](https://wiki.hypr.land/0.54.0/Configuring/Binds/)で確認してください。次期バージョンでは書き方が異なりますのでDMS自体の更新も必要になると思います。
+正しい書き方は公式Wikiの[Hyprland Wiki(v0.54.0) - bind](https://wiki.hypr.land/0.54.0/Configuring/Binds/)(最終バージョンは[bind](https://wiki.hypr.land/configuring/core/binds/))で確認してください。
 
 #### DMSのアップデートの方法
 
