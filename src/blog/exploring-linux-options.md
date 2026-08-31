@@ -603,11 +603,11 @@ osd-border-color='#99000000'
 
 ## localSendを使用するために
 
-[localSend](https://localsend.org/ja)は、Gnomeを入れたら「ソフトウェア」アプリから検索するとすぐ見つかります。Flatpakでインストールされると思います。
-[公式サイトでAppImageなどでも配布されている](https://localsend.org/ja/download?os=linux)のでこれらを[Gear Lever](https://flathub.org/en/apps/it.mijorus.gearlever)で管理するとより楽に使用できるかも知れません。
+[localSend](https://localsend.org/ja)は、Fedora Workstation(Gnome)を入れたら「ソフトウェア」アプリから検索するとすぐ見つかります。この場合、<u>Flatpakでインストールされるはず</u>です。
+こちらの解説では、[公式サイトでAppImageでも配布されている](https://localsend.org/ja/download?os=linux)のでこれらを[Gear Lever](https://flathub.org/en/apps/it.mijorus.gearlever)で管理するとFlatpakによるセキュリティ的な制限無くより楽に使用できるのでAppImageで進めます。
 Arch系の場合はAUR(Arch User Repository)というものがあるので`yay -S localsend-bin`あるいはparuを使用して`paru -S localsend-bin`でインストールできます。
 
-FedoraではCOPRリポジトリ(ネイティブなRPMパッケージ)という、Arch系で言うAURのようなものもあります。これは個人が公開しているリポジトリを利用するものなのであまりお薦めはできません。またアップデートを公開している個人の人が追従できるかが問題ともなります。
+FedoraではCOPRリポジトリ(ネイティブなRPMパッケージ)という、Arch系で言うAURのようなものもあります。これは個人が公開しているリポジトリを利用するものなのであまりお薦めはできません。また公開している個人がアップデートのたびに追従できるかが問題ともなります。
 
 AppImageでダウンロードして、更に便利にするためにFlatpakでGear LeverからAppImageの更新や起動を管理しようとすると、
 
@@ -620,15 +620,15 @@ AppImageでダウンロードして、更に便利にするためにFlatpakでGe
 
 ### flathubを利用可能にする
 
-Flatpakの[setup](https://flathub.org/ja/setup)では、利用中のディストリビューションでFlathubの利用に必要なコマンドが書いてあります。
+Flatpakの[setup](https://flathub.org/ja/setup)では、使用中のディストリビューションで、Flathubの利用に必要なコマンドが書いてあります。
 
-FlatpakはFedora Workstation、Fedora Silverblue、Fedora Kinoiteにデフォルトでインストールされていますが、spinなどではそれらが入っていないため、もしくはWorkstation(GNOME)等は既に入っているはずですが「<u>Fedora公式が管理するFlatpakリポジトリ</u>」だけなので利用できなかった場合に、ターミナルから以下のコマンドを実行します。
+FlatpakはFedora Workstation(GNOME)、Fedora Silverblue(GNOME・Atomic)、Fedora Kinoite(Plasma・Atomic)にデフォルトでインストールされていますが、spinも「<u>Fedora公式が管理するFlatpakリポジトリ</u>」だけなので、flathub本家を利用できなかった場合にはターミナルから以下のコマンドを実行します。
 
 ```shell
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 ```
 
-flathubが導入できたらflathub版のlocalSendを使用することもできます。ここではAppImageでの解説で続けます。
+flathubが導入できたら本家からでもFlatpak版のlocalSendを使用することもできます。ここではAppImageでの解説で続けます。
 
 ### Gear Leverの導入
 
@@ -640,6 +640,9 @@ Gear Leverは、AppImageの管理や起動、対応していたら更新も可�
 flatpak install flathub it.mijorus.gearlever
 ```
 
+> AppImageとGear Leverとは
+> 実行権限を与えるだけで全てがパッケージになっているのですぐに使用することができます。好きなところから実行できるので管理が大変になったりするので、Gear Leverから一括管理することで各々に実行権限を与える作業をせずとも良くなり、`.desktop`ファイルも自動で作られるためアイコンなどをドックなどに置くこともできるようになります。
+
 #### Gear LeverにAppImageを登録して起動できるようにする
 
 ダウンロードしておいたlocalSendのAppImageをGear Leverから開きます。ダウンロードしたファイルはFedoraのダウンロードディレクトリ(`~/ダウンロード`あるいは`~/Download`)に入っているかと思います。
@@ -648,7 +651,7 @@ flatpak install flathub it.mijorus.gearlever
 - Gear Leverの設定で`~/AppImages`(ホーム直下のAppImagesフォルダ)がデフォルトになったようなので、ホームディレクトリに`AppImages`ディレクトリを作成して選択します。
    - `/`はホームディレクトリです。`/[YOUR-NAME]/AppImage`の[YOUR-NAME]は利用者によって各々なので省略して`~/`と表します
    - 以前は`~/.AppImages`と隠しフォルダになっていましたが変わったようです
-- Gear Leverから初回は起動させることで、ディストリビューションのドックなどに登録もできるようになるかと思うので((.desktopファイルが作成されるため))、その後はドックから起動すればよいですが、ある程度時間が経った後、Gear Leverを起動させて登録した各アプリの更新状況を確かめると言う利用法が良いかと思います。
+- 初回はGear Leverから起動させることで、ディストリビューションのドックなどに登録もできるようになるかと思うので((.desktopファイルが作成されるため))、その後はドックから起動すればよいですが、ある程度時間が経った後、Gear Leverを起動させて登録した各アプリの更新状況を確かめると言う利用法が良いかと思います。
 
 Gear Leverはアップデートで問題に直面した場合でも、以前のバージョンも保持してあり簡単にロールバックすると言う機能も備わっています。
 
@@ -666,20 +669,20 @@ sudo dnf install fuse-libs
 sudo dnf install fuse
 ```
 
-と書かれています。fedoraの最新版ではより新しいFUSE 3に関連するパッケージが含まれていてそれらを強く推奨していますが、多くのAppImageがFUSE2を前提に作られており、FUSE 3では旧規格の古いライブラリが見つからないとなってしまう場合が多いという報告があります。
+と書かれています。fedoraの最新版ではより新しいFUSE 3に関連するパッケージが含まれていて、それらを強く推奨していますが、多くのAppImageがFUSE2を前提に作られており、FUSE 3では旧規格の古いライブラリが見つからないとなってしまう場合が多いという報告があります。
 そのため敢えて、`sudo dnf install fuse-libs`で対応します。今後多くのflatpakパッケージがFUSE 3に対応していけばFedoraの理想通りの方法で対応できると思います。
 
 このようにして、localSend(AppImage版)を管理、利用する事が可能になります。
 
-Flatpakはサンドボックス化(隔離仕様)のバージョンですから、通常のバージョンとはやや動作が異なる場面があります。
-AppImageは従来の公式配布のあるDebianやArch系の各ディストリビューションで使用するのと何も違いはありません。
+Flatpakはコンテナ化、サンドボックス化(隔離仕様)のバージョンですから、通常のバージョンとはやや動作が異なる場面があります。
+localSend(AppImage)は従来の公式配布のあるDebianやArch系の各ディストリビューションで使用するのと何も違いはありません。
 しかしFlatpak版はサンドボックスされた中で動くため、稀に同じネットワークの中にあるデバイスを見つけられなかったり、見失ったり、通信が遮断されてしまう場合があります。
 
-基本的には、ユーザーディレクトリ(例えば「~/ダウンロード」等)のファイルをやり取りするのでほとんどはFlatpakでも問題が出そうな制限はありませんが、逆にWindowsやスマホから送信されたものを受ける時に、内蔵された別のドライブに保存したいとかと言う場合に、エラーになる可能性を秘めています。
+基本的には、ユーザーディレクトリ(例えば「~/ダウンロード」等)のファイルをやり取りするのでほとんどはFlatpakでも問題が出そうな制限はありません。しかしWindowsやスマホから送信されたものを受ける時に、PCに内蔵された別のドライブで保存したい等と言う場合、エラーになる可能性を秘めています。
 こういった場合は、[Flatseal](https://flathub.org/ja/apps/com.github.tchx84.Flatseal)などで権限を解放するより手はありませんが、そうするとセキュリティ的に問題が出る場合もあります。
 
-これらアプリは善意の元作成されているので大抵は問題ないわけですが、導入するその他のアプリが必ずしもそうだとは限りません。せっかくのサンドボックス化されている権限を解放するということはそういうことです。
-そのため、この辺りはそれらアプリの利用者の考え方に委ねる部分ではあるものの、であればはじめからAppImageで何も問題ないとも言えるためこれらで利用する方法をlocalSendを題材に解説しました。
+これらアプリは善意の元、作成されているので大抵は問題ないわけですが、導入するその他のアプリが必ずしもそうだとは限りません。せっかくのサンドボックス化されている権限を解放するということは、弱点を晒してしまう事にもなりかねません。
+そのため、この辺りはアプリを使用するそれぞれの考え方に委ねる部分ではあるものの、であればはじめからFlatpak的なセキュリティがないAppImageで何も問題ないとも言えるため、AppIageを利用する方法をlocalSendを題材に解説しました。
 
 ### Firewallの設定
 
