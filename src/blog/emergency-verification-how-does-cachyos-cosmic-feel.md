@@ -2,7 +2,7 @@
 title: 緊急検証！CachyOSのCosmicデスクトップ環境の感じはどうだろうか？
 description: 前回、Fedora Cosmic Spinを試してみましたが、今度はArch系のディストリビューションであるCachyOSではどうだろうかを試してみました。
 date: 2025-10-30T03:43:20.025Z
-update: 2026-07-23
+update: 2026-09-05
 category:
   - blog
 tags:
@@ -29,6 +29,7 @@ permalink: /blog/{{ page.fileSlug }}/
 {ytp::https://youtu.be/-KCV7o4HQOk::PopOS COSMIC Desktop Update: New Frosted Glass!}
 
 > 11/8にアップデートをして色々更新されたので試してみた内容と、それまでの内容の修正などを加筆しました
+> 2026/9/5に、情報が古くなっている箇所を部分的に加筆修正しましたが、まだキモとなる部分の完全対応ができていないようなので全てを直したわけではありません。まずは英語で全世界を対象に問題部分のfix、あるいは新機能の追加などが優先されていて日本語の完全対応や使い勝手の向上等は後回しになっているようです
 
 ## 色々調べるために次のようにしてインストール{class="!mt-[1.5em]"}
 
@@ -49,6 +50,9 @@ Fedoraを使っているとどうしてもいつもの自分の環境から見�
 ## 準備を始めていく
 
 ### AURを利用するのでyayを入れる
+
+> 記事を書いた後気づいたのですが、CachyOSは`paru`が最初から入っているので敢えて`yay`を入れる必要はありません。
+> 以降、`yay`で書いてある部分は`paru`で代用できます
 
 Arch系のディストリビューションなので必要なものは後からパッケージマネージャである`pacman`と`yay`で入れますが、CachyOSは`yay`が入っていませんでした。そのため、
 
@@ -136,6 +140,12 @@ sudo ufw status
 とターミナルから入れると、動作していれば`Status: active`となっているはずです。設定がどうであれ、動作しているかどうかの確認はこれでできます。
 localSendの場合は、`53317`ポートを利用するので、UDP/TCPの両方を設定します。もちろんこれらは任意のポートに設定できます。ソフト側でポートを設定して、それらを別のlocalSendでも設定し、それらに合わせてFirewallの設定をするという感じです。
 
+```bash
+sudo ufw allow 53317/tcp
+sudo ufw allow 53317/udp
+sudo ufw reload
+```
+
 ### Cosmicの設定など
 
 ![CachyOS Cosmic settings](../img/cachyos_cosmic_tiling.avif)
@@ -220,6 +230,7 @@ COSMIC Storeは無効になっているでしょうし、これはその内に`p
 > pamacはManjaroなどで使われているGUI版のパッケージマネージャです。アプリストアとも言えます。ソフトのほとんどが無料で使用できるので、ストアと言うと有料な感じがしますがそんなことはありません。他のArch系でも利用はできます。
 
 > 11/8にアップデートしましたが、Cosmic Editの日本語の入力ができない問題は継続中
+> 2026/8～9月、Fedoraでしか確認していませんが、日本語が入力できるようにはなったものの使い勝手はイマイチでGNOMEやPlasmaのようには使えませんでした。まだCosmicと付くアプリ以外を使用したほうが良さそうです
 
 画面下のドックには、Cosmic Settingsがあります。この中の項目の`Applications`から、デフォルトのソフトを選択することができます。
 ファイルマネージャーであれば、同じWaylandで動作しているGnomeの`ファイル(Nautilus)`や、KDEの`Dolphin`、あるいはWayland対応のものではないかと思いますが、Xfceの`Thunar`など使い勝手の良いもので良いかと思います。
@@ -263,6 +274,8 @@ Hyprland Wikiの意図を正しく汲み取れないかも知れませんし、�
 通常は、`bind = SUPER, E, exec, ～`で良いはずですが、`bindd = ...`と書いてあったりで、その違いは何かというのに到達するだけでだいぶ時間がかかることもあるでしょう。これは`exec`などのdispatcherの前に簡単な説明(description)を入れることができると言うだけの事ですが、bind**d**の`d`フラグって何だとなった時、それを調べるのに時間がかかりすぎるのです。
 
 ### ひとまずサックリと設定だけしてみる
+
+> Hyprland、Dank Material Shellはバージョンアップし以下の情報は古くなっています。他の記事などで`hyprland.lua`の書き方を書いているのでそちらを参考にしてください。→ [Fedoraの説明ページなどにも書いています](/blog/exploring-linux-options/)
 
 便利に使えるわけではありませんが、まず設定として、`~/.config/hypr/hyprland.conf`の一番下の行にある、
 
