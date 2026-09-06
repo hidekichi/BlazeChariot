@@ -506,7 +506,7 @@ input {
 hl.config({
   input = {
     --  empty inhrits XKB_DEFAULT_LAYOUT (libxkbcommon), fall back to "US"
-    kb_layout = "",
+    kb_layout = "jp",
   },
 })
 ```
