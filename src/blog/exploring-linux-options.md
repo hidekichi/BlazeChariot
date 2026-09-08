@@ -63,7 +63,7 @@ MintやUbuntuから始めるとそこに固執してしまうようになった�
 
 ### 同じPCにWindows11とFedoraを入れてロボットで操作したテスト
 
-{ytp::https://youtu.be/KqtlpqeYhjM::}
+{ytp::https://youtu.be/KqtlpqeYhjM::Linux vs. Windows 11 Speed Test (Lab Tested)}
 
 Youtubeの概要欄和訳──実際のアプリやワークフローにおいて、Linux（Fedora）とWindows 11のど​​ちらが高速かを比較するスピードテストを実施しました。使用したのは、構成が同一のDell XPS 13（Intel Core 5 320、8GB RAM、512GB SSD）2台です。
 
