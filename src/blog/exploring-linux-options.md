@@ -2,7 +2,7 @@
 title: MintやUbuntuをWindowsの代替に使うのは止めてFedoraにしとこう
 description: どうしてもそれが良いという場合はこの全てではなく…という体で、Dank Material Shellの設定とArch系を勧める話
 date: 2026-04-29
-update: 2026-09-03
+update: 2026-09-08
 category:
     - blog
 tags:
@@ -61,6 +61,17 @@ MintやUbuntuから始めるとそこに固執してしまうようになった�
 
 しかし時代は変わったのです。
 
+### 同じPCにWindows11とFedoraを入れてロボットで操作したテスト
+
+{ytp::https://youtu.be/KqtlpqeYhjM::}
+
+Youtubeの概要欄和訳──実際のアプリやワークフローにおいて、Linux（Fedora）とWindows 11のど​​ちらが高速かを比較するスピードテストを実施しました。使用したのは、構成が同一のDell XPS 13（Intel Core 5 320、8GB RAM、512GB SSD）2台です。
+
+掲載記事[A Clanker Pitted Fedora Against Windows 11. Fedora Won, Mostly｜IT'S FOSS](https://itsfoss.com/news/fedora-beats-windows-11/)(人間ではなく、厳密なロボットによる自動テストで Fedora と Windows 11 を直接対決させたところ、大半のテストで Fedora が勝利した)
+
+> クランカーとは
+> テック系メディアやYouTubeチャンネルの「PhoneBuff」がテストに使用している自動計測用の「ロボット（ロボットアーム、または自動化されたマウス・キーボード操作システム）」のこと
+
 ## なぜFedoraを勧めるか
 
 Arch系ほど自己責任ということもなく、Ubuntu系ほどユーザーフレンドリーとまでは言えないまでも、「保守的すぎず、過激すぎない」いつの時代も<u>今のLinuxの標準</u>と言えるのがFedoraです。
@@ -108,7 +119,7 @@ Arch系の更新ファイルのリリースはユーザーも巻き込んでの�
 Arch系で痛い目を見た人なら「Archに戻りたくない」と考えるのもわかります。それらを踏まえて「Fedoraでいいんじゃない？」と提案したいのです。
 自己責任とは言いながら個人的には更新のタイミングですらいつでもできると言う、その<u>自由さがあるArch系の方が好き</u>なのです。
 
-{ytp::https://youtu.be/RkvoysTSnD4::Why Everyone is Saying "Fedora is The New Ubuntu" }
+{ytp::https://youtu.be/RkvoysTSnD4::Why Everyone is Saying "Fedora is The New Ubuntu"}
 
 この動画では<u>Fedoraは新しいUbuntuになれるか</u>と問いかけ、そして「多くの人がArchやUbuntuよりもFedoraを称賛している動画ばかりでもわかるだろう」と言っています。字幕を日本語にして確認してみてください。
 ArchかFedoraかは好みの問題ですけども「Ubuntuよりは」という点には賛成です。
