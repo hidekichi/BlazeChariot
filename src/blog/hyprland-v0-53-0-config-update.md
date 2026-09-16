@@ -16,6 +16,10 @@ layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---
 
+<details>
+<summary>何が起こったか2 - Hyprland v0.55、DMS v1.5</summary>
+<div>
+
 ## 何が起こったか2 - Hyprland v0.55、DMS v1.5
 
 [DMS 1.5 "The Wolverine" Released](https://danklinux.com/blog/v1-5-release)
@@ -26,6 +30,11 @@ permalink: /blog/{{ page.fileSlug }}/
 確実にここに原因があり、アップデートで修正できるとは言い切れないものの、同じ問題を抱えていた方がいらっしゃるようでしたらこの機会にアップデートを試してみてください。
 
 ここではHyprland用に書いていますが、Niriやそれ以外にも[MangoWM](https://github.com/mangowm/mango)のサポートもされるようになりました。
+
+</div>
+</details>
+
+## MangoWM
 
 {ytp::https://youtu.be/Q1Jgw_q0gWE::How to Install and Customize MangoWC (2026 Edition) - Wayland Compositor }
 
@@ -183,7 +192,8 @@ GUIで行ってもLuaファイルを編集して保存しても、即時反映�
 
 ----
 
-ここから先は古いバージョンの話です
+ここから先は`~/.config/hypr/hyprland.conf`に設定を書いていた古いバージョンの話です。
+現行バージョンの設定はまだまとめていませんが[MintやUbuntuをWindowsの代替に使うのは止めてFedoraにしとこう](/blog/exploring-linux-options/)の下の方に書いてあります。
 
 ## 何が起こったか
 
