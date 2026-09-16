@@ -2,7 +2,7 @@
 title: Dank Material Shell 1.6.1がCachyOSについに来た
 description: Fcitx5だと疑っていた時もありました、Fcitx5、DMS両開発チームに報告した後、テストして解決したであろうことの報告と新しいバージョンについて
 date: 2026-09-14
-update: 2026-09-14
+update: 2026-09-16
 category:
   - blog
 tags:
