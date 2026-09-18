@@ -40,6 +40,7 @@ function setupCopyButton(pre, code) {
   const button = document.createElement('button');
   button.className = 'copyButton';
   button.setAttribute('aria-label', 'コードをコピー');
+  button.title = `コードをコピー`;
   button.innerHTML = `<svg viewBox="0 0 24 24"><use href="#tabler-copy-plus"></use></svg>`;
 
   pre.appendChild(button);
