@@ -2,7 +2,7 @@
 title: fcitx5の公式から見る2026年の設定事情
 description: X11からWaylandへの過渡期ということもあり、設定が色々ややこしくなってきているようです
 date: 2026-02-05
-update: 2026-08-07
+update: 2026-09-20
 category:
   - blog
 tags:
@@ -13,6 +13,7 @@ images:
   - ../img/etc_xdg_autostart_fcitx5.avif
   - ../img/input_panel_flatpak_extension_manager_1.avif
   - ../img/input_panel_flatpak_extension_manager_2.avif
+  - ../img/plasma_virtual_keyboard.avif
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---
@@ -213,6 +214,7 @@ QT_IM_MODULES=wayland;fcitx
 ### GNOME(Wayland)
 
 GnomeはIBusとの統合が非常に強力なため、fcitx5を使用する場合は少し工夫が必要です。
+下にあるまとめでやることは書いてあります。とてもシンプルな操作で済みますが、その内容について最初に説明してからの記述になっているので、だいたいわかる方は「GNOMEのまとめ」だけご覧になってください。
 
 > 2026年6月23日 追記
 > GNOME 50へのアップデートに伴い、Ver.49までの対応だったkimpanelで不具合が一部ありましたが、Ver.50に正式対応したので、問題が無くなっただろうと思われるため、以下に諸々追記していた対応方法等を削除して、元の記事の状態に戻しました。[GNOME EXTENSIONS](https://extensions.gnome.org/extension/261/kimpanel/)の少し下にスクロールした所に対応バージョンなどが記載されています
@@ -273,7 +275,7 @@ GnomeはIBusとの統合が非常に強力なため、fcitx5を使用する場�
 これらの方法は<u>古いバージョンのGnomeだとエラーが出る可能性</u>があります。何度か拡張機能の刷新があったと思いますがGnome45.3で拡張機能が機能しなくなったというのを覚えています。Gnome46(2024年4月ぐらい)からは現行と同様になったはずなので46以降なら問題ないかと。それ以前は問題がある可能性があります。
 2026年2月現行版のGnomeだと問題ありません(実証済み。画像参考)。
 
-#### Gnomeのまとめ
+#### GNOMEのまとめ
 
 インストールの方法なども書いたので{煩雑|はんざつ}になってしまいましたが、簡単にまとめると、
 
@@ -287,7 +289,9 @@ GnomeはIBusとの統合が非常に強力なため、fcitx5を使用する場�
 
 KDEはfcitx5と<u>最も相性が良い環境</u>です。Wayland-onlyの宣言もしており、X11は廃止していくことが現実味を帯びてきていますが、X11のアプリが動かなくなるということはなく、`XWayland`という互換レイヤーがバックグラウンドで動作し、古いアプリの描画をWayland上で肩代わりします。
 
-- システム設定の「仮想キーボード」項目から「Fcitx5」を選択するだけ
+1. fcitx5をあらかじめインストールしておく
+   - いわゆる`fcitx5-configtool`もPlasmaの設定から操作できるので起動させる必要はありません。
+2. システム設定の「仮想キーボード」項目から「Fcitx5」を選択する
 
 ![fcitx5の選択](../img/plasma_virtual_keyboard.avif)
 
@@ -300,9 +304,16 @@ KDEはfcitx5と<u>最も相性が良い環境</u>です。Wayland-onlyの宣言�
 
 ### Hyprland / Sway
 
+<details>
+  <summary>Hyprland 旧設定</summary>
+  <div>
+
 - `~/.config/hypr/hyprland.conf`などで`exec-once = fcitx5 -d`を記述する。ログインしたらfcitx5が実行されるようにする設定
    - 「などで」という意味としては、自動起動するものだけ別でまとめて書いてある場合があるからです
 - 同様に、環境変数で`env = XMODIFIERS, @im=fcitx`は書いておくと無難です。無くても問題ないですが古いアプリでfcitx5が動作しないなどがあった場合に。他の変数は特定のアプリ(VSCodeなど)で文字入力ができない場合にのみ追加します
+
+  </div>
+</details>
 
 #### 2026/7/20 → 8/7追記
 
@@ -332,6 +343,10 @@ end)
 > 一方、何かしらの問題が起こってfcitx5を再起動させる時、GUI的にアイコンを右クリック等して出てきたメニューから再起動をしてもこれはmozcや設定を更新して反映させるためなら良いのかも知れませんが、いわゆる一旦終了させてから再度起動するという場合には、本体を終了させて、`fcitx5 -d -r`が必要になります。UIを終了させて、既に動いているプロセスを殺してから新たに起動させるために置き換え(replace)が必要ということです。
 > ログインしたばかり(セッションの開始・スタートアップ)では、fcitx5のプロセス自体が常駐していないので置き換える必要はありません。
 
+<details>
+  <summary>DMS v1.5で起こっていた問題(現在はv1.6で解決済み)</summary>
+  <div>
+
 現在、PlasmaやGNOMEが現行のWayland対応になる前、あるいはDMSが1.5(The Wolverine)になる前には起こらなかったと思いますが、fcitx5と競合しているのか←矢印、バックスペース、SUPER(Windowsキー/⌘キー)などが長時間のスリープからの復帰後などに一時効かない状態になっていることをいろんな記事で書いています。
 Plasma、GNOME環境では起こっていないようにも思いますが、DMSなどのHyprlandやNiri、Mango WMなどのコンポジター上でfcitx5を起動していて長期スリープからの復帰後に起こったりします。
 これらはおそらくX11環境とWayland環境で`SUPER`などを取り合っているのだろうと当たりをつけ、その最適な設定を探っている感じです。今試しているのでは、ほぼ問題が解消されているようにも思いますが長期スリープからの復帰後によく起こるので検証に時間がかかっています。
@@ -340,6 +355,37 @@ fcitx5を終了させて再度ランチャーやメニューからfcitx5を起�
 なるべくなら設定でどうにかして、最悪、再起動を自動的にできる方法を考えてみたいと思います。
 
 → [Waylandコンポジターでキーが時々効かなくなる場合のfcitx5の設定](/blog/fcitx5-sp-fix-hyprland_dms/)
+→ [Dank Material Shell 1.6.1がCachyOSについに来た](/blog/dms-161-finally-out-on-cachyos/)
+
+  </div>
+</details>
+
+#### Swayの設定
+
+Swayの設定が抜けていましたので追記。
+
+Swayは元々i3(X11)をWaylandに対応させるためにゼロから再設計されたコンポジタです。なので、基本的な設定はWaylandですることと違いはありませんが書き方などがやや異なります。
+
+1. 自動起動させる設定(~/.config/sway/config)
+   - `exec fcitx5 -d`
+   - Hyprlandの起動方法と同じです。`exec`はセッションの起動時のみ実行される書き方です
+2. 環境変数の設定
+   - Hyprlandと同様に`GTK_IM_MODULE`や`QT_IM_MODULE`はグローバルで設定しません。必要に迫った時のみ検討してください
+   - `/etc/environment`や`~/.config/environment.d/envvars.conf`(あるいは`~/.zprofile`/`~/.bash_profile`)に、`XMODIFIERS=@im=fcitx`だけを書いておくのが良いかと思います。
+3. キーボードの設定で、キーボードレイアウトを日本語(`jp`)に設定しておく必要があります。
+      ```bash
+      input "type:keyboard" {
+          xkb_layout jp
+      }
+      ```
+
+おおよそ、書き方が違うだけでHyprlandと同じであることがわかるかと思います。詳細は[Sway-Wiki](https://github.com/swaywm/sway/wiki#input-configuration)(英語)で確認してみてください。
+
+#### MangoWMの設定
+
+→ [最近色々な所で紹介されているMangoWMがDank Material Shellで使えるようになっているので早速使ってみよう](/blog/lets-try-using-mango-wm/)
+
+上記の記事で色々書きました。
 
 #### どうしても古いX11用のアプリを使用せざるを得ない場合
 
