@@ -2788,6 +2788,7 @@
           background-color: #071c1ed1;
           transform: translateX(-2px);
           width: max-content;
+          z-index: 999;
         }
       }
     }
