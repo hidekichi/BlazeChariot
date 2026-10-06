@@ -2,7 +2,7 @@
 title: LinuxとWindowsのアップデートの違い
 description: 聞いたこともないトランザクションとかLinuxは何をしているのでしょうか？
 date: 2026-10-02
-update: 2026-10-03
+update: 2026-10-07
 category:
   - blog
 tags:
