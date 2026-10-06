@@ -328,7 +328,7 @@
       color: var(--code-color);
       padding: 0 var(--padding-ex-xs) 0 !important;
       font-size: 0.825em;
-      --code-space: 0.04em;
+      --code-space: 0.05em;
       display: inline-grid;
       vertical-align: text-bottom;
       transform: translateY(calc((1lh - calc(1lh - var(--code-space))) / 2));
