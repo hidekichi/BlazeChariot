@@ -8,7 +8,7 @@ eleventyExcludeFromCollections: true
     {% set path = page.url | url %}
     {% if page.url and page.data.title and page.data.excludeFromSitemap !== true %}
     <url>
-        <loc>{{ site.url }}{{ page.url | url }}</loc>
+        <loc>{{ site.url }}{{ page.url | url | lower }}</loc>
         <lastmod>{{ (page.data.update or page.date).toISOString() }}</lastmod>
 
         {# 'page.data.priority' が存在すればそれを使い、なければ '0.5' #}
