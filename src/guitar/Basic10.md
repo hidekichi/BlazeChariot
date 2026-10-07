@@ -18,6 +18,7 @@ images:
 permalink: /guitar/{{ page.fileSlug }}/
 ---
 
+
 ## 弾き語りで重要なのはベース音
 
 <div class="table-container">

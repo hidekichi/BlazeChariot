@@ -17,6 +17,7 @@ layout: post.njk
 permalink: /guitar/{{ page.fileSlug }}/
 ---
 
+
 ### ピックの種類
 
 ピックは指の爪の代わりに弦を弾くための道具です。通常は親指と人差し指で挟んで使います。
