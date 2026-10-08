@@ -70,7 +70,7 @@ layout: base.njk
 
 {% for categoryKey, categoryData in guitarArticleLinks %}
   {% for item in categoryData.items %}
-    {% if item.link == page.url %}
+    {% if item.link | lower == page.url | lower %}
 
     {% set currentIndex = loop.index0 %}
     {% set currentList = categoryData.items %}
