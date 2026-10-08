@@ -2,16 +2,16 @@
   "BASIC": {
     "link": "/tags/basic/",
     "items": [
-      { "title": "基本的なこと はじめに", "link": "/guitar/Basic01/" },
+      { "title": "基本的なこと はじめに", "link": "/guitar/basic01/" },
       { "title": "アコギとエレキ、ギターの違い", "link": "/guitar/basic02/" },
       { "title": "どういったギターを選ぶか", "link": "/guitar/basic03/" },
       { "title": "弦の取り付け方", "link": "/guitar/basic04/" },
       { "title": "チューニング", "link": "/guitar/basic05/" },
-      { "title": "指板と押弦の音", "link": "/guitar/Basic06/" },
-      { "title": "ピックについて", "link": "/guitar/Basic07/" },
-      { "title": "アルファベットとドレミ", "link": "/guitar/Basic08/" },
-      { "title": "ドレミファソラシドを覚えてみる", "link": "/guitar/Basic09/" },
-      { "title": "ドレミファソラシドを覚えてみる2", "link": "/guitar/Basic10/" }
+      { "title": "指板と押弦の音", "link": "/guitar/basic06/" },
+      { "title": "ピックについて", "link": "/guitar/basic07/" },
+      { "title": "アルファベットとドレミ", "link": "/guitar/basic08/" },
+      { "title": "ドレミファソラシドを覚えてみる", "link": "/guitar/basic09/" },
+      { "title": "ドレミファソラシドを覚えてみる2", "link": "/guitar/basic10/" }
     ]
   },
   "CHORD": {

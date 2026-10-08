@@ -65,12 +65,13 @@ layout: base.njk
 {% if "/guitar" in page.url %}
 <section class="pageNavi">
 
+  {#
   {% if tags.length > 1 %}
     {% set currentCategory = tags[1] %}
   {% else %}
     {% set currentCategory = tags[0] %}
   {% endif %}
-{#{% set currentCategory = tags.length > 1 ? tags[1] : tags[0] %}#}
+
 {% set currentList = collections.guitarArticleLinks[currentCategory].items %}
 
 {% set prevPost = null %}
@@ -94,11 +95,13 @@ layout: base.njk
   {% endif %}
 
 {% endfor %}
+#}
+{% set prevPost = null %}
+{% set nextPost = null %}
 
-{#
-{% for categoryKey, categoryData in collections.guitarArticleLinks %}
+
+{% for categoryKey, categoryData in guitarArticleLinks %}
   {% for item in categoryData.items %}
-
     {% if item.link == page.url %}
 
     {% set currentIndex = loop.index0 %}
@@ -120,7 +123,7 @@ layout: base.njk
     {% endif %}
   {% endfor %}
 {% endfor %}
-#}
+
 
 {% if prevPost or nextPost %}
   {% if prevPost %}

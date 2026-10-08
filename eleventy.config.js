@@ -327,34 +327,6 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
     });
   });
 
-  eleventyConfig.addCollection("guitarArticleLinks", (api) => {
-    const articles = noDraft(
-      api.getFilteredByGlob("src/guitar/*.md")
-    ).sort((a, b) => a.inputPath.localeCompare(b.inputPath));
-
-    const categories = {};
-
-    for (const item of articles) {
-      const tags = item.data.tags || [];
-      const category = tags.length > 1 ? tags[1] : tags[0];
-
-      if (!category) continue;
-
-      if (!categories[category]) {
-        categories[category] = {
-          items: []
-        };
-      }
-
-      categories[category].items.push({
-        title: item.data.title,
-        link: item.url
-      });
-    }
-
-    return categories;
-  });
-
   // -----------------------------------------------------------------
   // shortcode
   // -----------------------------------------------------------------
