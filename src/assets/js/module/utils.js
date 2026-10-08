@@ -94,6 +94,7 @@ export function isExternalLink(url) {
 
 export function externalLink() {
   const links = document.querySelectorAll('.body-copy a');
+
   if (!links.length) return;
 
     links.forEach((link) => {

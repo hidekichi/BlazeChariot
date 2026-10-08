@@ -65,28 +65,62 @@ layout: base.njk
 {% if "/guitar" in page.url %}
 <section class="pageNavi">
 
+  {% if tags.length > 1 %}
+    {% set currentCategory = tags[1] %}
+  {% else %}
+    {% set currentCategory = tags[0] %}
+  {% endif %}
+{#{% set currentCategory = tags.length > 1 ? tags[1] : tags[0] %}#}
+{% set currentList = collections.guitarArticleLinks[currentCategory].items %}
+
 {% set prevPost = null %}
 {% set nextPost = null %}
 
-{% for categoryKey, categoryData in gutarArticleLinks %}
+{% for item in currentList %}
+
+  {% if item.link == page.url %}
+
+    {% set currentIndex = loop.index0 %}
+    {% set totalItems = currentList.length %}
+
+    {% if currentIndex > 0 %}
+      {% set prevPost = currentList[currentIndex - 1] %}
+    {% endif %}
+
+    {% if currentIndex < totalItems - 1 %}
+      {% set nextPost = currentList[currentIndex + 1] %}
+    {% endif %}
+
+  {% endif %}
+
+{% endfor %}
+
+{#
+{% for categoryKey, categoryData in collections.guitarArticleLinks %}
   {% for item in categoryData.items %}
 
     {% if item.link == page.url %}
 
-      {% set currentIndex = loop.index0 %}
-      {% set currentList = categoryData.items %}
+    {% set currentIndex = loop.index0 %}
+          {% set currentList = categoryData.items %}
+          {% set totalItems = currentList.length %}
 
-      {% if currentIndex > 0 %}
-        {% set prevPost = currentList[currentIndex - 1] %}
-      {% endif %}
+          {% if currentIndex > 0 %}
+            {% set prevPost = currentList[currentIndex - 1] %}
+          {% else %}
+            {% set prevPost = null %}
+          {% endif %}
 
-      {% if currentIndex < currentList.length - 1 %}
-        {% set nextPost = currentList[currentIndex + 1] %}
-      {% endif %}
+          {% if currentIndex < (totalItems - 1) %}
+            {% set nextPost = currentList[currentIndex + 1] %}
+          {% else %}
+            {% set nextPost = null %}
+          {% endif %}
 
     {% endif %}
   {% endfor %}
 {% endfor %}
+#}
 
 {% if prevPost or nextPost %}
   {% if prevPost %}
