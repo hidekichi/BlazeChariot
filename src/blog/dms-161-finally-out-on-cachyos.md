@@ -2,7 +2,7 @@
 title: Dank Material Shell 1.6.1がCachyOSについに来た
 description: Fcitx5だと疑っていた時もありました、Fcitx5、DMS両開発チームに報告した後、テストして解決したであろうことの報告と新しいバージョンについて
 date: 2026-09-14
-update: 2026-09-16
+update: 2026-10-20
 category:
   - blog
 tags:
@@ -17,6 +17,42 @@ images:
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---
+
+## 新しい問題 2026/10/20追記
+
+Dank Material Shell が v1.6.0+となり、直ったかと思っていたキー入力が時々おかしい状態になったので、新たに[DMSチームに報告(PR #3817)](https://github.com/AvengeMedia/DankMaterialShell/issues/3817)しました。
+
+以前はfcitx5を再起動したら、あるいは設定を変えたら、動作したり、復帰したりとありましたが、10/20までの最新バージョンでは、それまで動作していたのに突然キー入力ができなくなったり、日本語あるいは英語入力だけではなくHyprlandの操作も滞るような状態になったので、何かしらが問題なんだろうけども以前とは状況が違って全くアタリがつけられませんでした。
+一応、左Ctrlもしくは`Ctrl + ALT + Del`を押したら動く時もあり、動かない時もありでユーザー側では対処のしようがないと思われたので報告に至った感じです。
+
+比較的、`←矢印キー`を押しっぱなしにしたりで短い間隔で直るようにも思いましたが、以前は一度直ったら次に症状ができるまでは(長期スリープに入るまでは)普通に使えていたものの、今回はランダムに症状が出るようになっていました。
+その時に気がついたのは、それまでにはなかった画面上部のバー右側に表示されていた「LocalSend | fcitx5」のアイコンの並びが問題が起こる時にはよく「fcitx5 | LocalSend」となっていました。そこからアイコンの位置が変わるということは<u>内部で再起動がかかってる？</u>と思ったわけです。
+
+しかし症状が出てからでないとログもとれないだろうということで、その機会を待っていた所、たまたまいい感じに症状が出てすぐに回復したので、すかさず公式ドキュメントにもある`journalctl --user -u dms`をしてみました。
+
+すると、
+
+```bash
+# skipCopy
+dms[1086]: INFO qml: [ShellCore:307] Surface recovery pass 2 screens: 1 eDP-1
+dms[1086]: INFO qml: [ShellCore:45] Recreating bar surfaces, screens: 1 eDP-1
+
+# あるいは
+
+dms[1086]: WARN qt.qpa.wayland.textinput: virtual void QtWaylandClient::QWaylandTextInputv3::disableSurface(...) Trying to disable ... but ... is focused
+qt.qpa.wayland.textinput: virtual void QtWaylandClient::QWaylandTextInputv3::enableSurface(...) Trying to enable ... but ... has focus
+```
+
+というようなログが取れました。`Surface recovery`や`Recreating`、`disableSurface`など怪しい部分が出ていました。今回の報告は、これらの報告になっています。
+
+普通にPCを起動した直後ではこれらが起こっていなかったと思うので、何かしらが原因になってこれら症状を引き起こしていると見られますが、ユーザー側ではそれらはわからないので報告したわけです。
+2026/10/20現在では、まだ返信コメントも改善した報告などもないのでわかりませんが、日々多く寄せられるissueからこれらが目に止まるのかさえも怪しいのでしばらく待つ感じになるかと思います。
+
+もし同様の問題が起こっていたら、内容はわからないけど自分の環境でも(問題が)起こっているとコメントをもらえるとよりDMSチームの目に止まるようにもなるかも知れません。
+
+英語環境でも同じような症状は出ていたりしていても、ちょっと引っかかりがあるな程度で気が付きにくいのかもしれません。日本語環境などではfcitx5を使用していたりで、入力を切り替えたり操作が増える分問題がより重篤な症状になることがあるように思えます。
+
+キーボードで多くを操作するHyprland他コンポジターではキー操作に問題が出ることは、PC操作全体が不能になるぐらい比較的大きな問題です。
 
 ## これまでの流れ
 
