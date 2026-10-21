@@ -9,6 +9,10 @@ tags:
   - Arch系
   - Linux
   - DankMaterialShell
+images:
+  - ../img/settings-dark.avif
+  - ../img/dash-dark.avif
+  - ../img/dfiles.avif
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
 ---
@@ -39,10 +43,14 @@ permalink: /blog/{{ page.fileSlug }}/
 - 設定画面(Settings)、コントロールセンター、Dash、共有ウィジェットなどがMaterial 3 Expressiveデザインにアップデートされました。
 - 設定画面が整理され、バーのウィジェットオプションやDash専用ページが独立するなど関連する設定にアクセスしやすくなっています。
 
+![settings](../img/settings-dark.avif)
+
 #### Dashプラグイン
 
 - Dashが内蔵タブ以外にも拡張可能になりました。新しいタブや概要カードを追加できるようになります。
 - 概要、メディアプレーヤー、天気、壁紙などの内蔵ページも再設計され、新デフォルトメディアプレーヤーの名称は<u>Bento</u>になりました。
+
+![dash plugin](../img/dash-dark.avif)
 
 #### カスタマイズ可能なロック画面
 
@@ -66,9 +74,12 @@ permalink: /blog/{{ page.fileSlug }}/
    - アーカイブ対応：追加ツール無しで zip、tar、7z、rarの解凍や、zip/tar への圧縮が可能
    - 昇格（管理者権限でのやり直し）機能付きのファイル操作、高度な検索機能など
 
+![Dux Files](../img/dfiles.avif)
+
 #### コンポジット（ウィンドウマネージャー）のサポート強化
 
-- 従来のHyprland、MangoWCに加え、新たにAqueousのサポートが追加されました
+- 従来のHyprland、MangoWCに加え、新たに[Aqueous](https://github.com/Seafoam-Labs/Aqueous)のサポートが追加されました
+  - [公式Wiki](https://www.seafoam-labs.org/aqueous/overview/) 
 
 
 ### アップデート、従来のコマンドについて
