@@ -323,12 +323,14 @@
 
   :where(p, :not(pre)) {
     & > code {
+      text-box: trim-both cap alphabetic;
       margin: 0 4px;
       /*background: var(--code-background) !important;*/
       color: var(--code-color);
-      padding: 0 var(--padding-ex-xs) 0 !important;
+      /*padding: 0 var(--padding-ex-xs) 0 !important;*/
+      padding-inline: var(--padding-ex-s);
       font-size: 0.825em;
-      --code-space: 0.05em;
+      --code-space: 0.04em;
       display: inline-grid;
       vertical-align: text-bottom;
       transform: translateY(calc((1lh - calc(1lh - var(--code-space))) / 2));
