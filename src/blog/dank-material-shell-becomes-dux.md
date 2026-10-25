@@ -89,7 +89,13 @@ tar -xvf kora-2-0-5.tar.gz
 
 - ユーザーファイルの場合
    - ユーザーファイルの領域なのでWindows等と同じように`~/.local/share/`まで進んで`icons/`がないなら右クリックから作成できます。ターミナルからやるのであれば`mkdir -p ~/.local/share/icons/`でできます。
-   - ファイルマネージャーでタブを分けて`~/.local/share/icons/`までと、ダウンロードフォルダを開いておけば簡単にコピーでも移動でもできます。面倒な人は、`mkdir -p ~/.local/share/icons/ && tar -xvf kora-2-0-5.tar.gz -C ~/.local/share/icons/`でフォルダを作って、解凍してから移動までが1ライナーでも可能です。
+   - ファイルマネージャーでタブを分けて`~/.local/share/icons/`までと、ダウンロードフォルダを開いておけば簡単にコピーでも移動でもできます。面倒な人は、
+   
+     ```bash
+     mkdir -p ~/.local/share/icons/ && tar -xvf kora-2-0-5.tar.gz -C ~/.local/share/icons/
+     ```
+   
+      でフォルダを作って、解凍してから移動までが1ライナーでも可能です。
 - システムで適用する場合
    - `sudo tar -xvf kora-2-0-5.tar.gz -C /usr/share/icons/`で解凍してコピーまでできます。
    - こちらはほぼ100%`icons/ディレクトリ`はありますので上記で行けると思います。
