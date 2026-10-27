@@ -2,7 +2,7 @@
 title: Dank Material Shellがバージョン2.0となり名称がDux Shellに変更されました
 description: プロジェクト全体も「Dank Linux」から Dux Labs へと改称されています。
 date: 2026-10-21
-update: 2026-10-26
+update: 2026-10-28
 category:
   - blog
 tags:
