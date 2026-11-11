@@ -1,6 +1,6 @@
 ---
 title: Dank Material Shellがバージョン2.0となり名称がDux Shellに変更されました
-description: プロジェクト全体も「Dank Linux」から Dux Labs へと改称されています。
+description: プロジェクト全体も「Dank Linux」から Dux Labs へと改称されています。v2.0からわずか2週間足らずでv2.1になりました。
 date: 2026-10-21
 update: 2026-11-11
 category:
@@ -10,6 +10,10 @@ tags:
   - Linux
   - DankMaterialShell
 images:
+  - ../img/dms-setup-mango.avif
+  - ../img/edit-shortcut_thunar.avif
+  - ../img/edit-shortcut_firefox.avif
+  - ../img/add-app_bind-conf.avif
   - ../img/control_panel-dux.avif
   - ../img/control-center-dark.avif
   - ../img/keyboard-dux.avif
@@ -58,26 +62,76 @@ dms migrate dux
 
 大まかにはこれらが変更点です。
 
-以前、この記事のまとめにも書きましたが、MangoWMの新しい記述にも対応したようで、Hyprlandも更新がありましたが、設定の不備があると起動直後に画面上部などにそれら問題点を表示するウィンドウがこれらの対応で出なくなっているようです。
+#### MangoWMの注意点
 
-しかし一部まだWARNが出ている設定があり、設定が重複しているのが問題のようです。
-`~/.config/mango/dms/bind.conf` で
+以前、この記事のまとめにも書きましたが、MangoWMの設定ファイルで従来からの記述が新しい記述にも対応しました。新しいDux-shellが配布されね間にHyprland本体も更新がありましたが、これらコンポジターの設定の不備があると起動直後に画面上部などにそれら問題点を表示するウィンドウが出ます。
+Duxのアップデートによる対応でそれら警告表示が出なくなっているようです。
+
+しかしMangoWMでは一部まだWARNが出ている設定があり、設定が重複しているのが問題のようです。
+maangoの新しい記述にDuxは対応しましたが、一部の設定での競合が残っているという内容でしたが、その行を見てみた所、bind.conf上の<u>記述的としては競合しておらず</u>もしかすると他のconfファイルのどこかに競合している箇所があるのかも知れません。
+またそれらWARNが出ていても操作できないわけではありません。
+
+WARNの1つ目はwndowのサイズをリサイズする箇所で、`SUPER (+ SHIFT) + -`と`Super (+ SHIFT) + =`が割り当てられています（カッコはSHIFTが組み合わさっているのと組み合わさっていないものと言うこと）。
+`-`(マイナス)はまだしも、`=`(イコール)は日本語配列のキーボードではそれ単体では押せないので、コメントアウトしても良いと考えています。
+あるいは、別のキーを割り当てるべきとも思います。
+
+confファイルなどを初期化するには、
 
 ```bash
-# 58～59行
+dms setup
 
-bind=none,XF86AudioPlay,spawn,dms ipc call moris playPause
-# bind=none,XF86AudioPlay,spawn,dms ipc call moris playPause
-
-
-# 109～110行
-
-bind=SUPER+SHIFT,equal,incgaps,1
-# bind=SUPER+SHIFT,minus,incgaps,1
+# setup後
+dms restart
 ```
 
-とりあえず私は重複している所をコメントアウトしておきました。AUDIOの方は`playPause`がトグルスイッチになっているようなのでこれでいいと思います。[ipc - mpris](https://duxlabs.dev/docs/dms/keybinds-ipc#mpris)
-Layoutの方は記載が見つからなかったので詳細はわかりませんが、あまり使用しない所とも思うのでひとまずはこれで良いのではないかと。これら2点を修正したらWARNは消えました。
+手順的には上記のとおりです。`dms setup`をするとコンポジターに何を使うか、ターミナルは何を選ぶかなどの選択肢が出ます。
+
+![dms-setup-mango](../img/dms-setup-mango.avif)
+
+<span class="f-img" data-target="../img/dms-setup-mango.avif">`dms setup`</span>の最後辺りに、「Start from the DMS stock bind」を選べる選択肢がでてきます。これは自身の変更した設定を残すのではなく<u>DMSが持っているストックを適用する</u>ということができます。これがいわゆる初期化と思っています。自身がそれまで使っていたファイルはバックアップするかどうかも選択肢が出たと記憶しています。その場合古い設定はバックアップされて新しいconf（設定）が作られます。
+
+それらを行ってもこれら競合が出るため私の調査と想像では、
+
+- それぞれの記述に間違いはない
+- confファイルを分けて管理しているが、bind.conf自体には重複している記述はない
+- mongoは分割されているconfファイルをそれぞれ読みんで全体的に見ている
+
+これらのことから、まだどこかに競合（あるいはそれらに関係する問題）が潜んでいる可能性はあります。
+前述した説明から、`=`(イコール)はそれ単体で押せないので、それらを含むbind.confの記述をコメントアウトしたら（先頭に`# `と入れる）、ひとまずWARNは消えるということが確認できています。変更して保存で即反映。
+
+本来は別キーを割り当てるのが良いのでしょうが<u>新たに自身では割り当てず</u>ひとまずの応急処置として考え、公式の設定が直るのを待つのが良いと思います。
+これらを割り当てない場合、それら機能が働かないだけです。確認した所、Windowリサイズとサークルレイアウトでのギャップ調整みたいなのでほぼ問題なく使用できるはずです。
+これら機能を使用する人は何かしらの手段を考えないといけませんが、そんなには使用しない機能なので優先度は低いと感じています。ひとまずMangoWMを使用する人に対しては公式の修正を待つ段階かと考えられますが、これはかなり早い段階で修正されるだろうと期待はしています。
+
+設定を初期化すると自身が行ったバインドの追加もなくなります。v2.0以前からあったと思いますが、Duxでは`Super + ,`で設定を開き Input > Keyboard shortcutsから新しいバインドを登録できます。
+
+<div class="grid grid-cols-1 py-4 md:grid-cols-2 auto-rows-auto">
+
+![edit-shortcut_thunar](../img/edit-shortcut_thunar.avif)
+{class="block"}
+
+![edit-shortcut_firefox](../img/edit-shortcut_firefox.avif)
+{class="block !mt-0"}
+
+</div>
+
+最初の画像が<span class="f-img" data-target="../img/edit-shortcut_thunar.avif">thunar</span>で、あとの方が<span class="f-img" data-target="../img/edit-shortcut_firefox.avif">Firefox</span>のバインド(キーボードショートカット)をDMSの設定(GUI)から行った画面です。
+
+キーの部分でフォースを入れて<u>実際に登録したいキーを押す</u>と画像のように入力されます。これらは元々DMSに入っているアプリではないのでコマンドで登録します。コマンドを登録すると言っても単にアプリを開くだけなので何を開くかを書くだけです。
+内部的には、この画面はMangoWMを使用しているものからなので、
+
+![add-app_bind-conf](../img/add-app_bind-conf.avif)
+
+この画像のように<span class="f-img" data-target="../img/add-app_bind-conf.avif">独自バインド</span>が`~/.config/mango/dms/bind.conf`に自動的に追加されます。
+
+バインドに組み合わせるアルファベットは既に使用されているものもあり、装飾キー(`Ctrl`、`Shift`、`alt`等)の組み合わせ次第ですが、たくさんは登録できないかも知れません。
+もしバインドに登録できなかったりしたとしてもアプリに関してで言えば、DMSでは`Super + Space`でアプリ一覧は表示され、選択回数が多ければ上の方に表示されていくようになるので必ずしも登録する必要はありません。
+ブラウザとファイルエクスプローラーは頻繁に使用するアプリなので、特に登録しておくと便利です。
+
+私はThunar(Xfce)を使用していますが、dolphin(Plasma)の人もいるでしょうしnautilus(GNOMEのfile)の人もいるかも知れません。この辺りは使用するものを入力して下さい。
+v2.0ではDuxがファイルマネージャー([Dux Files](https://duxlabs.dev/docs/dfiles/))もリリースしているので、新規インストールスクリプトで入れた人はそれらが最初から入っているのかも知れませんが、そうでない場合は公式ドキュメントを参考に導入して使用する手もあります。
+
+#### Fedora Atomic系統のサポート開始
 
 またDux installerが、Fedora Atomicもサポートするようになったようです。
 
@@ -319,18 +373,7 @@ Dux(旧DMS)はまだディストリビューションではないので、Plasma
 
 ## まとめ
 
-~~実際にはまだ試していないので、試してみてから、~~ あるいは詳細が判明した段階でまた書いていこうかと思います。
-公式ドキュメントを見ていると、MangoWnのconfig(設定)などが、
-
-```bash
-exec-once=wl-paste --type text --watch cliphist store
-```
-
-と記載されていることから、まだMangoWMの新しいバージョンへの対応はされていないのではなかろうかと見られる部分もあります。
-MangoWM新しい設定では`-`(ハイフン)から`_`(アンダーバー)に変わっているものもあり、修正されているのであればドキュメントも当然変更されていると思いますが、それらはないので。
-
-> 10/25追記 ──
-> MangoWMではエラーまでではないけれども`Warn`は出ていましたが、右側にあるボタンでそれらを消してから、新たに設定GUIで再設定をして行ったら、警告あるいはエラーなどの表示はされなくなっていました。ログアウトしたりするとまた出るのかも知れませんが、ボーダーなどの設定とか動作には大きく影響しない部分なので、新しい設定が反映されることで修正されているのかも知れません。
+以前書いていたMangoWMの新しい記述には対応されていました。
 
 > 11/11追記 ──
 > v2.1でこれら10/25の段階で出ていた問題点が修正されました。ただし一部WARNが出ています。
