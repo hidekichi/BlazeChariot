@@ -2,7 +2,7 @@
 title: Dank Material Shellがバージョン2.0となり名称がDux Shellに変更されました
 description: プロジェクト全体も「Dank Linux」から Dux Labs へと改称されています。
 date: 2026-10-21
-update: 2026-11-05
+update: 2026-11-11
 category:
   - blog
 tags:
@@ -23,6 +23,69 @@ images:
   - ../img/system_software_update-dux.avif
 layout: post.njk
 permalink: /blog/{{ page.fileSlug }}/
+---
+
+## v2.0が出たと思ったらすぐにv2.1が出てました
+
+[DMS 2.1 Stormborn](https://duxlabs.dev/blog/v2-1-release)
+
+Arch系(CachyOSもそうですが)は既にv2.1に変わって時間が経っています。公式によると、v2.1のコードネームは**Stormborn**でした。
+
+DMSコマンドは変わらないと以前書きましたが、これはDMS(**D**ux **M**odular **S**hell)へと改名、正式名称になりました。
+シェルのインターフェース密度も調整できるようになり、Settings > Interface style から、
+
+- Spacious(広々)
+- Comfortable(快適・デフォルト)
+- Compact(コンパクト)
+- Dence(高密度)
+
+を選択できます。DMSのクラシックスタイルも追加され、アイコンとグループ化されたカードにへ変更できるようになりました。
+
+V2.0で既に書きましたが、メディアプレーヤーと歌詞機能が刷新されています。システムモニターも全面的に刷新され、ディスクのSMART値確認や、バグ報告用のMarkdownレポート生成機能などが追加されています。
+
+ビデオ壁紙がサポートされるようにもなっており、`mp4`、`webm`、`mkv`などの動画を壁紙として設定できるようになりました。ロック中や画面オフの時は自動で一時停止します。
+
+新しいOSD(オンスクリーンディスプレイ)が導入され、キーボードレイアウトの切り替え、Num Lockの状態変化、fcitx5等のIME切り替え時にOSDが表示されるようになりました。
+
+### Arch系以外のリポジトリの移行手順について
+
+Dank Material Shell → Dux Labへのリブランドに伴い**Arch系以外のディストリビューション**(Fedora、Debian、Ubuntu、openSUSE、Void Linuxなど)ではリポジトリを新しい`duxlabs`のものに<u>変更する作業が必要</u>になります。
+すでに旧リポジトリ（avengemedia や danklinux）を追加してインストールしている環境では、以下のコマンドを実行することで自動的に新しい dux リポジトリへ移行できます。
+
+```bash
+dms migrate dux
+```
+
+大まかにはこれらが変更点です。
+
+以前、この記事のまとめにも書きましたが、MangoWMの新しい記述にも対応したようで、Hyprlandも更新がありましたが、設定の不備があると起動直後に画面上部などにそれら問題点を表示するウィンドウがこれらの対応で出なくなっているようです。
+
+しかし一部まだWARNが出ている設定があり、設定が重複しているのが問題のようです。
+`~/.config/mango/dms/bind.conf` で
+
+```bash
+# 58～59行
+
+bind=none,XF86AudioPlay,spawn,dms ipc call moris playPause
+# bind=none,XF86AudioPlay,spawn,dms ipc call moris playPause
+
+
+# 109～110行
+
+bind=SUPER+SHIFT,equal,incgaps,1
+# bind=SUPER+SHIFT,minus,incgaps,1
+```
+
+とりあえず私は重複している所をコメントアウトしておきました。AUDIOの方は`playPause`がトグルスイッチになっているようなのでこれでいいと思います。[ipc - mpris](https://duxlabs.dev/docs/dms/keybinds-ipc#mpris)
+Layoutの方は記載が見つからなかったので詳細はわかりませんが、あまり使用しない所とも思うのでひとまずはこれで良いのではないかと。これら2点を修正したらWARNは消えました。
+
+またDux installerが、Fedora Atomicもサポートするようになったようです。
+
+> duxinstall now supports immutable Fedora: Silverblue, Kinoite, Sericea, Onyx, Bazzite, Bluefin, Aurora, Zirconium, and other rpm-ostree or bootc images based on Fedora.
+> duxinstallは、イミュータブルなFedora（Silverblue、Kinoite、Sericea、Onyx、Bazzite、Bluefin、Aurora、Zirconiumなど、Fedoraをベースとしたrpm-ostreeやbootcイメージ）に対応しました。
+
+これら詳細は[公式ドキュメント](https://duxlabs.dev/docs/dms/installation#fedora-atomic--bootc-images)を参考して下さい。かいつまんで書くと、これらFedora Atomic系のディストリビューションでは`dnf install`ができないので、それらに関して手順があるようです。
+
 ---
 
 ## v2.0に伴い、DMSからDux Shell(コードネーム：Heisenberg)になりました
@@ -268,6 +331,9 @@ MangoWM新しい設定では`-`(ハイフン)から`_`(アンダーバー)に変
 
 > 10/25追記 ──
 > MangoWMではエラーまでではないけれども`Warn`は出ていましたが、右側にあるボタンでそれらを消してから、新たに設定GUIで再設定をして行ったら、警告あるいはエラーなどの表示はされなくなっていました。ログアウトしたりするとまた出るのかも知れませんが、ボーダーなどの設定とか動作には大きく影響しない部分なので、新しい設定が反映されることで修正されているのかも知れません。
+
+> 11/11追記 ──
+> v2.1でこれら10/25の段階で出ていた問題点が修正されました。ただし一部WARNが出ています。
 
 ~~また、v1.6+の段階で日本語入力に不備があるという旨を現在報告中です([PR #3817](https://github.com/duxlabs-dev/dux-shell/issues/3817))。
 これらがどうなっているのかは実際に`dms-shell`が配布されて、試してみてからでしかわかりません。~~ もちろんインストールスクリプトを使用したら新しくはなると思いますが配布されたものでどうなるかを試したいので。
