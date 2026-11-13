@@ -86,6 +86,12 @@ const SITE_CONFIGS = [
       title: 'GitHubへのリンクです',
   },
   {
+      test: (href) => href.includes('github.io'),
+      iconId: '#icon-github',
+      className: 'github',
+      title: 'GitHubへのリンクです',
+  },
+  {
       test: (href) => href.includes('flathub.org'),
       iconId: '#icon-flathub',
       className: 'flathub',
