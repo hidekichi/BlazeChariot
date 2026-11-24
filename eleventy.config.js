@@ -2,7 +2,7 @@ import path from "path";
 import fs from 'fs-extra';
 import { DateTime } from "luxon";
 import { HtmlBasePlugin } from "@11ty/eleventy";
-import pluginRss from "@11ty/eleventy-plugin-rss";
+import pluginRss, { dateToRfc3339 } from "@11ty/eleventy-plugin-rss";
 import pluginNavigation from "@11ty/eleventy-navigation";
 import tailwind from "@tailwindcss/vite";
 import sitemap from "@quasibit/eleventy-plugin-sitemap";
@@ -239,7 +239,7 @@ eleventyConfig.addPassthroughCopy("src/public/*.{txt,xsl,jpg}");
     return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
   });
 
-  //eleventyConfig.addFilter("dateToRfc3339", pluginRss.dateToRfc3339);
+  eleventyConfig.addFilter("dateToRfc3339", dateToRfc3339);
 
   eleventyConfig.addFilter("blogImage", function (filePath) {
     if (!filePath) return "";

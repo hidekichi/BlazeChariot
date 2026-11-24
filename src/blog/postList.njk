@@ -44,8 +44,8 @@ sitemap:
 <ul class="listing left">
   {% for entry in blog %}
 
-	{% set pub     = entry.date | dateToRfc3339 %}
-	{% set upd     = entry.data.update | dateToRfc3339 %}
+	{% set pub     = entry.date %}
+	{% set upd     = entry.data.update %}
 	{% set pubStr  = pub | readableDate %}
 	{% set updStr  = upd | readableDate %}
 	{% set pubYear = pubStr | replace(r/年.*/, "") %}
