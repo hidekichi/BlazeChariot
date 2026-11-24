@@ -1,5 +1,6 @@
 {
   "category": "blog",
+  "date": "git Created",
   "tags": "posts",
   "layout": "post.njk",
   "priority": 0.8,
