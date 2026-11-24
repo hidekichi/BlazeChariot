@@ -1,5 +1,8 @@
 {
   "category": "blog",
+  "date": "git Created",
+  "update": "git Last Modified",
+  "tags": "posts",
   "layout": "post.njk",
   "priority": 0.8,
   "changeFreq": "weekly"
