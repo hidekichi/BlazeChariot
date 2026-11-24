@@ -6,12 +6,12 @@ tags:
 images:
   - ../img/hero-screenshot-dark.webp
 permalink: /blog/{{ page.fileSlug }}/
+date: 2026-11-24
+update: 2026-11-24
 ---
 
 テスト中。git関連なのでコミットが必須のためご容赦を
 
-date: 2026-11-24
-update: 2026-11-24
 
 <pre>
 inputPath: {{ page.inputPath }}
