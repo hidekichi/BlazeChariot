@@ -1,14 +1,24 @@
 ---
 title: ブラウザ第四勢力Ladybirdがついにα版に
 description: 無駄を極限まで削ぎ落とした、全てをスクラッチで作られている新しいブラウザが登場します
-date: 2026-11-24
-update: 2026-11-24
 tags:
   - ブラウザ
 images:
   - ../img/hero-screenshot-dark.webp
 permalink: /blog/{{ page.fileSlug }}/
 ---
+
+テスト中。git関連なのでコミットが必須のためご容赦を
+
+date: 2026-11-24
+update: 2026-11-24
+
+<pre>
+inputPath: {{ page.inputPath }}
+date: {{ date }}
+page.date: {{ page.date }}
+update: {{ update }}
+</pre>
 
 ## Ladybirdがついにアルファ版へ
 
